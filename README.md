@@ -3,10 +3,8 @@ Repositorio del equipo Kiñewen para GPI 2021-1
 
 1. [Ejecución](#ejecutar)
 2. [Direcciones](#direcciones)
-  1. [API](#direcciones/api)
-  2. [API Personal de Servicio](#direcciones/api/pservice)
-  3. [API Equipo](#direcciones/api/team)
-  4. [Web Integrada](#direcciones/web)
+  2. [API](#direcciones/api)
+
 
 <a name="ejecutar"></a>
 ## 1. Ejecución

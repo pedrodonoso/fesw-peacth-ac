@@ -47,7 +47,7 @@ const theme = createMuiTheme({
   },
 }, esES);
 
-class Calculo extends Component {
+class Registrar_visita extends Component {
 
   constructor(props) {
     super(props);
@@ -156,4 +156,4 @@ class Calculo extends Component {
   }
 };
 
-export default Calculo;
+export default Registrar_visita;

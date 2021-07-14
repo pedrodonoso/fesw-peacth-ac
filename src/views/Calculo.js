@@ -38,6 +38,7 @@ import SeamlessInputGroups from "../components/components-overview/SeamlessInput
 import CustomFileUpload from "../components/components-overview/CustomFileUpload";
 import DropdownInputGroups from "../components/components-overview/DropdownInputGroups";
 import CustomSelect from "../components/components-overview/CustomSelect";
+import DropdownOptions from "../components/calculo/drop-options";
 
 
 const theme = createMuiTheme({
@@ -103,7 +104,9 @@ class Calculo extends Component {
       <Container fluid className="main-content-container px-4 pb-4">
         {/* Page Header */}
         <ThemeProvider theme={theme}>
+          {/*
         <Row noGutters className="page-header py-4">
+           
           <PageTitle sm="4" title="Calcular primera dosis" subtitle="acenocumarol" className="text-sm-left" />
         </Row>
 
@@ -113,55 +116,36 @@ class Calculo extends Component {
           text={this.state.text}
           title={this.state.title}
         />
+          */}
         <Container fluid className="main-content-container px-4">
 
       <Row>
         <Col lg="12" className="py-4">
+        <DataUserGeneral onSubmit={this.handleTeamSubmit} />
+        {/*
           <Card>
             <CardHeader className="border-bottom">
-              <h6 className="m-0">Datos Generales</h6>
+              <h6 className="m-0">Datos del Paciente</h6>
+            </CardHeader>
               <Row>
                   <Col lg="4" className="mb-4">
-                    {/* Data general */}
                     <Card small>
                         <CardHeader className="border-bottom">
-                        <h6 className="m-0">Información Clínica del Paciente</h6>
+                        <h6 className="m-0">Datos Clínicos del Paciente</h6>
                         </CardHeader>
                         <DataUserGeneral />
                     </Card>
                   </Col>
                   <Col lg="4" className="mb-4">
-                    {/* Groups */}
                     <Card small>
                         <CardHeader className="border-bottom">
-                        <h6 className="m-0">Información Farmacogenética del Paciente</h6>
+                        <h6 className="m-0">Datos Farmacogenética del Paciente</h6>
                         </CardHeader>
-
-                        <ListGroup flush>
-                        <ListGroupItem className="px-3">
-                            <Form>
-                            <strong className="text-muted d-block mb-3">
-                                Button Groups
-                            </strong>
-                            <ButtonGroups />
-
-                            <strong className="text-muted d-block mb-2">
-                                Input Groups
-                            </strong>
-                            <InputGroups />
-
-                            <strong className="text-muted d-block mb-2">
-                                Seamless Input Groups
-                            </strong>
-                            <SeamlessInputGroups />
-                            </Form>
-                        </ListGroupItem>
-                        </ListGroup>
                     </Card>
                   </Col>
               </Row>
-            </CardHeader>
           </Card>
+        */}
         </Col>
       </Row>
     </Container>

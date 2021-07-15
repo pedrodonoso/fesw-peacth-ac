@@ -8,6 +8,7 @@ import {
     ListGroup,
     ListGroupItem,
     Form,
+    Button,
 } from "shards-react";
 
 import PageTitle from "../components/common/PageTitle";
@@ -39,7 +40,7 @@ import CustomFileUpload from "../components/components-overview/CustomFileUpload
 import DropdownInputGroups from "../components/components-overview/DropdownInputGroups";
 import CustomSelect from "../components/components-overview/CustomSelect";
 import DropdownOptions from "../components/calculo/drop-options";
-
+import formulaService from "../services/formula.service";
 
 const theme = createMuiTheme({
   palette: {
@@ -48,20 +49,68 @@ const theme = createMuiTheme({
 }, esES);
 
 class Calculo extends Component {
-
+  vars = {};
+  coef = {};
   constructor(props) {
     super(props);
     this.state = {
       open: false,
+      dosis: 0.0
     }
-    this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
+    this.handleCalculoSubmit = this.handleCalculoSubmit.bind(this);
     this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
     this.toggle = this.toggle.bind(this);
+    
   }
 
   //envía data a API
-  handleTeamSubmit(data) {
-    console.log({nombre:"handleTeamSubmit",data:data})
+  handleCalculoSubmit(data) {
+    console.log({nombre:"handleCalculoSubmit",data:data})
+    //guarda variables ingresadas
+    this.vars = data.vars
+    
+    // this.setState({
+    //   ...this.state,
+    //   vars: data.vars
+    // });
+
+
+    //subimos las variables ingresadas
+    /* 
+    teamsService.create(data.tag,data.idlist)
+    .then((response) => {
+      //guardamos las variables
+
+        // this.setState({
+        //   ...this.state,
+        //   vars: response
+        // }); 
+
+      //mostramos al usuario un toggle
+      
+        // this.toggle({
+        // text: "Equipo creado correctamente!! 😘",
+        // title: "Si se pudo!!😍 "
+        // });
+      
+    })
+    .catch((error) => {
+      //calculamos sin internet con las últimas variables
+      this.setState({
+          ...this.state,
+          coef: {} //vacío para que formula service ejecute las últimas variables
+        }); 
+    //mostramos al usuario un toggle
+    
+      // this.toggle({
+      //   text: "Debes ingresar Personal de Servicio que no esté asignado a un Equipo!! ✋",
+      //   title: "No se pudo 😁"
+      // });
+    
+   }); 
+ */
+
+    /*     
     teamsService.create(data.tag,data.idlist)
     .then((response) => this.toggle({
       text: "Equipo creado correctamente!! 😘",
@@ -70,7 +119,14 @@ class Calculo extends Component {
     .catch((error) => this.toggle({
       text: "Debes ingresar Personal de Servicio que no esté asignado a un Equipo!! ✋",
       title: "No se pudo 😁"
-    }) );
+    }) ); 
+    */
+    console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
+    var _dosis = formulaService.formula(this.coef,this.vars)
+    this.setState({
+      ...this.state,
+      dosis: _dosis
+    });
   }
 
   toggle(data) {
@@ -87,7 +143,6 @@ class Calculo extends Component {
         text: data.text,
       });
     }
-
     console.log({text:"toggle", open:this.state.open});
   }
 
@@ -98,6 +153,7 @@ class Calculo extends Component {
     });
     console.log({text:"handler", open:this.state.open});
   }
+
 
   render() {
     return (
@@ -110,7 +166,7 @@ class Calculo extends Component {
           <PageTitle sm="4" title="Calcular primera dosis" subtitle="acenocumarol" className="text-sm-left" />
         </Row>
 
-        <Team onSubmit={this.handleTeamSubmit}></Team>
+        <Team onSubmit={this.handleCalculoSubmit}></Team>
 
         <Test openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
           text={this.state.text}
@@ -121,7 +177,7 @@ class Calculo extends Component {
 
       <Row>
         <Col lg="12" className="py-4">
-        <DataUserGeneral onSubmit={this.handleTeamSubmit} />
+        <DataUserGeneral onSubmit={this.handleCalculoSubmit} dosis={this.state.dosis}/>
         {/*
           <Card>
             <CardHeader className="border-bottom">
@@ -148,7 +204,7 @@ class Calculo extends Component {
         */}
         </Col>
       </Row>
-    </Container>
+      </Container>
       </ThemeProvider>
       </Container>
       

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import PropTypes from "prop-types";
 import {
   Row,
@@ -17,13 +17,15 @@ import {
   FormCheckbox,
   CardHeader,
   ListGroup,
-  ListGroupItem,
+  ListGroupItem
 } from "shards-react";
 
 
 import DropdownOptions from "./drop-options";
+import constants from "../../data/constants";
 
-const DataUserGeneral = ({onSubmit }) => {
+
+const DataUserGeneral = ({onSubmit,dosis }) => {
     const [cod_paciente, setCodPaciente] = useState({value:'',valid:false});
     const [edad, setEdad] = useState({value:'',valid:false});
     const [peso, setPeso] = useState({value:'',valid:false});
@@ -44,16 +46,16 @@ const DataUserGeneral = ({onSubmit }) => {
     const [ind_cyp, setInd_cyp] = useState({value:'',valid:false});
     const [blood, setBloodType] = useState({value:'',valid:false});
     const [imc, setIMC] = useState({value:'',valid:false});
-    const [genetics, setGenetics] = useState({value: {'CYP2C9-2' : "*1/*1", 'CYP2C9-3' : "*1/*1", 'VKORC1': "A/A" },valid:false});
+    const [genetics, setGenetics] = useState({value: {[constants.gen2] : "*1/*1", [constants.gen3] : "*1/*1", [constants.gen4]: "A/A" },valid:false});
 
     function setForm() {
         setCodPaciente((prevState) => ({...prevState, value: '',valid:false})); {/* code: "T-004" */}
-        setEdad((prevState) => ({...prevState, value: 0.0,valid:false}));        {/* age: 69 */}
-        setPeso((prevState) => ({...prevState, value: 0.0,valid:false}));        {/* weight: 80.5 */}
-        setTalla((prevState) => ({...prevState, value: 0.0,valid:false}));       {/* height: 1.56 */}
+        setEdad((prevState) => ({...prevState, value: '',valid:false}));        {/* age: 69 */}
+        setPeso((prevState) => ({...prevState, value: '',valid:false}));        {/* weight: 80.5 */}
+        setTalla((prevState) => ({...prevState, value: '',valid:false}));       {/* height: 1.56 */}
         setSexo((prevState) => ({...prevState, value: 'F',valid:false}));       {/* sex: "M" */}
         setFumador((prevState) => ({...prevState, value: false,valid:false}));  {/* "weight: 80" */}
-        setInrInicial((prevState) => ({...prevState, value: 0.0,valid:false}));  {/* "initialINR: 1.1" */}
+        setInrInicial((prevState) => ({...prevState, value: '',valid:false}));  {/* "initialINR: 1.1" */}
         setTP((prevState) => ({...prevState, value: false,valid:false}));       {/* 4 diagnosis como una lista de cuatro elementos*/}
         setTVP((prevState) => ({...prevState, value: false,valid:false}));      {/* */}
         setFA((prevState) => ({...prevState, value: false,valid:false}));       {/* */}
@@ -67,7 +69,7 @@ const DataUserGeneral = ({onSubmit }) => {
         setInd_cyp((prevState) => ({...prevState, value: '',valid:false}));     {/* */}
         setBloodType((prevState) => ({...prevState, value: 'O+',valid:false}));   {/*O +/-,A +/-,B +/-, AB +/-*/}
         setIMC((prevState) => ({...prevState, value: '',valid:false}));   {/* imc: 24.4*/}
-        setGenetics((prevState) => ({...prevState, value: {'CYP2C9-2' : "*1/*1", 'CYP2C9-3' : "*1/*1", 'VKORC1': "A/A" } ,valid:false}));   {/* imc: 24.4*/}
+        setGenetics((prevState) => ({...prevState, value: {[constants.gen2] : "*1/*1", [constants.gen3] : "*1/*1", [constants.gen4]: "A/A" } ,valid:false}));   {/* imc: 24.4*/}
     }
     
     
@@ -388,8 +390,9 @@ const DataUserGeneral = ({onSubmit }) => {
           </Card>
         </Col>
           <Col lg="4" className="mb-4">
+            <Row>
             {/* Genetica */}
-              <Card small lg="9" >
+              <Card small lg="9" className="mb-2">
                 <CardHeader className="border-bottom">
                   <h6 className="m-0">Datos Farmacogenética del Paciente</h6>
                 </CardHeader>
@@ -401,15 +404,15 @@ const DataUserGeneral = ({onSubmit }) => {
                             <strong className="text-muted d-block mb-3">
                             CYP2C9-2
                             </strong>
-                            <DropdownOptions title="CYP2C9-2" options={['*1/*1','*1/*2','*1/*3']} values={['*1/*1','*1/*2','*1/*3']} onSubmit={handleSubmit}/>
+                            <DropdownOptions title={constants.gen2} options={['*1/*1','*1/*2','*1/*3']} values={['*1/*1','*1/*2','*1/*3']} onSubmit={handleSubmit}/>
                             <strong className="text-muted d-block mb-3">
                             CYP2C9-3
                             </strong>
-                            <DropdownOptions title="CYP2C9-3" options={['*1/*1','*1/*2','*1/*3']} values={['*1/*1','*1/*2','*1/*3']} onSubmit={handleSubmit}/>
+                            <DropdownOptions title={constants.gen3} options={['*1/*1','*1/*2','*1/*3']} values={['*1/*1','*1/*2','*1/*3']} onSubmit={handleSubmit}/>
                             <strong className="text-muted d-block mb-2">
                             VKORC1
                             </strong>
-                            <DropdownOptions title="VKORC1" options={['*A/*A (mut)', '*G/*A (het)','*G/*G (wt)']} values={['A/A', 'G/A','G/G' ]} onSubmit={handleSubmit}/>
+                            <DropdownOptions title={constants.gen4} options={['*A/*A (mut)', '*G/*A (het)','*G/*G (wt)']} values={['A/A', 'G/A','G/G' ]} onSubmit={handleSubmit}/>
                             {/* 
                             <strong className="text-muted d-block mb-2">
                             Inhibidores CYP
@@ -427,34 +430,53 @@ const DataUserGeneral = ({onSubmit }) => {
                     </Form>
                 </CardBody>
               </Card>
+            </Row>
+            <Row>
+                  <Card small lg="12" className="mb-2">
+                    <CardHeader className="border-bottom">
+                    <h6 className="m-0"> Dosis </h6>
+                    </CardHeader>
+                    <CardBody className="md-3">
+                        <t6> {isNaN(dosis) ? '-' : dosis} </t6> 
+                    </CardBody>                      
+                  </Card>
+            </Row>
+            <Row>
+              <ListGroupItem lg="9" className="mb-2">                  
+                <Button
+                  theme="primary"
+                  className="mb-2 mr-2"
+                  onClick={(event) => {
+                    onSubmit({
+                      vars : {
+                      'code': cod_paciente.valid ? cod_paciente.value : "",
+                      'sex':  sexo.value ,
+                      'bloodtype' : blood.value,
+                      'initialDate': "2009-11-30", //preguntar
+                      'initialDosis': 0,
+                      'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                      'weeklyDosisInRange': 10,
+                      'totalDays': 534,
+                      'weight': peso.valid ? peso.value : 0.0,
+                      'height': talla.valid ? talla.value : 0.0,
+                      'imc': calcImc(),
+                      'age': edad.valid ? parseFloat(edad.value) : 0,
+                      'genetics': genetics.value,
+                      //'diagnosis': diagnosis.value,
+                      }});
+                    }}
+                  >
+                    Calcular dosis
+                </Button>
+                <Button 
+                  theme="secondary"
+                  className="mb-2 mr-2"
+                  onClick={(event) => {setForm()}}>
+                    Nuevo Paciente
+                </Button>
+              </ListGroupItem>
+            </Row>
           </Col>
-      </Row>
-      <Row>
-         <Button
-          theme="primary"
-          className="mb-2 mr-1"
-          onClick={(event) => {
-            console.log({
-              'code': cod_paciente.valid ? cod_paciente.value : "",
-              'sex':  sexo.value ,
-              'bloodtype' : blood.value,
-              'initialDate': "2009-11-30", //preguntar
-              'initialDosis': 0,
-              'initialINR': inr_inicial.valid ? inr_inicial.value : 0.0,
-              'weeklyDosisInRange': 10,
-              'totalDays': 534,
-              'weight': peso.valid ? peso.value : 0.0,
-              'height': talla.valid ? talla.value : 0.0,
-              'imc': calcImc(),
-              'age': edad.valid ? edad.value : 0,
-              'genetics': genetics.value,
-              //'diagnosis': diagnosis.value,
-              });
-            setForm();
-            }}
-          >
-            Agregar
-        </Button>
       </Row>
       </Col>
     );

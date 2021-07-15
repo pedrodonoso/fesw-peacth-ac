@@ -32,12 +32,14 @@ export default [
     layout: DefaultLayout,
     component: Calculo
   },
-  /*
+  
   {
-    path: "/com_dosis_gen",
+    path: "/registrar_visita",
+    exact: true,
     layout: DefaultLayout,
-    component: UserProfileLite
+    component: () => <Redirect to="/registrar_visita" />
   },
+  /*
   {
     path: "/frec_distribucion_gen",
     layout: DefaultLayout,

@@ -46,7 +46,7 @@ export default function() {
       title: 'Registrar visitas',
       subtitle:"",
       htmlBefore: '<i class="material-icons">app_registration</i>',
-      to: '/Registrar_visita' //ruta 
+      to: '/registrar_visita' //ruta 
     },
     {
       title: 'Análsis',

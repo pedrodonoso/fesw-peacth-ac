@@ -19,7 +19,6 @@ const DataUserVisit = ({onSubmit }) => {
 
     const today = new Date();
     const [cod_paciente, setCodPaciente] = useState({value:'',valid:false});
-    const [controlDate, setControlDate] = useState({value: '',valid:true});
     const [arrivalDose, setArrivalDose] = useState({value:'',valid:false});
     const [updatedDose, setUpdatedDose] = useState({value:'',valid:false});
     const [arrivalINR, setArrivalINR] = useState({value:'',valid:false});
@@ -27,8 +26,7 @@ const DataUserVisit = ({onSubmit }) => {
     
 
     function setForm() {
-        setCodPaciente((prevState) => ({...prevState, value: '',valid:false})); {/* code: "T-004" */}
-        setControlDate((prevState) => ({...prevState, value: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),valid:false}));        {/* age: 69 */}
+        setCodPaciente((prevState) => ({...prevState, value: '',valid:false})); {/* code: "T-004" */}       {/* age: 69 */}
         setArrivalDose((prevState) => ({...prevState, value: 0.0,valid:false}));        {/* weight: 80.5 */}
         setUpdatedDose((prevState) => ({...prevState, value: 0.0,valid:false}));       {/* height: 1.56 */}
         setArrivalINR((prevState) => ({...prevState, value: 0.0,valid:false}));       {/* sex: "M" */}

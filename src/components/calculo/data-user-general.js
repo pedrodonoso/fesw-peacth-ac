@@ -321,7 +321,7 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
                     size="lg"
                     className="mb-3"
                     placeholder="934669676" />*/}
-                <FormFeedback  valid={fumador.valid}>"Debes ingresar un telefono que contenga solo números."</FormFeedback>
+                <FormFeedback  valid={fumador.valid}>"Debes ingresar una opción."</FormFeedback>
                 </FormGroup>
 
                 {/* INR Inicial */}

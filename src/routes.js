@@ -6,6 +6,7 @@ import { DefaultLayout } from "./layouts";
 
 // Route Views
 import Calculo from "./views/Calculo";
+import RegistrarVisita from "./views/Registrar_visita";
 /*
 import BlogOverview from "./views/template/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
@@ -37,7 +38,7 @@ export default [
     path: "/registrar_visita",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/registrar_visita" />
+    component: RegistrarVisita
   },
   /*
   {

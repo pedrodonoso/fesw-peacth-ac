@@ -5,7 +5,7 @@ import {
     Col,
 } from "shards-react";
 
-import DataUserGeneral from "../components/registrar_visita/data-user-visit";
+import DataUserVisit from "../components/registrar_visita/data-user-visit";
 import teamsService from '../services/teams.service';
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -17,7 +17,7 @@ const theme = createMuiTheme({
   },
 }, esES);
 
-class registrar_visita extends Component {
+class RegistrarVisita extends Component {
 
   constructor(props) {
     super(props);
@@ -126,4 +126,4 @@ class registrar_visita extends Component {
   }
 };
 
-export default registrar_visita;
+export default RegistrarVisita;

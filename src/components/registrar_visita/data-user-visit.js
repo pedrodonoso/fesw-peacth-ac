@@ -17,8 +17,9 @@ import {
 
 const DataUserVisit = ({onSubmit }) => {
 
+    const today = new Date();
     const [cod_paciente, setCodPaciente] = useState({value:'',valid:false});
-    const [controlDate, setControlDate] = useState({value: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),valid:false,valid:false});
+    const [controlDate, setControlDate] = useState({value: '',valid:true});
     const [arrivalDose, setArrivalDose] = useState({value:'',valid:false});
     const [updatedDose, setUpdatedDose] = useState({value:'',valid:false});
     const [arrivalINR, setArrivalINR] = useState({value:'',valid:false});
@@ -98,7 +99,6 @@ const DataUserVisit = ({onSubmit }) => {
   function onChangeCodPaciente(e) {
     var _cod = e.target.value;
     setCodPaciente((prevState) => ({...prevState, value: _cod}))
-    console.log(validPacienteRegex.test(_cod))
     if(validPacienteRegex.test(_cod)) {
       setCodPaciente((prevState) => ({...prevState, valid: true}))
     } else {
@@ -138,16 +138,7 @@ const DataUserVisit = ({onSubmit }) => {
     }
     return true
   }
-  function onChangeINRinRange(e) {
-    var _inr = e.target.value;
-    setInrInicial((prevState) => ({...prevState, value: _inr}))
-    if(validNumRegex.test(_inr)) {
-      setInrInicial((prevState) => ({...prevState, valid: true}))
-    } else {
-      setInrInicial((prevState) => ({...prevState, valid: false}))
-    }
-    return true
-  }
+  
     return(
       <Col>
       <Row>
@@ -155,7 +146,7 @@ const DataUserVisit = ({onSubmit }) => {
           {/* Data general */}
           <Card small lg="9" >
             <CardHeader className="border-bottom">
-              <h6 className="m-0">Datos Clínicos del Paciente</h6>
+              <h6 className="m-0">Registro de visita de paciente</h6>
             </CardHeader>
             <CardBody>
               <Form className="add-new-post">
@@ -171,12 +162,12 @@ const DataUserVisit = ({onSubmit }) => {
                     size="lg"
                     className="mb-3"
                     placeholder="T-069" />
-                <FormFeedback   valid={cod_paciente.valid}>"Ej: T-002"</FormFeedback>
+                <FormFeedback   valid={cod_paciente.valid}>"Ej: T-420"</FormFeedback>
                 </FormGroup>
 
                 {/* Dosis con que llega */}
                 <FormGroup>
-                <label>Edad</label>
+                <label>Dosis actual</label>
                     <InputGroup className="mb-3">
                     <FormInput
                     value={arrivalDose.value}
@@ -215,7 +206,7 @@ const DataUserVisit = ({onSubmit }) => {
                     value={arrivalINR.value}
                     valid={arrivalINR.valid}
                     invalid={!arrivalINR.valid}
-                    onChange={onChangeTalla}
+                    onChange={onChangeArrivalINR}
                     size="lg"
                     //className="mb-3"
                     placeholder="2.9" />
@@ -226,8 +217,8 @@ const DataUserVisit = ({onSubmit }) => {
                 <label>¿INR dentro de rango?</label> 
                 <FormGroup>
                 <ButtonGroup size="sm" className="mr-2" >
-                    <Button theme={inrInRange.value === false ? 'primary' : 'white'} onClick={() => setSexo((prevState) => ({...prevState, value: false, valid:true}))}>No</Button> 
-                    <Button theme={inrInRange.value === true ? 'primary' : 'white'} onClick={() => setSexo((prevState) => ({...prevState, value: true, valid:true}))}>Sí</Button>
+                    <Button theme={inrInRange.value === true ? 'primary' : 'white'} onClick={() => setINRinRange((prevState) => ({...prevState, value: true, valid:true}))}>Sí</Button>
+                    <Button theme={inrInRange.value === false ? 'primary' : 'white'} onClick={() => setINRinRange((prevState) => ({...prevState, value: false, valid:true}))}>No</Button>    
                 </ButtonGroup>
                     {/*
                 <FormInput
@@ -251,11 +242,11 @@ const DataUserVisit = ({onSubmit }) => {
           onClick={(event) => {
             console.log({
               'patientCode': cod_paciente.valid ? cod_paciente.value : "",
-              'controlDate':  controlDate.value ,
-              'arrivalDose' : arrivalDose.value,
-              'updatedDose': updatedDose.value,
-              'arrivalINR': arrivalINR.value,
-              'inrInRange': inrInRange.value,
+              'controlDate':  today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2),
+              'arrivalDose' : arrivalDose.valid ? arrivalDose.value : 0.0,
+              'updatedDose': updatedDose.valid ? updatedDose.value: 0.0, 
+              'arrivalINR': arrivalINR.valid ? arrivalINR.value: 0.0,
+              'inrInRange': inrInRange.value
               });
             setForm();
             }}

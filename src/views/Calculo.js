@@ -11,11 +11,8 @@ import {
     Button,
 } from "shards-react";
 
-import PageTitle from "../components/common/PageTitle";
 import DataUserGeneral from "../components/calculo/data-user-general";
-import Team from "../components/forms/Team";
 import teamsService from '../services/teams.service';
-import Test from "../components/forms/Test";
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 

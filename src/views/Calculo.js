@@ -12,6 +12,7 @@ import {
 } from "shards-react";
 
 import DataUserGeneral from "../components/calculo/data-user-general";
+import Test from '../components/forms/Test';
 import teamsService from '../services/teams.service';
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';

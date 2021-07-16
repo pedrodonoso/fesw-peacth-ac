@@ -25,8 +25,7 @@ import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
 import Divider from "@material-ui/core/Divider";
 
-const DataUserGeneral = ({onSubmit }) => {
-
+const DataUserGeneral = ({onSubmit , dosis}) => {
     const today = new Date();
     const [cod_paciente, setCodPaciente] = useState({value:'',valid:false});
     const [edad, setEdad] = useState({value:'',valid:false});
@@ -34,8 +33,8 @@ const DataUserGeneral = ({onSubmit }) => {
     const [talla, setTalla] = useState({value:'',valid:false});
     const [sexo, setSexo] = useState({value:'F',valid:false});
     const [inr_inicial, setInrInicial] = useState({value:'',valid:false});
-    const [imc, setIMC] = useState({value:'',valid:false});
-    const [genetics, setGenetics] = useState({value: {'CYP2C9-2' : "*1/*1", 'CYP2C9-3' : "*1/*1", 'VKORC1': "A/A" },valid:false});
+    const [imc, setIMC] = useState({value:'',valid:false}); // [constants.gen11,constants.gen12,constants.gen22]
+    const [genetics, setGenetics] = useState({value: {[constants.gen2] : constants.gen11, [constants.gen3] : constants.gen12, [constants.gen4]: constants.genaa },valid:false});
 
     function setForm() {
         setCodPaciente((prevState) => ({...prevState, value: '',valid:false})); {/* code: "T-004" */}
@@ -45,7 +44,7 @@ const DataUserGeneral = ({onSubmit }) => {
         setSexo((prevState) => ({...prevState, value: 'F',valid:false}));       {/* sex: "M" */}
         setInrInicial((prevState) => ({...prevState, value: '',valid:false}));  {/* "initialINR: 1.1" */}
         setIMC((prevState) => ({...prevState, value: '',valid:false}));   {/* imc: 24.4*/}
-        setGenetics((prevState) => ({...prevState, value: {'CYP2C9-2' : "*1/*1", 'CYP2C9-3' : "*1/*1", 'VKORC1': "A/A" } ,valid:false}));   {/* imc: 24.4*/}
+        setGenetics((prevState) => ({...prevState, value: {[constants.gen2] : constants.gen11, [constants.gen3] : constants.gen12, [constants.gen4]: constants.genaa } ,valid:false}));   {/* imc: 24.4*/}
     }
     
     

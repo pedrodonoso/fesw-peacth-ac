@@ -15,6 +15,8 @@ import {
   CardHeader,
   ListGroupItem,
   ListGroup,
+  InputGroupAddon,
+  InputGroupText,
 } from "shards-react";
 
 const VariablesInfo = ({onSubmit }) => {
@@ -230,6 +232,12 @@ const VariablesInfo = ({onSubmit }) => {
     <Col sm="8" md="5">
     <strong className="text-muted d-block mb-2">Modificar variables fórmula farmacogenética</strong>
     <Form>
+    <InputGroup className="mb-3">
+          <InputGroupAddon type="prepend">
+            <InputGroupText>@</InputGroupText>
+          </InputGroupAddon>
+          <FormInput placeholder="Username" />
+        </InputGroup>
       <Row form>
         <Col className="form-group">
           <FormInput

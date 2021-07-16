@@ -427,10 +427,7 @@ const DataUserGeneral = ({onSubmit }) => {
                     </Form>
                 </CardBody>
               </Card>
-          </Col>
-      </Row>
-      <Row>
-         <Button
+              <Button
           theme="primary"
           className="mb-2 mr-1"
           onClick={(event) => {
@@ -453,8 +450,10 @@ const DataUserGeneral = ({onSubmit }) => {
             setForm();
             }}
           >
-            Agregar
+            Calcular INR
         </Button>
+          </Col>
+          
       </Row>
       </Col>
     );

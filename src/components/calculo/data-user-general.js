@@ -23,6 +23,7 @@ import {
 
 import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
+import Divider from "@material-ui/core/Divider";
 
 
 const DataUserGeneral = ({onSubmit,dosis }) => {
@@ -31,20 +32,7 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
     const [peso, setPeso] = useState({value:'',valid:false});
     const [talla, setTalla] = useState({value:'',valid:false});
     const [sexo, setSexo] = useState({value:'F',valid:false});
-    const [fumador, setFumador] = useState({value:false,valid:false});
     const [inr_inicial, setInrInicial] = useState({value:'',valid:false});
-    const [t_p, setTP] = useState({value:false,valid:false});
-    const [t_v_p, setTVP] = useState({value:false,valid:false});
-    const [f_a, setFA] = useState({value:false,valid:false});
-    const [v_c, setVC] = useState({value:false,valid:false});
-    const [hepatica, setHepatica] = useState({value:false,valid:false});
-    const [renal, setRenal] = useState({value:false,valid:false});
-    const [cyp2c92, setCyp2c92] = useState({value:'',valid:false});
-    const [cyp2c93, setCyp2c93] = useState({value:'',valid:false});
-    const [vkorc1, setVkorc1] = useState({value:'',valid:false});
-    const [inh_cyp, setInh_cyp] = useState({value:'',valid:false});
-    const [ind_cyp, setInd_cyp] = useState({value:'',valid:false});
-    const [blood, setBloodType] = useState({value:'',valid:false});
     const [imc, setIMC] = useState({value:'',valid:false});
     const [genetics, setGenetics] = useState({value: {[constants.gen2] : "*1/*1", [constants.gen3] : "*1/*1", [constants.gen4]: "A/A" },valid:false});
 
@@ -54,20 +42,7 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
         setPeso((prevState) => ({...prevState, value: '',valid:false}));        {/* weight: 80.5 */}
         setTalla((prevState) => ({...prevState, value: '',valid:false}));       {/* height: 1.56 */}
         setSexo((prevState) => ({...prevState, value: 'F',valid:false}));       {/* sex: "M" */}
-        setFumador((prevState) => ({...prevState, value: false,valid:false}));  {/* "weight: 80" */}
         setInrInicial((prevState) => ({...prevState, value: '',valid:false}));  {/* "initialINR: 1.1" */}
-        setTP((prevState) => ({...prevState, value: false,valid:false}));       {/* 4 diagnosis como una lista de cuatro elementos*/}
-        setTVP((prevState) => ({...prevState, value: false,valid:false}));      {/* */}
-        setFA((prevState) => ({...prevState, value: false,valid:false}));       {/* */}
-        setVC((prevState) => ({...prevState, value: false,valid:false}));       {/* */}
-        setHepatica((prevState) => ({...prevState, value: false,valid:false})); {/* */}   
-        setRenal((prevState) => ({...prevState, value: false,valid:false}));    {/* */}  
-        setCyp2c92((prevState) => ({...prevState, value: '*1/*1',valid:false}));     {/* *1/*1,*1/*2,*1/*3 */}
-        setCyp2c93((prevState) => ({...prevState, value: '*1/*1',valid:false}));     {/* *1/*2 */}             
-        setVkorc1((prevState) => ({...prevState, value: 'A/A',valid:false}));      {/* *A/*A (mut),*G/*G (wt), *G/*A (het) se guarda A/A (mut),G/G (wt), G/A (het) */}
-        setInh_cyp((prevState) => ({...prevState, value: '',valid:false}));     {/* */}
-        setInd_cyp((prevState) => ({...prevState, value: '',valid:false}));     {/* */}
-        setBloodType((prevState) => ({...prevState, value: 'O+',valid:false}));   {/*O +/-,A +/-,B +/-, AB +/-*/}
         setIMC((prevState) => ({...prevState, value: '',valid:false}));   {/* imc: 24.4*/}
         setGenetics((prevState) => ({...prevState, value: {[constants.gen2] : "*1/*1", [constants.gen3] : "*1/*1", [constants.gen4]: "A/A" } ,valid:false}));   {/* imc: 24.4*/}
     }
@@ -114,16 +89,8 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
     var dic = genetics.value
     dic = { ...dic, [title] : selected}
     setGenetics((prevState) => ({...prevState, value: dic}))
-    
-    console.log(genetics.value)
+  
   }
-
-  function handleBloodSubmit(data) {
-    console.log({nombre:"handleBloodSubmit",data:data})
-    var selected = data.selected
-    setBloodType((prevState) => ({...prevState, value: selected}))
-  }
-
   function calcImc() {
     var _imc = peso.value/Math.pow(talla.value*0.01,2);
     setIMC((prevState) => ({...prevState, value: _imc}))
@@ -246,7 +213,19 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
                 <FormFeedback  valid={peso.valid}>"Debes ingresar solo números."</FormFeedback>
                 </InputGroup>
                 </FormGroup>
-
+              </Form>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg="4" className="mb-4">
+          <Card small lg="9">
+            {/*
+            <CardHeader className="border-bottom">
+              <h6 className="m-0">Datos Clínicos del Paciente</h6>
+            </CardHeader>
+            */}
+            <ListGroup flush >
+              <ListGroupItem className="px-3"> 
                 {/* Talla */}
                 <FormGroup>
                 <label>Talla</label>
@@ -265,6 +244,8 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
                 <FormFeedback  valid={talla.valid}>"Debes ingresar solo números"</FormFeedback>
                 </InputGroup>
                 </FormGroup>
+
+               
                 {/* Sexo */}
                 <label>Sexo</label> 
                 <FormGroup>
@@ -283,114 +264,29 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
                     placeholder="juan@gmail.com" />
                     */}
                 </FormGroup>
-              </Form>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col lg="4" className="mb-4">
-          <Card small lg="9">
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Datos Clínicos del Paciente</h6>
-            </CardHeader>
-            <CardBody>
-
-                 {/* Grupo sanguineo O +/-,A +/-,B +/-, AB +/- */}      
-                <FormGroup>
-                <strong className="text-muted d-block mb-2">
-                 Grupo sanguineo
-                </strong>
-                <DropdownOptions title="" options={['O+', 'O-','A+', 'A-', 'B+','B-','AB+','AB-']} values={['O+', 'O-','A+', 'A-', 'B+','B-','AB+','AB-']} onSubmit={handleBloodSubmit}/>              
-            
-                <FormFeedback  valid={fumador.valid}>"Debes elegir una opción."</FormFeedback>
-                </FormGroup>
-
-
-                {/* Fumador */}                    
-                <label>Fumador</label>
-                <FormGroup>
-                <ButtonGroup size="sm" className="mr-2">
-                  <Button theme={fumador.value === true ? 'primary' : 'white'} onClick={() => setFumador((prevState) => ({...prevState, value: true, valid:true}))}>Si</Button> 
-                  <Button theme={fumador.value === false ? 'primary' : 'white'} onClick={() => setFumador((prevState) => ({...prevState, value: false, valid:true}))}>No</Button>
-                </ButtonGroup>
-                    {/*
-                <FormInput
-                    value={fumador.value}
-                    valid={fumador.valid}
-                    invalid={fumador.invalid}
-                    //onChange={validTelefono}
-                    size="lg"
-                    className="mb-3"
-                    placeholder="934669676" />*/}
-                <FormFeedback  valid={fumador.valid}>"Debes ingresar una opción."</FormFeedback>
-                </FormGroup>
-
-                {/* INR Inicial */}
-                <FormGroup>
-                <label>INR Inicial</label>
-                <FormInput
-                    value={inr_inicial.value}
-                    valid={inr_inicial.valid}
-                    invalid={!inr_inicial.valid}
-                    onChange={onChangeINRInicial}
-                    size="lg"
-                    className="mb-3"
-                    placeholder="2.4" />
-                <FormFeedback  valid={inr_inicial.valid}>"Debes ingresar un valor decimal. EJ: 2.4"</FormFeedback>
-                </FormGroup>
-
-                {/* Patologia */}
-                {/* 
-                <label>Patología indicadora</label>
-                <FormGroup>
-                <fieldset>
-                    <FormCheckbox  small style ={{color: "#00e676",}} enabled defaultChecked>
-                        Tromboempolismo Pulmonar
-                    </FormCheckbox>
-                    <FormCheckbox  small defaultChecked>
-                        Trombosis venosa profunda
-                    </FormCheckbox>
-                    <FormCheckbox  small >
-                        Fibrilación Auricular
-                    </FormCheckbox>
-                    <FormCheckbox  small defaultChecked >
-                        Válvula Cardiaca
-                    </FormCheckbox>
-                    </fieldset>
-                <FormInput
-                    value={patologia.value}
-                    valid={patologia.valid}
-                    invalid={patologia.invalid}
-                    //onChange={validTelefono}
-                    size="lg"
-                    className="mb-3"
-                    placeholder="934669676" />
-                <FormFeedback  valid={patologia.valid}>"Puedes ingresar un telefono que contenga solo números."</FormFeedback>
-                </FormGroup>
-              */}
-                {/* Hepatica */}                    
-                <label>Enfermedad Hepática</label>
-                <FormGroup>
-                <ButtonGroup size="sm" className="mr-2">
-                  <Button theme={hepatica.value === true ? 'primary' : 'white'} onClick={() => setHepatica((prevState) => ({...prevState, value: true, valid:true}))}>Si</Button> 
-                  <Button theme={hepatica.value === false ? 'primary' : 'white'} onClick={() => setHepatica((prevState) => ({...prevState, value: false, valid:true}))}>No</Button>
-                </ButtonGroup>
-                <FormFeedback  valid={hepatica.valid}>"Debes ingresar una opción."</FormFeedback>
-                </FormGroup>
-
-                {/* Renal */}
-                <label>Renal</label>
-                <FormGroup>
-                <ButtonGroup size="sm" className="mr-2">
-                  <Button theme={renal.value === true ? 'primary' : 'white'} onClick={() => setRenal((prevState) => ({...prevState, value: true, valid:true}))}>Si</Button> 
-                  <Button theme={renal.value === false ? 'primary' : 'white'} onClick={() => setRenal((prevState) => ({...prevState, value: false, valid:true}))}>No</Button>
-                </ButtonGroup>
-                <FormFeedback  valid={hepatica.valid}>"Debes ingresar una opción."</FormFeedback>
-               </FormGroup>
-            </CardBody>
+                </ListGroupItem>
+                <CardHeader className="border-bottom">
+                <h6 className="m-0">Datos Clínicos del Paciente</h6>
+              </CardHeader>
+                <ListGroupItem className="px-3">
+                  {/* INR Inicial */}
+                  <FormGroup>
+                  <label>INR Inicial</label>
+                  <FormInput
+                      value={inr_inicial.value}
+                      valid={inr_inicial.valid}
+                      invalid={!inr_inicial.valid}
+                      onChange={onChangeINRInicial}
+                      size="lg"
+                      className="mb-3"
+                      placeholder="2.4" />
+                  <FormFeedback  valid={inr_inicial.valid}>"Debes ingresar un valor decimal. EJ: 2.4"</FormFeedback>
+                  </FormGroup>
+                </ListGroupItem>
+                </ListGroup>
           </Card>
         </Col>
           <Col lg="4" className="mb-4">
-            <Row>
             {/* Genetica */}
               <Card small lg="9" className="mb-2">
                 <CardHeader className="border-bottom">
@@ -401,47 +297,47 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
                       <ListGroup flush>
                         <ListGroupItem className="px-3">
                             <Form>
-                            <strong className="text-muted d-block mb-3">
-                            CYP2C9-2
-                            </strong>
-                            <DropdownOptions title={constants.gen2} options={['*1/*1','*1/*2','*1/*3']} values={['*1/*1','*1/*2','*1/*3']} onSubmit={handleSubmit}/>
-                            <strong className="text-muted d-block mb-3">
-                            CYP2C9-3
-                            </strong>
-                            <DropdownOptions title={constants.gen3} options={['*1/*1','*1/*2','*1/*3']} values={['*1/*1','*1/*2','*1/*3']} onSubmit={handleSubmit}/>
-                            <strong className="text-muted d-block mb-2">
-                            VKORC1
-                            </strong>
-                            <DropdownOptions title={constants.gen4} options={['*A/*A (mut)', '*G/*A (het)','*G/*G (wt)']} values={['A/A', 'G/A','G/G' ]} onSubmit={handleSubmit}/>
-                            {/* 
-                            <strong className="text-muted d-block mb-2">
-                            Inhibidores CYP
-                            </strong>
-                            <DropdownOptions title="Inhibidores CYP" options={['*1/*1','*1/*2','*1/*3']}/>
-
-                            <strong className="text-muted d-block mb-2">
-                            Inductores CYP
-                            </strong>
-                            <DropdownOptions title="Inductores CYP" options={['*1/*1','*1/*2','*1/*3']}/>
-                            */}
+                              <label>CYP2C9-2</label>
+                              <DropdownOptions 
+                                title={constants.gen2} 
+                                options={[constants.gen11,constants.gen12,constants.gen22]} 
+                                values={[constants.gen11,constants.gen12,constants.gen22]} 
+                                onSubmit={handleSubmit}
+                              />
+                              <label>CYP2C9-3</label>
+                              <DropdownOptions 
+                                title={constants.gen3} 
+                                options={[constants.gen11,constants.gen13,constants.gen33]} 
+                                values={[constants.gen11,constants.gen13,constants.gen33]} 
+                                onSubmit={handleSubmit}
+                              />
+                              <label>VKORC1</label>
+                              <DropdownOptions 
+                                title={constants.gen4} 
+                                options={['*A/*A', '*G/*A','*G/*G']} 
+                                values={[constants.genaa,constants.genga,constants.gengg]} 
+                                onSubmit={handleSubmit}
+                              />
                             </Form>
                         </ListGroupItem>
                       </ListGroup>
                     </Form>
                 </CardBody>
               </Card>
-            </Row>
-            <Row>
-                  <Card small lg="12" className="mb-2">
-                    <CardHeader className="border-bottom">
-                    <h6 className="m-0"> Dosis </h6>
-                    </CardHeader>
-                    <CardBody className="md-3">
-                        <t6> {isNaN(dosis) ? '-' : dosis} </t6> 
-                    </CardBody>                      
-                  </Card>
-            </Row>
-            <Row>
+            <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}}>
+              <Card  lg="9" className="mb-2">
+                <CardHeader className="border-bottom">
+                <h6 className="m-0"> Dosis </h6>
+                </CardHeader>
+                <CardBody className="md-3">
+                    <t6> {(dosis === -999.0) ? '-' : (isNaN(dosis)? '-': dosis)} </t6> 
+                </CardBody>                      
+              </Card>
+              </div>
               <ListGroupItem lg="9" className="mb-2">                  
                 <Button
                   theme="primary"
@@ -449,22 +345,22 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
                   onClick={(event) => {
                     onSubmit({
                       vars : {
-                      'code': cod_paciente.valid ? cod_paciente.value : "",
-                      'sex':  sexo.value ,
-                      'bloodtype' : blood.value,
-                      'initialDate': "2009-11-30", //preguntar
-                      'initialDosis': 0,
-                      'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
-                      'weeklyDosisInRange': 10,
-                      'totalDays': 534,
-                      'weight': peso.valid ? peso.value : 0.0,
-                      'height': talla.valid ? talla.value : 0.0,
-                      'imc': calcImc(),
-                      'age': edad.valid ? parseFloat(edad.value) : 0,
-                      'genetics': genetics.value,
-                      //'diagnosis': diagnosis.value,
-                      }});
-                    }}
+                        'code': cod_paciente.valid ? cod_paciente.value : "",
+                        'sex':  sexo.value ,
+                        //'bloodtype' : blood.value,
+                        'initialDate': "2009-11-30", //preguntar
+                        'initialDose': 0,
+                        'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                        'weeklyDoseInRange': 10.0,
+                        'totalDays': 534,
+                        'weight': peso.valid ? peso.value : 0.0,
+                        'height': talla.valid ? talla.value : 0.0,
+                        'imc': calcImc(),
+                        'age': edad.valid ? parseFloat(edad.value) : 0,
+                        'genetics': genetics.value,
+                      }
+                    });
+                  }}
                   >
                     Calcular dosis
                 </Button>
@@ -475,7 +371,6 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
                     Nuevo Paciente
                 </Button>
               </ListGroupItem>
-            </Row>
           </Col>
       </Row>
       </Col>
@@ -483,13 +378,13 @@ const DataUserGeneral = ({onSubmit,dosis }) => {
   }
 
   DataUserGeneral.propTypes = {
-  onSubmit: PropTypes.func,
-}
+    onSubmit: PropTypes.func,
+    dosis: PropTypes.number
+  }
 
 DataUserGeneral.defaultProps = {
-  onSubmit: () => {},
-}
-
-
+    onSubmit: () => {},
+    dosis: -999.0,
+  }
 
 export default DataUserGeneral;

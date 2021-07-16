@@ -41,6 +41,8 @@ import DropdownInputGroups from "../components/components-overview/DropdownInput
 import CustomSelect from "../components/components-overview/CustomSelect";
 import DropdownOptions from "../components/calculo/drop-options";
 import formulaService from "../services/formula.service";
+import calculoService from "../services/calculo.service";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -65,6 +67,7 @@ class Calculo extends Component {
 
   //envía data a API
   handleCalculoSubmit(data) {
+    var ifResponse = false
     console.log({nombre:"handleCalculoSubmit",data:data})
     //guarda variables ingresadas
     this.vars = data.vars
@@ -76,15 +79,17 @@ class Calculo extends Component {
 
 
     //subimos las variables ingresadas
-    /* 
-    teamsService.create(data.tag,data.idlist)
+    
+    calculoService.getDosePatient(this.vars)
     .then((response) => {
+      var _dosis = response.data.initialDose;
+      console.log({title: 'initialDose', initialDose: _dosis})
       //guardamos las variables
-
-        // this.setState({
-        //   ...this.state,
-        //   vars: response
-        // }); 
+        ifResponse = true
+        this.setState({
+          ...this.state,
+          dosis: _dosis
+        }); 
 
       //mostramos al usuario un toggle
       
@@ -95,6 +100,8 @@ class Calculo extends Component {
       
     })
     .catch((error) => {
+      console.log({title: 'error', error: error})
+
       //calculamos sin internet con las últimas variables
       this.setState({
           ...this.state,
@@ -102,13 +109,12 @@ class Calculo extends Component {
         }); 
     //mostramos al usuario un toggle
     
-      // this.toggle({
-      //   text: "Debes ingresar Personal de Servicio que no esté asignado a un Equipo!! ✋",
-      //   title: "No se pudo 😁"
-      // });
+      this.toggle({
+        title: "No se pudo 😁",
+        text: "Ha ocurrido un problema, vuelve a intentarlo! \n Se calculará la dosis con los último parametros guardados localmente.",
+      });
     
    }); 
- */
 
     /*     
     teamsService.create(data.tag,data.idlist)
@@ -122,11 +128,13 @@ class Calculo extends Component {
     }) ); 
     */
     console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
-    var _dosis = formulaService.formula(this.coef,this.vars)
-    this.setState({
-      ...this.state,
-      dosis: _dosis
-    });
+    if(!ifResponse) {
+      var _Dosis = formulaService.formula(this.coef,this.vars)
+      this.setState({
+        ...this.state,
+        dosis: _Dosis
+      });
+    }
   }
 
   toggle(data) {
@@ -178,6 +186,10 @@ class Calculo extends Component {
       <Row>
         <Col lg="12" className="py-4">
         <DataUserGeneral onSubmit={this.handleCalculoSubmit} dosis={this.state.dosis}/>
+        <Test openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
+          text={this.state.text}
+          title={this.state.title}
+        />
         {/*
           <Card>
             <CardHeader className="border-bottom">

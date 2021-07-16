@@ -4,37 +4,53 @@ function formula(props,vars) {
   console.log({nombre:"Formula",data:vars,props:props})
     if (Object.keys(props).length === 0) {
       props = {
-        '1' :   3.081   , 
-        '2' :   0.167   ,
-        '3' :   0.0081  , 
-        '4' :   0.55    ,
-        '5' :   0.013   ,
-        '6' :   0.107   ,
-        '7' :   0.323   ,
-        '8' :   0.746   ,
-        '9' :   0.270   ,
-        '10':   0.701   
+        'p_0'         :   3.081   , 
+        'p_men'       :   0.167   ,
+        'p_age'       :   0.0081  , 
+        'p_initialINR':   0.055   ,
+        'p_imc'       :   0.013   ,
+        'p_CYP2C9_12' :   0.107   ,
+        'p_CYP2C9_13' :   0.323   ,
+        'p_CYP2C9_33' :   0.746   ,
+        'p_VKORC1_GA' :   0.270   ,
+        'p_VKORC1_AA' :   0.701   
       }
     }
-      
-    // var _1_2 = !(vars.genetics[constants.gen2] === undefined) ? 1 : 0
-    // var _1_3 = !(vars.genetics[constants.gen3] === undefined) ? 1 : 0
-    // var _3_3 = !(vars.genetics[constants.gen3] === undefined) ? 1 : 0
-    var _1_2 =  0
-    var _1_3 =  0
-    var _3_3 =  0
-    // var _G_A = !(vars.genetics[constants.genga] === undefined) ? 1 : 0
-    // var _A_A = !(vars.genetics[constants.genaa] === undefined) ? 1 : 0
-    var _G_A =  1 
-    var _A_A =  0
-    console.log(_1_2)
-    console.log(_1_3)
-    console.log(_3_3)
-    console.log(_G_A)
-    console.log(_A_A)
+    var _1_2 = 0
+    var _1_3 = 0
+    var _3_3 = 0
+    var _G_A = 0
+    var _A_A = 0
+    if(!(vars.genetics[constants.gen2] === undefined) ) { //CYP2C9*2
+      if(vars.genetics[constants.gen2] === constants.gen12) { //*1/*2
+        _1_2 = 1
+      }
+    }
+    if(!(vars.genetics[constants.gen3] === undefined) ) { //CYP2C9*3
+      if(vars.genetics[constants.gen3] === constants.gen13) { //*1/*3
+        _1_3 = 1
+      }
+      if(vars.genetics[constants.gen3] === constants.gen33) { //*3/*3
+        _3_3 = 1
+      }
+    }
+    if(!(vars.genetics[constants.gen4] === undefined) ) { //VKORC1
+      if(vars.genetics[constants.gen4] === constants.genga) { //G/A
+        _G_A = 1
+      }
+      if(vars.genetics[constants.gen4] === constants.genaa) { //A/A
+        _A_A = 1
+      }
+    }
+
+    console.log({title: '1/2', data: _1_2})
+    console.log({title: '1/3', data: _1_3})
+    console.log({title: '3/3', data: _3_3})
+    console.log({title: 'G/A', data: _G_A})
+    console.log({title: 'A/A', data: _A_A})
 
     var _vars = {
-      'men' : vars.sex === 'M' ? 1 : 0,
+      'notfem' : vars.sex === 'F' ? 0 : 1,
       'age' : vars.age , 
       'initINR' : vars.initialINR ,
       'BMI'  : vars.imc , 
@@ -46,8 +62,10 @@ function formula(props,vars) {
     }
     console.log({nombre:"calculo dosis 2",data:_vars,props:props})
 
-    var LogWTD = props['1'] + (props['2']*_vars['men']) - (props['3']*_vars['age']) - (props['4']*_vars['initINR']) + (props['5']*_vars['BMI']) - (props['6']*_vars['1/2']) - (props['7']*_vars['1/3']) - (props['8']*_vars['3/3']) - (props['9']*_vars['G/A']) - (props['10']*_vars['A/A'])
+    var LogWTD = props['p_0'] + (props['p_men']*_vars['notfem']) - (props['p_age']*_vars['age']) - (props['p_initialINR']*_vars['initINR']) + (props['p_imc']*_vars['BMI']) - (props['p_CYP2C9_12']*_vars['1/2']) - (props['p_CYP2C9_13']*_vars['1/3']) - (props['p_CYP2C9_33']*_vars['3/3']) - (props['p_VKORC1_GA']*_vars['G/A']) - (props['p_VKORC1_AA']*_vars['A/A'])
     var WTD = Math.exp(LogWTD)
+    console.log({nombre:"WTD", data: WTD.toFixed(4)})
+    WTD = WTD.toFixed(4);
     return WTD;
   }
 

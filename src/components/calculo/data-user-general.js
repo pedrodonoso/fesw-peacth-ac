@@ -24,8 +24,6 @@ import {
 import DropdownOptions from "./drop-options";
 
 const DataUserGeneral = ({onSubmit }) => {
-
-    const today = new Date();
     const [cod_paciente, setCodPaciente] = useState({value:'',valid:false});
     const [edad, setEdad] = useState({value:'',valid:false});
     const [peso, setPeso] = useState({value:'',valid:false});
@@ -440,7 +438,7 @@ const DataUserGeneral = ({onSubmit }) => {
               'code': cod_paciente.valid ? cod_paciente.value : "",
               'sex':  sexo.value ,
               'bloodtype' : blood.value,
-              'initialDate': today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2),
+              'initialDate': "2009-11-30", //preguntar
               'initialDosis': 0,
               'initialINR': inr_inicial.valid ? inr_inicial.value : 0.0,
               'weeklyDosisInRange': 10,

@@ -7,6 +7,7 @@ import { DefaultLayout } from "./layouts";
 // Route Views
 import Calculo from "./views/Calculo";
 import RegistrarVisita from "./views/Registrar_visita";
+import CambiarVariable from "./views/Cambiar_variable";
 /*
 import BlogOverview from "./views/template/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
@@ -40,12 +41,13 @@ export default [
     layout: DefaultLayout,
     component: RegistrarVisita
   },
-  /*
   {
-    path: "/frec_distribucion_gen",
+    path: "/modificar_variables",
+    exact: true, 
     layout: DefaultLayout,
-    component: AddNewPost
+    component: CambiarVariable
   },
+  /*
   {
     path: "/pservice/all-pservice",
     layout: DefaultLayout,

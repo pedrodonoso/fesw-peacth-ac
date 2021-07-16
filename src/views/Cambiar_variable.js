@@ -5,7 +5,7 @@ import {
     Col,
 } from "shards-react";
 
-import DataUserVisit from "../components/registrar_visita/data-user-visit";
+import VariablesInfo from "../components/variables/cambiarVariables";
 import teamsService from '../services/teams.service';
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -17,7 +17,7 @@ const theme = createMuiTheme({
   },
 }, esES);
 
-class RegistrarVisita extends Component {
+class CambiarVariable extends Component {
 
   constructor(props) {
     super(props);
@@ -90,8 +90,8 @@ class RegistrarVisita extends Component {
         <Container fluid className="main-content-container px-4">
 
       <Row>
-        <Col lg="20" className="py-4">
-        <DataUserVisit onSubmit={this.handleTeamSubmit} />
+        <Col lg="12" className="py-4">
+        <VariablesInfo onSubmit={this.handleTeamSubmit} />
         {/*
           <Card>
             <CardHeader className="border-bottom">
@@ -126,4 +126,4 @@ class RegistrarVisita extends Component {
   }
 };
 
-export default RegistrarVisita;
+export default CambiarVariable;

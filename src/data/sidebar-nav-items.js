@@ -58,7 +58,7 @@ export default function() {
       title: 'Actualizar algoritmo',
       subtitle:"",
       htmlBefore: '<i class="material-icons">update</i>',
-      to: 'https://iif-front.herokuapp.com/recuperacion'
+      to: '/modificar_variables'
     },
   ];
 }

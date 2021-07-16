@@ -140,7 +140,6 @@ const DataUserVisit = ({onSubmit }) => {
     return(
       <Col>
       <Row>
-        
           {/* Data general */}
           <Card small lg="9" >
             <CardHeader className="border-bottom">

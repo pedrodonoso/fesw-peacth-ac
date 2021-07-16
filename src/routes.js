@@ -2,11 +2,11 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 // Layout Types
-import { DefaultLayout } from "./layouts";
+import { DefaultLayout,Custom } from "./layouts";
 
 // Route Views
-import Calculo from "./views/Calculo";
-import RegistrarVisita from "./views/Registrar_visita";
+import {Calculo, Analisis} from "./views";
+
 /*
 import BlogOverview from "./views/template/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
@@ -20,26 +20,38 @@ import TeamForm from './views/TeamForm';
 import AddNewPService from './views/AddNewPService';
 import AllPService from './views/ShowAllPService';
 */
-
+var noNavbar = true;
 export default [
   {
     path: "/",
     exact: true,
-    layout: DefaultLayout,
-    component: () => <Redirect to="/calculo" />
+    layout: Custom,
+    component: () => <Redirect to="/calculo" />,
+    layout_props: {noNavbar: true, noFooter:true}
   },
   {
     path: "/calculo",
-    layout: DefaultLayout,
-    component: Calculo
+    layout: Custom,
+    component: Calculo,    
+    layout_props: {noNavbar: true, noFooter:true}
   },
   
   {
-    path: "/registrar_visita",
-    exact: true,
-    layout: DefaultLayout,
-    component: RegistrarVisita
+    path: "/analisis/dosis_gen",
+    layout: Custom,
+    component: Analisis,
+    layout_props: {noNavbar: false, noFooter:true},
+    component_props: { dosisGen: true}
   },
+  {
+    path: "/analisis/dis_gen",
+    layout: Custom,
+    component: Analisis,
+    layout_props: {noNavbar: false, noFooter:false, footer_props: { menuItems: []}},
+    component_props_: { dosisGen: false }
+    
+  },
+  
   /*
   {
     path: "/frec_distribucion_gen",

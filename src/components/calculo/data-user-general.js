@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import PropTypes from "prop-types";
 import {
   Row,
@@ -429,34 +429,53 @@ const DataUserGeneral = ({onSubmit }) => {
                     </Form>
                 </CardBody>
               </Card>
+            </Row>
+            <Row>
+                  <Card small lg="12" className="mb-2">
+                    <CardHeader className="border-bottom">
+                    <h6 className="m-0"> Dosis </h6>
+                    </CardHeader>
+                    <CardBody className="md-3">
+                        <t6> {isNaN(dosis) ? '-' : dosis} </t6> 
+                    </CardBody>                      
+                  </Card>
+            </Row>
+            <Row>
+              <ListGroupItem lg="9" className="mb-2">                  
+                <Button
+                  theme="primary"
+                  className="mb-2 mr-2"
+                  onClick={(event) => {
+                    onSubmit({
+                      vars : {
+                      'code': cod_paciente.valid ? cod_paciente.value : "",
+                      'sex':  sexo.value ,
+                      'bloodtype' : blood.value,
+                      'initialDate': "2009-11-30", //preguntar
+                      'initialDosis': 0,
+                      'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                      'weeklyDosisInRange': 10,
+                      'totalDays': 534,
+                      'weight': peso.valid ? peso.value : 0.0,
+                      'height': talla.valid ? talla.value : 0.0,
+                      'imc': calcImc(),
+                      'age': edad.valid ? parseFloat(edad.value) : 0,
+                      'genetics': genetics.value,
+                      //'diagnosis': diagnosis.value,
+                      }});
+                    }}
+                  >
+                    Calcular dosis
+                </Button>
+                <Button 
+                  theme="secondary"
+                  className="mb-2 mr-2"
+                  onClick={(event) => {setForm()}}>
+                    Nuevo Paciente
+                </Button>
+              </ListGroupItem>
+            </Row>
           </Col>
-      </Row>
-      <Row>
-         <Button
-          theme="primary"
-          className="mb-2 mr-1"
-          onClick={(event) => {
-            console.log({
-              'code': cod_paciente.valid ? cod_paciente.value : "",
-              'sex':  sexo.value ,
-              'bloodtype' : blood.value,
-              'initialDate': today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2),
-              'initialDosis': 0,
-              'initialINR': inr_inicial.valid ? inr_inicial.value : 0.0,
-              'weeklyDosisInRange': 10,
-              'totalDays': 534,
-              'weight': peso.valid ? peso.value : 0.0,
-              'height': talla.valid ? talla.value : 0.0,
-              'imc': calcImc(),
-              'age': edad.valid ? edad.value : 0,
-              'genetics': genetics.value,
-              //'diagnosis': diagnosis.value,
-              });
-            setForm();
-            }}
-          >
-            Agregar
-        </Button>
       </Row>
       </Col>
     );

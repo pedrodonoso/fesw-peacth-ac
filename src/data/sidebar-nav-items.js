@@ -49,10 +49,10 @@ export default function() {
       to: '/registrar_visita' //ruta 
     },
     {
-      title: 'Análsis',
+      title: 'Análisis',
       subtitle:"",
       htmlBefore: '<i class="material-icons">show_chart</i>',
-      to: 'https://iif-front.herokuapp.com/Pabellones'
+      to: '/analisis/dosis_gen'
     },
     {
       title: 'Actualizar algoritmo',

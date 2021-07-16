@@ -1,3 +1,5 @@
 import DefaultLayout from "./Default";
+import Custom from "./Custom";
 
-export { DefaultLayout };
+export { DefaultLayout,Custom };
+

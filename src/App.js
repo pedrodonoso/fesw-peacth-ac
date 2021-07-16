@@ -18,8 +18,8 @@ export default () => (
             exact={route.exact}
             component={withTracker(props => {
               return (
-                <route.layout {...props}>
-                  <route.component {...props} />
+                <route.layout {...route.layout_props}>
+                  <route.component {...route.component_props} />
                 </route.layout>
               );
             })}

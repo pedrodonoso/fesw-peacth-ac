@@ -14,6 +14,7 @@ import {
   ButtonGroup,
   CardHeader,
 } from "shards-react";
+import RangeDatePicker from '../common/RangeDatePicker';
 
 const DataUserVisit = ({onSubmit }) => {
 
@@ -89,125 +90,125 @@ const DataUserVisit = ({onSubmit }) => {
   }
   
     return(
+      <React.Fragment>
       <Col>
-      <Row>
-          {/* Data general */}
-          <Card small lg="9" >
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Registro de visita de paciente</h6>
-            </CardHeader>
-            <CardBody>
-              <Form className="add-new-post">
-
-                {/* Codigo Paciente */}
-                <FormGroup check={false}>
-                <label>Código del paciente</label>
-                <FormInput
-                    value= {cod_paciente.value}
-                    valid={cod_paciente.valid}
-                    invalid={!cod_paciente.valid}
-                    onChange={onChangeCodPaciente}
-                    size="lg"
-                    className="mb-3"
-                    placeholder="T-421" />
-                <FormFeedback  
-                //className={`style={{display: ${!cod_paciente.valid} ? 'block' : 'none' }}`} 
-                //valid={undefined} 
-                //valid={cod_paciente.valid}
-                >"Debes ingresar una letra seguido de un guión y tres dígitos. <br/> Ej: T-422"</FormFeedback>
-                </FormGroup>
-
-                {/* Dosis con que llega */}
-                <FormGroup>
-                <label>Dosis actual</label>
-                    <InputGroup className="mb-3">
-                    <FormInput
-                    value={arrivalDose.value}
-                    valid={arrivalDose.valid}
-                    invalid={!arrivalDose.valid}
-                    onChange={onChangeArrivalDose}
-                    size="lg"
-                    //className="mb-3 "
-                    placeholder="3.7"
-                    />
-                    <FormFeedback  
-                    //valid={arrivalDose.valid}
-                    >"Debes ingresar solo números."</FormFeedback>
+        <Row>
+          <Col lg="12" style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1
+          }}>
+            <Card small lg="12" className="mb-2">
+              <CardBody>
+                <Row>
+                  <Col xs="6" md="6">
+                    <InputGroup className="mb-2">
+                        <Button
+                          theme="primary"
+                          className="font-weight-bold"
+                          onClick={(event) => {
+                            onSubmit({
+                              vars: {
+                                'patientCode': cod_paciente.valid ? cod_paciente.value: "",
+                                'controlDate': "2009-11-30",
+                                'arrivalDose': arrivalDose.valid ? arrivalDose.value: 0.0,
+                                'updatedDose': updatedDose.valid ? updatedDose.value: 0.0,
+                                'arrivalINR': arrivalINR.valid ? arrivalINR.value: 0.0
+                                //'diagnosis': diagnosis.value,
+                              }
+                            });
+                          }}
+                        >
+                          Guardar visita
+                        </Button>
                     </InputGroup>
-                </FormGroup>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="7" className="mb-4">
 
-                {/* Nueva dosis */}
-                <FormGroup>
-                <label>Nueva dosis</label>
-                <InputGroup className="mb-3">
-                <FormInput
-                    value={updatedDose.value}
-                    valid={updatedDose.valid}
-                    invalid={!updatedDose.valid}
-                    onChange={onChangeUpdatedDose}
-                    size="lg"
-                    //className="mb-3"
-                    placeholder="2.5" />
-                <FormFeedback  
-                //valid={updatedDose.valid}
-                >"Debes ingresar solo números."</FormFeedback>
-                </InputGroup>
-                </FormGroup>
+            {/* Data general */}
+            <Card small lg="12">
+              <CardHeader className="border-bottom">
+                <h6 className="m-0">Datos Clínicos del Paciente</h6>
+              </CardHeader>
+              <CardBody>
+                <Form className="add-new-post">
 
-                {/* INR con que llega el paciente */}
-                <FormGroup>
-                <label>INR actual</label>
-                <InputGroup className="mb-3">
-                <FormInput
-                    value={arrivalINR.value}
-                    valid={arrivalINR.valid}
-                    invalid={!arrivalINR.valid}
-                    onChange={onChangeArrivalINR}
-                    size="lg"
-                    //className="mb-3"
-                    placeholder="2.9" />
-                <FormFeedback  
-                //valid={arrivalINR.valid}
-                >"Debes ingresar solo números"</FormFeedback>
-                </InputGroup>
-                </FormGroup>
-                {/* INR rango */}
-                {/*
-                <label>¿INR dentro de rango?</label> 
-                <FormGroup>
-                <ButtonGroup size="sm" className="mr-2" >
-                    <Button theme={inrInRange.value === true ? 'primary' : 'white'} onClick={() => setINRinRange((prevState) => ({...prevState, value: true, valid:true}))}>Sí</Button>
-                    <Button theme={inrInRange.value === false ? 'primary' : 'white'} onClick={() => setINRinRange((prevState) => ({...prevState, value: false, valid:true}))}>No</Button>    
-                </ButtonGroup>
-                </FormGroup>
-                */}
-              </Form>
-            </CardBody>
-          </Card>
-      </Row>
-      <Row>
-         <Button
-          theme="primary"
-          className="mb-2 mr-1"
-          onClick={(event) => {
-            onSubmit({
-              data: {
-                'patientCode': cod_paciente.valid ? cod_paciente.value : "",
-                'controlDate':  today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2),
-                'arrivalDose' : arrivalDose.valid ? parseFloat(arrivalDose.value) : 0.0,
-                'updatedDose': updatedDose.valid ? parseFloat(updatedDose.value): 0.0, 
-                'arrivalINR': arrivalINR.valid ? parseFloat(arrivalINR.value) : 0.0,
-                'inrInRange': false//inrInRange.value
-              }
-              });
-            setForm();
-            }}
-          >
-            Agregar
-        </Button>
-      </Row>
+                  {/* Codigo Paciente */}
+                  <FormGroup check={false}>
+                    <label>Código del paciente</label>
+                    <FormInput
+                      value={cod_paciente.value}
+                      valid={cod_paciente.valid}
+                      invalid={!cod_paciente.valid}
+                      onChange={onChangeCodPaciente}
+                      size="lg"
+                      className="mb-3"
+                      placeholder="T-001"/>
+                    <FormFeedback valid={cod_paciente.valid}>"Ej:
+                      T-002"</FormFeedback>
+                  </FormGroup>
+                  <Row>
+                    <Col>
+                  {/* Dosis de llegada */}
+                  <FormGroup>
+                    <label>Dosis llegada</label>
+                    <InputGroup className="mb-3">
+                      <FormInput
+                        value={arrivalDose.value}
+                        valid={arrivalDose.valid}
+                        invalid={!arrivalDose.valid}
+                        onChange={onChangeArrivalDose}
+                        size="lg"
+                        //className="mb-3 "
+                        placeholder="1.0"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  </Col>
+                  {/* Peso */}
+                  <Col>
+                  <FormGroup>
+                    <label>Nueva dosis</label>
+                    <InputGroup className="mb-3">
+                      <FormInput
+                        value={updatedDose.value}
+                        valid={updatedDose.valid}
+                        invalid={!updatedDose.valid}
+                        onChange={onChangeUpdatedDose}
+                        size="lg"
+                        //className="mb-3"
+                        placeholder="1.5"/>
+                    </InputGroup>
+                  </FormGroup>
+                  </Col>
+                  <Col>
+                  <FormGroup>
+                    <label>INR de llegada</label>
+                    <InputGroup className="mb-3">
+                      <FormInput
+                        value={arrivalINR.value}
+                        valid={arrivalINR.valid}
+                        invalid={!arrivalINR.valid}
+                        onChange={onChangeArrivalINR}
+                        size="lg"
+                        //className="mb-3"
+                        placeholder="1.5"/>
+                    </InputGroup>
+                  </FormGroup>
+                  </Col>
+                  </Row>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </Col>
-    );
+    </React.Fragment>
+  );
   }
 
   DataUserVisit.propTypes = {

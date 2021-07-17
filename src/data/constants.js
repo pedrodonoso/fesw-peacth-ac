@@ -10,6 +10,8 @@ var gen12 = '*1/*2'
 var gen22 = '*2/*2'
 var gen13 = '*1/*3'
 var gen33 = '*3/*3'
+var series = [14, 23, 21, 17, 15, 10, 12, 17, 21]
+var labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 const constants = {
     gen2,
     gen3,
@@ -21,7 +23,9 @@ const constants = {
     gen12,
     gen22,
     gen13,
-    gen33
+    gen33,
+    series,
+    labels
 };
 
 export default constants;

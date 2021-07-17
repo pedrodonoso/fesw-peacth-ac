@@ -1,49 +1,62 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Chart from 'react-apexcharts'
-import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
+import { Row, Col, Card, CardHeader, CardBody, Button, ButtonGroup } from "shards-react";
 
 import RangeDatePicker from "../common/RangeDatePicker";
+import constants from "../../data/constants";
+
+import calculoService from "../../services/calculo.service";
 
 class AnalisisDisGen extends React.Component {
   constructor(props) {
     super(props);
+    this.generate(this.props.gen)
     this.state = {
-        series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
-        chart: {
-            type: 'polarArea',
-            height:'500',
-            width: '100%' 
-        },
-        options : {
-            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-            title: {
-                text:  '',
-                align: 'left'
-            },
-            stroke: {
-                colors: ['#fff']
-            },
-            fill: {
-                opacity: 0.8
-            },
-            legend: {
-                position: 'left',
-                containerMargin: {
-                    left: 10,
-                    right: 10,
-                  }
-            },
-            responsive: [{
-                breakpoint: 1000,
-                options: {
-                legend: {
-                    position: 'bottom'
-                }
-                }
-            }]
-            },
-      }
+      gen: this.props.gen,
+      series: this.props.series,
+      chart: this.props.chart,
+      options:  this.props.options
+    }
+  }
+  
+  generate(_gen) {
+    console.log({title: "generate", gen: _gen})
+
+    this.setState({
+      ...this.state,
+      gen: _gen
+    });
+
+    calculoService.getDistribution(_gen)
+      .then((response) => {
+        var lab = response.data.labels
+        var ser = response.data.frequency
+        console.log({title: "getDistribution", response: response.data, gen: _gen})
+        console.log({title: "frequency", response: ser})
+        console.log({title: "labels", response: lab})
+        this._labels = lab
+        this.setState({
+          ...this.state,
+          series: ser, 
+          options: {
+            ...this.state.options,
+            labels: lab
+          }
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          ...this.state,
+          series: constants.series, 
+          options: {
+            ...this.state.options,
+            lables: constants.labels
+          }
+        });
+      })
+      console.log({title: "return", response: this.state})
+
   }
 
   render() {
@@ -56,15 +69,37 @@ class AnalisisDisGen extends React.Component {
         <CardBody className="pt-0">
           <Row className="border-bottom py-2 bg-light">
             <Col sm="6" className="d-flex mb-2 mb-sm-0">
-              <RangeDatePicker />
+              {/*<RangeDatePicker />*/}
+              <ButtonGroup > 
+                <Button 
+                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'} 
+                  onClick={() => 
+                    this.generate(constants.gen2)
+                  }
+                > {constants.gen2} </Button>
+                <Button 
+                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'} 
+                  onClick={() => 
+                    this.generate(constants.gen3)
+                  }
+                > {constants.gen3} </Button>
+                <Button 
+                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'} 
+                  onClick={() => 
+                    this.generate(constants.gen4)
+                  }
+                > {constants.gen4} </Button>
+              </ButtonGroup>
             </Col>
             <Col>
+            {/*
               <Button
                 size="sm"
                 className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
               >
                 View Full Report &rarr;
               </Button>
+            */}
             </Col>
           </Row>
           <div >
@@ -104,104 +139,42 @@ AnalisisDisGen.propTypes = {
   chartOptions: PropTypes.object
 };
 
-/*
+
 AnalisisDisGen.defaultProps = {
-  title: "Análisis",
-  chartData: {
-    labels: Array.from(new Array(30), (_, i) => (i === 0 ? 1 : i)),
-    
-    datasets: [
-      {
-        label: "Current Month",
-        fill: "start",
-        data: [
-          500,
-          800,
-          320,
-          180,
-          240,
-          320,
-          230,
-          650,
-          590,
-          1200,
-          750,
-          940,
-          1420,
-          1200,
-          960,
-          1450,
-          1820,
-          2800,
-          2102,
-          1920,
-          3920,
-          3202,
-          3140,
-          2800,
-          3200,
-          3200,
-          3400,
-          2910,
-          3100,
-          4250
-        ],¨
-        backgroundColor: "rgba(0,123,255,0.1)",
-        borderColor: "rgba(0,123,255,1)",
-        pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgb(0,123,255)",
-        borderWidth: 1.5,
-        pointRadius: 0,
-        pointHoverRadius: 3
-      },
-      {
-        label: "Past Month",
-        fill: "start",
-        data: [
-          380,
-          430,
-          120,
-          230,
-          410,
-          740,
-          472,
-          219,
-          391,
-          229,
-          400,
-          203,
-          301,
-          380,
-          291,
-          620,
-          700,
-          300,
-          630,
-          402,
-          320,
-          380,
-          289,
-          410,
-          300,
-          530,
-          630,
-          720,
-          780,
-          1200
-        ],
-        backgroundColor: "rgba(255,65,105,0.1)",
-        borderColor: "rgba(255,65,105,1)",
-        pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgba(255,65,105,1)",
-        borderDash: [3, 3],
-        borderWidth: 1,
-        pointRadius: 0,
-        pointHoverRadius: 2,
-        pointBorderColor: "rgba(255,65,105,1)"
-      }
-    ]
-    
-  }
+  gen: constants.gen2,
+  series: constants.series,
+  chart: {
+    type: 'polarArea',
+    height:'500',
+    width: '100%' 
+  },
+  options : {
+    labels: constants.labels,
+    title: {
+        text:  '',
+        align: 'left'
+    },
+    stroke: {
+        colors: ['#fff']
+    },
+    fill: {
+        opacity: 0.8
+    },
+    legend: {
+        position: 'left',
+        containerMargin: {
+            left: 10,
+            right: 10,
+          }
+    },
+    responsive: [{
+        breakpoint: 1000,
+        options: {
+        legend: {
+            position: 'top'
+        }
+        }
+    }]
+  },
 };
-*/
 export default AnalisisDisGen;

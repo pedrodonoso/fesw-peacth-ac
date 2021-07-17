@@ -18,6 +18,14 @@ function getDosePatient(data) {
     return api.post(`${basePath}/patients/get_weekly_dosis/get_weekly_dosis/`, data);
 }
 
+function getLastPropsAlgorithm() {
+    //get
+    //https://peacth-ac-backend.herokuapp.com/api/LogWTDparameters/get_last/get_last/
+    axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    return api.get(`${basePath}/LogWTDparameters/get_last/get_last/`);
+}
+
 function getControls() {
     //get
     //https://peacth-ac-backend.herokuapp.com/api/clinical_control/
@@ -52,6 +60,7 @@ function addToTeam(id,idlist) {
 */
 const calculoService = {
     getDosePatient,
+    getLastPropsAlgorithm,
 };
 
 export default calculoService;

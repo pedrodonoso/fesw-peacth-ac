@@ -43,11 +43,6 @@ function formula(props,vars) {
       }
     }
 
-    console.log({title: '1/2', data: _1_2})
-    console.log({title: '1/3', data: _1_3})
-    console.log({title: '3/3', data: _3_3})
-    console.log({title: 'G/A', data: _G_A})
-    console.log({title: 'A/A', data: _A_A})
 
     var _vars = {
       'notfem' : vars.sex === 'F' ? 0 : 1,

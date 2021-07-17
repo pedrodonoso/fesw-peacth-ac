@@ -65,7 +65,9 @@ class Calculo extends Component {
 
   //envía data a API
   handleCalculoSubmit(data) {
-    var ifResponse = false
+    var ifResponseCoef = false
+    var ifResponseVar = false
+
     console.log({nombre:"handleCalculoSubmit",data:data})
     //guarda variables ingresadas
     this.vars = data.vars
@@ -75,16 +77,27 @@ class Calculo extends Component {
     //   vars: data.vars
     // });
 
+    //TODO: Consultar ultimos coeficientes
+    calculoService.getLastPropsAlgorithm()
+    .then((response) => {
+      var _coef = response.data
+      console.log({title: 'Coefs', coef: _coef})
+      ifResponseCoef = true
+
+      this.coef = _coef
+    })
+    .catch((error) => {
+      console.log({title: 'error', error: error.error.response.data})
+    });
 
     //subimos las variables ingresadas
-    
     calculoService.getDosePatient(this.vars)
     .then((response) => {
       var _dosis = response.data.initialDose
       _dosis = _dosis.toFixed(4)
       console.log({title: 'initialDose', initialDose: _dosis})
       //guardamos las variables
-        ifResponse = true
+      ifResponseVar = true
         this.setState({
           ...this.state,
           dosis: _dosis
@@ -127,8 +140,8 @@ class Calculo extends Component {
     }) ); 
     */
     console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
-    if(!ifResponse) {
-      var _Dosis = formulaService.formula(this.coef,this.vars)
+    if(!ifResponseVar) {
+      var _Dosis = formulaService.formula(ifResponseCoef ? this.coef : {}, this.vars )
       this.setState({
         ...this.state,
         dosis: _Dosis

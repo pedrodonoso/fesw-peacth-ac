@@ -83,7 +83,6 @@ const DataUserGeneral = ({onSubmit , dosis}) => {
 */
 
  function handleSubmit(data) {
-    console.log({nombre:"handleSubmit",data:data})
     var title = data.title
     var selected = data.selected
     var dic = genetics.value

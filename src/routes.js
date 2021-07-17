@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { DefaultLayout,Custom } from "./layouts";
 
 // Route Views
-import {Calculo, Analisis} from "./views";
+import {Calculo, Analisis, RegistrarVisita} from "./views";
 
 /*
 import BlogOverview from "./views/template/BlogOverview";
@@ -51,13 +51,13 @@ export default [
     component_props_: { dosisGen: false }
     
   },
-  
-  /*
   {
-    path: "/frec_distribucion_gen",
-    layout: DefaultLayout,
-    component: AddNewPost
+    path: "/registrar_visita",
+    layout: Custom,
+    component: RegistrarVisita,
+    layout_props: {noNavbar: true, noFooter:true}
   },
+  /*
   {
     path: "/pservice/all-pservice",
     layout: DefaultLayout,

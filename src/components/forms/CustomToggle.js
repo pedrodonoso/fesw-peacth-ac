@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const  Test =({openOut,handler,toggle,text,title}) => {
+const  CustomToggle =({openOut,handler,toggle,text,title}) => {
 
   return (
     <div>
@@ -32,4 +32,4 @@ const  Test =({openOut,handler,toggle,text,title}) => {
   );
 }
 
-export default Test;
+export default CustomToggle;

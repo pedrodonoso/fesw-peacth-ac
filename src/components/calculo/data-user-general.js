@@ -77,40 +77,10 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     }
   }
 
-  const validEmailRegex =
-    RegExp(/^((([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})|)$/i
-    );
-  const validRutRegex =
-    //RegExp(/^(([0-9])+\-([kK0-9])|)$/i);
-    RegExp(/^(([0-9])+|)$/i);
-  const validNombreRegex =
-    RegExp(/^[a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1]+$/i);
-//RegExp(/^([a-z A-Z])+$/i);
-  const validApellidoRegex =
-    RegExp(/^[a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1]+$/i);
-//RegExp(/^([a-z A-Z])+$/i);
-  const validProfesionRegex =
-    RegExp(/^[a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1]+$/i);
-//RegExp(/^([a-z A-Z])+$/i);
   const validNumRegex =
-    RegExp(/^([0-9])*[\.]?([0-9])*$/i);
+  RegExp(/^([0-9])*[\.]?([0-9])*$/i);
   const validPacienteRegex =
-    RegExp(/^(T-)([0-9])*$/i);
-
-  /*
-      const validNombre = (e) =>{
-        var input = e.target.value;
-        setNombres((prevState) => ({...prevState, nombres: input}));
-        if(validNombreRegex.test(input))  {
-            setNombres((prevState) => ({...prevState, valid: true, invalid: false}));
-          return true;
-        } else {
-            setNombres((prevState) => ({...prevState, valid: false, invalid: true}));
-          return false;
-        }
-      }
-
-  */
+  RegExp(/^(T-)([0-9]){3}$/i);
 
   function handleSubmit(data) {
     var title = data.title
@@ -207,6 +177,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                           theme="primary"
                           className="font-weight-bold"
                           onClick={(event) => {
+                            var _imc = calcImc();
                             onSubmit({
                               vars: {
                                 'code': cod_paciente.valid ? cod_paciente.value : "",
@@ -219,7 +190,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                                 'totalDays': 534,
                                 'weight': peso.valid ? peso.value : 0.0,
                                 'height': talla.valid ? talla.value : 0.0,
-                                'imc': calcImc(),
+                                'imc': _imc === Infinity ? 999 : _imc,
                                 'age': edad.valid ? parseFloat(edad.value) : 0,
                                 'genetics': genetics.value,
                                 //'diagnosis': diagnosis.value,
@@ -233,7 +204,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <InputGroupAddon type="append">
                         <InputGroupText>
                           <t6
-                            className={"text-black"}> {isNaN(dosis) ? '-' : dosis} </t6>
+                            className={"text-black"}> {isNaN(dosis) ? '-' : dosis.toFixed(4)} </t6>
                         </InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>

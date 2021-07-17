@@ -18,81 +18,25 @@ import {
 const DataUserVisit = ({onSubmit }) => {
 
     const today = new Date();
-    const [cod_paciente, setCodPaciente] = useState({value:'',valid:false});
-    const [arrivalDose, setArrivalDose] = useState({value:'',valid:false});
-    const [updatedDose, setUpdatedDose] = useState({value:'',valid:false});
-    const [arrivalINR, setArrivalINR] = useState({value:'',valid:false});
-    const [inrInRange, setINRinRange] = useState({value:false,valid:false});
+    const [cod_paciente, setCodPaciente] = useState({value:'', valid:undefined});
+    const [arrivalDose, setArrivalDose] = useState({value:'',valid:undefined});
+    const [updatedDose, setUpdatedDose] = useState({value:'',valid:undefined});
+    const [arrivalINR, setArrivalINR] = useState({value:'',valid:undefined});
+    //const [inrInRange, setINRinRange] = useState({value:false,valid:false});
     
 
     function setForm() {
-        setCodPaciente((prevState) => ({...prevState, value: '',valid:false})); {/* code: "T-004" */}       {/* age: 69 */}
-        setArrivalDose((prevState) => ({...prevState, value: 0.0,valid:false}));        {/* weight: 80.5 */}
-        setUpdatedDose((prevState) => ({...prevState, value: 0.0,valid:false}));       {/* height: 1.56 */}
-        setArrivalINR((prevState) => ({...prevState, value: 0.0,valid:false}));       {/* sex: "M" */}
-        setINRinRange((prevState) => ({...prevState, value: false,valid:false}));  {/* "weight: 80" */}
+        setCodPaciente((prevState) => ({...prevState, value: '',valid:undefined})); {/* code: "T-004" */}       {/* age: 69 */}
+        setArrivalDose((prevState) => ({...prevState, value: '',valid:undefined}));        {/* weight: 80.5 */}
+        setUpdatedDose((prevState) => ({...prevState, value: '',valid:undefined}));       {/* height: 1.56 */}
+        setArrivalINR((prevState) => ({...prevState, value: '',valid:undefined}));       {/* sex: "M" */}
+        //setINRinRange((prevState) => ({...prevState, value: false,valid:false}));  {/* "weight: 80" */}
     }
     
-    const validEmailRegex =
-    RegExp(/^((([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})|)$/i
-    );
-    const validRutRegex =
-    //RegExp(/^(([0-9])+\-([kK0-9])|)$/i);
-    RegExp(/^(([0-9])+|)$/i);
-    const validNombreRegex =
-    RegExp(/^[a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1]+$/i);
-    //RegExp(/^([a-z A-Z])+$/i);
-    const validApellidoRegex =
-    RegExp(/^[a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1]+$/i);
-    //RegExp(/^([a-z A-Z])+$/i);
-    const validProfesionRegex  =
-    RegExp(/^[a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1]+$/i);
-    //RegExp(/^([a-z A-Z])+$/i);
     const validNumRegex =
     RegExp(/^([0-9])*[\.]?([0-9])*$/i);
     const validPacienteRegex =
-    RegExp(/^(T-)([0-9])*$/i);
-/*
-    const validNombre = (e) =>{
-      var input = e.target.value;
-      setNombres((prevState) => ({...prevState, nombres: input}));
-      if(validNombreRegex.test(input))  {
-          setNombres((prevState) => ({...prevState, valid: true, invalid: false}));
-        return true;
-      } else {
-          setNombres((prevState) => ({...prevState, valid: false, invalid: true}));
-        return false;
-      }
-    }
-
-*/
-
-/*
- function handleSubmit(data) {
-    console.log({nombre:"handleSubmit",data:data})
-    var title = data.title
-    var selected = data.selected
-    var dic = genetics.value
-    dic = { ...dic, [title] : selected}
-    setGenetics((prevState) => ({...prevState, value: dic}))
-    
-    console.log(genetics.value)
-  }
-
-  function onChangecontrolDate(e) {
-    var _cod = e.target.value;
-    setCodPaciente((prevState) => ({...prevState, value: _cod}))
-    console.log(validPacienteRegex.test(_cod))
-    if(validPacienteRegex.test(_cod)) {
-      
-      setCodPaciente((prevState) => ({...prevState, valid: true}))
-    } else {
-      setCodPaciente((prevState) => ({...prevState, valid: false}))
-    }
-
-    return true
-  }
-  */
+    RegExp(/^(T-)([0-9]){3}$/i);
 
   function onChangeCodPaciente(e) {
     var _cod = e.target.value;
@@ -102,8 +46,9 @@ const DataUserVisit = ({onSubmit }) => {
     } else {
       setCodPaciente((prevState) => ({...prevState, valid: false}))
     }
-
-    return true
+    if(_cod === '') {
+      setCodPaciente((prevState) => ({...prevState, valid: undefined}))
+    }
   }
 
   function onChangeArrivalDose(e) {
@@ -114,7 +59,9 @@ const DataUserVisit = ({onSubmit }) => {
     } else {
       setArrivalDose((prevState) => ({...prevState, valid: false}))
     }
-    return true
+    if(_arrival === '') {
+      setCodPaciente((prevState) => ({...prevState, valid: undefined}))
+    }
   }
   function onChangeUpdatedDose(e) {
     var _updated = e.target.value;
@@ -124,7 +71,9 @@ const DataUserVisit = ({onSubmit }) => {
     } else {
       setUpdatedDose((prevState) => ({...prevState, valid: false}))
     }
-    return true
+    if(_updated === '') {
+      setCodPaciente((prevState) => ({...prevState, valid: undefined}))
+    }
   }
   function onChangeArrivalINR(e) {
     var _arrival = e.target.value;
@@ -134,13 +83,14 @@ const DataUserVisit = ({onSubmit }) => {
     } else {
       setArrivalINR((prevState) => ({...prevState, valid: false}))
     }
-    return true
+    if(_arrival === '') {
+      setCodPaciente((prevState) => ({...prevState, valid: undefined}))
+    }
   }
   
     return(
       <Col>
       <Row>
-        
           {/* Data general */}
           <Card small lg="9" >
             <CardHeader className="border-bottom">
@@ -159,8 +109,12 @@ const DataUserVisit = ({onSubmit }) => {
                     onChange={onChangeCodPaciente}
                     size="lg"
                     className="mb-3"
-                    placeholder="T-069" />
-                <FormFeedback   valid={cod_paciente.valid}>"Ej: T-420"</FormFeedback>
+                    placeholder="T-421" />
+                <FormFeedback  
+                //className={`style={{display: ${!cod_paciente.valid} ? 'block' : 'none' }}`} 
+                //valid={undefined} 
+                //valid={cod_paciente.valid}
+                >"Debes ingresar una letra seguido de un guión y tres dígitos. <br/> Ej: T-422"</FormFeedback>
                 </FormGroup>
 
                 {/* Dosis con que llega */}
@@ -176,7 +130,9 @@ const DataUserVisit = ({onSubmit }) => {
                     //className="mb-3 "
                     placeholder="3.7"
                     />
-                    <FormFeedback  valid={arrivalDose.valid}>"Debes ingresar solo números."</FormFeedback>
+                    <FormFeedback  
+                    //valid={arrivalDose.valid}
+                    >"Debes ingresar solo números."</FormFeedback>
                     </InputGroup>
                 </FormGroup>
 
@@ -192,7 +148,9 @@ const DataUserVisit = ({onSubmit }) => {
                     size="lg"
                     //className="mb-3"
                     placeholder="2.5" />
-                <FormFeedback  valid={updatedDose.valid}>"Debes ingresar solo números."</FormFeedback>
+                <FormFeedback  
+                //valid={updatedDose.valid}
+                >"Debes ingresar solo números."</FormFeedback>
                 </InputGroup>
                 </FormGroup>
 
@@ -208,27 +166,21 @@ const DataUserVisit = ({onSubmit }) => {
                     size="lg"
                     //className="mb-3"
                     placeholder="2.9" />
-                <FormFeedback  valid={arrivalINR.valid}>"Debes ingresar solo números"</FormFeedback>
+                <FormFeedback  
+                //valid={arrivalINR.valid}
+                >"Debes ingresar solo números"</FormFeedback>
                 </InputGroup>
                 </FormGroup>
-                {/* Sexo */}
+                {/* INR rango */}
+                {/*
                 <label>¿INR dentro de rango?</label> 
                 <FormGroup>
                 <ButtonGroup size="sm" className="mr-2" >
                     <Button theme={inrInRange.value === true ? 'primary' : 'white'} onClick={() => setINRinRange((prevState) => ({...prevState, value: true, valid:true}))}>Sí</Button>
                     <Button theme={inrInRange.value === false ? 'primary' : 'white'} onClick={() => setINRinRange((prevState) => ({...prevState, value: false, valid:true}))}>No</Button>    
                 </ButtonGroup>
-                    {/*
-                <FormInput
-                    value={sexo.value}
-                    valid={sexo.valid}
-                    invalid={sexo.invalid}
-                    //onChange={validCorreo}
-                    size="lg"
-                    className="mb-3"
-                    placeholder="juan@gmail.com" />
-                    */}
                 </FormGroup>
+                */}
               </Form>
             </CardBody>
           </Card>
@@ -238,13 +190,15 @@ const DataUserVisit = ({onSubmit }) => {
           theme="primary"
           className="mb-2 mr-1"
           onClick={(event) => {
-            console.log({
-              'patientCode': cod_paciente.valid ? cod_paciente.value : "",
-              'controlDate':  today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2),
-              'arrivalDose' : arrivalDose.valid ? arrivalDose.value : 0.0,
-              'updatedDose': updatedDose.valid ? updatedDose.value: 0.0, 
-              'arrivalINR': arrivalINR.valid ? arrivalINR.value: 0.0,
-              'inrInRange': inrInRange.value
+            onSubmit({
+              data: {
+                'patientCode': cod_paciente.valid ? cod_paciente.value : "",
+                'controlDate':  today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2),
+                'arrivalDose' : arrivalDose.valid ? parseFloat(arrivalDose.value) : 0.0,
+                'updatedDose': updatedDose.valid ? parseFloat(updatedDose.value): 0.0, 
+                'arrivalINR': arrivalINR.valid ? parseFloat(arrivalINR.value) : 0.0,
+                'inrInRange': false//inrInRange.value
+              }
               });
             setForm();
             }}

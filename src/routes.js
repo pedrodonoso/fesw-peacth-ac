@@ -57,6 +57,12 @@ export default [
     component: RegistrarVisita,
     layout_props: {noNavbar: true, noFooter:true}
   },
+  {
+    path: "/actualizar",
+    layout: Custom,
+    component: RegistrarVisita,
+    layout_props: {noNavbar: true, noFooter:true}
+  },
   /*
   {
     path: "/pservice/all-pservice",

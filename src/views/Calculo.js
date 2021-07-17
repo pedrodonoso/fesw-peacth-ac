@@ -3,41 +3,14 @@ import {
     Container,
     Row,
     Col,
-    Card,
-    CardHeader,
-    ListGroup,
-    ListGroupItem,
-    Form,
-    Button,
 } from "shards-react";
 
 import DataUserGeneral from "../components/calculo/data-user-general";
-import Test from '../components/forms/Test';
-import teamsService from '../services/teams.service';
+import CustomToggle from '../components/forms/CustomToggle';
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 
-import Colors from "../components/components-overview/Colors";
-import Checkboxes from "../components/components-overview/Checkboxes";
-import RadioButtons from "../components/components-overview/RadioButtons";
-import ToggleButtons from "../components/components-overview/ToggleButtons";
-import SmallButtons from "../components/components-overview/SmallButtons";
-import SmallOutlineButtons from "../components/components-overview/SmallOutlineButtons";
-import NormalButtons from "../components/components-overview/NormalButtons";
-import NormalOutlineButtons from "../components/components-overview/NormalOutlineButtons";
-import Forms from "../components/components-overview/Forms";
-import FormValidation from "../components/components-overview/FormValidation";
-import CompleteFormExample from "../components/components-overview/CompleteFormExample";
-import Sliders from "../components/components-overview/Sliders";
-import ProgressBars from "../components/components-overview/ProgressBars";
-import ButtonGroups from "../components/components-overview/ButtonGroups";
-import InputGroups from "../components/components-overview/InputGroups";
-import SeamlessInputGroups from "../components/components-overview/SeamlessInputGroups";
-import CustomFileUpload from "../components/components-overview/CustomFileUpload";
-import DropdownInputGroups from "../components/components-overview/DropdownInputGroups";
-import CustomSelect from "../components/components-overview/CustomSelect";
-import DropdownOptions from "../components/calculo/drop-options";
 import formulaService from "../services/formula.service";
 import calculoService from "../services/calculo.service";
 
@@ -123,7 +96,7 @@ class Calculo extends Component {
     
       this.toggle({
         title: "No se pudo 😁",
-        text: "Ha ocurrido un problema, vuelve a intentarlo! \n Se calculará la dosis con los último parametros guardados localmente.",
+        text: (<div> Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Se calculará la dosis con los último parametros guardados localmente. </b> </div>),
       });
     
    }); 
@@ -198,7 +171,7 @@ class Calculo extends Component {
       <Row>
         <Col lg="12" className="py-4">
         <DataUserGeneral onSubmit={this.handleCalculoSubmit} dosis={this.state.dosis}/>
-        <Test openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
+        <CustomToggle openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
           text={this.state.text}
           title={this.state.title}
         />

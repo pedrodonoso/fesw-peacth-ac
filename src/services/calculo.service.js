@@ -34,11 +34,13 @@ function getControls() {
     return api.get(`${basePath}/clinical_control`)
 }
 
-function registerVisit(data) {
+function postRegisterVisit(data) {
     //post
     //https://peacth-ac-backend.herokuapp.com/api/clinical_control/register_visit/register_visit/
     axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    console.log({title: 'pre post postRegisterVisit', url: `${basePath}/clinical_control/register_visit/register_visit/` ,data:data})
+
     return api.post(`${basePath}/clinical_control/register_visit/register_visit/`,data)
 }
 
@@ -61,6 +63,7 @@ function addToTeam(id,idlist) {
 const calculoService = {
     getDosePatient,
     getLastPropsAlgorithm,
+    postRegisterVisit,
 };
 
 export default calculoService;

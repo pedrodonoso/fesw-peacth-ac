@@ -6,10 +6,10 @@ import {
 } from "shards-react";
 
 import DataUserVisit from "../components/registrar_visita/data-user-visit";
-import teamsService from '../services/teams.service';
+import calculoService from '../services/calculo.service';
+import CustomToggle from '../components/forms/CustomToggle';
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
 
 const theme = createMuiTheme({
   palette: {
@@ -18,29 +18,45 @@ const theme = createMuiTheme({
 }, esES);
 
 class RegistrarVisita extends Component {
-
+  data = {};
   constructor(props) {
     super(props);
     this.state = {
       open: false,
     }
-    this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
     this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
   //envía data a API
-  handleTeamSubmit(data) {
-    console.log({nombre:"handleTeamSubmit",data:data})
-    teamsService.create(data.tag,data.idlist)
-    .then((response) => this.toggle({
-      text: "Equipo creado correctamente!! 😘",
-      title: "Si se pudo!!😍 "
-    }))
-    .catch((error) => this.toggle({
-      text: "Debes ingresar Personal de Servicio que no esté asignado a un Equipo!! ✋",
-      title: "No se pudo 😁"
-    }) );
+  handleRegisterSubmit(submited) {
+
+    console.log({nombre:"handleRegisterSubmit",data:submited.data})
+    //guarda variables ingresadas
+    this.data = submited.data
+    console.log(this.data)
+    //subimos las variables ingresadas
+    calculoService.postRegisterVisit(this.data)
+    .then((response) => {
+      //console.log({title: 'postRegisterVisit', initialDose: response.data})
+      //mostramos al usuario un toggle
+        this.toggle({
+        title: "Si se pudo!!😍 ",
+        text: "Visita registrada correctamente!! 😘",
+        });
+      
+    })
+    .catch((error) => {
+      //console.log({title: 'error', error: error.response.data})
+    //mostramos al usuario un toggle
+      this.toggle({
+        title: "No se pudo 😁",
+        text: (<div>Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Intenta ingresando un usuario que ya exista </b></div>)
+      });
+    
+   }); 
+
   }
 
   toggle(data) {
@@ -74,48 +90,15 @@ class RegistrarVisita extends Component {
       <Container fluid className="main-content-container px-4 pb-4">
         {/* Page Header */}
         <ThemeProvider theme={theme}>
-          {/*
-        <Row noGutters className="page-header py-4">
-           
-          <PageTitle sm="4" title="Calcular primera dosis" subtitle="acenocumarol" className="text-sm-left" />
-        </Row>
-
-        <Team onSubmit={this.handleTeamSubmit}></Team>
-
-        <Test openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
-          text={this.state.text}
-          title={this.state.title}
-        />
-          */}
         <Container fluid className="main-content-container px-4">
 
       <Row>
         <Col lg="12" className="py-4">
-        <DataUserVisit onSubmit={this.handleTeamSubmit} />
-        {/*
-          <Card>
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Datos del Paciente</h6>
-            </CardHeader>
-              <Row>
-                  <Col lg="4" className="mb-4">
-                    <Card small>
-                        <CardHeader className="border-bottom">
-                        <h6 className="m-0">Datos Clínicos del Paciente</h6>
-                        </CardHeader>
-                        <DataUserGeneral />
-                    </Card>
-                  </Col>
-                  <Col lg="4" className="mb-4">
-                    <Card small>
-                        <CardHeader className="border-bottom">
-                        <h6 className="m-0">Datos Farmacogenética del Paciente</h6>
-                        </CardHeader>
-                    </Card>
-                  </Col>
-              </Row>
-          </Card>
-        */}
+        <DataUserVisit onSubmit={this.handleRegisterSubmit} />
+        <CustomToggle openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
+          text={this.state.text}
+          title={this.state.title}
+        />
         </Col>
       </Row>
     </Container>

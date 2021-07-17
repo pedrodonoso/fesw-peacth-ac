@@ -80,7 +80,8 @@ class Calculo extends Component {
     
     calculoService.getDosePatient(this.vars)
     .then((response) => {
-      var _dosis = response.data.initialDose;
+      var _dosis = response.data.initialDose
+      _dosis = _dosis.toFixed(4)
       console.log({title: 'initialDose', initialDose: _dosis})
       //guardamos las variables
         ifResponse = true
@@ -98,7 +99,7 @@ class Calculo extends Component {
       
     })
     .catch((error) => {
-      console.log({title: 'error', error: error})
+      console.log({title: 'error', error: error.error.response.data})
 
       //calculamos sin internet con las últimas variables
       this.setState({

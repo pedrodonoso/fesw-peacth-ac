@@ -92,7 +92,7 @@ const DataUserGeneral = ({onSubmit , dosis}) => {
   
   }
   function calcImc() {
-    var _imc = peso.value/Math.pow(talla.value*0.01,2);
+    var _imc = peso.value/Math.pow(talla.value,2);
     setIMC((prevState) => ({...prevState, value: _imc}))
     return _imc;
   }
@@ -237,9 +237,9 @@ const DataUserGeneral = ({onSubmit , dosis}) => {
                     onChange={onChangeTalla}
                     size="lg"
                     //className="mb-3"
-                    placeholder="65" />
+                    placeholder="1.65" />
                 <InputGroupAddon type="prepend">
-                    <InputGroupText>cm</InputGroupText>
+                    <InputGroupText>m</InputGroupText>
                 </InputGroupAddon>
                 <FormFeedback  valid={talla.valid}>"Debes ingresar solo números"</FormFeedback>
                 </InputGroup>
@@ -379,7 +379,7 @@ const DataUserGeneral = ({onSubmit , dosis}) => {
 
   DataUserGeneral.propTypes = {
     onSubmit: PropTypes.func,
-    dosis: PropTypes.number
+    dosis: PropTypes.any
   }
 
 DataUserGeneral.defaultProps = {

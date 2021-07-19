@@ -34,7 +34,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
   const [genetics, setGenetics] = useState({
     value: {
       [constants.gen2]: constants.gen11,
-      [constants.gen3]: constants.gen12,
+      [constants.gen3]: constants.gen11,
       [constants.gen4]: constants.genaa
     }, valid: false
   });
@@ -50,7 +50,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
       ...prevState,
       value: {
         [constants.gen2]: constants.gen11,
-        [constants.gen3]: constants.gen12,
+        [constants.gen3]: constants.gen11,
         [constants.gen4]: constants.genaa
       },
       valid: false
@@ -380,6 +380,9 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         <InputGroupText>
                           <t6 className={"text-black"}> {isNaN(dosis) ? '-' : dosis.toFixed(4)} </t6>
                         </InputGroupText>
+                        <InputGroupAddon type="prepend">
+                          <InputGroupText>mg/semana</InputGroupText>
+                        </InputGroupAddon>
                       </InputGroupAddon>
                     </InputGroup>
                   </Col>

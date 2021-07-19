@@ -194,7 +194,6 @@ AnalisisDosisGen.defaultProps = {
       }
       }
     }]    
-    
     */ 
       
   },

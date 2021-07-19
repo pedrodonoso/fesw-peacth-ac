@@ -72,8 +72,11 @@ class Calculo extends Component {
       formulaService.updateLocalProps(_coef);
     })
     .catch((error) => {
-      //console.log({title: 'error', error: error.error.response.data})
+      console.log({title: 'error', error: error})
     });
+
+    
+    console.log({title: 'vars', data: this.vars})
 
     //subimos las variables ingresadas
     calculoService.getDosePatient(this.vars)
@@ -98,7 +101,7 @@ class Calculo extends Component {
       
     })
     .catch((error) => {
-      //console.log({title: 'error', error: error.error.response.data})
+      console.log({title: 'error', error: error})
 
       //calculamos sin internet con las últimas variables
       this.setState({
@@ -127,7 +130,7 @@ class Calculo extends Component {
     */
     //console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
     if(!ifResponseVar) { //no se puede acceder a bd para calcular dosis
-      var _Dosis = formulaService.formula(ifResponseCoef ? this.coef : {}, this.vars )
+      var _Dosis = formulaService.formula( this.coef, this.vars )
       this.setState({
         ...this.state,
         dosis: _Dosis

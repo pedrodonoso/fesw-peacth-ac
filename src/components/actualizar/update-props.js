@@ -10,7 +10,7 @@ import {
   FormInput,
   Button,
   FormFeedback,
-  InputGroup, 
+  InputGroup,
   CardHeader,
 } from "shards-react";
 
@@ -28,17 +28,17 @@ const UpdateProps = ({onSubmit }) => {
 
     function setForm() {
         setP0((prevState) => ({...prevState, value: '',valid:undefined}));
-        setPMen((prevState) => ({...prevState, value: '',valid:undefined})); 
-        setPAge((prevState) => ({...prevState, value: '',valid:undefined})); 
-        setPInitialINR((prevState) => ({...prevState, value: '',valid:undefined}));   
-        setPImc((prevState) => ({...prevState, value: '',valid:undefined}));  
-        setPCYP2C912((prevState) => ({...prevState, value: '',valid:undefined}));  
-        setPCYP2C913((prevState) => ({...prevState, value: '',valid:undefined}));  
-        setPCYP2C933((prevState) => ({...prevState, value: '',valid:undefined}));  
-        setPVKORC1GA((prevState) => ({...prevState, value: '',valid:undefined}));  
-        setPVKORC1AA((prevState) => ({...prevState, value: '',valid:undefined})); 
+        setPMen((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPAge((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPInitialINR((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPImc((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPCYP2C912((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPCYP2C913((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPCYP2C933((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPVKORC1GA((prevState) => ({...prevState, value: '',valid:undefined}));
+        setPVKORC1AA((prevState) => ({...prevState, value: '',valid:undefined}));
     }
-    
+
     const validNumRegex =
     RegExp(/^([0-9])+[\.]?([0-9])*$/i);
 
@@ -213,9 +213,9 @@ const UpdateProps = ({onSubmit }) => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  
+
                   <Row>
-                    
+
                   {/* Nueva dosis */}
                   <Col>
                   <FormGroup>
@@ -295,7 +295,7 @@ const UpdateProps = ({onSubmit }) => {
           <Col lg="6" className="mb-4">
             <Card small lg="6">
                 <CardBody>
-                  
+
                 <Row>
                   {/* Nueva dosis */}
                   <Col>
@@ -395,16 +395,16 @@ const UpdateProps = ({onSubmit }) => {
                                 "p_initialINR":  p_initialINR.valid ? parseFloat(p_initialINR.value) : 0.0,
                                 "p_imc":  p_imc.valid ? parseFloat(p_imc.value) : 0.0,
                                 "p_CYP2C9_12":  p_CYP2C9_12.valid ? parseFloat(p_CYP2C9_12.value) : 0.0,
-                                "p_CYP2C9_13":  p_CYP2C9_13.valid ? parseFloat(p_CYP2C9_13.value) : 0.0, 
+                                "p_CYP2C9_13":  p_CYP2C9_13.valid ? parseFloat(p_CYP2C9_13.value) : 0.0,
                                 "p_CYP2C9_33":  p_CYP2C9_33.valid ? parseFloat(p_CYP2C9_33.value) : 0.0,
                                 "p_VKORC1_GA":  p_VKORC1_GA.valid ? parseFloat(p_VKORC1_GA.value) : 0.0,
-                                "p_VKORC1_AA":  p_VKORC1_AA.valid ? parseFloat(p_VKORC1_AA.value) : 0.0, 
+                                "p_VKORC1_AA":  p_VKORC1_AA.valid ? parseFloat(p_VKORC1_AA.value) : 0.0,
                               }
                             });
-                            
+
                           }}
                         >
-                          Guardar visita
+                          Guardar parámetros
                         </Button>
                     </InputGroup>
                   </Col>

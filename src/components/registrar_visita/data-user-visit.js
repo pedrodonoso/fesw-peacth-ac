@@ -10,7 +10,7 @@ import {
   FormInput,
   Button,
   FormFeedback,
-  InputGroup, 
+  InputGroup,
   CardHeader,
 } from "shards-react";
 
@@ -21,15 +21,15 @@ const DataUserVisit = ({onSubmit }) => {
     const [arrivalDose, setArrivalDose] = useState({value:'',valid:undefined});
     const [updatedDose, setUpdatedDose] = useState({value:'',valid:undefined});
     const [arrivalINR, setArrivalINR] = useState({value:'',valid:undefined});
-    
+
 
     function setForm() {
         setCodPaciente((prevState) => ({...prevState, value: '',valid:undefined}));
-        setArrivalDose((prevState) => ({...prevState, value: '',valid:undefined}));       
-        setUpdatedDose((prevState) => ({...prevState, value: '',valid:undefined}));     
-        setArrivalINR((prevState) => ({...prevState, value: '',valid:undefined}));       
+        setArrivalDose((prevState) => ({...prevState, value: '',valid:undefined}));
+        setUpdatedDose((prevState) => ({...prevState, value: '',valid:undefined}));
+        setArrivalINR((prevState) => ({...prevState, value: '',valid:undefined}));
     }
-    
+
     const validNumRegex =
     RegExp(/^([0-9])+[\.]?([0-9])*$/i);
     const validPacienteRegex =
@@ -37,7 +37,7 @@ const DataUserVisit = ({onSubmit }) => {
 
   function allValid() {
     return (cod_paciente.valid || !(cod_paciente.valid === undefined)) && (arrivalDose.valid || !(arrivalDose.valid === undefined)) && (updatedDose.valid || !(updatedDose.valid === undefined))  && (arrivalINR.valid || !(arrivalINR.valid === undefined));
-  } 
+  }
   function onChangeCodPaciente(e) {
     var _cod = e.target.value;
     setCodPaciente((prevState) => ({...prevState, value: _cod}))
@@ -87,12 +87,12 @@ const DataUserVisit = ({onSubmit }) => {
       setArrivalINR((prevState) => ({...prevState, valid: undefined}))
     }
   }
-  
+
     return(
       <React.Fragment>
       <Col>
         <Row>
-          <Col lg="7" className="mb-4">
+          <Col xs="12" lg="10" xl="8" className="mb-4 offset-lg-1 offset-xl-2">
             {/* Data general */}
             <Card small lg="7">
               <CardHeader className="border-bottom">
@@ -135,9 +135,9 @@ const DataUserVisit = ({onSubmit }) => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  
+
                   <Row>
-                    
+
                   {/* Nueva dosis */}
                   <Col>
                   <FormGroup>
@@ -177,7 +177,7 @@ const DataUserVisit = ({onSubmit }) => {
               </CardBody>
             </Card>
           </Col>
-          <Col lg="7" style={{
+          <Col xs="12" lg="10" xl="8" className="mb-4 offset-lg-1 offset-xl-2" style={{
             position: "center",
             bottom: 0,
             zIndex: 1
@@ -202,7 +202,7 @@ const DataUserVisit = ({onSubmit }) => {
                                 //'diagnosis': diagnosis.value,
                               }
                             });
-                            
+
                           }}
                         >
                           Guardar visita

@@ -1,101 +1,72 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Chart from 'react-apexcharts'
-import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
+import { Row, Col, Card, CardHeader, CardBody, Button ,ButtonGroup} from "shards-react";
 
 import RangeDatePicker from "../common/RangeDatePicker";
+import constants from "../../data/constants";
+
+import calculoService from "../../services/calculo.service";
 
 class AnalisisDosisGen extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);    
     this.state = {
-        chart: {
-            type: 'boxPlot',
-            height:'500',
-            width: '100%' 
-        },
-        options: {
-            colors: ['#008FFB', '#FEB019'],
-            title: {
-                text:  '',
-                align: 'left'
-            },
-            xaxis: {
-                type: 'datetime',
-                tooltip: {
-                formatter: function(val) {
-                    return new Date(val).getFullYear()
-                }
-                }
-            },
-            tooltip: {
-                shared: false,
-                intersect: true
-            }
-        },
-
-        series: [
-            {
-            name: 'box',
-            type: 'boxPlot',
-            data: [
-                {
-                x: new Date('2017-01-01').getTime(),
-                y: [54, 66, 69, 75, 88]
-                },
-                {
-                x: new Date('2018-01-01').getTime(),
-                y: [43, 65, 69, 76, 81]
-                },
-                {
-                x: new Date('2019-01-01').getTime(),
-                y: [31, 39, 45, 51, 59]
-                },
-                {
-                x: new Date('2020-01-01').getTime(),
-                y: [39, 46, 55, 65, 71]
-                },
-                {
-                x: new Date('2021-01-01').getTime(),
-                y: [29, 31, 35, 39, 44]
-                }
-            ]
-            },
-            {
-            name: 'outliers',
-            type: 'scatter',
-            data: [
-                {
-                x: new Date('2017-01-01').getTime(),
-                y: 32
-                },
-                {
-                x: new Date('2018-01-01').getTime(),
-                y: 25
-                },
-                {
-                x: new Date('2019-01-01').getTime(),
-                y: 64
-                },
-                {
-                x: new Date('2020-01-01').getTime(),
-                y: 27
-                },
-                {
-                x: new Date('2020-01-01').getTime(),
-                y: 78
-                },
-                {
-                x: new Date('2021-01-01').getTime(),
-                y: 15
-                }
-            ]
-            }
-        ],
-      }
-    //this.canvasRef = React.createRef();
+      gen: this.props.gen,
+      title: this.props.title,
+      series: this.props.series,
+      chart: this.props.chart,
+      options: this.props.options,
+    }
+    this.generate(constants.gen2);
   }
   
+  generate(_gen) {
+    console.log({title: "generate box", gen: _gen})
+    this.setState({
+      ...this.state,
+      gen: _gen
+    });
+
+    calculoService.getBoxplot(_gen)
+    .then((response) => {
+      var data = response.data
+      // var ser = response.data.frequency
+      console.log({title: "getBoxplot", response: data, gen: _gen})
+      var _data = [];
+      data.forEach(function(e) {
+        var label = e.label;
+        var value = e.value;
+        console.log({title:"foreach", data: label})
+        var aux = {};
+        aux.x = label;
+        aux.y = value;
+        _data.push(aux)
+      })
+      
+      var _serie = [{
+        type: 'boxPlot',
+        data:  _data,
+      }]
+
+      console.log({title: "data",data:_data})
+      this.setState({
+        ...this.state,
+        series: _serie
+      });
+      console.log(this.state)
+    })
+    .catch((error) => {
+      // this.setState({
+      //   ...this.state,
+      //   series: constants.series, 
+      //   options: {
+      //     ...this.state.options,
+      //     lables: constants.labels
+      //   }
+      // });
+    })
+  }
 
   render() {
     const { title } = this.props;
@@ -107,15 +78,37 @@ class AnalisisDosisGen extends React.Component {
         <CardBody className="pt-0">
           <Row className="border-bottom py-2 bg-light">
             <Col sm="6" className="d-flex mb-2 mb-sm-0">
-              <RangeDatePicker />
+              {/*<RangeDatePicker />*/}
+              <ButtonGroup > 
+                <Button 
+                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'} 
+                  onClick={() => 
+                    this.generate(constants.gen2)
+                  }
+                > {constants.gen2} </Button>
+                <Button 
+                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'} 
+                  onClick={() => 
+                    this.generate(constants.gen3)
+                  }
+                > {constants.gen3} </Button>
+                <Button 
+                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'} 
+                  onClick={() => 
+                    this.generate(constants.gen4)
+                  }
+                > {constants.gen4} </Button>
+              </ButtonGroup>
             </Col>
             <Col>
+            {/*
               <Button
                 size="sm"
                 className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
               >
                 View Full Report &rarr;
               </Button>
+            */}
             </Col>
           </Row>
           <div >
@@ -155,104 +148,75 @@ AnalisisDosisGen.propTypes = {
   chartOptions: PropTypes.object
 };
 
-/*
+
 AnalisisDosisGen.defaultProps = {
+  gen: constants.gen2,
   title: "Análisis",
-  chartData: {
-    labels: Array.from(new Array(30), (_, i) => (i === 0 ? 1 : i)),
-    
-    datasets: [
-      {
-        label: "Current Month",
-        fill: "start",
-        data: [
-          500,
-          800,
-          320,
-          180,
-          240,
-          320,
-          230,
-          650,
-          590,
-          1200,
-          750,
-          940,
-          1420,
-          1200,
-          960,
-          1450,
-          1820,
-          2800,
-          2102,
-          1920,
-          3920,
-          3202,
-          3140,
-          2800,
-          3200,
-          3200,
-          3400,
-          2910,
-          3100,
-          4250
-        ],¨
-        backgroundColor: "rgba(0,123,255,0.1)",
-        borderColor: "rgba(0,123,255,1)",
-        pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgb(0,123,255)",
-        borderWidth: 1.5,
-        pointRadius: 0,
-        pointHoverRadius: 3
+  chart: {
+    type: 'boxPlot',
+    height:'300',
+    width: '100%' 
+  },
+  options: {
+      colors: ['#008FFB', '#FEB019'],
+      title: {
+          text:  '',
+          align: 'left'
       },
+      yaxis: {
+        labels: {
+          formatter: function (value) {
+            return value.toFixed(3);
+          }
+        },
+      },
+      /*
+      xaxis: {
+          type: 'datetime',
+          tooltip: {
+          formatter: function(val) {
+              return new Date(val).getFullYear()
+          }
+          }
+      },
+      
+      tooltip: {
+          shared: false,
+          intersect: true
+      },
+      */
+      responsive: [{
+        breakpoint: 1000,
+        options: {
+        legend: {
+            position: 'top'
+        }
+        }
+    }]     
+      
+  },
+
+  series: [
       {
-        label: "Past Month",
-        fill: "start",
-        data: [
-          380,
-          430,
-          120,
-          230,
-          410,
-          740,
-          472,
-          219,
-          391,
-          229,
-          400,
-          203,
-          301,
-          380,
-          291,
-          620,
-          700,
-          300,
-          630,
-          402,
-          320,
-          380,
-          289,
-          410,
-          300,
-          530,
-          630,
-          720,
-          780,
-          1200
-        ],
-        backgroundColor: "rgba(255,65,105,0.1)",
-        borderColor: "rgba(255,65,105,1)",
-        pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgba(255,65,105,1)",
-        borderDash: [3, 3],
-        borderWidth: 1,
-        pointRadius: 0,
-        pointHoverRadius: 2,
-        pointBorderColor: "rgba(255,65,105,1)"
-      }
-    ]
-    
-  }
+      name: 'box',
+      type: 'boxPlot',
+      data: [
+          {
+          x: '*3/*4',
+          y: [54, 66, 69, 75, 88]
+          },
+          {
+          x: '*3/*5',
+          y: [43, 65, 69, 76, 81]
+          },
+          {
+          x: '*3/*6',
+          y: [31, 39, 45, 51, 59]
+          },
+      ]
+      },
+      
+  ],
+  
 };
-*/
 export default AnalisisDosisGen;

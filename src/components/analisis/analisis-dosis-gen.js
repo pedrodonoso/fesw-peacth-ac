@@ -9,7 +9,7 @@ import calculoService from "../../services/calculo.service";
 
 class AnalisisDosisGen extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);    
     this.state = {
       gen: this.props.gen,
       title: this.props.title,
@@ -19,7 +19,7 @@ class AnalisisDosisGen extends React.Component {
     }
     this.generate(constants.gen2);
   }
-
+  
   generate(_gen) {
     //console.log({title: "generate box", gen: _gen})
     this.setState({
@@ -42,7 +42,7 @@ class AnalisisDosisGen extends React.Component {
         aux.y = value;
         _data.push(aux)
       })
-
+      
       var _serie = [{
         type: 'boxPlot',
         data:  _data,
@@ -58,7 +58,7 @@ class AnalisisDosisGen extends React.Component {
     .catch((error) => {
       // this.setState({
       //   ...this.state,
-      //   series: constants.series,
+      //   series: constants.series, 
       //   options: {
       //     ...this.state.options,
       //     lables: constants.labels
@@ -66,7 +66,7 @@ class AnalisisDosisGen extends React.Component {
       // });
     })
   }
-
+  
 
   render() {
     const { title } = this.props;
@@ -79,22 +79,22 @@ class AnalisisDosisGen extends React.Component {
           <Row className="border-bottom py-2 bg-light">
             <Col sm="6" className="d-flex mb-2 mb-sm-0">
               {/*<RangeDatePicker />*/}
-              <ButtonGroup >
-                <Button
-                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
-                  onClick={() =>
+              <ButtonGroup > 
+                <Button 
+                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'} 
+                  onClick={() => 
                     this.generate(constants.gen2)
                   }
                 > {constants.gen2} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'}
-                  onClick={() =>
+                <Button 
+                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'} 
+                  onClick={() => 
                     this.generate(constants.gen3)
                   }
                 > {constants.gen3} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'}
-                  onClick={() =>
+                <Button 
+                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'} 
+                  onClick={() => 
                     this.generate(constants.gen4)
                   }
                 > {constants.gen4} </Button>
@@ -111,16 +111,16 @@ class AnalisisDosisGen extends React.Component {
             */}
             </Col>
           </Row>
-
+          
           {/*
           <div id="chart"></div>
           */}
           <div>
-            <Chart
+            <Chart 
                 options={this.state.options}
                 series={this.state.series}
                 type='boxPlot'
-                width='100%'
+                width='100%' 
                 height='300'
             />
           </div>
@@ -160,7 +160,7 @@ AnalisisDosisGen.defaultProps = {
   chart: {
     type: 'boxPlot',
     height:'300',
-    width: '100%'
+    width: '100%' 
   },
   */
   options: {
@@ -172,33 +172,20 @@ AnalisisDosisGen.defaultProps = {
         text:  '',
         align: 'left'
     },
-
+    
+    /*
     yaxis: {
       labels: {
         formatter: function (value) {
-          return value.toFixed(0);
-        }
-      },
-      title: {
-        text: "Dosis [mg/semana]",
-        style: {
-          fontSize: "14px",
+          return value.toFixed(3);
         }
       },
     },
-    xaxis: {
-      title: {
-        text: "Gen",
-        style: {
-          fontSize: "14px",
-        }
-      },
-    },
-/*    tooltip: {
+    tooltip: {
         shared: false,
         intersect: true
     },
-
+    
     responsive: [{
       breakpoint: 100,
       options: {
@@ -206,8 +193,9 @@ AnalisisDosisGen.defaultProps = {
           position: 'top'
       }
       }
-    }] */
-
+    }]    
+    */ 
+      
   },
 
   series: [
@@ -217,6 +205,6 @@ AnalisisDosisGen.defaultProps = {
       data: []
       },
   ],
-
+  
 };
 export default AnalisisDosisGen;

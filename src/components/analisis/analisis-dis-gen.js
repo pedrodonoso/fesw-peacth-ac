@@ -19,8 +19,8 @@ class AnalisisDisGen extends React.Component {
     }
     this.generate(constants.gen2)
   }
-
-
+  
+  
   generate(_gen) {
     //console.log({title: "generate", gen: _gen})
 
@@ -38,7 +38,7 @@ class AnalisisDisGen extends React.Component {
         //console.log({title: "labels", response: lab})
         this.setState({
           ...this.state,
-          series: ser,
+          series: ser, 
           options: {
             ...this.state.options,
             labels: lab
@@ -48,7 +48,7 @@ class AnalisisDisGen extends React.Component {
       .catch((error) => {
         this.setState({
           ...this.state,
-          series: constants.series,
+          series: constants.series, 
           options: {
             ...this.state.options,
             lables: constants.labels
@@ -58,7 +58,7 @@ class AnalisisDisGen extends React.Component {
       //console.log({title: "return", response: this.state})
   }
 
-
+ 
 
 
   render() {
@@ -72,22 +72,22 @@ class AnalisisDisGen extends React.Component {
           <Row className="border-bottom py-2 bg-light">
             <Col sm="6" className="d-flex mb-2 mb-sm-0">
               {/*<RangeDatePicker />*/}
-              <ButtonGroup >
-                <Button
-                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
-                  onClick={() =>
+              <ButtonGroup > 
+                <Button 
+                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'} 
+                  onClick={() => 
                     this.generate(constants.gen2)
                   }
                 > {constants.gen2} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'}
-                  onClick={() =>
+                <Button 
+                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'} 
+                  onClick={() => 
                     this.generate(constants.gen3)
                   }
                 > {constants.gen3} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'}
-                  onClick={() =>
+                <Button 
+                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'} 
+                  onClick={() => 
                     this.generate(constants.gen4)
                   }
                 > {constants.gen4} </Button>
@@ -105,7 +105,7 @@ class AnalisisDisGen extends React.Component {
             </Col>
           </Row>
           <div >
-            <Chart
+            <Chart 
                 options={this.state.options}
                 series={this.state.series}
                 type={this.state.chart.type}
@@ -160,8 +160,8 @@ AnalisisDisGen.defaultProps = {
     },
     labels: [],
     title: {
-        text:  'Distribución de genotipos',
-        align: 'center'
+        text:  '',
+        align: 'left'
     },
     stroke: {
         colors: ['#fff']

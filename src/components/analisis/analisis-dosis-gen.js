@@ -17,6 +17,7 @@ class AnalisisDosisGen extends React.Component {
       chart: this.props.chart,
       options: this.props.options,
     }
+    this.generate(constants.gen2);
   }
   
   generate(_gen) {
@@ -66,50 +67,6 @@ class AnalisisDosisGen extends React.Component {
     })
   }
   
-  async componentDidMount() {
-    var _gen=constants.gen2
-    this.setState({
-      ...this.state,
-      gen: _gen
-    });
-
-    await calculoService.getBoxplot(_gen)
-    .then((response) => {
-      var data = response.data
-      // var ser = response.data.frequency
-      //console.log({title: "getBoxplot", response: data, gen: _gen})
-      var _data = [];
-      data.forEach(function(e) {
-        var label = e.label;
-        var value = e.value;
-        //console.log({title:"foreach", data: label})
-        var aux = {};
-        aux.x = label;
-        aux.y = value;
-        _data.push(aux)
-      })
-      var _serie = [{
-        type: 'boxPlot',
-        data:  _data,
-      }]
-      console.log({title: "data",data:_serie})
-      this.setState({
-        ...this.state,
-        series: _serie
-      });
-      //console.log(this.state)
-    })
-    .catch((error) => {
-      // this.setState({
-      //   ...this.state,
-      //   series: constants.series, 
-      //   options: {
-      //     ...this.state.options,
-      //     lables: constants.labels
-      //   }
-      // });
-    })
-  }
 
   render() {
     const { title } = this.props;
@@ -154,13 +111,17 @@ class AnalisisDosisGen extends React.Component {
             */}
             </Col>
           </Row>
-          <div >
+          
+          {/*
+          <div id="chart"></div>
+          */}
+          <div>
             <Chart 
                 options={this.state.options}
                 series={this.state.series}
-                type={this.state.chart.type}
-                width={this.state.chart.width}
-                height={this.state.chart.height}
+                type='boxPlot'
+                width='100%' 
+                height='300'
             />
           </div>
           {/*
@@ -195,11 +156,13 @@ AnalisisDosisGen.propTypes = {
 AnalisisDosisGen.defaultProps = {
   gen: constants.gen2,
   title: "Análisis",
+  /*
   chart: {
     type: 'boxPlot',
     height:'300',
     width: '100%' 
   },
+  */
   options: {
     noData: {
       text: 'Cargando...'
@@ -209,6 +172,8 @@ AnalisisDosisGen.defaultProps = {
         text:  '',
         align: 'left'
     },
+    
+    /*
     yaxis: {
       labels: {
         formatter: function (value) {
@@ -216,29 +181,21 @@ AnalisisDosisGen.defaultProps = {
         }
       },
     },
-    /*
-    xaxis: {
-        type: 'datetime',
-        tooltip: {
-        formatter: function(val) {
-            return new Date(val).getFullYear()
-        }
-        }
-    },
-    
     tooltip: {
         shared: false,
         intersect: true
     },
-    */
+    
     responsive: [{
-      breakpoint: 1000,
+      breakpoint: 100,
       options: {
       legend: {
           position: 'top'
       }
       }
-    }]     
+    }]    
+    
+    */ 
       
   },
 
@@ -246,8 +203,7 @@ AnalisisDosisGen.defaultProps = {
       {
       name: 'box',
       type: 'boxPlot',
-      data: [
-      ]
+      data: []
       },
   ],
   

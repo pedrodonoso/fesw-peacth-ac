@@ -17,6 +17,7 @@ class AnalisisDisGen extends React.Component {
       options:  this.props.options
       // options:  constants.options
     }
+    this.generate(constants.gen2)
   }
   
   
@@ -55,45 +56,19 @@ class AnalisisDisGen extends React.Component {
         });
       })
       //console.log({title: "return", response: this.state})
+  }
+
+  componentDidUpdate() {
+    
+    console.log({title: 'life', data: this.state});
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log({title: 'life', data: prevProps});
+    console.log({title: 'life2', data: prevState});
 
   }
 
-  async componentDidMount() {
-    var _gen=constants.gen2
-    this.setState({
-      ...this.state,
-      gen: _gen
-    });
-
-    await calculoService.getDistribution(_gen)
-      .then((response) => {
-        var lab = response.data.labels
-        var ser = response.data.frequency
-        //console.log({title: "getDistribution", response: response.data, gen: _gen})
-        //console.log({title: "frequency", response: ser})
-        //console.log({title: "labels", response: lab})
-        this.setState({
-          ...this.state,
-          series: ser, 
-          options: {
-            ...this.state.options,
-            labels: lab
-          }
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          ...this.state,
-          series: constants.series, 
-          options: {
-            ...this.state.options,
-            lables: constants.labels
-          }
-        });
-      })
-      //console.log({title: "return", response: this.state})
-  }
-  
 
   render() {
     const { title } = this.props;

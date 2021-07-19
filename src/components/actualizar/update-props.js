@@ -372,12 +372,12 @@ const UpdateProps = ({onSubmit }) => {
                 </CardBody>
             </Card>
           </Col>
-          <Col lg="6" style={{
+          <Col lg="12" style={{
             position: "sticky",
             bottom: 0,
             zIndex: 1
           }}>
-            <Card small lg="6" className="mb-2 border-primary" style={{border: '#5A6169'}}>
+            <Card small lg="12" className="mb-2 border-primary" style={{border: '#5A6169'}}>
               <CardBody>
                 <Row>
                   <Col xs="6" md="6">

@@ -170,9 +170,9 @@ const UpdateProps = ({onSubmit }) => {
       <React.Fragment>
       <Col>
         <Row>
-          <Col lg="7" className="mb-4">
+          <Col lg="6" className="mb-4">
             {/* Data general */}
-            <Card small lg="7">
+            <Card small lg="6">
               <CardHeader className="border-bottom">
                 <h6 className="m-0">Actualizar parametros de algoritmo</h6>
               </CardHeader>
@@ -252,7 +252,6 @@ const UpdateProps = ({onSubmit }) => {
                   </Col>
                   </Row>
                   <Row>
-                    
                   {/* Nueva dosis */}
                   <Col>
                   <FormGroup>
@@ -289,7 +288,15 @@ const UpdateProps = ({onSubmit }) => {
                   </Col>
                   </Row>
 
-                  <Row>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="6" className="mb-4">
+            <Card small lg="6">
+                <CardBody>
+                  
+                <Row>
                   {/* Nueva dosis */}
                   <Col>
                   <FormGroup>
@@ -362,16 +369,15 @@ const UpdateProps = ({onSubmit }) => {
                   </FormGroup>
                   </Col>
                   </Row>
-                </Form>
-              </CardBody>
+                </CardBody>
             </Card>
           </Col>
-          <Col lg="7" style={{
-            position: "center",
+          <Col lg="6" style={{
+            position: "sticky",
             bottom: 0,
             zIndex: 1
           }}>
-            <Card small lg="7" className="mb-2 border-primary" style={{border: '#5A6169'}}>
+            <Card small lg="6" className="mb-2 border-primary" style={{border: '#5A6169'}}>
               <CardBody>
                 <Row>
                   <Col xs="6" md="6">
@@ -409,7 +415,7 @@ const UpdateProps = ({onSubmit }) => {
                       onClick={(event) => {
                         setForm()
                       }}>
-                      Nuevo Paciente
+                      Limpiar campos
                     </Button>
                   </Col>
                 </Row>

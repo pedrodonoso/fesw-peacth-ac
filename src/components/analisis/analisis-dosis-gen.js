@@ -19,14 +19,14 @@ class AnalisisDosisGen extends React.Component {
     }
   }
   
-  async generate(_gen) {
+  generate(_gen) {
     //console.log({title: "generate box", gen: _gen})
     this.setState({
       ...this.state,
       gen: _gen
     });
 
-    await calculoService.getBoxplot(_gen)
+    calculoService.getBoxplot(_gen)
     .then((response) => {
       var data = response.data
       // var ser = response.data.frequency
@@ -92,7 +92,7 @@ class AnalisisDosisGen extends React.Component {
         type: 'boxPlot',
         data:  _data,
       }]
-      //console.log({title: "data",data:_serie})
+      console.log({title: "data",data:_serie})
       this.setState({
         ...this.state,
         series: _serie

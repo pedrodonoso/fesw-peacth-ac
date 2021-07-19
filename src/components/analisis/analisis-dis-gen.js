@@ -20,7 +20,7 @@ class AnalisisDisGen extends React.Component {
   }
   
   
-  async generate(_gen) {
+  generate(_gen) {
     //console.log({title: "generate", gen: _gen})
 
     this.setState({
@@ -28,7 +28,7 @@ class AnalisisDisGen extends React.Component {
       gen: _gen
     });
 
-    await calculoService.getDistribution(_gen)
+    calculoService.getDistribution(_gen)
       .then((response) => {
         var lab = response.data.labels
         var ser = response.data.frequency
@@ -93,6 +93,7 @@ class AnalisisDisGen extends React.Component {
       })
       //console.log({title: "return", response: this.state})
   }
+  
 
   render() {
     const { title } = this.props;

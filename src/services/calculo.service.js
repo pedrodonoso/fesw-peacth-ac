@@ -41,21 +41,21 @@ function updatePropsAlgorithm(data) {
 }
 
 //obtener distribucion
-function getDistribution(data) {
+async function getDistribution(data) {
     //get
     //https://peacth-ac-backend.herokuapp.com/api/distributions/frequency/{gen}
     axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    return api.get(`${basePath}/distributions/frequency/${data}`)
+    return await api.get(`${basePath}/distributions/frequency/${data}`)
 }
 
 //obtener dosis entre genotipos
-function getBoxplot(data) {
+async function  getBoxplot(data) {
     //get
     //https://peacth-ac-backend.herokuapp.com/api/distributions/boxplot/{gen}
     axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    return api.get(`${basePath}/distributions/boxplot/${data}`)
+    return await api.get(`${basePath}/distributions/boxplot/${data}`)
 }
 
 const calculoService = {

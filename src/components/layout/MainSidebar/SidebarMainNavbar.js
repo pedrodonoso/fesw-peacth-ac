@@ -36,7 +36,7 @@ class SidebarMainNavbar extends React.Component {
                 className="d-inline-block align-top mr-1"
                 style={{ maxWidth: "128px" }}
                 // src={require("../../../images/shards-dashboards-logo.svg")}
-                src={require("../../../images/logo_peacth.svg")}
+                src={require("../../../images/peacth_ac-01.svg")}
                 alt="peacth-ac"
                 // alt="Team Context"
               />

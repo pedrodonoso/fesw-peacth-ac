@@ -380,9 +380,6 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         <InputGroupText>
                           <t6 className={"text-black"}> {isNaN(dosis) ? '-' : dosis.toFixed(4)} </t6>
                         </InputGroupText>
-                        <InputGroupAddon type="prepend">
-                          <InputGroupText>mg/semana</InputGroupText>
-                        </InputGroupAddon>
                       </InputGroupAddon>
                       <InputGroupAddon type="append">
                         <InputGroupText>

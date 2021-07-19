@@ -12,6 +12,8 @@ import {
   FormFeedback,
   InputGroup,
   CardHeader,
+  InputGroupAddon,
+  InputGroupText
 } from "shards-react";
 
 const DataUserVisit = ({onSubmit }) => {
@@ -130,6 +132,9 @@ const DataUserVisit = ({onSubmit }) => {
                             //className="mb-3 "
                             placeholder="1.0"
                           />
+                          <InputGroupAddon type="prepend">
+                            <InputGroupText>mg/semana</InputGroupText>
+                          </InputGroupAddon>
                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ: 1.0 </FormFeedback>
                         </InputGroup>
                       </FormGroup>
@@ -137,24 +142,7 @@ const DataUserVisit = ({onSubmit }) => {
                   </Row>
 
                   <Row>
-
-                  {/* Nueva dosis */}
-                  <Col>
-                  <FormGroup>
-                    <label>Nueva dosis</label>
-                    <InputGroup className="mb-3">
-                      <FormInput
-                        value={updatedDose.value}
-                        valid={updatedDose.valid}
-                        invalid={updatedDose.valid === undefined ? undefined : !updatedDose.valid}
-                        onChange={onChangeUpdatedDose}
-                        size="lg"
-                        //className="mb-3"
-                        placeholder="1.5"/>
-                      <FormFeedback> Debes ingresar un número decimal, con punto. EJ: 1.0 </FormFeedback>
-                    </InputGroup>
-                  </FormGroup>
-                  </Col>
+                    
                   <Col>
                   {/* INR de llegada */}
                   <FormGroup>
@@ -168,6 +156,26 @@ const DataUserVisit = ({onSubmit }) => {
                         size="lg"
                         //className="mb-3"
                         placeholder="1.5"/>
+                      <FormFeedback> Debes ingresar un número decimal, con punto. EJ: 1.0 </FormFeedback>
+                    </InputGroup>
+                  </FormGroup>
+                  </Col>
+                  {/* Nueva dosis */}
+                  <Col>
+                  <FormGroup>
+                    <label>Nueva dosis</label>
+                    <InputGroup className="mb-3">
+                      <FormInput
+                        value={updatedDose.value}
+                        valid={updatedDose.valid}
+                        invalid={updatedDose.valid === undefined ? undefined : !updatedDose.valid}
+                        onChange={onChangeUpdatedDose}
+                        size="lg"
+                        //className="mb-3"
+                        placeholder="1.5"/>
+                        <InputGroupAddon type="prepend">
+                          <InputGroupText>mg/semana</InputGroupText>
+                        </InputGroupAddon>
                       <FormFeedback> Debes ingresar un número decimal, con punto. EJ: 1.0 </FormFeedback>
                     </InputGroup>
                   </FormGroup>
@@ -198,7 +206,8 @@ const DataUserVisit = ({onSubmit }) => {
                                 'controlDate': "2009-11-30",
                                 'arrivalDose': arrivalDose.valid ? parseFloat(arrivalDose.value) : 0.0,
                                 'updatedDose': updatedDose.valid ? parseFloat(updatedDose.value) : 0.0,
-                                'arrivalINR': arrivalINR.valid ? parseFloat(arrivalINR.value) : 0.0
+                                'arrivalINR': arrivalINR.valid ? parseFloat(arrivalINR.value) : 0.0,
+                                "inrInRange":  false
                                 //'diagnosis': diagnosis.value,
                               }
                             });

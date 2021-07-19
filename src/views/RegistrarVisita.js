@@ -42,7 +42,7 @@ class RegistrarVisita extends Component {
 
     //console.log({nombre:"handleRegisterSubmit",data:submited.data})
     //guarda variables ingresadas
-    this.data = submited.data
+    this.data = submited.vars
     //console.log(this.data)
     //subimos las variables ingresadas
     calculoService.postRegisterVisit(this.data)

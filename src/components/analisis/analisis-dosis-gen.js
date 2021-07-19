@@ -13,7 +13,7 @@ import calculoService from "../../services/calculo.service";
 
 class AnalisisDosisGen extends React.Component {
   constructor(props) {
-    super(props);    
+    super(props);
     this.state = {
       gen: this.props.gen,
       title: this.props.title,
@@ -23,7 +23,7 @@ class AnalisisDosisGen extends React.Component {
     }
     this.generate(constants.gen2);
   }
-  
+
   generate(_gen) {
     //console.log({title: "generate box", gen: _gen})
     this.setState({
@@ -46,7 +46,7 @@ class AnalisisDosisGen extends React.Component {
         aux.y = value;
         _data.push(aux)
       })
-      
+
       var _serie = [{
         type: 'boxPlot',
         data:  _data,
@@ -62,7 +62,7 @@ class AnalisisDosisGen extends React.Component {
     .catch((error) => {
       // this.setState({
       //   ...this.state,
-      //   series: constants.series, 
+      //   series: constants.series,
       //   options: {
       //     ...this.state.options,
       //     lables: constants.labels
@@ -70,7 +70,7 @@ class AnalisisDosisGen extends React.Component {
       // });
     })
   }
-  
+
 
   render() {
     const { title } = this.props;
@@ -152,7 +152,7 @@ class AnalisisDosisGen extends React.Component {
             */}
             </Col>
           </Row>
-          
+
           {/*
           <div id="chart"></div>
           */}
@@ -204,7 +204,7 @@ AnalisisDosisGen.defaultProps = {
   chart: {
     type: 'boxPlot',
     height:'300',
-    width: '100%' 
+    width: '100%'
   },
   */
   options: {
@@ -238,7 +238,7 @@ AnalisisDosisGen.defaultProps = {
         shared: false,
         intersect: true
     },
-    
+
     responsive: [{
       breakpoint: 100,
       options: {
@@ -246,9 +246,8 @@ AnalisisDosisGen.defaultProps = {
           position: 'top'
       }
       }
-    }]    
-    */ 
-      
+    }] */
+
   },
 
   series: [
@@ -258,6 +257,6 @@ AnalisisDosisGen.defaultProps = {
       data: []
       },
   ],
-  
+
 };
 export default AnalisisDosisGen;

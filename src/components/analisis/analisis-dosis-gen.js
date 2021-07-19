@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Chart from 'react-apexcharts'
-import { Row, Col, Card, CardHeader, CardBody, Button ,ButtonGroup} from "shards-react";
+import { Row, Col, Card, CardHeader, CardBody, Button ,ButtonGroup
+,InputGroupAddon,
+InputGroupText,
+Container
+} from "shards-react";
 
 import constants from "../../data/constants";
 
@@ -77,27 +81,64 @@ class AnalisisDosisGen extends React.Component {
         </CardHeader>
         <CardBody className="pt-0">
           <Row className="border-bottom py-2 bg-light">
-            <Col sm="6" className="d-flex mb-2 mb-sm-0">
+            <Col sm="8" className="d-flex mb-2 mb-sm-0">
               {/*<RangeDatePicker />*/}
               <ButtonGroup > 
+              <InputGroupAddon type="prepend">
+                <InputGroupText>Gen</InputGroupText>
+              </InputGroupAddon>
                 <Button 
                   theme={this.state.gen === constants.gen2 ? 'primary' : 'white'} 
                   onClick={() => 
                     this.generate(constants.gen2)
                   }
-                > {constants.gen2} </Button>
+                > 
+                <Col style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>       
+                  <Col>
+                  <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9 *2</strong></Row>
+                  <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs1799853</strong></Row>
+                  </Col>
+                </Col>
+                
+             </Button>
                 <Button 
                   theme={this.state.gen === constants.gen3 ? 'primary' : 'white'} 
                   onClick={() => 
                     this.generate(constants.gen3)
                   }
-                > {constants.gen3} </Button>
+                > 
+                <Col style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>       
+                  <Col>
+                  <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9 *3</strong></Row>
+                  <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs1057910 </strong></Row>
+                  </Col>
+                </Col>
+                </Button>
                 <Button 
                   theme={this.state.gen === constants.gen4 ? 'primary' : 'white'} 
                   onClick={() => 
                     this.generate(constants.gen4)
                   }
-                > {constants.gen4} </Button>
+                >
+                <Col style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>       
+                  <Col>
+                  <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>VKORC1</strong></Row>
+                  <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs9923231</strong></Row>
+                  </Col>
+                </Col>  
+                </Button>
               </ButtonGroup>
             </Col>
             <Col>
@@ -115,15 +156,18 @@ class AnalisisDosisGen extends React.Component {
           {/*
           <div id="chart"></div>
           */}
-          <div>
+
+          <Row >
+            <Col>
             <Chart 
                 options={this.state.options}
                 series={this.state.series}
                 type='boxPlot'
-                width='100%' 
+                width='800' 
                 height='300'
             />
-          </div>
+            </Col>
+          </Row>
           {/*
           <canvas
             height="120"
@@ -169,18 +213,27 @@ AnalisisDosisGen.defaultProps = {
     },
     colors: ['#008FFB', '#FEB019'],
     title: {
-        text:  '',
-        align: 'left'
+        text:  'Dosis calculada v/s genotipos',
+        align: 'center'
+    },
+
+    xaxis: {
+      title: {
+        text: 'Genotipos'
+      },
     },
     
-    /*
     yaxis: {
+      title: {
+        text: 'Dosis semanal (mg/semana)'
+      },
       labels: {
         formatter: function (value) {
-          return value.toFixed(3);
+          return value.toFixed(2);
         }
       },
     },
+    /*
     tooltip: {
         shared: false,
         intersect: true

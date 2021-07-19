@@ -186,7 +186,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         //className="mb-3 "
                         placeholder="74"
                       />
-                      <InputGroupAddon type="prepend">
+                      <InputGroupAddon type="append">
                         <InputGroupText>años</InputGroupText>
                       </InputGroupAddon>
                       <FormFeedback>"Debes ingresar solo
@@ -206,7 +206,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         size="lg"
                         //className="mb-3"
                         placeholder="78"/>
-                      <InputGroupAddon type="prepend">
+                      <InputGroupAddon type="append">
                         <InputGroupText>Kg</InputGroupText>
                       </InputGroupAddon>
                       <FormFeedback>"Debes ingresar solo
@@ -238,7 +238,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         size="lg"
                         //className="mb-3"
                         placeholder="1.65"/>
-                      <InputGroupAddon type="prepend">
+                      <InputGroupAddon type="append">
                         <InputGroupText>m</InputGroupText>
                       </InputGroupAddon>
                       <FormFeedback>"Debes ingresar solo
@@ -307,14 +307,14 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <Form>
                         <label>CYP2C9-2</label>
                         <DropdownOptions
-                          title={constants.gen2}
+                          title='CYP2C9 *2'
                           options={[constants.gen11, constants.gen12, constants.gen22]}
                           values={[constants.gen11, constants.gen12, constants.gen22]}
                           onSubmit={handleSubmit}
                         />
                         <label>CYP2C9-3</label>
                         <DropdownOptions
-                          title={constants.gen3}
+                          title='CYP2C9 *3'
                           options={[constants.gen11, constants.gen13, constants.gen33]}
                           values={[constants.gen11, constants.gen13, constants.gen33]}
                           onSubmit={handleSubmit}

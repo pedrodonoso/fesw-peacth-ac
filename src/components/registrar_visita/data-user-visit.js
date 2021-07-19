@@ -119,7 +119,7 @@ const DataUserVisit = ({onSubmit }) => {
                     <Col >
                       {/* Dosis de llegada */}
                       <FormGroup>
-                        <label>Dosis llegada</label>
+                        <label>Dosis llegada (mg/semana)</label>
                         <InputGroup className="mb-3">
                           <FormInput
                             value={arrivalDose.value}
@@ -141,7 +141,7 @@ const DataUserVisit = ({onSubmit }) => {
                   {/* Nueva dosis */}
                   <Col>
                   <FormGroup>
-                    <label>Nueva dosis</label>
+                    <label>Nueva dosis (mg/semana)</label>
                     <InputGroup className="mb-3">
                       <FormInput
                         value={updatedDose.value}

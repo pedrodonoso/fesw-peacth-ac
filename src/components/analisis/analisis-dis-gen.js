@@ -58,16 +58,7 @@ class AnalisisDisGen extends React.Component {
       //console.log({title: "return", response: this.state})
   }
 
-  componentDidUpdate() {
-    
-    console.log({title: 'life', data: this.state});
-  }
-
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log({title: 'life', data: prevProps});
-    console.log({title: 'life2', data: prevState});
-
-  }
+ 
 
 
   render() {

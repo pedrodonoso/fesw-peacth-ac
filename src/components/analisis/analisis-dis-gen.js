@@ -11,13 +11,14 @@ import calculoService from "../../services/calculo.service";
 class AnalisisDisGen extends React.Component {
   constructor(props) {
     super(props);
-    this.generate(this.props.gen)
     this.state = {
       gen: this.props.gen,
       series: this.props.series,
       chart: this.props.chart,
       options:  this.props.options
     }
+    
+    this.generate(this.props.gen)
   }
   
   generate(_gen) {
@@ -35,7 +36,6 @@ class AnalisisDisGen extends React.Component {
         console.log({title: "getDistribution", response: response.data, gen: _gen})
         console.log({title: "frequency", response: ser})
         console.log({title: "labels", response: lab})
-        this._labels = lab
         this.setState({
           ...this.state,
           series: ser, 

@@ -63,11 +63,21 @@ function getDistribution(data) {
     return api.get(`${basePath}/distributions/frequency/${data}`)
 }
 
+//obtener dosis entre genotipos
+function getBoxplot(data) {
+    //get
+    //https://peacth-ac-backend.herokuapp.com/api/distributions/boxplot/{gen}
+    axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    return api.get(`${basePath}/distributions/boxplot/${data}`)
+}
+
 const calculoService = {
     getDosePatient,
     getLastPropsAlgorithm,
     postRegisterVisit,
     getDistribution,
+    getBoxplot,
 };
 
 export default calculoService;

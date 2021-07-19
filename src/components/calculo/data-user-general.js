@@ -64,7 +64,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
 
   function allValid() {
     return (cod_paciente.valid || !(cod_paciente.valid === undefined)) && (edad.valid || !(edad.valid === undefined)) && (peso.valid || !(peso.valid === undefined))  && (talla.valid || !(talla.valid === undefined)) && (inr_inicial.valid || !(inr_inicial.valid === undefined));
-  } 
+  }
   function handleSubmit(data) {
     var title = data.title
     var selected = data.selected
@@ -148,7 +148,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     <React.Fragment>
       <Col>
         <Row>
-          
+
           <Col lg="4" className="mb-4">
             {/* Data general */}
             <Card small lg="12">
@@ -275,11 +275,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                     placeholder="juan@gmail.com" />
                     */}
                   </FormGroup>
-                </ListGroupItem>
-                <CardHeader className="border-bottom">
-                  <h6 className="m-0">Datos Clínicos del Paciente</h6>
-                </CardHeader>
-                <ListGroupItem className="px-3">
+
                   {/* INR Inicial */}
                   <FormGroup>
                     <label>INR Inicial</label>

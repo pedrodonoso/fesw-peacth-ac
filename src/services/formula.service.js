@@ -3,6 +3,8 @@ import constants from "../data/constants"
 function formula(props,vars) {
   console.log({nombre:"Formula",data:vars,props:props})
     if (Object.keys(props).length === 0) {
+      props = this.getLastLocalProps();
+      /* 
       props = {
         'p_0'         :   3.081   , 
         'p_men'       :   0.167   ,
@@ -15,6 +17,7 @@ function formula(props,vars) {
         'p_VKORC1_GA' :   0.270   ,
         'p_VKORC1_AA' :   0.701   
       }
+       */
     }
     var _1_2 = 0
     var _1_3 = 0
@@ -63,9 +66,21 @@ function formula(props,vars) {
     WTD = WTD.toFixed(4);
     return WTD;
   }
+  function updateLocalProps(data) {
+    window.localStorage.setItem('vars', JSON.stringify(data));
+    const result = window.localStorage.getItem('vars');
+    console.log({title:"formula updateLocalProps",data:this.getLastLocalProps()})
+    return result
+  }
+  function getLastLocalProps() {
+    const result = JSON.parse(window.localStorage.getItem('vars'));
+    return result;
+  }
 
   const formulaService = {
     formula,
+    updateLocalProps,
+    getLastLocalProps
     };
 
   export default formulaService;

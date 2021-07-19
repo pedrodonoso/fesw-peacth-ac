@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Chart from 'react-apexcharts'
 import { Row, Col, Card, CardHeader, CardBody, Button, ButtonGroup } from "shards-react";
 
-import RangeDatePicker from "../common/RangeDatePicker";
 import constants from "../../data/constants";
 
 import calculoService from "../../services/calculo.service";
@@ -16,26 +15,26 @@ class AnalisisDisGen extends React.Component {
       series: this.props.series,
       chart: this.props.chart,
       options:  this.props.options
+      // options:  constants.options
     }
-    
-    this.generate(this.props.gen)
   }
   
-  generate(_gen) {
-    console.log({title: "generate", gen: _gen})
+  
+  async generate(_gen) {
+    //console.log({title: "generate", gen: _gen})
 
     this.setState({
       ...this.state,
       gen: _gen
     });
 
-    calculoService.getDistribution(_gen)
+    await calculoService.getDistribution(_gen)
       .then((response) => {
         var lab = response.data.labels
         var ser = response.data.frequency
-        console.log({title: "getDistribution", response: response.data, gen: _gen})
-        console.log({title: "frequency", response: ser})
-        console.log({title: "labels", response: lab})
+        //console.log({title: "getDistribution", response: response.data, gen: _gen})
+        //console.log({title: "frequency", response: ser})
+        //console.log({title: "labels", response: lab})
         this.setState({
           ...this.state,
           series: ser, 
@@ -55,8 +54,44 @@ class AnalisisDisGen extends React.Component {
           }
         });
       })
-      console.log({title: "return", response: this.state})
+      //console.log({title: "return", response: this.state})
 
+  }
+
+  async componentDidMount() {
+    var _gen=constants.gen2
+    this.setState({
+      ...this.state,
+      gen: _gen
+    });
+
+    await calculoService.getDistribution(_gen)
+      .then((response) => {
+        var lab = response.data.labels
+        var ser = response.data.frequency
+        //console.log({title: "getDistribution", response: response.data, gen: _gen})
+        //console.log({title: "frequency", response: ser})
+        //console.log({title: "labels", response: lab})
+        this.setState({
+          ...this.state,
+          series: ser, 
+          options: {
+            ...this.state.options,
+            labels: lab
+          }
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          ...this.state,
+          series: constants.series, 
+          options: {
+            ...this.state.options,
+            lables: constants.labels
+          }
+        });
+      })
+      //console.log({title: "return", response: this.state})
   }
 
   render() {
@@ -142,14 +177,21 @@ AnalisisDisGen.propTypes = {
 
 AnalisisDisGen.defaultProps = {
   gen: constants.gen2,
-  series: constants.series,
+  series: [],
   chart: {
-    type: 'polarArea',
-    height:'500',
-    width: '100%' 
+    type: 'donut',
+    height: '300',
+    width: '100%',
   },
   options : {
-    labels: constants.labels,
+    dataLabels: {
+      enabled: true
+    },
+    series: [],
+    noData: {
+      text: 'Cargando...'
+    },
+    labels: [],
     title: {
         text:  '',
         align: 'left'
@@ -161,7 +203,7 @@ AnalisisDisGen.defaultProps = {
         opacity: 0.8
     },
     legend: {
-        position: 'left',
+        position: 'top',
         containerMargin: {
             left: 10,
             right: 10,
@@ -170,9 +212,9 @@ AnalisisDisGen.defaultProps = {
     responsive: [{
         breakpoint: 1000,
         options: {
-        legend: {
+          legend: {
             position: 'top'
-        }
+          }
         }
     }]
   },

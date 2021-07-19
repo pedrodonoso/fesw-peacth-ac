@@ -38,10 +38,20 @@ class Calculo extends Component {
 
   //envía data a API
   handleCalculoSubmit(data) {
+
+    if(!data.valid) {
+      //console.log({title:"Data",data:data})
+      this.toggle({
+        title: "Alto ahí 😁",
+        text: "Debes ingresar los datos correctamente!! 😘",
+      });
+      return false;
+    }
+
     var ifResponseCoef = false
     var ifResponseVar = false
 
-    console.log({nombre:"handleCalculoSubmit",data:data})
+    //console.log({nombre:"handleCalculoSubmit",data:data})
     //guarda variables ingresadas
     this.vars = data.vars
     
@@ -54,13 +64,15 @@ class Calculo extends Component {
     calculoService.getLastPropsAlgorithm()
     .then((response) => {
       var _coef = response.data
-      console.log({title: 'Coefs', coef: _coef})
+      //console.log({title: 'Coefs', coef: _coef})
       ifResponseCoef = true
 
       this.coef = _coef
+      //guardamos en local
+      formulaService.updateLocalProps(_coef);
     })
     .catch((error) => {
-      console.log({title: 'error', error: error.error.response.data})
+      //console.log({title: 'error', error: error.error.response.data})
     });
 
     //subimos las variables ingresadas
@@ -68,13 +80,14 @@ class Calculo extends Component {
     .then((response) => {
       var _dosis = response.data.initialDose
       _dosis = _dosis.toFixed(4)
-      console.log({title: 'initialDose', initialDose: _dosis})
+      //console.log({title: 'initialDose', initialDose: _dosis})
       //guardamos las variables
       ifResponseVar = true
-        this.setState({
-          ...this.state,
-          dosis: _dosis
-        }); 
+
+      this.setState({
+        ...this.state,
+        dosis: _dosis
+      }); 
 
       //mostramos al usuario un toggle
       
@@ -85,7 +98,7 @@ class Calculo extends Component {
       
     })
     .catch((error) => {
-      console.log({title: 'error', error: error.error.response.data})
+      //console.log({title: 'error', error: error.error.response.data})
 
       //calculamos sin internet con las últimas variables
       this.setState({
@@ -112,8 +125,8 @@ class Calculo extends Component {
       title: "No se pudo 😁"
     }) ); 
     */
-    console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
-    if(!ifResponseVar) {
+    //console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
+    if(!ifResponseVar) { //no se puede acceder a bd para calcular dosis
       var _Dosis = formulaService.formula(ifResponseCoef ? this.coef : {}, this.vars )
       this.setState({
         ...this.state,
@@ -136,7 +149,7 @@ class Calculo extends Component {
         text: data.text,
       });
     }
-    console.log({text:"toggle", open:this.state.open});
+    //console.log({text:"toggle", open:this.state.open});
   }
 
   handlerOpenDialog(data) {
@@ -144,7 +157,7 @@ class Calculo extends Component {
       ...this.state,
       open: data
     });
-    console.log({text:"handler", open:this.state.open});
+    //console.log({text:"handler", open:this.state.open});
   }
 
 
@@ -170,7 +183,7 @@ class Calculo extends Component {
 
       <Row>
         <Col lg="12" className="py-4">
-        <DataUserGeneral onSubmit={this.handleCalculoSubmit} dosis={this.state.dosis}/>
+        <DataUserGeneral onSubmit={this.handleCalculoSubmit} dosis={parseFloat(this.state.dosis)}/>
         <CustomToggle openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
           text={this.state.text}
           title={this.state.title}

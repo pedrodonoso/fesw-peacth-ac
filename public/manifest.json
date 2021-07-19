@@ -1,9 +1,9 @@
 {
-  "short_name": "PAC",
+  "short_name": "P-AC",
   "name": "Peacth-AC",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "logo_peacth_mini.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }

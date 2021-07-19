@@ -34,9 +34,11 @@ class SidebarMainNavbar extends React.Component {
               <img
                 id="main-logo"
                 className="d-inline-block align-top mr-1"
-                style={{ maxWidth: "25px" }}
-                src={require("../../../images/shards-dashboards-logo.svg")}
-                alt="Team Context"
+                style={{ maxWidth: "128px" }}
+                // src={require("../../../images/shards-dashboards-logo.svg")}
+                src={require("../../../images/logo_peacth.svg")}
+                alt="peacth-ac"
+                // alt="Team Context"
               />
               {!hideLogoText && (
                 <span className="d-none d-md-inline ml-1">

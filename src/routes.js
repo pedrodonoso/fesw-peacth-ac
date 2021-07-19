@@ -2,11 +2,10 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 // Layout Types
-import { DefaultLayout,Custom } from "./layouts";
+import { Custom,Custom2 } from "./layouts";
 
 // Route Views
-import {Calculo, Analisis, RegistrarVisita} from "./views";
-
+import {Calculo, Analisis, RegistrarVisita, Actualizar} from "./views";
 /*
 import BlogOverview from "./views/template/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
@@ -20,48 +19,47 @@ import TeamForm from './views/TeamForm';
 import AddNewPService from './views/AddNewPService';
 import AllPService from './views/ShowAllPService';
 */
-var noNavbar = true;
 export default [
   {
     path: "/",
     exact: true,
     layout: Custom,
     component: () => <Redirect to="/calculo" />,
-    layout_props: {noNavbar: true, noFooter:true}
+    layout_props: {noNavbar: true, noFooter:true, hideLogoText:true}
   },
   {
     path: "/calculo",
-    layout: Custom,
+    layout: Custom2,
     component: Calculo,    
-    layout_props: {noNavbar: true, noFooter:true}
+    layout_props: {noNavbar: false, noFooter:true, hideLogoText:true}
   },
   
   {
     path: "/analisis/dosis_gen",
     layout: Custom,
     component: Analisis,
-    layout_props: {noNavbar: false, noFooter:true},
+    layout_props: {noNavbar: false, noFooter:true, hideLogoText:true},
     component_props: { dosisGen: true}
   },
   {
     path: "/analisis/dis_gen",
     layout: Custom,
     component: Analisis,
-    layout_props: {noNavbar: false, noFooter:false, footer_props: { menuItems: []}},
+    layout_props: {noNavbar: false, noFooter:false, footer_props: { menuItems: []} , hideLogoText:true},
     component_props_: { dosisGen: false }
     
   },
   {
     path: "/registrar_visita",
-    layout: Custom,
+    layout: Custom2,
     component: RegistrarVisita,
-    layout_props: {noNavbar: true, noFooter:true}
+    layout_props: {noNavbar: true, noFooter:true, hideLogoText:true}
   },
   {
     path: "/actualizar",
-    layout: Custom,
-    component: RegistrarVisita,
-    layout_props: {noNavbar: true, noFooter:true}
+    layout: Custom2,
+    component: Actualizar,
+    layout_props: {noNavbar: true, noFooter:true, hideLogoText:true}
   },
   /*
   {

@@ -14,26 +14,23 @@ import {
   InputGroupAddon,
   InputGroupText,
   ButtonGroup,
-  FormCheckbox,
   CardHeader,
   ListGroup,
-  ListGroupItem, Navbar, Nav, NavItem
+  ListGroupItem,
 } from "shards-react";
 
 
 import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
-import Divider from "@material-ui/core/Divider";
 
 const DataUserGeneral = ({onSubmit, dosis}) => {
   const today = new Date();
-  const [cod_paciente, setCodPaciente] = useState({value: '', valid: false});
-  const [edad, setEdad] = useState({value: '', valid: false});
-  const [peso, setPeso] = useState({value: '', valid: false});
-  const [talla, setTalla] = useState({value: '', valid: false});
-  const [sexo, setSexo] = useState({value: 'F', valid: false});
-  const [inr_inicial, setInrInicial] = useState({value: '', valid: false});
-  const [imc, setIMC] = useState({value: '', valid: false}); // [constants.gen11,constants.gen12,constants.gen22]
+  const [cod_paciente, setCodPaciente] = useState({value: '', valid: undefined});
+  const [edad, setEdad] = useState({value: '', valid: undefined});
+  const [peso, setPeso] = useState({value: '', valid: undefined});
+  const [talla, setTalla] = useState({value: '', valid: undefined});
+  const [sexo, setSexo] = useState({value: 'F'});
+  const [inr_inicial, setInrInicial] = useState({value: '', valid: undefined});
   const [genetics, setGenetics] = useState({
     value: {
       [constants.gen2]: constants.gen11,
@@ -43,27 +40,12 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
   });
 
   function setForm() {
-    setCodPaciente((prevState) => ({...prevState, value: '', valid: false}));
-    {/* code: "T-004" */
-    }
-    setEdad((prevState) => ({...prevState, value: 0.0, valid: false}));
-    {/* age: 69 */
-    }
-    setPeso((prevState) => ({...prevState, value: 0.0, valid: false}));
-    {/* weight: 80.5 */
-    }
-    setTalla((prevState) => ({...prevState, value: 0.0, valid: false}));
-    {/* height: 1.56 */
-    }
-    setSexo((prevState) => ({...prevState, value: 'F', valid: false}));
-    {/* sex: "M" */
-    }
-    setInrInicial((prevState) => ({...prevState, value: '', valid: false}));
-    {/* "initialINR: 1.1" */
-    }
-    setIMC((prevState) => ({...prevState, value: '', valid: false}));
-    {/* imc: 24.4*/
-    }
+    setCodPaciente((prevState) => ({...prevState, value: '', valid: undefined}));
+    setEdad((prevState) => ({...prevState, value: 0.0, valid: undefined}));
+    setPeso((prevState) => ({...prevState, value: 0.0, valid: undefined}));
+    setTalla((prevState) => ({...prevState, value: 0.0, valid: undefined}));
+    setSexo((prevState) => ({...prevState, value: 'F'}));
+    setInrInicial((prevState) => ({...prevState, value: '', valid: undefined}));
     setGenetics((prevState) => ({
       ...prevState,
       value: {
@@ -73,27 +55,26 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
       },
       valid: false
     }));
-    {/* imc: 24.4*/
-    }
   }
 
   const validNumRegex =
-  RegExp(/^([0-9])*[\.]?([0-9])*$/i);
+  RegExp(/^([0-9])+[\.]?([0-9])*$/i);
   const validPacienteRegex =
   RegExp(/^(T-)([0-9]){3}$/i);
 
+  function allValid() {
+    return (cod_paciente.valid || !(cod_paciente.valid === undefined)) && (edad.valid || !(edad.valid === undefined)) && (peso.valid || !(peso.valid === undefined))  && (talla.valid || !(talla.valid === undefined)) && (inr_inicial.valid || !(inr_inicial.valid === undefined));
+  } 
   function handleSubmit(data) {
     var title = data.title
     var selected = data.selected
     var dic = genetics.value
     dic = {...dic, [title]: selected}
     setGenetics((prevState) => ({...prevState, value: dic}))
-
   }
 
   function calcImc() {
     var _imc = peso.value / Math.pow(talla.value, 2);
-    setIMC((prevState) => ({...prevState, value: _imc}))
     return _imc;
   }
 
@@ -102,13 +83,13 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     setCodPaciente((prevState) => ({...prevState, value: _cod}))
     console.log(validPacienteRegex.test(_cod))
     if (validPacienteRegex.test(_cod)) {
-
       setCodPaciente((prevState) => ({...prevState, valid: true}))
     } else {
       setCodPaciente((prevState) => ({...prevState, valid: false}))
     }
-
-    return true
+    if(_cod === '') {
+      setCodPaciente((prevState) => ({...prevState, valid: undefined}))
+    }
   }
 
   function onChangeEdad(e) {
@@ -119,7 +100,9 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     } else {
       setEdad((prevState) => ({...prevState, valid: false}))
     }
-    return true
+    if(_edad === '') {
+      setEdad((prevState) => ({...prevState, valid: undefined}))
+    }
   }
 
   function onChangePeso(e) {
@@ -130,7 +113,9 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     } else {
       setPeso((prevState) => ({...prevState, valid: false}))
     }
-    return true
+    if(_peso === '') {
+      setPeso((prevState) => ({...prevState, valid: undefined}))
+    }
   }
 
   function onChangeTalla(e) {
@@ -141,7 +126,9 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     } else {
       setTalla((prevState) => ({...prevState, valid: false}))
     }
-    return true
+    if(_talla === '') {
+      setTalla((prevState) => ({...prevState, valid: undefined}))
+    }
   }
 
   function onChangeINRInicial(e) {
@@ -152,89 +139,16 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     } else {
       setInrInicial((prevState) => ({...prevState, valid: false}))
     }
-    return true
+    if(_inr === '') {
+      setInrInicial((prevState) => ({...prevState, valid: undefined}))
+    }
   }
 
   return (
     <React.Fragment>
       <Col>
         <Row>
-          <Col lg="12" style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 1
-          }}>
-            <Card small lg="12" className="mb-2">
-              {/*<CardHeader className="border-bottom">
-              <h6 className="m-0"> Dosis </h6>
-            </CardHeader>*/}
-              <CardBody>
-                <Row>
-                  <Col xs="6" md="6">
-                    <InputGroup className="mb-2">
-                      <InputGroupAddon type="prepend">
-                        <Button
-                          theme="primary"
-                          className="font-weight-bold"
-                          onClick={(event) => {
-                            var _imc = calcImc();
-                            onSubmit({
-                              vars: {
-                                'code': cod_paciente.valid ? cod_paciente.value : "",
-                                'sex': sexo.value,
-                                // 'bloodtype': blood.value,
-                                'initialDate': "2009-11-30", //preguntar
-                                'initialDosis': 0,
-                                'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
-                                'weeklyDosisInRange': 10,
-                                'totalDays': 534,
-                                'weight': peso.valid ? peso.value : 0.0,
-                                'height': talla.valid ? talla.value : 0.0,
-                                'imc': _imc === Infinity ? 999 : _imc,
-                                'age': edad.valid ? parseFloat(edad.value) : 0,
-                                'genetics': genetics.value,
-                                //'diagnosis': diagnosis.value,
-                              }
-                            });
-                          }}
-                        >
-                          Calcular dosis
-                        </Button>
-                      </InputGroupAddon>
-                      <InputGroupAddon type="append">
-                        <InputGroupText>
-                          <t6
-                            className={"text-black"}> {isNaN(dosis) ? '-' : dosis.toFixed(4)} </t6>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </Col>
-                  <Col xs="6" md="6" className="text-right">
-                    <Button
-                      theme="secondary"
-                      className="mb-2"
-                      onClick={(event) => {
-                        setForm()
-                      }}>
-                      Nuevo Paciente
-                    </Button>
-                  </Col>
-                </Row>
-
-
-                {/* <ListGroupItem lg="9" className="mb-2">
-                <Button
-                  theme="secondary"
-                  className="mb-2 mr-2"
-                  onClick={(event) => {
-                    setForm()
-                  }}>
-                  Nuevo Paciente
-                </Button>
-              </ListGroupItem>*/}
-              </CardBody>
-            </Card>
-          </Col>
+          
           <Col lg="4" className="mb-4">
             {/* Data general */}
             <Card small lg="12">
@@ -250,12 +164,12 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                     <FormInput
                       value={cod_paciente.value}
                       valid={cod_paciente.valid}
-                      invalid={!cod_paciente.valid}
+                      invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
                       onChange={onChangeCodPaciente}
                       size="lg"
                       className="mb-3"
-                      placeholder="#347635"/>
-                    <FormFeedback valid={cod_paciente.valid}>"Ej:
+                      placeholder="T-002"/>
+                    <FormFeedback>"Ej:
                       T-002"</FormFeedback>
                   </FormGroup>
 
@@ -266,7 +180,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <FormInput
                         value={edad.value}
                         valid={edad.valid}
-                        invalid={!edad.valid}
+                        invalid={edad.valid === undefined ? undefined : !edad.valid}
                         onChange={onChangeEdad}
                         size="lg"
                         //className="mb-3 "
@@ -275,7 +189,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <InputGroupAddon type="prepend">
                         <InputGroupText>años</InputGroupText>
                       </InputGroupAddon>
-                      <FormFeedback valid={edad.valid}>"Debes ingresar solo
+                      <FormFeedback>"Debes ingresar solo
                         números."</FormFeedback>
                     </InputGroup>
                   </FormGroup>
@@ -287,7 +201,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <FormInput
                         value={peso.value}
                         valid={peso.valid}
-                        invalid={!peso.valid}
+                        invalid={peso.valid === undefined ? undefined : !peso.valid}
                         onChange={onChangePeso}
                         size="lg"
                         //className="mb-3"
@@ -295,7 +209,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <InputGroupAddon type="prepend">
                         <InputGroupText>Kg</InputGroupText>
                       </InputGroupAddon>
-                      <FormFeedback valid={peso.valid}>"Debes ingresar solo
+                      <FormFeedback>"Debes ingresar solo
                         números."</FormFeedback>
                     </InputGroup>
                   </FormGroup>
@@ -319,7 +233,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <FormInput
                         value={talla.value}
                         valid={talla.valid}
-                        invalid={!talla.valid}
+                        invalid={talla.valid === undefined ? undefined : !talla.valid}
                         onChange={onChangeTalla}
                         size="lg"
                         //className="mb-3"
@@ -327,7 +241,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <InputGroupAddon type="prepend">
                         <InputGroupText>m</InputGroupText>
                       </InputGroupAddon>
-                      <FormFeedback valid={talla.valid}>"Debes ingresar solo
+                      <FormFeedback>"Debes ingresar solo
                         números"</FormFeedback>
                     </InputGroup>
                   </FormGroup>
@@ -372,12 +286,12 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                     <FormInput
                       value={inr_inicial.value}
                       valid={inr_inicial.valid}
-                      invalid={!inr_inicial.valid}
+                      invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
                       onChange={onChangeINRInicial}
                       size="lg"
                       className="mb-3"
                       placeholder="2.4"/>
-                    <FormFeedback valid={inr_inicial.valid}>"Debes ingresar un
+                    <FormFeedback>"Debes ingresar un
                       valor decimal. EJ: 2.4"</FormFeedback>
                   </FormGroup>
                 </ListGroupItem>
@@ -420,6 +334,82 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                     </ListGroupItem>
                   </ListGroup>
                 </Form>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="12" style={{
+            position: "sticky",
+            bottom: 0,
+            zIndex: 1
+          }}>
+            <Card small lg="12" className="mb-2">
+              {/*<CardHeader className="border-bottom">
+              <h6 className="m-0"> Dosis </h6>
+            </CardHeader>*/}
+              <CardBody>
+                <Row>
+                  <Col xs="6" md="6">
+                    <InputGroup className="mb-2">
+                      <InputGroupAddon type="prepend">
+                        <Button
+                          theme="primary"
+                          className="font-weight-bold"
+                          onClick={(event) => {
+                            var _imc = calcImc();
+                            onSubmit({
+                              valid: allValid(),
+                              vars: {
+                                'code': cod_paciente.valid ? cod_paciente.value : "",
+                                'sex': sexo.value,
+                                // 'bloodtype': blood.value,
+                                'initialDate': "2009-11-30", //preguntar
+                                'initialDosis': 0,
+                                'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                                'weeklyDosisInRange': 10,
+                                'totalDays': 534,
+                                'weight': peso.valid ?  parseFloat(peso.value) : 0.0,
+                                'height': talla.valid ?  parseFloat(talla.value) : 0.0,
+                                'imc': _imc === Infinity ? 999 : _imc,
+                                'age': edad.valid ? parseFloat(edad.value) : 0,
+                                'genetics': genetics.value,
+                                //'diagnosis': diagnosis.value,
+                              }
+                            });
+                          }}
+                        >
+                          Calcular dosis
+                        </Button>
+                      </InputGroupAddon>
+                      <InputGroupAddon type="append">
+                        <InputGroupText>
+                          <t6 className={"text-black"}> {isNaN(dosis) ? '-' : dosis.toFixed(4)} </t6>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                    </InputGroup>
+                  </Col>
+                  <Col xs="6" md="6" className="text-right">
+                    <Button
+                      theme="secondary"
+                      className="mb-2"
+                      onClick={(event) => {
+                        setForm()
+                      }}>
+                      Limpiar campos
+                    </Button>
+                  </Col>
+                </Row>
+
+
+                {/* <ListGroupItem lg="9" className="mb-2">
+                <Button
+                  theme="secondary"
+                  className="mb-2 mr-2"
+                  onClick={(event) => {
+                    setForm()
+                  }}>
+                  Nuevo Paciente
+                </Button>
+              </ListGroupItem>*/}
               </CardBody>
             </Card>
           </Col>

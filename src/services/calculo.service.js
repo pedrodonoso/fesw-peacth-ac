@@ -2,12 +2,6 @@ import { api } from '../helpers';
 import axios from 'axios';
 //TODO: API 
 const basePath = 'api';
-var headers = {
-    headers: {
-        'Content-Type' : 'application/json;charset=utf-8',
-        'Access-Control-Allow-Origin' : '*'
-    }
-  };
 //obtener dosis del paciente
 function getDosePatient(data) { 
     axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
@@ -25,14 +19,6 @@ function getLastPropsAlgorithm() {
     axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     return api.get(`${basePath}/LogWTDparameters/get_last/get_last/`);
-}
-
-function getControls() {
-    //get
-    //https://peacth-ac-backend.herokuapp.com/api/clinical_control/
-    axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    return api.get(`${basePath}/clinical_control`)
 }
 
 //registrar visitas
@@ -78,6 +64,7 @@ const calculoService = {
     postRegisterVisit,
     getDistribution,
     getBoxplot,
+    updatePropsAlgorithm
 };
 
 export default calculoService;

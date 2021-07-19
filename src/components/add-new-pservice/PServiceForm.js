@@ -34,17 +34,17 @@ class PServiceForm extends Component {
       });
     }
 
-    console.log({text:"toggle", open:this.state.open});
+    //console.log({text:"toggle", open:this.state.open});
   }
   handlerOpenDialog(data) {
     this.setState({
       ...this.state,
       open: data
     });
-    console.log({text:"handler", open:this.state.open});
+    //console.log({text:"handler", open:this.state.open});
   }
   handleAddPServiceSubmit(data) {
-    console.log({algo:"ALGO",data:data})
+    //console.log({algo:"ALGO",data:data})
     addpserviceService.create(data)
       .then((response) => this.toggle({
         text: "Personal de servicio creado correctamente!! 😘",

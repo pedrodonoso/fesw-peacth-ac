@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col } from "shards-react";
-import MainNavbar from "../components/layout/MainNavbar/MainNavbar";
+import { Container, Row, Col , Navbar} from "shards-react";
+import NavbarToggle from "../components/layout/MainNavbar/NavbarToggle";
 import MainSidebar from "../components/layout/MainSidebar/MainSidebar";
 import MainFooter from "../components/layout/MainFooter";
 
-const Custom = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideLogoText}) => (
+const Custom2 = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideLogoText}) => (
   <Container fluid>
     <Row>
       <MainSidebar hideLogoText={hideLogoText}/>
@@ -16,7 +16,13 @@ const Custom = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideL
         sm="12"
         tag="main"
       >
-        {!noNavbar && <MainNavbar {...navbar_props} />}
+        <div>
+        <Container className="p-0">
+            <Navbar type="light" className="align-items-stretch right">
+                <NavbarToggle  />
+            </Navbar>
+        </Container>
+        </div>
         {children}
         {!noFooter && <MainFooter {...footer_props} />}
       </Col>
@@ -24,7 +30,7 @@ const Custom = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideL
   </Container>
 );
 
-Custom.propTypes = {
+Custom2.propTypes = {
   /**
    * Whether to display the navbar, or not.
    */
@@ -35,9 +41,9 @@ Custom.propTypes = {
   noFooter: PropTypes.bool
 };
 
-Custom.defaultProps = {
+Custom2.defaultProps = {
   noNavbar: false,
   noFooter: false,
 };
 
-export default Custom;
+export default Custom2;

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Chart from 'react-apexcharts'
 import { Row, Col, Card, CardHeader, CardBody, Button ,ButtonGroup} from "shards-react";
 
-import RangeDatePicker from "../common/RangeDatePicker";
 import constants from "../../data/constants";
 
 import calculoService from "../../services/calculo.service";
@@ -18,26 +17,25 @@ class AnalisisDosisGen extends React.Component {
       chart: this.props.chart,
       options: this.props.options,
     }
-    this.generate(constants.gen2);
   }
   
-  generate(_gen) {
-    console.log({title: "generate box", gen: _gen})
+  async generate(_gen) {
+    //console.log({title: "generate box", gen: _gen})
     this.setState({
       ...this.state,
       gen: _gen
     });
 
-    calculoService.getBoxplot(_gen)
+    await calculoService.getBoxplot(_gen)
     .then((response) => {
       var data = response.data
       // var ser = response.data.frequency
-      console.log({title: "getBoxplot", response: data, gen: _gen})
+      //console.log({title: "getBoxplot", response: data, gen: _gen})
       var _data = [];
       data.forEach(function(e) {
         var label = e.label;
         var value = e.value;
-        console.log({title:"foreach", data: label})
+        //console.log({title:"foreach", data: label})
         var aux = {};
         aux.x = label;
         aux.y = value;
@@ -49,12 +47,57 @@ class AnalisisDosisGen extends React.Component {
         data:  _data,
       }]
 
-      console.log({title: "data",data:_data})
+      //console.log({title: "data",data:_data})
       this.setState({
         ...this.state,
         series: _serie
       });
-      console.log(this.state)
+      //console.log(this.state)
+    })
+    .catch((error) => {
+      // this.setState({
+      //   ...this.state,
+      //   series: constants.series, 
+      //   options: {
+      //     ...this.state.options,
+      //     lables: constants.labels
+      //   }
+      // });
+    })
+  }
+  
+  async componentDidMount() {
+    var _gen=constants.gen2
+    this.setState({
+      ...this.state,
+      gen: _gen
+    });
+
+    await calculoService.getBoxplot(_gen)
+    .then((response) => {
+      var data = response.data
+      // var ser = response.data.frequency
+      //console.log({title: "getBoxplot", response: data, gen: _gen})
+      var _data = [];
+      data.forEach(function(e) {
+        var label = e.label;
+        var value = e.value;
+        //console.log({title:"foreach", data: label})
+        var aux = {};
+        aux.x = label;
+        aux.y = value;
+        _data.push(aux)
+      })
+      var _serie = [{
+        type: 'boxPlot',
+        data:  _data,
+      }]
+      //console.log({title: "data",data:_serie})
+      this.setState({
+        ...this.state,
+        series: _serie
+      });
+      //console.log(this.state)
     })
     .catch((error) => {
       // this.setState({
@@ -158,40 +201,43 @@ AnalisisDosisGen.defaultProps = {
     width: '100%' 
   },
   options: {
-      colors: ['#008FFB', '#FEB019'],
-      title: {
-          text:  '',
-          align: 'left'
+    noData: {
+      text: 'Cargando...'
+    },
+    colors: ['#008FFB', '#FEB019'],
+    title: {
+        text:  '',
+        align: 'left'
+    },
+    yaxis: {
+      labels: {
+        formatter: function (value) {
+          return value.toFixed(3);
+        }
       },
-      yaxis: {
-        labels: {
-          formatter: function (value) {
-            return value.toFixed(3);
-          }
-        },
-      },
-      /*
-      xaxis: {
-          type: 'datetime',
-          tooltip: {
-          formatter: function(val) {
-              return new Date(val).getFullYear()
-          }
-          }
-      },
-      
-      tooltip: {
-          shared: false,
-          intersect: true
-      },
-      */
-      responsive: [{
-        breakpoint: 1000,
-        options: {
-        legend: {
-            position: 'top'
+    },
+    /*
+    xaxis: {
+        type: 'datetime',
+        tooltip: {
+        formatter: function(val) {
+            return new Date(val).getFullYear()
         }
         }
+    },
+    
+    tooltip: {
+        shared: false,
+        intersect: true
+    },
+    */
+    responsive: [{
+      breakpoint: 1000,
+      options: {
+      legend: {
+          position: 'top'
+      }
+      }
     }]     
       
   },
@@ -201,21 +247,8 @@ AnalisisDosisGen.defaultProps = {
       name: 'box',
       type: 'boxPlot',
       data: [
-          {
-          x: '*3/*4',
-          y: [54, 66, 69, 75, 88]
-          },
-          {
-          x: '*3/*5',
-          y: [43, 65, 69, 76, 81]
-          },
-          {
-          x: '*3/*6',
-          y: [31, 39, 45, 51, 59]
-          },
       ]
       },
-      
   ],
   
 };

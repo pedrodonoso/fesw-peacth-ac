@@ -5,11 +5,12 @@ import {
     Col,
 } from "shards-react";
 
-import DataUserVisit from "../components/registrar_visita/data-user-visit";
 import calculoService from '../services/calculo.service';
 import CustomToggle from '../components/forms/CustomToggle';
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import UpdateProps from "../components/actualizar/update-props";
+import formulaService from "../services/formula.service";
 
 const theme = createMuiTheme({
   palette: {
@@ -17,20 +18,20 @@ const theme = createMuiTheme({
   },
 }, esES);
 
-class RegistrarVisita extends Component {
+class Actualizar extends Component {
   data = {};
   constructor(props) {
     super(props);
     this.state = {
       open: false,
     }
-    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+    this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
     this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
   //envía data a API
-  handleRegisterSubmit(submited) {
+  handleUpdateSubmit(submited) {
 
     if(!submited.valid) {
       this.toggle({
@@ -40,18 +41,22 @@ class RegistrarVisita extends Component {
         return false;
     }
 
-    //console.log({nombre:"handleRegisterSubmit",data:submited.data})
+    //console.log({nombre:"handleUpdateSubmit",data:submited.vars})
     //guarda variables ingresadas
-    this.data = submited.data
+    this.data = submited.vars
     //console.log(this.data)
     //subimos las variables ingresadas
-    calculoService.postRegisterVisit(this.data)
+
+
+    
+    calculoService.updatePropsAlgorithm(this.data)
     .then((response) => {
       ////console.log({title: 'postRegisterVisit', initialDose: response.data})
+        formulaService.updateLocalProps(this.data);
       //mostramos al usuario un toggle
         this.toggle({
         title: "Si se pudo!!😍 ",
-        text: "Visita registrada correctamente!! 😘",
+        text: "Algoritmo actualizado correctamente!! 😘",
         });
       
     })
@@ -81,8 +86,6 @@ class RegistrarVisita extends Component {
         text: data.text,
       });
     }
-
-    //console.log({text:"toggle", open:this.state.open});
   }
 
   handlerOpenDialog(data) {
@@ -102,7 +105,7 @@ class RegistrarVisita extends Component {
 
       <Row>
         <Col lg="12" className="py-4">
-        <DataUserVisit onSubmit={this.handleRegisterSubmit} />
+        <UpdateProps onSubmit={this.handleUpdateSubmit} />
         <CustomToggle openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
           text={this.state.text}
           title={this.state.title}
@@ -117,4 +120,4 @@ class RegistrarVisita extends Component {
   }
 };
 
-export default RegistrarVisita;
+export default Actualizar;

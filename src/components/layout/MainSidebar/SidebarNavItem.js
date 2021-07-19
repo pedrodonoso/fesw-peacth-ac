@@ -6,7 +6,7 @@ import { NavItem, NavLink } from "shards-react";
 const SidebarNavItem = ({ item }) => (
 
   <NavItem>
-    <a href={item.to}><NavLink disabled tag={RouteNavLink} to={item.to}>
+    <NavLink disabled tag={RouteNavLink} to={item.to}>
       {item.htmlBefore && (
         <div
           className="d-inline-block item-icon-wrapper"
@@ -20,7 +20,7 @@ const SidebarNavItem = ({ item }) => (
           dangerouslySetInnerHTML={{ __html: item.htmlAfter }}
         />
       )}
-    </NavLink></a>
+    </NavLink>
   </NavItem>
 );
 

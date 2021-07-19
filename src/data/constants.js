@@ -12,6 +12,18 @@ var gen13 = '*1/*3'
 var gen33 = '*3/*3'
 var series = [14, 23, 21, 17, 15, 10, 12, 17, 21]
 var labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+var props = {
+    'p_0'         :   3.081   , 
+    'p_men'       :   0.167   ,
+    'p_age'       :   0.0081  , 
+    'p_initialINR':   0.055   ,
+    'p_imc'       :   0.013   ,
+    'p_CYP2C9_12' :   0.107   ,
+    'p_CYP2C9_13' :   0.323   ,
+    'p_CYP2C9_33' :   0.746   ,
+    'p_VKORC1_GA' :   0.270   ,
+    'p_VKORC1_AA' :   0.701   
+  }
 const constants = {
     gen2,
     gen3,
@@ -25,7 +37,8 @@ const constants = {
     gen13,
     gen33,
     series,
-    labels
+    labels,
+    props
 };
 
 export default constants;

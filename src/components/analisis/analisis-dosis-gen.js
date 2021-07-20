@@ -9,18 +9,22 @@ Container
 
 import constants from "../../data/constants";
 
+import CustomToggle from '../forms/CustomToggle';
 import calculoService from "../../services/calculo.service";
 
 class AnalisisDosisGen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: false,
       gen: this.props.gen,
       title: this.props.title,
       series: this.props.series,
       chart: this.props.chart,
       options: this.props.options,
     }
+    this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.generate(constants.gen2);
   }
 
@@ -60,16 +64,47 @@ class AnalisisDosisGen extends React.Component {
       //console.log(this.state)
     })
     .catch((error) => {
-      // this.setState({
-      //   ...this.state,
-      //   series: constants.series,
-      //   options: {
-      //     ...this.state.options,
-      //     lables: constants.labels
-      //   }
-      // });
+      this.setState({
+        ...this.state,
+        error: true,
+        errortitle: 'Cuidado!!',
+        errortext: 'No pudimos obtener los datos, intenta más tarde',
+        options: {
+          ...this.state.options,
+          noData: {
+            ...this.state.options.noData,
+            text: 'Intentalo más tarde'
+          },
+        }
+      });
     })
   }
+
+  toggle(data) {
+    if(data === {}) {
+      this.setState({
+        ...this.state,
+        error: !this.state.error
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        error: !this.state.error,
+        errortitle: data.title,
+        errortext: data.text,
+      });
+    }
+    //console.log({text:"toggle", open:this.state.open});
+  }
+
+  handlerOpenDialog(data) {
+    this.setState({
+      ...this.state,
+      error: data
+    });
+    //console.log({text:"handler", open:this.state.open});
+  }
+
 
 
   render() {
@@ -168,6 +203,10 @@ class AnalisisDosisGen extends React.Component {
             />
             </Col>
           </Row>
+          <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
+          text={this.state.errortext}
+          title={this.state.errortitle}
+          />
           {/*
           <canvas
             height="120"
@@ -198,6 +237,7 @@ AnalisisDosisGen.propTypes = {
 
 
 AnalisisDosisGen.defaultProps = {
+  error: false,
   gen: constants.gen2,
   title: "Análisis",
   /*

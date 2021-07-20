@@ -24,7 +24,6 @@ class Analisis extends Component {
       open: false,
     }
   }
-  
 
   render() {
     return (

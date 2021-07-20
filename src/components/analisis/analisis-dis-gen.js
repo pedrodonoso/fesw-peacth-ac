@@ -9,23 +9,27 @@ import {
   CardBody,
   Button,
   ButtonGroup,
-  InputGroupAddon, InputGroupText
+  InputGroupAddon, InputGroupText,
+  
 } from "shards-react";
 
 import constants from "../../data/constants";
-
+import CustomToggle from '../forms/CustomToggle';
 import calculoService from "../../services/calculo.service";
 
 class AnalisisDisGen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: false,
       gen: this.props.gen,
       series: this.props.series,
       chart: this.props.chart,
       options:  this.props.options
       // options:  constants.options
     }
+    this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.generate(constants.gen2)
   }
 
@@ -57,10 +61,15 @@ class AnalisisDisGen extends React.Component {
       .catch((error) => {
         this.setState({
           ...this.state,
-          series: constants.series,
+          error: true,
+          errortitle: 'Cuidado!!',
+          errortext: 'No pudimos obtener los datos, intenta más tarde',
           options: {
             ...this.state.options,
-            lables: constants.labels
+            noData: {
+              ...this.state.options.noData,
+              text: 'Intentalo más tarde'
+            },
           }
         });
       })
@@ -68,6 +77,30 @@ class AnalisisDisGen extends React.Component {
   }
 
 
+  toggle(data) {
+    if(data === {}) {
+      this.setState({
+        ...this.state,
+        error: !this.state.error
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        error: !this.state.error,
+        errortitle: data.title,
+        errortext: data.text,
+      });
+    }
+    //console.log({text:"toggle", open:this.state.open});
+  }
+
+  handlerOpenDialog(data) {
+    this.setState({
+      ...this.state,
+      error: data
+    });
+    //console.log({text:"handler", open:this.state.open});
+  }
 
 
   render() {
@@ -179,6 +212,10 @@ class AnalisisDisGen extends React.Component {
                 height={this.state.chart.height}
             />
           </div>
+          <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
+          text={this.state.errortext}
+          title={this.state.errortitle}
+          />
           {/*
           <canvas
             height="120"

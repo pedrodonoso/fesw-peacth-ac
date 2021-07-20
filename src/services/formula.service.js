@@ -4,20 +4,6 @@ function formula(props,vars) {
   console.log({nombre:"Formula",data:vars,props:props})
     if (Object.keys(props).length === 0) {
       props = this.getLastLocalProps();
-      /* 
-      props = {
-        'p_0'         :   3.081   , 
-        'p_men'       :   0.167   ,
-        'p_age'       :   0.0081  , 
-        'p_initialINR':   0.055   ,
-        'p_imc'       :   0.013   ,
-        'p_CYP2C9_12' :   0.107   ,
-        'p_CYP2C9_13' :   0.323   ,
-        'p_CYP2C9_33' :   0.746   ,
-        'p_VKORC1_GA' :   0.270   ,
-        'p_VKORC1_AA' :   0.701   
-      }
-       */
     }
     var _1_2 = 0
     var _1_3 = 0
@@ -73,7 +59,24 @@ function formula(props,vars) {
     return result
   }
   function getLastLocalProps() {
-    const result = JSON.parse(window.localStorage.getItem('vars'));
+    var result = window.localStorage.getItem('vars');
+    console.log(result);
+    if( result === null) {
+      result = {
+        'p_0'         :   3.081   , 
+        'p_men'       :   0.167   ,
+        'p_age'       :   0.0081  , 
+        'p_initialINR':   0.055   ,
+        'p_imc'       :   0.013   ,
+        'p_CYP2C9_12' :   0.107   ,
+        'p_CYP2C9_13' :   0.323   ,
+        'p_CYP2C9_33' :   0.746   ,
+        'p_VKORC1_GA' :   0.270   ,
+        'p_VKORC1_AA' :   0.701   
+      }
+    } else {
+      result = JSON.parse(result)
+    }
     return result;
   }
 

@@ -118,48 +118,48 @@ class AnalisisDosisGen extends React.Component {
           <Row className="border-bottom py-2 bg-light">
             <Col sm="8" className="d-flex mb-2 mb-sm-0">
               {/*<RangeDatePicker />*/}
-              <ButtonGroup > 
+              <ButtonGroup >
               <InputGroupAddon type="prepend">
                 <InputGroupText>Gen</InputGroupText>
               </InputGroupAddon>
-                <Button 
-                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'} 
-                  onClick={() => 
+                <Button
+                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
+                  onClick={() =>
                     this.generate(constants.gen2)
                   }
-                > 
+                >
                 <Col style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                }}>       
+                }}>
                   <Col>
                   <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9 *2</strong></Row>
                   <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs1799853</strong></Row>
                   </Col>
                 </Col>
-                
+
              </Button>
-                <Button 
-                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'} 
-                  onClick={() => 
+                <Button
+                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'}
+                  onClick={() =>
                     this.generate(constants.gen3)
                   }
-                > 
+                >
                 <Col style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                }}>       
+                }}>
                   <Col>
                   <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9 *3</strong></Row>
                   <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs1057910 </strong></Row>
                   </Col>
                 </Col>
                 </Button>
-                <Button 
-                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'} 
-                  onClick={() => 
+                <Button
+                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'}
+                  onClick={() =>
                     this.generate(constants.gen4)
                   }
                 >
@@ -167,12 +167,12 @@ class AnalisisDosisGen extends React.Component {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                }}>       
+                }}>
                   <Col>
                   <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>VKORC1</strong></Row>
                   <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs9923231</strong></Row>
                   </Col>
-                </Col>  
+                </Col>
                 </Button>
               </ButtonGroup>
             </Col>
@@ -194,11 +194,11 @@ class AnalisisDosisGen extends React.Component {
 
           <Row >
             <Col>
-            <Chart 
+            <Chart
                 options={this.state.options}
                 series={this.state.series}
                 type='boxPlot'
-                width='800' 
+                width='800'
                 height='300'
             />
             </Col>
@@ -262,7 +262,7 @@ AnalisisDosisGen.defaultProps = {
         text: 'Genotipos'
       },
     },
-    
+
     yaxis: {
       title: {
         text: 'Dosis semanal (mg/semana)'

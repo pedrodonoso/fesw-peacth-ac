@@ -1,7 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Chart from 'react-apexcharts'
-import { Row, Col, Card, CardHeader, CardBody, Button, ButtonGroup } from "shards-react";
+import {
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  Button,
+  ButtonGroup,
+  InputGroupAddon, InputGroupText
+} from "shards-react";
 
 import constants from "../../data/constants";
 
@@ -73,6 +82,63 @@ class AnalisisDisGen extends React.Component {
             <Col sm="6" className="d-flex mb-2 mb-sm-0">
               {/*<RangeDatePicker />*/}
               <ButtonGroup >
+                <InputGroupAddon type="prepend">
+                  <InputGroupText>Gen</InputGroupText>
+                </InputGroupAddon>
+                <Button
+                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
+                  onClick={() =>
+                    this.generate(constants.gen2)
+                  }
+                >
+                  <Col style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Col>
+                      <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9 *2</strong></Row>
+                      <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs1799853</strong></Row>
+                    </Col>
+                  </Col>
+
+                </Button>
+                <Button
+                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'}
+                  onClick={() =>
+                    this.generate(constants.gen3)
+                  }
+                >
+                  <Col style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Col>
+                      <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9 *3</strong></Row>
+                      <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs1057910 </strong></Row>
+                    </Col>
+                  </Col>
+                </Button>
+                <Button
+                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'}
+                  onClick={() =>
+                    this.generate(constants.gen4)
+                  }
+                >
+                  <Col style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Col>
+                      <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>VKORC1</strong></Row>
+                      <Row><strong style={{ 'font-size': '10px', 'font-weight': '50' }}>rs9923231</strong></Row>
+                    </Col>
+                  </Col>
+                </Button>
+              </ButtonGroup>
+             {/* <ButtonGroup >
                 <Button
                   theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
                   onClick={() =>
@@ -91,7 +157,7 @@ class AnalisisDisGen extends React.Component {
                     this.generate(constants.gen4)
                   }
                 > {constants.gen4} </Button>
-              </ButtonGroup>
+              </ButtonGroup>*/}
             </Col>
             <Col>
             {/*
@@ -160,7 +226,7 @@ AnalisisDisGen.defaultProps = {
     },
     labels: [],
     title: {
-        text:  'Distribución de genotipos',
+        text:  'Frecuencia de distribución según genotipos',
         align: 'center'
     },
     stroke: {

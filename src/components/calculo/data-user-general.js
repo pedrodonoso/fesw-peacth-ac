@@ -307,14 +307,14 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       <Form>
                         <label>CYP2C9-2</label>
                         <DropdownOptions
-                          title='CYP2C9 *2'
+                          title={constants.gen2}
                           options={[constants.gen11, constants.gen12, constants.gen22]}
                           values={[constants.gen11, constants.gen12, constants.gen22]}
                           onSubmit={handleSubmit}
                         />
                         <label>CYP2C9-3</label>
                         <DropdownOptions
-                          title='CYP2C9 *3'
+                          title={constants.gen3}
                           options={[constants.gen11, constants.gen13, constants.gen33]}
                           values={[constants.gen11, constants.gen13, constants.gen33]}
                           onSubmit={handleSubmit}

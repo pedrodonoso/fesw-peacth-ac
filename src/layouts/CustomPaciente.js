@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col , Navbar} from "shards-react";
-import NavbarToggle from "../components/layout/MainNavbar/NavbarToggle";
+import { Container, Row, Col } from "shards-react";
+import PacienteNavbar from "../components/layout/PacienteNavbar/MainNavbar";
 import MainSidebar from "../components/layout/MainSidebar/MainSidebar";
 import MainFooter from "../components/layout/MainFooter";
 
-const Custom2 = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideLogoText}) => (
+const CustomPaciente = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideLogoText}) => (
   <Container fluid>
     <Row>
       <MainSidebar hideLogoText={hideLogoText}/>
@@ -16,13 +16,7 @@ const Custom2 = ({ children, noNavbar, noFooter, footer_props, navbar_props,hide
         sm="12"
         tag="main"
       >
-        <div>
-        <Container className="p-0">
-            <Navbar type="light" className="align-items-stretch right">
-                <NavbarToggle  />
-            </Navbar>
-        </Container>
-        </div>
+        {!noNavbar && <PacienteNavbar {...navbar_props} />}
         {children}
         {!noFooter && <MainFooter {...footer_props} />}
       </Col>
@@ -30,7 +24,7 @@ const Custom2 = ({ children, noNavbar, noFooter, footer_props, navbar_props,hide
   </Container>
 );
 
-Custom2.propTypes = {
+CustomPaciente.propTypes = {
   /**
    * Whether to display the navbar, or not.
    */
@@ -41,9 +35,9 @@ Custom2.propTypes = {
   noFooter: PropTypes.bool
 };
 
-Custom2.defaultProps = {
+CustomPaciente.defaultProps = {
   noNavbar: false,
   noFooter: false,
 };
 
-export default Custom2;
+export default CustomPaciente;

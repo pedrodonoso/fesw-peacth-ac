@@ -5,7 +5,7 @@ import MainNavbar from "../components/layout/MainNavbar/MainNavbar";
 import MainSidebar from "../components/layout/MainSidebar/MainSidebar";
 import MainFooter from "../components/layout/MainFooter";
 
-const Custom = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideLogoText}) => (
+const CustomAnalisis = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideLogoText}) => (
   <Container fluid>
     <Row>
       <MainSidebar hideLogoText={hideLogoText}/>
@@ -24,7 +24,7 @@ const Custom = ({ children, noNavbar, noFooter, footer_props, navbar_props,hideL
   </Container>
 );
 
-Custom.propTypes = {
+CustomAnalisis.propTypes = {
   /**
    * Whether to display the navbar, or not.
    */
@@ -35,9 +35,9 @@ Custom.propTypes = {
   noFooter: PropTypes.bool
 };
 
-Custom.defaultProps = {
+CustomAnalisis.defaultProps = {
   noNavbar: false,
   noFooter: false,
 };
 
-export default Custom;
+export default CustomAnalisis;

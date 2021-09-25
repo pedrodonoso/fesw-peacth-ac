@@ -1,6 +1,7 @@
 import DefaultLayout from "./Default";
-import Custom from "./Custom";
-import Custom2 from "./Custom2";
+import CustomAnalisis from "./CustomAnalisis";
+import CustomGeneral from "./CustomGeneral";
+import CustomPaciente from "./CustomPaciente";
 
-export { DefaultLayout,Custom,Custom2 };
+export { DefaultLayout, CustomGeneral, CustomAnalisis, CustomPaciente };
 

@@ -37,6 +37,12 @@ export default function() {
     //   to: "/errors",
     // },
     {
+      title: 'Ficha Paciente',
+      subtitle:"",
+      htmlBefore: '<i class="material-icons">assignment</i>',
+      to: '/paciente/general' //ruta
+    },
+    {
       title: 'Calculo primera dosis',
       subtitle:"",
       htmlBefore: '<i class="material-icons">functions</i>',

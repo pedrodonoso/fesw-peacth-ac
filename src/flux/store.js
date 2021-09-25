@@ -4,11 +4,14 @@ import Dispatcher from "./dispatcher";
 import Constants from "./constants";
 import getSidebarNavItems from "../data/sidebar-nav-items";
 import getNavbarItems from "../data/navbar-nav-items";
+import getPacienteNavbarItems from "../data/navbar-paciente-nav-items";
+
 
 let _store = {
   menuVisible: false,
   navItems: getSidebarNavItems(),
   navbarItems: getNavbarItems(),
+  pacienteNavbarItems: getPacienteNavbarItems(),
 };
 
 class Store extends EventEmitter {
@@ -45,6 +48,10 @@ class Store extends EventEmitter {
 
   getNavbarItems() {
     return _store.navbarItems;
+  }
+
+  getPacienteNavbarItems() {
+    return _store.pacienteNavbarItems;
   }
 
   addChangeListener(callback) {

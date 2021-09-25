@@ -2,10 +2,10 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 // Layout Types
-import { Custom,Custom2 } from "./layouts";
+import { CustomAnalisis, CustomGeneral, CustomPaciente} from "./layouts";
 
 // Route Views
-import {Calculo, Analisis, RegistrarVisita, Actualizar} from "./views";
+import {Calculo, Analisis, RegistrarVisita, Actualizar, Paciente} from "./views";
 /*
 import BlogOverview from "./views/template/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
@@ -23,55 +23,58 @@ export default [
   {
     path: "/",
     exact: true,
-    layout: Custom,
+    layout: CustomGeneral,
     component: () => <Redirect to="/calculo" />,
     layout_props: {noNavbar: true, noFooter:true, hideLogoText:true}
   },
   {
     path: "/calculo",
-    layout: Custom2,
+    layout: CustomGeneral,
     component: Calculo,    
     layout_props: {noNavbar: false, noFooter:true, hideLogoText:true}
   },
   
   {
     path: "/analisis/dosis_gen",
-    layout: Custom,
+    layout: CustomAnalisis,
     component: Analisis,
     layout_props: {noNavbar: false, noFooter:true, hideLogoText:true},
     component_props: { dosisGen: true}
   },
   {
     path: "/analisis/dis_gen",
-    layout: Custom,
+    layout: CustomAnalisis,
     component: Analisis,
     layout_props: {noNavbar: false, noFooter:false, footer_props: { menuItems: []} , hideLogoText:true},
     component_props_: { dosisGen: false }
-    
   },
   {
     path: "/registrar_visita",
-    layout: Custom2,
+    layout: CustomGeneral,
     component: RegistrarVisita,
     layout_props: {noNavbar: true, noFooter:true, hideLogoText:true}
   },
   {
     path: "/actualizar",
-    layout: Custom2,
+    layout: CustomGeneral,
     component: Actualizar,
     layout_props: {noNavbar: true, noFooter:true, hideLogoText:true}
   },
+  {
+    path: "/paciente/general",
+    layout: CustomPaciente,
+    component: Paciente,
+    layout_props: {noNavbar: false, noFooter:true, hideLogoText:true},
+    component_props: { dosisGen: true}
+  },
+  {
+    path: "/paciente/genetico",
+    layout: CustomPaciente,
+    component: Paciente,
+    layout_props: {noNavbar: false, noFooter:false, footer_props: { menuItems: []} , hideLogoText:true},
+    component_props_: { dosisGen: false }
+  },
   /*
-  {
-    path: "/pservice/all-pservice",
-    layout: DefaultLayout,
-    component: AllPService
-  },
-  {
-    path: "/pservice/add-new-pservice",
-    layout: DefaultLayout,
-    component: AddNewPService
-  },
   {
     path: "/errors",
     layout: DefaultLayout,

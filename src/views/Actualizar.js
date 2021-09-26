@@ -35,8 +35,8 @@ class Actualizar extends Component {
 
     if(!submited.valid) {
       this.toggle({
-        title: "Alto ahí 😁",
-        text: "Debes ingresar los datos correctamente!! 😘",
+        title: "Revisa los datos",
+        text: "Algunos campos presentan errores o están vacíos",
         });
         return false;
     }
@@ -48,7 +48,7 @@ class Actualizar extends Component {
     //subimos las variables ingresadas
 
 
-    
+
     calculoService.updatePropsAlgorithm(this.data)
     .then((response) => {
       ////console.log({title: 'postRegisterVisit', initialDose: response.data})
@@ -58,7 +58,7 @@ class Actualizar extends Component {
         title: "Si se pudo!!😍 ",
         text: "Algoritmo actualizado correctamente!! 😘",
         });
-      
+
     })
     .catch((error) => {
       ////console.log({title: 'error', error: error.response.data})
@@ -67,8 +67,8 @@ class Actualizar extends Component {
         title: "No se pudo 😁",
         text: (<div>Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Intenta ingresando un usuario que ya exista </b></div>)
       });
-    
-   }); 
+
+   });
 
   }
 
@@ -115,7 +115,7 @@ class Actualizar extends Component {
     </Container>
       </ThemeProvider>
       </Container>
-      
+
     );
   }
 };

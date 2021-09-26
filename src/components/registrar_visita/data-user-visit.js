@@ -130,7 +130,7 @@ const DataUserVisit = ({onSubmit }) => {
                             onChange={onChangeArrivalDose}
                             size="lg"
                             //className="mb-3 "
-                            placeholder="1.0"
+                            placeholder="0"
                           />
                           <InputGroupAddon type="prepend">
                             <InputGroupText>mg/semana</InputGroupText>
@@ -142,7 +142,7 @@ const DataUserVisit = ({onSubmit }) => {
                   </Row>
 
                   <Row>
-                    
+
                   <Col>
                   {/* INR de llegada */}
                   <FormGroup>
@@ -155,7 +155,7 @@ const DataUserVisit = ({onSubmit }) => {
                         onChange={onChangeArrivalINR}
                         size="lg"
                         //className="mb-3"
-                        placeholder="1.5"/>
+                        placeholder="0"/>
                       <FormFeedback> Debes ingresar un número decimal, con punto. EJ: 1.0 </FormFeedback>
                     </InputGroup>
                   </FormGroup>
@@ -172,7 +172,7 @@ const DataUserVisit = ({onSubmit }) => {
                         onChange={onChangeUpdatedDose}
                         size="lg"
                         //className="mb-3"
-                        placeholder="1.5"/>
+                        placeholder="0"/>
                         <InputGroupAddon type="prepend">
                           <InputGroupText>mg/semana</InputGroupText>
                         </InputGroupAddon>

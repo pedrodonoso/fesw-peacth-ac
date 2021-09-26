@@ -148,7 +148,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     <React.Fragment>
       <Col>
         <Row>
-          
+
 
         <Col lg="12" style={{
             position: "sticky",
@@ -250,7 +250,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
                       onChange={onChangeCodPaciente}
                       size="lg"
                       className="mb-3"
-                      placeholder="T-002"/>
+                      placeholder="T-001"/>
                     <FormFeedback>"Ej:
                       T-002"</FormFeedback>
                   </FormGroup>
@@ -287,7 +287,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
                         onChange={onChangePeso}
                         size="lg"
                         //className="mb-3"
-                        placeholder="78"/>
+                        placeholder="0"/>
                       <InputGroupAddon type="append">
                         <InputGroupText>Kg</InputGroupText>
                       </InputGroupAddon>
@@ -319,7 +319,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
                         onChange={onChangeTalla}
                         size="lg"
                         //className="mb-3"
-                        placeholder="1.65"/>
+                        placeholder="0"/>
                       <InputGroupAddon type="append">
                         <InputGroupText>m</InputGroupText>
                       </InputGroupAddon>
@@ -368,7 +368,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
                       onChange={onChangeINRInicial}
                       size="lg"
                       className="mb-3"
-                      placeholder="2.4"/>
+                      placeholder="0"/>
                     <FormFeedback>"Debes ingresar un
                       valor decimal. EJ: 2.4"</FormFeedback>
                   </FormGroup>

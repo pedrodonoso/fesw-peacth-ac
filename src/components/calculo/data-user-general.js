@@ -159,16 +159,17 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                 <Form className="add-new-post">
 
                   {/* Codigo Paciente */}
-                  <FormGroup check={false}>
+                  <FormGroup check={false} >
                     <label>Código del paciente</label>
                     <FormInput
+
                       value={cod_paciente.value}
                       valid={cod_paciente.valid}
                       invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
                       onChange={onChangeCodPaciente}
                       size="lg"
                       className="mb-3"
-                      placeholder="T-002"/>
+                      placeholder="T-001"/>
                     <FormFeedback>"Ej:
                       T-002"</FormFeedback>
                   </FormGroup>
@@ -178,13 +179,14 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                     <label>Edad</label>
                     <InputGroup className="mb-3">
                       <FormInput
+
                         value={edad.value}
                         valid={edad.valid}
                         invalid={edad.valid === undefined ? undefined : !edad.valid}
                         onChange={onChangeEdad}
                         size="lg"
                         //className="mb-3 "
-                        placeholder="74"
+                        placeholder="0"
                       />
                       <InputGroupAddon type="append">
                         <InputGroupText>años</InputGroupText>
@@ -205,7 +207,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         onChange={onChangePeso}
                         size="lg"
                         //className="mb-3"
-                        placeholder="78"/>
+                        placeholder="0"/>
                       <InputGroupAddon type="append">
                         <InputGroupText>Kg</InputGroupText>
                       </InputGroupAddon>
@@ -237,7 +239,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         onChange={onChangeTalla}
                         size="lg"
                         //className="mb-3"
-                        placeholder="1.65"/>
+                        placeholder="0"/>
                       <InputGroupAddon type="append">
                         <InputGroupText>m</InputGroupText>
                       </InputGroupAddon>
@@ -286,7 +288,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                       onChange={onChangeINRInicial}
                       size="lg"
                       className="mb-3"
-                      placeholder="2.4"/>
+                      placeholder="0"/>
                     <FormFeedback>"Debes ingresar un
                       valor decimal. EJ: 2.4"</FormFeedback>
                   </FormGroup>

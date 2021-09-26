@@ -26,14 +26,27 @@ class PacienteGeneral extends Component {
             chart: this.props.chart,
             options: this.props.options,
             id_paciente: this.props.id_paciente,
+            isActive: true,
         }
+    }
+
+    handleShowPerfil() {
+        this.setState({
+            isActive: true
+        });
+    }
+
+    handleHidePerfil() {
+        this.setState({
+            isActive: false
+        })
     }
 
 
     render() {
         const {title} = this.props;
         return (
-            <Card small className="h-100">
+            <Card small className="h-100 w-100">
                 <CardHeader className="border-bottom bg-light">
                     <h5 className="mt-1 font-weight-bold text-center">{title}</h5>
                 </CardHeader>
@@ -44,9 +57,9 @@ class PacienteGeneral extends Component {
                                 <InputGroupText>Perfil</InputGroupText>
                             </InputGroupAddon>
                             <Button
-                                theme={this.state.perfil === constants.perfil_clinico ? 'primary' : 'white'}
+                                theme={this.state.isActive === true ? 'primary' : 'white'}
                                 onClick={() =>
-                                    this.generate(constants.perfil_clinico)
+                                    this.handleShowPerfil()
                                 }
                             >
                                 <Col style={{
@@ -64,9 +77,9 @@ class PacienteGeneral extends Component {
 
                             </Button>
                             <Button
-                                theme={this.state.perfil === constants.perfil_genetico ? 'primary' : 'white'}
+                                theme={this.state.isActive === false ? 'primary' : 'white'}
                                 onClick={() =>
-                                    this.generate(constants.perfil_genetico)
+                                    this.handleHidePerfil()
                                 }
                             >
                                 <Col style={{
@@ -83,19 +96,10 @@ class PacienteGeneral extends Component {
                                 </Col>
                             </Button>
                         </ButtonGroup>
-
-                        {/*<InputGroup className="ml-auto">
-                            <InputGroupAddon type="prepend">
-                                <InputGroupText>Código del paciente</InputGroupText>
-                            </InputGroupAddon>
-                            <FormInput placeholder="T-001"/>
-                            <InputGroupAddon type="append">
-                                <Button theme="secondary">Buscar</Button>
-                            </InputGroupAddon>
-                        </InputGroup>*/}
                     </ButtonToolbar>
 
                     {/* Perfil Clinico*/}
+                    {this.state.isActive &&
                     <Row id="#perfil-clinico" className="mt-2">
                         <Col lg="4" className="mb-4">
                             {/* Data general */}
@@ -115,6 +119,7 @@ class PacienteGeneral extends Component {
                                                 valid={cod_paciente.valid}
                                                 invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
                                                 onChange={onChangeCodPaciente}*/
+                                                disabled
                                                 size="lg"
                                                 className="mb-3"
                                                 placeholder="T-001"/>
@@ -133,7 +138,7 @@ class PacienteGeneral extends Component {
                                                     invalid={edad.valid === undefined ? undefined : !edad.valid}
                                                     onChange={onChangeEdad}*/
                                                     size="lg"
-                                                    //className="mb-3 "
+                                                    disabled
                                                     placeholder="0"
                                                 />
                                                 <InputGroupAddon type="append">
@@ -154,7 +159,7 @@ class PacienteGeneral extends Component {
                                                     invalid={peso.valid === undefined ? undefined : !peso.valid}
                                                     onChange={onChangePeso}*/
                                                     size="lg"
-                                                    //className="mb-3"
+                                                    disabled
                                                     placeholder="0"/>
                                                 <InputGroupAddon type="append">
                                                     <InputGroupText>Kg</InputGroupText>
@@ -181,7 +186,7 @@ class PacienteGeneral extends Component {
                                                     invalid={talla.valid === undefined ? undefined : !talla.valid}
                                                     onChange={onChangeTalla}*/
                                                     size="lg"
-                                                    //className="mb-3"
+                                                    disabled
                                                     placeholder="0"/>
                                                 <InputGroupAddon type="append">
                                                     <InputGroupText>m</InputGroupText>
@@ -193,32 +198,18 @@ class PacienteGeneral extends Component {
 
 
                                         {/* Sexo */}
-                                        <label>Sexo</label>
+
                                         <FormGroup>
-                                            <ButtonGroup size="sm" className="mr-2">
-                                                <Button /*theme={sexo.value === 'F' ? 'primary' : 'white'}
-                                                                onClick={() => setSexo((prevState) => ({
-                                                                    ...prevState,
-                                                                    value: 'F',
-                                                                    valid: true
-                                                                }))}*/>Femenino</Button>
-                                                <Button/* theme={sexo.value === 'M' ? 'primary' : 'white'}
-                                                                onClick={() => setSexo((prevState) => ({
-                                                                    ...prevState,
-                                                                    value: 'M',
-                                                                    valid: true
-                                                                }))}*/>Masculino</Button>
-                                            </ButtonGroup>
-                                            {/*
-                <FormInput
-                    value={sexo.value}
-                    valid={sexo.valid}
-                    invalid={sexo.invalid}
-                    //onChange={validCorreo}
-                    size="lg"
-                    className="mb-3"
-                    placeholder="juan@gmail.com" />
-                    */}
+                                            <label>Sexo</label>
+                                            <FormInput
+                                                /*value={inr_inicial.value}
+                                                valid={inr_inicial.valid}
+                                                invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                onChange={onChangeINRInicial}*/
+                                                size="lg"
+                                                disabled
+                                                className="mb-3"
+                                                placeholder="Femenino"/>
                                         </FormGroup>
 
                                         {/* INR Inicial */}
@@ -231,6 +222,7 @@ class PacienteGeneral extends Component {
                                                 onChange={onChangeINRInicial}*/
                                                 size="lg"
                                                 className="mb-3"
+                                                disabled
                                                 placeholder="0"/>
                                             <FormFeedback>"Debes ingresar un
                                                 valor decimal. EJ: 2.4"</FormFeedback>
@@ -251,26 +243,41 @@ class PacienteGeneral extends Component {
                                             <ListGroupItem className="px-0">
                                                 <Form>
                                                     <label>CYP2C9-2</label>
-                                                    <DropdownOptions
-                                                        title={constants.gen2}
-                                                        options={[constants.gen11, constants.gen12, constants.gen22]}
-                                                        values={[constants.gen11, constants.gen12, constants.gen22]}
-                                                        // onSubmit={handleSubmit}
-                                                    />
+                                                    <FormInput
+                                                        /*value={inr_inicial.value}
+                                                        valid={inr_inicial.valid}
+                                                        invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                        onChange={onChangeINRInicial}*/
+                                                        size="lg"
+                                                        className="mb-3"
+                                                        disabled
+                                                        placeholder="*1/*1"/>
+                                                    <FormFeedback>"Debes ingresar un
+                                                        valor decimal. EJ: 2.4"</FormFeedback>
                                                     <label>CYP2C9-3</label>
-                                                    <DropdownOptions
-                                                        title={constants.gen3}
-                                                        options={[constants.gen11, constants.gen13, constants.gen33]}
-                                                        values={[constants.gen11, constants.gen13, constants.gen33]}
-                                                        // onSubmit={handleSubmit}
-                                                    />
+                                                    <FormInput
+                                                        /*value={inr_inicial.value}
+                                                        valid={inr_inicial.valid}
+                                                        invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                        onChange={onChangeINRInicial}*/
+                                                        size="lg"
+                                                        className="mb-3"
+                                                        disabled
+                                                        placeholder="*1/*1"/>
+                                                    <FormFeedback>"Debes ingresar un
+                                                        valor decimal. EJ: 2.4"</FormFeedback>
                                                     <label>VKORC1</label>
-                                                    <DropdownOptions
-                                                        title={constants.gen4}
-                                                        options={['*A/*A', '*G/*A', '*G/*G']}
-                                                        values={[constants.genaa, constants.genga, constants.gengg]}
-                                                        // onSubmit={handleSubmit}
-                                                    />
+                                                    <FormInput
+                                                        /*value={inr_inicial.value}
+                                                        valid={inr_inicial.valid}
+                                                        invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                        onChange={onChangeINRInicial}*/
+                                                        size="lg"
+                                                        className="mb-3"
+                                                        disabled
+                                                        placeholder="*A/*A"/>
+                                                    <FormFeedback>"Debes ingresar un
+                                                        valor decimal. EJ: 2.4"</FormFeedback>
                                                 </Form>
                                             </ListGroupItem>
                                         </ListGroup>
@@ -278,9 +285,54 @@ class PacienteGeneral extends Component {
                                 </CardBody>
                             </Card>
                         </Col>
-                    </Row>
+                    </Row>}
+
 
                     {/* Perfil Genético*/}
+                    {this.state.isActive === false &&
+                    <div id="#perfil-genetico" className="mt-2">
+                        <Card>
+                            <CardHeader className="border-bottom bg-light">
+                                Perfil Genético
+                            </CardHeader>
+                            <CardBody>
+                                <table className="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Gen</th>
+                                        <th scope="col">ID Poliformismo estudiado</th>
+                                        <th scope="col">Presencia del Alelo variante</th>
+                                        <th scope="col">Observaciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row" rowSpan="2">CYP2C9</th>
+                                        <td>rs1799853 (*2)</td>
+                                        <td>Ausente</td>
+                                        <td rowSpan="2">
+                                            El genotipo del paciente corresponde a un metabolizador
+                                            extensivo o silvestre (EM)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>rs1057910 (*3)</td>
+                                        <td>Ausente</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">VKORC1</th>
+                                        <td>rs9923231</td>
+                                        <td>Heterocigoto (G/A)</td>
+                                        <td>El genotipo del paciente se relaciona con una menor dosis de
+                                            Acenocumarol
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </CardBody>
+                        </Card>
+                    </div>}
+
                     <div hidden id="#perfil-genetico" className="table-responsive pt-4">
                         <table className="table">
                             <thead>
@@ -316,7 +368,7 @@ class PacienteGeneral extends Component {
                             </tbody>
                         </table>
                     </div>
-                    
+
                     {/*
           <canvas
             height="120"

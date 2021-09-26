@@ -24,7 +24,6 @@ import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
 
 const DataUserGeneral = ({onSubmit, dosis}) => {
-    const today = new Date();
     const [cod_paciente, setCodPaciente] = useState({value: '', valid: undefined});
     const [edad, setEdad] = useState({value: '', valid: undefined});
     const [peso, setPeso] = useState({value: '', valid: undefined});
@@ -426,8 +425,7 @@ DataUserGeneral.propTypes =
 
 DataUserGeneral.defaultProps =
     {
-        onSubmit: () => {
-        },
+        onSubmit: () => {},
         dosis: -999.0,
     }
 

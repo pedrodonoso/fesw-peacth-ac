@@ -6,7 +6,7 @@ import {
 } from "shards-react";
 
 import PacienteGeneral from "../components/paciente/paciente-general";
-import PacienteGenetico from "../components/paciente/paciente-genetico";
+import SearchBar from "../components/paciente/search-bar";
 import {esES} from '@material-ui/core/locale';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 

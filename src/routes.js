@@ -62,14 +62,14 @@ export default [
     },
     {
         path: "/paciente/general",
-        layout: CustomPaciente,
+        layout: CustomGeneral,
         component: Paciente,
         layout_props: {noNavbar: false, noFooter: true, hideLogoText: true},
         component_props: {dosisGen: true}
     },
     {
         path: "/paciente/genetico",
-        layout: CustomPaciente,
+        layout: CustomGeneral,
         component: Paciente,
         layout_props: {noNavbar: false, noFooter: false, footer_props: {menuItems: []}, hideLogoText: true},
         component_props_: {dosisGen: false}

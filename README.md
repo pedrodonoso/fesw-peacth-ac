@@ -25,3 +25,7 @@ npm start
 API del Equipo Kiñewen.
 
 >```https://peacth-ac-backend.herokuapp.com/```
+
+## Librería SearchBar
+
+[React Native Paper](https://callstack.github.io/react-native-paper/getting-started.html)

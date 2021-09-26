@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
     Container,
     Row,
@@ -6,15 +6,15 @@ import {
 } from "shards-react";
 
 import PacienteGeneral from "../components/paciente/paciente-general";
-import { esES } from '@material-ui/core/locale';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import SearchBar from "../components/paciente/search-bar";
+import PacienteGenetico from "../components/paciente/paciente-genetico";
+import {esES} from '@material-ui/core/locale';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
 
 const theme = createMuiTheme({
-  palette: {
-    primary: { main: '#1976d2' },
-  },
+    palette: {
+        primary: {main: '#1976d2'},
+    },
 }, esES);
 
 class Paciente extends Component {

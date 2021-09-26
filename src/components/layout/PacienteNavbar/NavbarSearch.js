@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Form,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  FormInput
+    Form,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    FormInput
 } from "shards-react";
 
 import constants from "../../../data/constants";

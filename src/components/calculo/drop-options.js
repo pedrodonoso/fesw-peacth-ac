@@ -1,17 +1,17 @@
 import React from "react";
 import {
-  FormSelect,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText
+    FormSelect,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText
 } from "shards-react";
 
-const  DropdownOptions =({options,values,title,onSubmit}) => {
+const DropdownOptions = ({options, values, title, onSubmit}) => {
     function onSelect(e) {
         var selection = e.target.value
         onSubmit({
-            'selected'  : selection,
-            'title'     : title,
+            'selected': selection,
+            'title': title,
         })
     }
 
@@ -21,7 +21,7 @@ const  DropdownOptions =({options,values,title,onSubmit}) => {
                 <InputGroupText>{title}</InputGroupText>
             </InputGroupAddon>
             <FormSelect onChange={onSelect}>
-                {options.map(function(option, i){
+                {options.map(function (option, i) {
                     return <option value={values[i]}>{option}</option>;
                 })}
             </FormSelect>

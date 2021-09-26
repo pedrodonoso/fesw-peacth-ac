@@ -25,94 +25,8 @@ class PacienteGeneral extends Component {
             series: this.props.series,
             chart: this.props.chart,
             options: this.props.options,
-            id_paciente: "T-001",
+            id_paciente: this.props.id_paciente,
         }
-        this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
-        this.toggle = this.toggle.bind(this);
-        this.generate(constants.perfil_clinico);
-    }
-
-    generate(_perfil_option) {
-        //console.log({title: "generate box", gen: _gen})
-        this.setState({
-            ...this.state,
-            perfil: _perfil_option
-        });
-
-        //TODO: aquí voy jeje
-        pacienteService.getProfilePatient(this.state.id_paciente)
-            .then((response) => {
-                var data = response.data
-                // var ser = response.data.frequency
-                console.log({title: "getProfilePatient", response: data, gen: _perfil_option})
-                /*
-                var _data = [];
-                data.forEach(function(e) {
-                  var label = e.label;
-                  var value = e.value;
-                  //console.log({title:"foreach", data: label})
-                  var aux = {};
-                  aux.x = label;
-                  aux.y = value;
-                  _data.push(aux)
-                })
-                */
-                /*
-                      var _serie = [{
-                        type: 'boxPlot',
-                        data:  _data,
-                      }]
-                      */
-
-                //console.log({title: "data",data:_data})
-                /*
-                this.setState({
-                  ...this.state,
-                  series: _serie
-                });
-                */
-                //console.log(this.state)
-            })
-            .catch((error) => {
-                this.setState({
-                    ...this.state,
-                    error: true,
-                    errortitle: 'Lo sentimos',
-                    errortext: 'No pudimos obtener los datos, por favor intenta más tarde',
-                    options: {
-                        ...this.state.options,
-                        noData: {
-                            ...this.state.options.noData,
-                            text: 'Inténtalo más tarde'
-                        },
-                    }
-                });
-            })
-    }
-
-    toggle(data) {
-        if (data === {}) {
-            this.setState({
-                ...this.state,
-                error: !this.state.error
-            });
-        } else {
-            this.setState({
-                ...this.state,
-                error: !this.state.error,
-                errortitle: data.title,
-                errortext: data.text,
-            });
-        }
-        //console.log({text:"toggle", open:this.state.open});
-    }
-
-    handlerOpenDialog(data) {
-        this.setState({
-            ...this.state,
-            error: data
-        });
-        //console.log({text:"handler", open:this.state.open});
     }
 
 
@@ -402,11 +316,7 @@ class PacienteGeneral extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this, {})}
-                                  handler={this.handlerOpenDialog.bind(this)}
-                                  text={this.state.errortext}
-                                  title={this.state.errortitle}
-                    />
+                    
                     {/*
           <canvas
             height="120"

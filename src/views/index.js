@@ -4,5 +4,5 @@ import RegistrarVisita from "./RegistrarVisita";
 import Actualizar from "./Actualizar";
 import Paciente from "./Paciente";
 
-export { Analisis,Calculo ,RegistrarVisita,Actualizar, Paciente};
+export {Analisis, Calculo, RegistrarVisita, Actualizar, Paciente};
 

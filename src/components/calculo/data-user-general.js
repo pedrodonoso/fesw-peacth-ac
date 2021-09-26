@@ -148,7 +148,6 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     <React.Fragment>
       <Col>
         <Row>
-
           <Col lg="4" className="mb-4">
             {/* Data general */}
             <Card small lg="12">

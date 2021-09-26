@@ -1,6 +1,6 @@
 
 import { esES } from '@material-ui/core/locale';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 var gen2 = 'CYP2C9_2'
 var gen3 = 'CYP2C9_3'
 var gen4 = 'VKORC1'

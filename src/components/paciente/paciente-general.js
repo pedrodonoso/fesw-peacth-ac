@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Chart from 'react-apexcharts'
 import {
   Row, Col, Card, CardHeader, CardBody, Button ,ButtonGroup
   ,InputGroupAddon,
   InputGroupText,
-  Container  
 } from "shards-react";
 
 import PacienteDataUserGeneral from "../paciente/paciente-data-user-general";
 import CustomToggle from '../forms/CustomToggle';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import pacienteService from "../../services/paciente.service";
 import constants from "../../data/constants";
@@ -185,13 +182,39 @@ class PacienteGeneral extends Component {
 
           <Row >
             <Col>
-            <Chart
-                options={this.state.options}
-                series={this.state.series}
-                type='boxPlot'
-                width='800'
-                height='300'
-            />
+            <Row>
+        <Col lg="12" className="py-4">
+          <PacienteDataUserGeneral onSubmit={this.handleCalculoSubmit} dosis={parseFloat(this.state.dosis)}/>
+          <CustomToggle openOut={this.state.open} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}
+            text={this.state.text}
+            title={this.state.title}
+          />
+        {/*
+          <Card>
+            <CardHeader className="border-bottom">
+              <h6 className="m-0">Datos del Paciente</h6>
+            </CardHeader>
+              <Row>
+                  <Col lg="4" className="mb-4">
+                    <Card small>
+                        <CardHeader className="border-bottom">
+                        <h6 className="m-0">Datos Clínicos del Paciente</h6>
+                        </CardHeader>
+                        <DataUserGeneral />
+                    </Card>
+                  </Col>
+                  <Col lg="4" className="mb-4">
+                    <Card small>
+                        <CardHeader className="border-bottom">
+                        <h6 className="m-0">Datos Farmacogenética del Paciente</h6>
+                        </CardHeader>
+                    </Card>
+                  </Col>
+              </Row>
+          </Card>
+        */}
+        </Col>
+      </Row>
             </Col>
           </Row>
           <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this,{})} handler={this.handlerOpenDialog.bind(this)}

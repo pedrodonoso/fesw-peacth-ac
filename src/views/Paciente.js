@@ -6,9 +6,9 @@ import {
 } from "shards-react";
 
 import PacienteGeneral from "../components/paciente/paciente-general";
-import PacienteGenetico from "../components/paciente/paciente-genetico";
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import SearchBar from "../components/paciente/search-bar";
 
 
 const theme = createMuiTheme({
@@ -25,6 +25,11 @@ class Paciente extends Component {
     }
   }
 
+  handlerSearch(data) {
+    console.log(data.query);
+  }
+
+  
   render() {
     return (
       <Container fluid className="main-content-container px-4 pb-4">
@@ -32,15 +37,16 @@ class Paciente extends Component {
         <ThemeProvider theme={theme}>
         <Container fluid className="main-content-container px-4">
 
-      <Row>
         <Col lg="12" className="py-4">
-        {this.props.dosisGen ? 
-          <PacienteGeneral title="Perfil médico del paciente"/>
-          :
-          <PacienteGenetico title="Perfil genético del paciente"/>
-        }
+            <Row>
+                <Col lg="12" className="mb-2"> 
+                    <SearchBar onSearchSubmit={this.handlerSearch}/>
+                </Col>
+            </Row>
+            <Row>
+                <PacienteGeneral title="Perfil médico del paciente"/>
+            </Row>
         </Col>
-      </Row>
       </Container>
       </ThemeProvider>
       </Container>

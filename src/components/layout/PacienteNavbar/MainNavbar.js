@@ -13,12 +13,15 @@ const MainNavbar = ({ layout, stickyTop }) => {
     "bg-white",
     stickyTop && "sticky-top"
   );
+  function handleSearchSubmit(data) {
+    console.log(`handleSearchSubmit : ${data.input}`);
+  }
 
   return (
     <div className={classes}>
       <Container className="p-0">
         <Navbar type="light" className="align-items-stretch right">
-          <NavbarSearch/>
+          <NavbarSearch onSubmit={handleSearchSubmit}/>
           <NavbarToggle/>
         </Navbar>
       </Container>

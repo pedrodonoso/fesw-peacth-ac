@@ -9,7 +9,7 @@ class NavbarToggle extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(e) {
     Dispatcher.dispatch({
       actionType: Constants.TOGGLE_SIDEBAR
     });

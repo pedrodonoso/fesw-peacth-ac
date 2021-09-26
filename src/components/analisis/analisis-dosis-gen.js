@@ -67,13 +67,13 @@ class AnalisisDosisGen extends React.Component {
       this.setState({
         ...this.state,
         error: true,
-        errortitle: 'Cuidado!!',
-        errortext: 'No pudimos obtener los datos, intenta más tarde',
+        errortitle: 'Lo sentimos',
+        errortext: 'No pudimos obtener los datos, por favor intenta más tarde',
         options: {
           ...this.state.options,
           noData: {
             ...this.state.options.noData,
-            text: 'Intentalo más tarde'
+            text: 'Inténtalo más tarde'
           },
         }
       });

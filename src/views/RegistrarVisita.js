@@ -34,8 +34,8 @@ class RegistrarVisita extends Component {
 
     if(!submited.valid) {
       this.toggle({
-        title: "Alto ahí 😁",
-        text: "Debes ingresar los datos correctamente!! 😘",
+        title: "Revisa los datos",
+        text: "Algunos campos presentan errores o están vacíos",
         });
         return false;
     }
@@ -53,7 +53,7 @@ class RegistrarVisita extends Component {
         title: "Si se pudo!!😍 ",
         text: "Visita registrada correctamente!! 😘",
         });
-      
+
     })
     .catch((error) => {
       ////console.log({title: 'error', error: error.response.data})
@@ -62,8 +62,8 @@ class RegistrarVisita extends Component {
         title: "No se pudo 😁",
         text: (<div>Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Intenta ingresando un usuario que ya exista </b></div>)
       });
-    
-   }); 
+
+   });
 
   }
 
@@ -112,7 +112,7 @@ class RegistrarVisita extends Component {
     </Container>
       </ThemeProvider>
       </Container>
-      
+
     );
   }
 };

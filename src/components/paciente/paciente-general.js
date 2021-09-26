@@ -5,7 +5,7 @@ import {
   Row, Col, Card, CardHeader, CardBody, Button ,ButtonGroup
   ,InputGroupAddon,
   InputGroupText,
-  Container  
+  Container
 } from "shards-react";
 
 import PacienteDataUserGeneral from "../paciente/paciente-data-user-general";
@@ -77,13 +77,13 @@ class PacienteGeneral extends Component {
       this.setState({
         ...this.state,
         error: true,
-        errortitle: 'Cuidado!!',
-        errortext: 'No pudimos obtener los datos, intenta más tarde',
+        errortitle: 'Lo sentimos',
+        errortext: 'No pudimos obtener los datos, por favor intenta más tarde',
         options: {
           ...this.state.options,
           noData: {
             ...this.state.options.noData,
-            text: 'Intentalo más tarde'
+            text: 'Inténtalo más tarde'
           },
         }
       });
@@ -164,7 +164,7 @@ class PacienteGeneral extends Component {
                   <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>Genético</strong></Row>
                   </Col>
                 </Col>
-                </Button> 
+                </Button>
               </ButtonGroup>
             </Col>
             <Col>

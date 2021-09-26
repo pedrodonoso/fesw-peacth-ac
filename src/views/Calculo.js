@@ -33,7 +33,7 @@ class Calculo extends Component {
     this.handleCalculoSubmit = this.handleCalculoSubmit.bind(this);
     this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
     this.toggle = this.toggle.bind(this);
-    
+
   }
 
   //envía data a API
@@ -42,8 +42,8 @@ class Calculo extends Component {
     if(!data.valid) {
       //console.log({title:"Data",data:data})
       this.toggle({
-        title: "Alto ahí 😁",
-        text: "Debes ingresar los datos correctamente!! 😘",
+        title: "Revisa los datos",
+        text: "Algunos campos presentan errores o están vacíos",
       });
       return false;
     }
@@ -54,7 +54,7 @@ class Calculo extends Component {
     //console.log({nombre:"handleCalculoSubmit",data:data})
     //guarda variables ingresadas
     this.vars = data.vars
-    
+
     // this.setState({
     //   ...this.state,
     //   vars: data.vars
@@ -75,7 +75,7 @@ class Calculo extends Component {
       console.log({title: 'error', error: error})
     });
 
-    
+
     console.log({title: 'vars', data: this.vars})
 
     //subimos las variables ingresadas
@@ -90,15 +90,15 @@ class Calculo extends Component {
       this.setState({
         ...this.state,
         dosis: _dosis
-      }); 
+      });
 
       //mostramos al usuario un toggle
-      
+
         // this.toggle({
         // text: "Equipo creado correctamente!! 😘",
         // title: "Si se pudo!!😍 "
         // });
-      
+
     })
     .catch((error) => {
       console.log({title: 'error', error: error})
@@ -107,17 +107,17 @@ class Calculo extends Component {
       this.setState({
           ...this.state,
           coef: {} //vacío para que formula service ejecute las últimas variables
-        }); 
+        });
     //mostramos al usuario un toggle
-    
+
       this.toggle({
         title: "No se pudo 😁",
         text: (<div> Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Se calculará la dosis con los último parametros guardados localmente. </b> </div>),
       });
-    
-   }); 
 
-    /*     
+   });
+
+    /*
     teamsService.create(data.tag,data.idlist)
     .then((response) => this.toggle({
       text: "Equipo creado correctamente!! 😘",
@@ -126,7 +126,7 @@ class Calculo extends Component {
     .catch((error) => this.toggle({
       text: "Debes ingresar Personal de Servicio que no esté asignado a un Equipo!! ✋",
       title: "No se pudo 😁"
-    }) ); 
+    }) );
     */
     //console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
     if(!ifResponseVar) { //no se puede acceder a bd para calcular dosis
@@ -171,7 +171,7 @@ class Calculo extends Component {
         <ThemeProvider theme={theme}>
           {/*
         <Row noGutters className="page-header py-4">
-           
+
           <PageTitle sm="4" title="Calcular primera dosis" subtitle="acenocumarol" className="text-sm-left" />
         </Row>
 
@@ -220,7 +220,7 @@ class Calculo extends Component {
       </Container>
       </ThemeProvider>
       </Container>
-      
+
     );
   }
 };

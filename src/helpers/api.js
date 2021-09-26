@@ -6,7 +6,7 @@ const endpoints = {
     // development: 'https://chopinhauer.herokuapp.com',
     test: 'https://peacth-ac-backend.herokuapp.com/',
 };
-    
+
 
 export const api = axios.create({
     baseURL: endpoints['test'],

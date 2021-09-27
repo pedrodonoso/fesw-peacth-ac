@@ -33,10 +33,10 @@ class SidebarMainNavbar extends React.Component {
             <div className="d-table m-auto">
               <img
                 id="main-logo"
-                className="d-inline-block align-top mr-1"
-                style={{ maxWidth: "160px" }}
+                className="d-inline-block align-top mr-2"
+                style={{ maxWidth: "120px" }}
                 // src={require("../../../images/shards-dashboards-logo.svg")}
-                src={require("../../../images/peacth_ac-01.svg")}
+                src={require("../../../images/peacth_ac-02.svg")}
                 alt="peacth-ac"
                 // alt="Team Context"
               />

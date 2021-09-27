@@ -1,5 +1,6 @@
+import React from "react";
 import {esES} from '@material-ui/core/locale';
-import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 
 var gen2 = 'CYP2C9_2'
 var gen3 = 'CYP2C9_3'
@@ -38,6 +39,23 @@ const theme = createMuiTheme({
 
 var search_paciente = "Ingresa el código del paciente a buscar: T-200"
 
+var mensaje_error_perfil_paciente_titulo = "Lo sentimos";
+var mensaje_error_perfil_paciente_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
+
+var mensaje_error_analisis_titulo = "Lo sentimos";
+var mensaje_error_analisis_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
+
+var mensaje_error_calculo_titulo = "No se pudo 😁";
+var mensaje_error_calculo_mensaje = (<div> El código del paciente ya existe!! <br/> <b> Vuelve a intentarlo con un nuevo código </b></div>)
+
+//(<div> Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Se calculará la dosis con los
+//    último parametros guardados localmente. </b></div>);
+
+var mensaje_error_calculo_mal_ingreso_titulo = "Revisa los datos";
+var mensaje_error_calculo_mal_ingreso_mensaje = "Algunos campos presentan errores o están vacíos";
+
+
+var no_data = "no hay datos";
 const constants = {
     gen2,
     gen3,
@@ -56,7 +74,16 @@ const constants = {
     theme,
     perfil_clinico,
     perfil_genetico,
-    search_paciente
+    search_paciente,
+    no_data,
+    mensaje_error_perfil_paciente_titulo,
+    mensaje_error_perfil_paciente_mensaje,
+    mensaje_error_analisis_titulo,
+    mensaje_error_analisis_mensaje,
+    mensaje_error_calculo_titulo,
+    mensaje_error_calculo_mensaje,
+    mensaje_error_calculo_mal_ingreso_titulo,
+    mensaje_error_calculo_mal_ingreso_mensaje
 };
 
 export default constants;

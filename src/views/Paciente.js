@@ -31,14 +31,13 @@ class Paciente extends Component {
         series: this.props.series,
         chart: this.props.chart,
         options: this.props.options,
-        id_paciente: this.props.id_paciente,
+        data: {},
         query: '',
     }
     this.handlerSearch = this.handlerSearch.bind(this);
     
     this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
     this.toggle = this.toggle.bind(this);
-    this.generate(constants.perfil_clinico);
   }
 
   handlerSearch(data) {
@@ -53,7 +52,7 @@ class Paciente extends Component {
   }
 
   
-  generate(_perfil_option) {
+  generate(query) {
     //console.log({title: "generate box", gen: _gen})
     /*
     this.setState({
@@ -63,52 +62,23 @@ class Paciente extends Component {
     */
 
     //TODO: aquí voy jeje
-    pacienteService.getProfilePatient(_perfil_option)
+    pacienteService.getProfilePatient(query)
         .then((response) => {
-            var data = response.data
+            var dataProfile = response.data
             // var ser = response.data.frequency
-            console.log({title: "getProfilePatient", response: data, gen: _perfil_option})
-            /*
-            var _data = [];
-            data.forEach(function(e) {
-              var label = e.label;
-              var value = e.value;
-              //console.log({title:"foreach", data: label})
-              var aux = {};
-              aux.x = label;
-              aux.y = value;
-              _data.push(aux)
-            })
-            */
-            /*
-                  var _serie = [{
-                    type: 'boxPlot',
-                    data:  _data,
-                  }]
-                  */
-
-            //console.log({title: "data",data:_data})
-            /*
+            console.log({title: "getProfilePatient", response: dataProfile, gen: query});
             this.setState({
-              ...this.state,
-              series: _serie
+                ...this.state,
+                data: dataProfile
             });
-            */
-            //console.log(this.state)
+            console.log({title: "getProfilePatient2", response: this.state.data, gen: query});
         })
         .catch((error) => {
             this.setState({
                 ...this.state,
                 error: true,
-                errortitle: 'Lo sentimos',
-                errortext: 'No pudimos obtener los datos, por favor intenta más tarde',
-                options: {
-                    ...this.state.options,
-                    noData: {
-                        ...this.state.options.noData,
-                        text: 'Inténtalo más tarde'
-                    },
-                }
+                errortitle: constants.mensaje_error_perfil_paciente_titulo,
+                errortext: constants.mensaje_error_perfil_paciente_mensaje,
             });
         })
 }
@@ -127,7 +97,6 @@ toggle(data) {
             errortext: data.text,
         });
     }
-    //console.log({text:"toggle", open:this.state.open});
 }
 
 handlerOpenDialog(data) {
@@ -135,7 +104,6 @@ handlerOpenDialog(data) {
         ...this.state,
         error: data
     });
-    //console.log({text:"handler", open:this.state.open});
 }
 
   
@@ -153,14 +121,14 @@ handlerOpenDialog(data) {
                 </Col>
             </Row>
             <Row>
-                <PacienteGeneral id_paciente={this.state.query} title="Perfil médico del paciente"/>
+                <PacienteGeneral data_paciente={this.state.data} title="Perfil médico del paciente"/>
             </Row>
         </Col>
         <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this, {})}
-                                  handler={this.handlerOpenDialog.bind(this)}
-                                  text={this.state.errortext}
-                                  title={this.state.errortitle}
-                    />
+            handler={this.handlerOpenDialog.bind(this)}
+            text={this.state.errortext}
+            title={this.state.errortitle}
+        />
       </Container>
       </ThemeProvider>
       </Container>
@@ -188,64 +156,6 @@ Paciente.propTypes = {
 Paciente.defaultProps = {
     error: false,
     perfil: constants.perfil_clinico,
-    title: "Análisis",
-    /*
-    chart: {
-      type: 'boxPlot',
-      height:'300',
-      width: '100%'
-    },
-    */
-    options: {
-        noData: {
-            text: 'Cargando...'
-        },
-        colors: ['#008FFB', '#FEB019'],
-        title: {
-            text: 'Dosis calculada v/s genotipos',
-            align: 'center'
-        },
-
-        xaxis: {
-            title: {
-                text: 'Genotipos'
-            },
-        },
-
-        yaxis: {
-            title: {
-                text: 'Dosis semanal (mg/semana)'
-            },
-            labels: {
-                formatter: function (value) {
-                    return value.toFixed(2);
-                }
-            },
-        },
-        /*
-        tooltip: {
-            shared: false,
-            intersect: true
-        },
-
-        responsive: [{
-          breakpoint: 100,
-          options: {
-          legend: {
-              position: 'top'
-          }
-          }
-        }] */
-
-    },
-
-    series: [
-        {
-            name: 'box',
-            type: 'boxPlot',
-            data: []
-        },
-    ],
 
 };
 

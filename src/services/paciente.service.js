@@ -15,7 +15,7 @@ async function getProfilePatient(data) {
         data: data,
         path: `${basePath}/patients/${data}`
     })
-    return await api.get(`${basePath}/patients/${data}`);
+    return await api.get(`${basePath}/patients/${data}/patient_profile/`);
 }
 
 async function getGeneticProfilePatient(data) {
@@ -24,11 +24,13 @@ async function getGeneticProfilePatient(data) {
     //post
     //https://peacth-ac-backend.herokuapp.com/api/patients/patient/genetic_analysis
     //var json = JSON.stringify({ answer: 42 });
+    /*
     console.log({
         title: 'pre get getGeneticProfilePatient',
         data: data,
         path: `${basePath}/patients/${data}`
     })
+    */
     return await api.get(`${basePath}/patients/${data}/genetic_analysis`);
 }
 

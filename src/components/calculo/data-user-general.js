@@ -62,7 +62,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
         RegExp(/^(T-)([0-9]){3}$/i);
 
     function allValid() {
-        return (cod_paciente.valid || !(cod_paciente.valid === undefined)) && (edad.valid || !(edad.valid === undefined)) && (peso.valid || !(peso.valid === undefined)) && (talla.valid || !(talla.valid === undefined)) && (inr_inicial.valid || !(inr_inicial.valid === undefined));
+        return (cod_paciente.valid && !(cod_paciente.valid === undefined)) && (edad.valid && !(edad.valid === undefined)) && (peso.valid && !(peso.valid === undefined)) && (talla.valid && !(talla.valid === undefined)) && (inr_inicial.valid && !(inr_inicial.valid === undefined));
     }
 
     function handleSubmit(data) {

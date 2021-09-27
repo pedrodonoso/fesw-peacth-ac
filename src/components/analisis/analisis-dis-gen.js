@@ -62,8 +62,8 @@ class AnalisisDisGen extends React.Component {
                 this.setState({
                     ...this.state,
                     error: true,
-                    errortitle: 'Lo sentimos',
-                    errortext: 'No pudimos obtener los datos, por favor intenta más tarde',
+                    errortitle: constants.mensaje_error_analisis_titulo,
+                    errortext: constants.mensaje_error_analisis_mensaje,
                     options: {
                         ...this.state.options,
                         noData: {

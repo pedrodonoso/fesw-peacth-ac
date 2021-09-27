@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import PropTypes from "prop-types";
 import {
     Row, Col, Card, CardHeader, CardBody, Button, ButtonGroup
@@ -15,36 +15,25 @@ import pacienteService from "../../services/paciente.service";
 import constants from "../../data/constants";
 import DropdownOptions from "../calculo/drop-options";
 
-class PacienteGeneral extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: false,
-            perfil: this.props.perfil,
-            title: this.props.title,
-            series: this.props.series,
-            chart: this.props.chart,
-            options: this.props.options,
-            id_paciente: this.props.id_paciente,
-            isActive: true,
-        }
+const PacienteGeneral = ({data_paciente, title}) => {
+  //const [data_paciente, setDataPaciente] = useState({value: '', valid: undefined});
+  const [isActive, setisActive] = useState({value: true});
+
+    function handleShowPerfil() {
+      setisActive((prevState) => ({...prevState, value: true}));
     }
 
-    handleShowPerfil() {
-        this.setState({
-            isActive: true
-        });
+    function handleHidePerfil() {
+      setisActive((prevState) => ({...prevState, value: false}));
     }
 
-    handleHidePerfil() {
-        this.setState({
-            isActive: false
-        })
+    function isObjectEmpty(obj){
+      return Object.getOwnPropertyNames(obj).length == 0
     }
 
-
-    render() {
-        const {title} = this.props;
+    //render() {
+        //const {title} = this.props;
+        
         return (
             <Card small className="h-100 w-100">
                 <CardHeader className="border-bottom bg-light">
@@ -57,9 +46,9 @@ class PacienteGeneral extends Component {
                                 <InputGroupText>Perfil</InputGroupText>
                             </InputGroupAddon>
                             <Button
-                                theme={this.state.isActive === true ? 'primary' : 'white'}
+                                theme={isActive.value === true ? 'primary' : 'white'}
                                 onClick={() =>
-                                    this.handleShowPerfil()
+                                    handleShowPerfil()
                                 }
                             >
                                 <Col style={{
@@ -77,9 +66,9 @@ class PacienteGeneral extends Component {
 
                             </Button>
                             <Button
-                                theme={this.state.isActive === false ? 'primary' : 'white'}
+                                theme={isActive.value === false ? 'primary' : 'white'}
                                 onClick={() =>
-                                    this.handleHidePerfil()
+                                    handleHidePerfil()
                                 }
                             >
                                 <Col style={{
@@ -99,7 +88,7 @@ class PacienteGeneral extends Component {
                     </ButtonToolbar>
 
                     {/* Perfil Clinico*/}
-                    {this.state.isActive &&
+                    {isActive.value &&
                     <Row id="#perfil-clinico" className="mt-2">
                         <Col lg="4" className="mb-4">
                             {/* Data general */}
@@ -114,7 +103,7 @@ class PacienteGeneral extends Component {
                                         <FormGroup check={false}>
                                             <label>Código del paciente</label>
                                             <FormInput
-
+                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.code}
                                                 /*value={cod_paciente.value}
                                                 valid={cod_paciente.valid}
                                                 invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
@@ -122,7 +111,8 @@ class PacienteGeneral extends Component {
                                                 disabled
                                                 size="lg"
                                                 className="mb-3"
-                                                placeholder="T-001"/>
+                                                placeholder="T-001"
+                                                />
                                             <FormFeedback>"Ej:
                                                 T-002"</FormFeedback>
                                         </FormGroup>
@@ -132,7 +122,7 @@ class PacienteGeneral extends Component {
                                             <label>Edad</label>
                                             <InputGroup className="mb-3">
                                                 <FormInput
-
+                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.age}
                                                     /*value={edad.value}
                                                     valid={edad.valid}
                                                     invalid={edad.valid === undefined ? undefined : !edad.valid}
@@ -154,6 +144,7 @@ class PacienteGeneral extends Component {
                                             <label>Peso</label>
                                             <InputGroup className="mb-3">
                                                 <FormInput
+                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.weight}
                                                     /*value={peso.value}
                                                     valid={peso.valid}
                                                     invalid={peso.valid === undefined ? undefined : !peso.valid}
@@ -181,6 +172,7 @@ class PacienteGeneral extends Component {
                                             <label>Talla</label>
                                             <InputGroup className="mb-3">
                                                 <FormInput
+                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.height}
                                                     /*value={talla.value}
                                                     valid={talla.valid}
                                                     invalid={talla.valid === undefined ? undefined : !talla.valid}
@@ -202,6 +194,7 @@ class PacienteGeneral extends Component {
                                         <FormGroup>
                                             <label>Sexo</label>
                                             <FormInput
+                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.sex}
                                                 /*value={inr_inicial.value}
                                                 valid={inr_inicial.valid}
                                                 invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
@@ -216,6 +209,7 @@ class PacienteGeneral extends Component {
                                         <FormGroup>
                                             <label>INR Inicial</label>
                                             <FormInput
+                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.initialINR}
                                                 /*value={inr_inicial.value}
                                                 valid={inr_inicial.valid}
                                                 invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
@@ -244,6 +238,7 @@ class PacienteGeneral extends Component {
                                                 <Form>
                                                     <label>CYP2C9-2</label>
                                                     <FormInput
+                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.CYP2C9_2}
                                                         /*value={inr_inicial.value}
                                                         valid={inr_inicial.valid}
                                                         invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
@@ -256,6 +251,7 @@ class PacienteGeneral extends Component {
                                                         valor decimal. EJ: 2.4"</FormFeedback>
                                                     <label>CYP2C9-3</label>
                                                     <FormInput
+                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.CYP2C9_3}
                                                         /*value={inr_inicial.value}
                                                         valid={inr_inicial.valid}
                                                         invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
@@ -268,6 +264,7 @@ class PacienteGeneral extends Component {
                                                         valor decimal. EJ: 2.4"</FormFeedback>
                                                     <label>VKORC1</label>
                                                     <FormInput
+                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.VKORC1}  
                                                         /*value={inr_inicial.value}
                                                         valid={inr_inicial.valid}
                                                         invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
@@ -289,7 +286,7 @@ class PacienteGeneral extends Component {
 
 
                     {/* Perfil Genético*/}
-                    {this.state.isActive === false &&
+                    {isActive.value === false &&
                     <div id="#perfil-genetico" className="mt-2">
                         <Card>
                             <CardHeader className="border-bottom bg-light">
@@ -299,32 +296,31 @@ class PacienteGeneral extends Component {
                                 <table className="table">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Gen</th>
-                                        <th scope="col">ID Poliformismo estudiado</th>
-                                        <th scope="col">Presencia del Alelo variante</th>
-                                        <th scope="col">Observaciones</th>
+                                      <th scope="col">Gen</th>
+                                      <th scope="col">ID Poliformismo estudiado</th>
+                                      <th scope="col">Presencia del Alelo variante</th>
+                                      <th scope="col">Observaciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <th scope="row" rowSpan="2">CYP2C9</th>
                                         <td>rs1799853 (*2)</td>
-                                        <td>Ausente</td>
-                                        <td rowSpan="2">
-                                            El genotipo del paciente corresponde a un metabolizador
-                                            extensivo o silvestre (EM)
+                                        <td>{isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.CYP2C9.rs1799853}</td>
+                                        <td rowSpan="2" className="align-middle">
+                                          {isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.CYP2C9.Observaciones}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>rs1057910 (*3)</td>
-                                        <td>Ausente</td>
+                                        <td>{isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.CYP2C9.rs1057910}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">VKORC1</th>
                                         <td>rs9923231</td>
-                                        <td>Heterocigoto (G/A)</td>
-                                        <td>El genotipo del paciente se relaciona con una menor dosis de
-                                            Acenocumarol
+                                        <td>{isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.VKORC1.rs9923231}</td>
+                                        <td>
+                                          {isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.VKORC1.Observaciones}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -332,43 +328,6 @@ class PacienteGeneral extends Component {
                             </CardBody>
                         </Card>
                     </div>}
-
-                    <div hidden id="#perfil-genetico" className="table-responsive pt-4">
-                        <table className="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Gen</th>
-                                <th scope="col">ID Poliformismo estudiado</th>
-                                <th scope="col">Presencia del Alelo variante</th>
-                                <th scope="col">Observaciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row" rowSpan="2">CYP2C9</th>
-                                <td>rs1799853 (*2)</td>
-                                <td>Ausente</td>
-                                <td rowSpan="2">
-                                    El genotipo del paciente corresponde a un metabolizador
-                                    extensivo o silvestre (EM)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>rs1057910 (*3)</td>
-                                <td>Ausente</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">VKORC1</th>
-                                <td>rs9923231</td>
-                                <td>Heterocigoto (G/A)</td>
-                                <td>El genotipo del paciente se relaciona con una menor dosis de
-                                    Acenocumarol
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
                     {/*
           <canvas
             height="120"
@@ -379,7 +338,7 @@ class PacienteGeneral extends Component {
                 </CardBody>
             </Card>
         );
-    }
+   // }
 }
 
 PacienteGeneral.propTypes = {

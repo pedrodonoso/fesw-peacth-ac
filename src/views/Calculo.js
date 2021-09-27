@@ -10,6 +10,8 @@ import CustomToggle from '../components/forms/CustomToggle';
 import {esES} from '@material-ui/core/locale';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
+import constants from "../data/constants";
+
 
 import formulaService from "../services/formula.service";
 import calculoService from "../services/calculo.service";
@@ -39,12 +41,12 @@ class Calculo extends Component {
 
     //envía data a API
     handleCalculoSubmit(data) {
-
+      console.log(data)
         if (!data.valid) {
             //console.log({title:"Data",data:data})
             this.toggle({
-                title: "Revisa los datos",
-                text: "Algunos campos presentan errores o están vacíos",
+                title: constants.mensaje_error_calculo_mal_ingreso_titulo,
+                text: constants.mensaje_error_calculo_mal_ingreso_mensaje,
             });
             return false;
         }
@@ -112,9 +114,8 @@ class Calculo extends Component {
                 //mostramos al usuario un toggle
 
                 this.toggle({
-                    title: "No se pudo 😁",
-                    text: (<div> Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Se calculará la dosis con los
-                        último parametros guardados localmente. </b></div>),
+                    title: constants.mensaje_error_calculo_titulo,
+                    text: constants.mensaje_error_calculo_mensaje,
                 });
 
             });

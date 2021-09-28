@@ -15,7 +15,7 @@ const SearchBar = ({onSearchSubmit}) => {
     const [search_input, setSearchInput] = useState({query: ''});
 
     function onChangeSearchInput(e) {
-        var _cod = e.target.value;
+        var _cod = e.target.value.toUpperCase();
         setSearchInput((prevState) => ({...prevState, query: _cod}));
 
         //var input = document.getElementById("#navbar-search-input");
@@ -24,7 +24,7 @@ const SearchBar = ({onSearchSubmit}) => {
     }
 
     function onSubmitSearch(e) {
-        if (e.key == "Enter") {
+        if (e.key === "Enter") {
             onSearchSubmit({
                 query: search_input.query,
             });

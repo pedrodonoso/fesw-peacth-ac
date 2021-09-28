@@ -108,16 +108,13 @@ class AnalisisDisGen extends React.Component {
         return (
             <Card small className="h-100">
                 <CardHeader className="border-bottom">
-                    <h6 className="m-0">{title}</h6>
+                    <h5 className="m-0 font-weight-bold text-center">{title}</h5>
                 </CardHeader>
                 <CardBody className="pt-0">
                     <Row className="border-bottom py-2 bg-light">
                         <Col sm="6" className="d-flex mb-2 mb-sm-0">
                             {/*<RangeDatePicker />*/}
                             <ButtonGroup>
-                                <InputGroupAddon type="prepend">
-                                    <InputGroupText>Gen</InputGroupText>
-                                </InputGroupAddon>
                                 <Button
                                     theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
                                     onClick={() =>
@@ -183,36 +180,6 @@ class AnalisisDisGen extends React.Component {
                                     </Col>
                                 </Button>
                             </ButtonGroup>
-                            {/* <ButtonGroup >
-                <Button
-                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
-                  onClick={() =>
-                    this.generate(constants.gen2)
-                  }
-                > {constants.gen2} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'}
-                  onClick={() =>
-                    this.generate(constants.gen3)
-                  }
-                > {constants.gen3} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'}
-                  onClick={() =>
-                    this.generate(constants.gen4)
-                  }
-                > {constants.gen4} </Button>
-              </ButtonGroup>*/}
-                        </Col>
-                        <Col>
-                            {/*
-              <Button
-                size="sm"
-                className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
-              >
-                View Full Report &rarr;
-              </Button>
-            */}
                         </Col>
                     </Row>
                     <div>
@@ -229,13 +196,6 @@ class AnalisisDisGen extends React.Component {
                                   text={this.state.errortext}
                                   title={this.state.errortitle}
                     />
-                    {/*
-          <canvas
-            height="120"
-            ref={this.canvasRef}
-            style={{ maxWidth: "100% !important" }}
-          />
-          */}
                 </CardBody>
             </Card>
         );

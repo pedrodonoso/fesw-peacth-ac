@@ -16,7 +16,7 @@ import {
     ButtonGroup,
     CardHeader,
     ListGroup,
-    ListGroupItem,
+    ListGroupItem, Container,
 } from "shards-react";
 
 
@@ -146,190 +146,198 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
 
     return (
         <React.Fragment>
-            <Col>
+            <Container>
                 <Row>
-
-                    <Col lg="4" className="mb-4">
-                        {/* Data general */}
-                        <Card small lg="12">
-                            <CardHeader className="border-bottom">
-                                <h6 className="m-0">Datos Clínicos del Paciente</h6>
+                    <Col>
+                        <Card small className="mb-4">
+                            <CardHeader className="border-bottom bg-light">
+                                <h5 className="m-0 font-weight-bold text-center">Cálculo de dosis inicial</h5>
                             </CardHeader>
                             <CardBody>
-                                <Form className="add-new-post">
+                                <Row className="mb-2">
+                                    <Col>
+                                        {/* Data general */}
+                                        <Card small lg="12">
+                                            <CardHeader className="border-bottom">
+                                                <h6 className="m-0">Datos Clínicos del Paciente</h6>
+                                            </CardHeader>
+                                            <CardBody>
+                                                <Row>
+                                                    <Col sm="12" lg="4">
+                                                        {/* Codigo Paciente */}
+                                                        <FormGroup>
+                                                            <label>Código del paciente</label>
+                                                            <FormInput
+                                                                value={cod_paciente.value}
+                                                                valid={cod_paciente.valid}
+                                                                invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
+                                                                onChange={onChangeCodPaciente}
+                                                                size="lg"
+                                                                className="mb-3"
+                                                                placeholder="T-001"/>
+                                                            <FormFeedback tooltip={true}>"Ej:
+                                                                T-002"</FormFeedback>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col sm="12" lg="4">
+                                                        {/* Edad */}
+                                                        <FormGroup>
+                                                            <label>Edad</label>
+                                                            <InputGroup className="mb-3">
+                                                                <FormInput
 
-                                    {/* Codigo Paciente */}
-                                    <FormGroup check={false}>
-                                        <label>Código del paciente</label>
-                                        <FormInput
+                                                                    value={edad.value}
+                                                                    valid={edad.valid}
+                                                                    invalid={edad.valid === undefined ? undefined : !edad.valid}
+                                                                    onChange={onChangeEdad}
+                                                                    size="lg"
+                                                                    //className="mb-3 "
+                                                                    placeholder="0"
+                                                                />
+                                                                <FormFeedback tooltip={true}>"Debes ingresar solo
+                                                                    números."</FormFeedback>
+                                                                <InputGroupAddon type="append">
+                                                                    <InputGroupText>años</InputGroupText>
+                                                                </InputGroupAddon>
+                                                            </InputGroup>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col sm="12" lg="4">
+                                                        {/* Peso */}
+                                                        <FormGroup>
+                                                            <label>Peso</label>
+                                                            <InputGroup className="mb-3">
+                                                                <FormInput
+                                                                    value={peso.value}
+                                                                    valid={peso.valid}
+                                                                    invalid={peso.valid === undefined ? undefined : !peso.valid}
+                                                                    onChange={onChangePeso}
+                                                                    size="lg"
+                                                                    //className="mb-3"
+                                                                    placeholder="0"/>
+                                                                <FormFeedback tooltip={true}>"Debes ingresar solo
+                                                                    números."</FormFeedback>
+                                                                <InputGroupAddon type="append">
+                                                                    <InputGroupText>Kg</InputGroupText>
+                                                                </InputGroupAddon>
 
-                                            value={cod_paciente.value}
-                                            valid={cod_paciente.valid}
-                                            invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
-                                            onChange={onChangeCodPaciente}
-                                            size="lg"
-                                            className="mb-3"
-                                            placeholder="T-001"/>
-                                        <FormFeedback>"Ej:
-                                            T-002"</FormFeedback>
-                                    </FormGroup>
+                                                            </InputGroup>
+                                                        </FormGroup>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col sm="12" lg="4">
+                                                        {/* Talla */}
+                                                        <FormGroup>
+                                                            <label>Talla</label>
+                                                            <InputGroup className="mb-3">
+                                                                <FormInput
+                                                                    value={talla.value}
+                                                                    valid={talla.valid}
+                                                                    invalid={talla.valid === undefined ? undefined : !talla.valid}
+                                                                    onChange={onChangeTalla}
+                                                                    size="lg"
+                                                                    //className="mb-3"
+                                                                    placeholder="0"/>
+                                                                <FormFeedback tooltip={true}>"Debes ingresar solo
+                                                                    números"</FormFeedback>
+                                                                <InputGroupAddon type="append">
+                                                                    <InputGroupText>m</InputGroupText>
+                                                                </InputGroupAddon>
 
-                                    {/* Edad */}
-                                    <FormGroup>
-                                        <label>Edad</label>
-                                        <InputGroup className="mb-3">
-                                            <FormInput
+                                                            </InputGroup>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col sm="12" lg="4">
+                                                        {/* INR Inicial */}
+                                                        <FormGroup>
+                                                            <label>INR Inicial</label>
+                                                            <FormInput
+                                                                value={inr_inicial.value}
+                                                                valid={inr_inicial.valid}
+                                                                invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                                onChange={onChangeINRInicial}
+                                                                size="lg"
+                                                                className="mb-3"
+                                                                placeholder="0"/>
+                                                            <FormFeedback tooltip={true}>"Debes ingresar un
+                                                                valor decimal. EJ: 2.4"</FormFeedback>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col sm="12" lg="4">
+                                                        {/* Sexo */}
+                                                        <label>Sexo</label>
+                                                        <FormGroup>
+                                                            <ButtonGroup>
+                                                                <Button theme={sexo.value === 'F' ? 'primary' : 'white'}
+                                                                        onClick={() => setSexo((prevState) => ({
+                                                                            ...prevState,
+                                                                            value: 'F',
+                                                                            valid: true
+                                                                        }))}>Femenino</Button>
+                                                                <Button theme={sexo.value === 'M' ? 'primary' : 'white'}
+                                                                        onClick={() => setSexo((prevState) => ({
+                                                                            ...prevState,
+                                                                            value: 'M',
+                                                                            valid: true
+                                                                        }))}>Masculino</Button>
+                                                            </ButtonGroup>
+                                                        </FormGroup>
+                                                    </Col>
 
-                                                value={edad.value}
-                                                valid={edad.valid}
-                                                invalid={edad.valid === undefined ? undefined : !edad.valid}
-                                                onChange={onChangeEdad}
-                                                size="lg"
-                                                //className="mb-3 "
-                                                placeholder="0"
-                                            />
-                                            <InputGroupAddon type="append">
-                                                <InputGroupText>años</InputGroupText>
-                                            </InputGroupAddon>
-                                            <FormFeedback>"Debes ingresar solo
-                                                números."</FormFeedback>
-                                        </InputGroup>
-                                    </FormGroup>
+                                                </Row>
 
-                                    {/* Peso */}
-                                    <FormGroup>
-                                        <label>Peso</label>
-                                        <InputGroup className="mb-3">
-                                            <FormInput
-                                                value={peso.value}
-                                                valid={peso.valid}
-                                                invalid={peso.valid === undefined ? undefined : !peso.valid}
-                                                onChange={onChangePeso}
-                                                size="lg"
-                                                //className="mb-3"
-                                                placeholder="0"/>
-                                            <InputGroupAddon type="append">
-                                                <InputGroupText>Kg</InputGroupText>
-                                            </InputGroupAddon>
-                                            <FormFeedback>"Debes ingresar solo
-                                                números."</FormFeedback>
-                                        </InputGroup>
-                                    </FormGroup>
-                                </Form>
+
+                                            </CardBody>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {/* Genetica */}
+                                        <Card small lg="12">
+                                            <CardHeader className="border-bottom">
+                                                <h6 className="m-0">Datos Farmacogenéticos del Paciente</h6>
+                                            </CardHeader>
+                                            <CardBody>
+                                                <Row>
+                                                    <Col sm="12" lg="4">
+                                                        <label>CYP2C9-2</label>
+                                                        <DropdownOptions
+                                                            title={constants.gen2}
+                                                            options={[constants.gen11, constants.gen12, constants.gen22]}
+                                                            values={[constants.gen11, constants.gen12, constants.gen22]}
+                                                            onSubmit={handleSubmit}
+                                                        />
+                                                    </Col>
+                                                    <Col sm="12" lg="4">
+                                                        <label>CYP2C9-3</label>
+                                                        <DropdownOptions
+                                                            title={constants.gen3}
+                                                            options={[constants.gen11, constants.gen13, constants.gen33]}
+                                                            values={[constants.gen11, constants.gen13, constants.gen33]}
+                                                            onSubmit={handleSubmit}
+                                                        />
+                                                    </Col>
+                                                    <Col sm="12" lg="4">
+                                                        <label>VKORC1</label>
+                                                        <DropdownOptions
+                                                            title={constants.gen4}
+                                                            options={['*A/*A', '*G/*A', '*G/*G']}
+                                                            values={[constants.genaa, constants.genga, constants.gengg]}
+                                                            onSubmit={handleSubmit}
+                                                        />
+                                                    </Col>
+                                                </Row>
+                                            </CardBody>
+                                        </Card>
+                                    </Col>
+                                </Row>
                             </CardBody>
                         </Card>
                     </Col>
-                    <Col lg="4" className="mb-4">
-                        <Card small lg="9">
-                            <ListGroup flush>
-                                <ListGroupItem className="px-3">
-                                    {/* Talla */}
-                                    <FormGroup>
-                                        <label>Talla</label>
-                                        <InputGroup className="mb-3">
-                                            <FormInput
-                                                value={talla.value}
-                                                valid={talla.valid}
-                                                invalid={talla.valid === undefined ? undefined : !talla.valid}
-                                                onChange={onChangeTalla}
-                                                size="lg"
-                                                //className="mb-3"
-                                                placeholder="0"/>
-                                            <InputGroupAddon type="append">
-                                                <InputGroupText>m</InputGroupText>
-                                            </InputGroupAddon>
-                                            <FormFeedback>"Debes ingresar solo
-                                                números"</FormFeedback>
-                                        </InputGroup>
-                                    </FormGroup>
-
-
-                                    {/* Sexo */}
-                                    <label>Sexo</label>
-                                    <FormGroup>
-                                        <ButtonGroup size="sm" className="mr-2">
-                                            <Button theme={sexo.value === 'F' ? 'primary' : 'white'}
-                                                    onClick={() => setSexo((prevState) => ({
-                                                        ...prevState,
-                                                        value: 'F',
-                                                        valid: true
-                                                    }))}>Femenino</Button>
-                                            <Button theme={sexo.value === 'M' ? 'primary' : 'white'}
-                                                    onClick={() => setSexo((prevState) => ({
-                                                        ...prevState,
-                                                        value: 'M',
-                                                        valid: true
-                                                    }))}>Masculino</Button>
-                                        </ButtonGroup>
-                                        {/*
-                <FormInput
-                    value={sexo.value}
-                    valid={sexo.valid}
-                    invalid={sexo.invalid}
-                    //onChange={validCorreo}
-                    size="lg"
-                    className="mb-3"
-                    placeholder="juan@gmail.com" />
-                    */}
-                                    </FormGroup>
-
-                                    {/* INR Inicial */}
-                                    <FormGroup>
-                                        <label>INR Inicial</label>
-                                        <FormInput
-                                            value={inr_inicial.value}
-                                            valid={inr_inicial.valid}
-                                            invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
-                                            onChange={onChangeINRInicial}
-                                            size="lg"
-                                            className="mb-3"
-                                            placeholder="0"/>
-                                        <FormFeedback>"Debes ingresar un
-                                            valor decimal. EJ: 2.4"</FormFeedback>
-                                    </FormGroup>
-                                </ListGroupItem>
-                            </ListGroup>
-                        </Card>
-                    </Col>
-                    <Col lg="4" className="mb-4">
-                        {/* Genetica */}
-                        <Card small lg="12">
-                            <CardHeader className="border-bottom">
-                                <h6 className="m-0">Datos Farmacogenética del Paciente</h6>
-                            </CardHeader>
-                            <CardBody>
-                                <Form className="add-new-post">
-                                    <ListGroup flush>
-                                        <ListGroupItem className="px-0">
-                                            <Form>
-                                                <label>CYP2C9-2</label>
-                                                <DropdownOptions
-                                                    title={constants.gen2}
-                                                    options={[constants.gen11, constants.gen12, constants.gen22]}
-                                                    values={[constants.gen11, constants.gen12, constants.gen22]}
-                                                    onSubmit={handleSubmit}
-                                                />
-                                                <label>CYP2C9-3</label>
-                                                <DropdownOptions
-                                                    title={constants.gen3}
-                                                    options={[constants.gen11, constants.gen13, constants.gen33]}
-                                                    values={[constants.gen11, constants.gen13, constants.gen33]}
-                                                    onSubmit={handleSubmit}
-                                                />
-                                                <label>VKORC1</label>
-                                                <DropdownOptions
-                                                    title={constants.gen4}
-                                                    options={['*A/*A', '*G/*A', '*G/*G']}
-                                                    values={[constants.genaa, constants.genga, constants.gengg]}
-                                                    onSubmit={handleSubmit}
-                                                />
-                                            </Form>
-                                        </ListGroupItem>
-                                    </ListGroup>
-                                </Form>
-                            </CardBody>
-                        </Card>
-                    </Col>
+                </Row>
+                <Row>
                     <Col lg="12" style={{
                         position: "sticky",
                         bottom: 0,
@@ -412,7 +420,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         </Card>
                     </Col>
                 </Row>
-            </Col>
+            </Container>
         </React.Fragment>
     );
 }
@@ -425,7 +433,8 @@ DataUserGeneral.propTypes =
 
 DataUserGeneral.defaultProps =
     {
-        onSubmit: () => {},
+        onSubmit: () => {
+        },
         dosis: -999.0,
     }
 

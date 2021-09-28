@@ -11,7 +11,7 @@ import {
     Button,
     FormFeedback,
     InputGroup,
-    CardHeader,
+    CardHeader, Container,
 } from "shards-react";
 
 const UpdateProps = ({onSubmit}) => {
@@ -179,141 +179,193 @@ const UpdateProps = ({onSubmit}) => {
     return (
         <React.Fragment>
             <Col>
-                <Row>
-                    <Col lg="6" className="mb-4">
+                <Container>
+                    <Col className="mb-4">
                         {/* Data general */}
-                        <Card small lg="6">
-                            <CardHeader className="border-bottom">
-                                <h6 className="m-0">Actualizar parametros de algoritmo</h6>
+                        <Card small sm="12">
+                            <CardHeader className="border-bottom bg-light">
+                                <h5 className="m-0 font-weight-bold text-center">Actualizar parámetros del
+                                    algoritmo</h5>
                             </CardHeader>
                             <CardBody>
-                                <Form className="add-new-post">
-                                    <Row>
-                                        <Col>
-                                            {/* Codigo Paciente */}
-                                            <FormGroup check={false}>
-                                                <label>Coeficiente inicial</label>
-                                                <FormInput
-                                                    value={p_0.value}
-                                                    valid={p_0.valid}
-                                                    invalid={p_0.valid === undefined ? undefined : !p_0.valid}
-                                                    onChange={onChangeP0}
-                                                    size="lg"
-                                                    className="mb-3"
-                                                    placeholder="3.042"/>
-                                                <FormFeedback>Debes ingresar un número decimal, con punto. EJ:
-                                                    1.0</FormFeedback>
-                                            </FormGroup>
-                                        </Col>
-                                        <Col>
-                                            {/* Dosis de llegada */}
-                                            <FormGroup>
-                                                <label>Coeficiente Hombre</label>
-                                                <InputGroup className="mb-3">
-                                                    <FormInput
-                                                        value={p_men.value}
-                                                        valid={p_men.valid}
-                                                        invalid={p_men.valid === undefined ? undefined : !p_men.valid}
-                                                        onChange={onChangePMen}
-                                                        size="lg"
-                                                        //className="mb-3 "
-                                                        placeholder="0.169"
-                                                    />
-                                                    <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
-                                                        1.0 </FormFeedback>
-                                                </InputGroup>
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
+                                <Row>
+                                    <Col sm="12" lg="4">
+                                        {/*Coef. inicial*/}
+                                        <FormGroup>
+                                            <label>Coeficiente inicial</label>
+                                            <FormInput
+                                                value={p_0.value}
+                                                valid={p_0.valid}
+                                                invalid={p_0.valid === undefined ? undefined : !p_0.valid}
+                                                onChange={onChangeP0}
+                                                size="lg"
+                                                className="mb-3"
+                                                placeholder="3.042"/>
+                                            <FormFeedback>Debes ingresar un número decimal, con punto. EJ:
+                                                1.0</FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" lg="4">
+                                        {/*Coef. Hombre*/}
+                                        <FormGroup>
+                                            <label>Coeficiente Hombre</label>
+                                            <FormInput
+                                                value={p_men.value}
+                                                valid={p_men.valid}
+                                                invalid={p_men.valid === undefined ? undefined : !p_men.valid}
+                                                onChange={onChangePMen}
+                                                size="lg"
+                                                //className="mb-3 "
+                                                placeholder="0.169"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" lg="4">
+                                        {/*Coef edad*/}
+                                        <FormGroup>
+                                            <label>Coeficiente Edad</label>
+                                            <FormInput
+                                                value={p_age.value}
+                                                valid={p_age.valid}
+                                                invalid={p_age.valid === undefined ? undefined : !p_age.valid}
+                                                onChange={onChangePAge}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.0021"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
 
-                                    <Row>
+                                </Row>
+                                <Row>
+                                    <Col sm="12" lg="4">
+                                        {/*INR inicial*/}
+                                        <FormGroup>
+                                            <label>Coeficiente InitialINR</label>
+                                            <FormInput
+                                                value={p_initialINR.value}
+                                                valid={p_initialINR.valid}
+                                                invalid={p_initialINR.valid === undefined ? undefined : !p_initialINR.valid}
+                                                onChange={onChangePInitialINR}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.044"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" lg="4">
+                                        {/*IMC*/}
+                                        <FormGroup>
+                                            <label>Coeficiente IMC</label>
+                                            <FormInput
+                                                value={p_imc.value}
+                                                valid={p_imc.valid}
+                                                invalid={p_imc.valid === undefined ? undefined : !p_imc.valid}
+                                                onChange={onChangePImc}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.013"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" lg="4">
+                                        {/*Coef CYP2C9 *1/*2*/}
+                                        <FormGroup>
+                                            <label>Coeficiente CYP2C9 *1/*2</label>
+                                            <FormInput
+                                                value={p_CYP2C9_12.value}
+                                                valid={p_CYP2C9_12.valid}
+                                                invalid={p_CYP2C9_12.valid === undefined ? undefined : !p_CYP2C9_12.valid}
+                                                onChange={onChangePCYP2C912}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.106"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="12" lg="4">
+                                        {/*Coef CYP2C9 *1/*3*/}
+                                        <FormGroup>
+                                            <label>Coeficiente CYP2C9 *1/*3</label>
+                                            <FormInput
+                                                value={p_CYP2C9_13.value}
+                                                valid={p_CYP2C9_13.valid}
+                                                invalid={p_CYP2C9_13.valid === undefined ? undefined : !p_CYP2C9_13.valid}
+                                                onChange={onChangePCYP2C913}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.334"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" lg="4">
+                                        {/*Coef CYP2C9 *3/*3*/}
+                                        <FormGroup>
+                                            <label>Coeficiente CYP2C9 *3/*3</label>
+                                            <FormInput
+                                                value={p_CYP2C9_33.value}
+                                                valid={p_CYP2C9_33.valid}
+                                                invalid={p_CYP2C9_33.valid === undefined ? undefined : !p_CYP2C9_33.valid}
+                                                onChange={onChangePCYP2C933}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.784"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" lg="4">
+                                        {/* Coeficiente VKORC1 *G/*A */}
+                                        <FormGroup>
+                                            <label>Coeficiente VKORC1 *G/*A </label>
+                                            <FormInput
+                                                value={p_VKORC1_GA.value}
+                                                valid={p_VKORC1_GA.valid}
+                                                invalid={p_VKORC1_GA.valid === undefined ? undefined : !p_VKORC1_GA.valid}
+                                                onChange={onChangeVKORC1GA}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.26"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="12" lg="4">
+                                        {/* Coeficiente VKORC1 *A/*A */}
+                                        <FormGroup>
+                                            <label>Coeficiente VKORC1 *A/*A</label>
+                                            <FormInput
+                                                value={p_VKORC1_AA.value}
+                                                valid={p_VKORC1_AA.valid}
+                                                invalid={p_VKORC1_AA.valid === undefined ? undefined : !p_VKORC1_AA.valid}
+                                                onChange={onChangeVKORC1AA}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.705"/>
+                                            <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
 
-                                        {/* Nueva dosis */}
-                                        <Col>
-                                            <FormGroup>
-                                                <label>Coeficiente Edad</label>
-                                                <InputGroup className="mb-3">
-                                                    <FormInput
-                                                        value={p_age.value}
-                                                        valid={p_age.valid}
-                                                        invalid={p_age.valid === undefined ? undefined : !p_age.valid}
-                                                        onChange={onChangePAge}
-                                                        size="lg"
-                                                        //className="mb-3"
-                                                        placeholder="0.0021"/>
-                                                    <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
-                                                        1.0 </FormFeedback>
-                                                </InputGroup>
-                                            </FormGroup>
-                                        </Col>
-                                        <Col>
-                                            {/* INR de llegada */}
-                                            <FormGroup>
-                                                <label>Coeficiente InitialINR</label>
-                                                <InputGroup className="mb-3">
-                                                    <FormInput
-                                                        value={p_initialINR.value}
-                                                        valid={p_initialINR.valid}
-                                                        invalid={p_initialINR.valid === undefined ? undefined : !p_initialINR.valid}
-                                                        onChange={onChangePInitialINR}
-                                                        size="lg"
-                                                        //className="mb-3"
-                                                        placeholder="0.044"/>
-                                                    <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
-                                                        1.0 </FormFeedback>
-                                                </InputGroup>
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        {/* Nueva dosis */}
-                                        <Col>
-                                            <FormGroup>
-                                                <label>Coeficiente IMC</label>
-                                                <InputGroup className="mb-3">
-                                                    <FormInput
-                                                        value={p_imc.value}
-                                                        valid={p_imc.valid}
-                                                        invalid={p_imc.valid === undefined ? undefined : !p_imc.valid}
-                                                        onChange={onChangePImc}
-                                                        size="lg"
-                                                        //className="mb-3"
-                                                        placeholder="0.013"/>
-                                                    <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
-                                                        1.0 </FormFeedback>
-                                                </InputGroup>
-                                            </FormGroup>
-                                        </Col>
-                                        <Col>
-                                            {/* INR de llegada */}
-                                            <FormGroup>
-                                                <label>Coeficiente CYP2C9 *1/*2</label>
-                                                <InputGroup className="mb-3">
-                                                    <FormInput
-                                                        value={p_CYP2C9_12.value}
-                                                        valid={p_CYP2C9_12.valid}
-                                                        invalid={p_CYP2C9_12.valid === undefined ? undefined : !p_CYP2C9_12.valid}
-                                                        onChange={onChangePCYP2C912}
-                                                        size="lg"
-                                                        //className="mb-3"
-                                                        placeholder="0.106"/>
-                                                    <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
-                                                        1.0 </FormFeedback>
-                                                </InputGroup>
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
-
-                                </Form>
                             </CardBody>
                         </Card>
                     </Col>
-                    <Col lg="6" className="mb-4">
+                    {/*<Col lg="12" className="mb-4">
                         <Card small lg="6">
                             <CardBody>
-
                                 <Row>
-                                    {/* Nueva dosis */}
+                                     Nueva dosis
                                     <Col>
                                         <FormGroup>
                                             <label>Coeficiente CYP2C9 *1/*3</label>
@@ -332,7 +384,7 @@ const UpdateProps = ({onSubmit}) => {
                                         </FormGroup>
                                     </Col>
                                     <Col>
-                                        {/* INR de llegada */}
+                                         INR de llegada
                                         <FormGroup>
                                             <label>Coeficiente CYP2C9 *3/*3</label>
                                             <InputGroup className="mb-3">
@@ -352,7 +404,7 @@ const UpdateProps = ({onSubmit}) => {
                                 </Row>
 
                                 <Row>
-                                    {/* Nueva dosis */}
+                                     Nueva dosis
                                     <Col>
                                         <FormGroup>
                                             <label>Coeficiente VKORC1 *G/*A </label>
@@ -371,7 +423,7 @@ const UpdateProps = ({onSubmit}) => {
                                         </FormGroup>
                                     </Col>
                                     <Col>
-                                        {/* INR de llegada */}
+                                         INR de llegada
                                         <FormGroup>
                                             <label>Coeficiente VKORC1 *A/*A</label>
                                             <InputGroup className="mb-3">
@@ -391,7 +443,7 @@ const UpdateProps = ({onSubmit}) => {
                                 </Row>
                             </CardBody>
                         </Card>
-                    </Col>
+                    </Col>*/}
                     <Col lg="12" style={{
                         position: "sticky",
                         bottom: 0,
@@ -442,7 +494,7 @@ const UpdateProps = ({onSubmit}) => {
                             </CardBody>
                         </Card>
                     </Col>
-                </Row>
+                </Container>
             </Col>
         </React.Fragment>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import {
     Row,
@@ -23,13 +23,13 @@ import {
 import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
 
-const DataUserGeneral = ({ onSubmit, dosis }) => {
-    const [cod_paciente, setCodPaciente] = useState({ value: '', valid: undefined });
-    const [edad, setEdad] = useState({ value: '', valid: undefined });
-    const [peso, setPeso] = useState({ value: '', valid: undefined });
-    const [talla, setTalla] = useState({ value: '', valid: undefined });
-    const [sexo, setSexo] = useState({ value: 'F' });
-    const [inr_inicial, setInrInicial] = useState({ value: '', valid: undefined });
+const DataUserGeneral = ({onSubmit, dosis}) => {
+    const [cod_paciente, setCodPaciente] = useState({value: '', valid: undefined});
+    const [edad, setEdad] = useState({value: '', valid: undefined});
+    const [peso, setPeso] = useState({value: '', valid: undefined});
+    const [talla, setTalla] = useState({value: '', valid: undefined});
+    const [sexo, setSexo] = useState({value: 'F'});
+    const [inr_inicial, setInrInicial] = useState({value: '', valid: undefined});
     const [genetics, setGenetics] = useState({
         value: {
             [constants.gen2]: constants.gen11,
@@ -39,12 +39,12 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
     });
 
     function setForm() {
-        setCodPaciente((prevState) => ({ ...prevState, value: '', valid: undefined }));
-        setEdad((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
-        setPeso((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
-        setTalla((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
-        setSexo((prevState) => ({ ...prevState, value: 'F' }));
-        setInrInicial((prevState) => ({ ...prevState, value: '', valid: undefined }));
+        setCodPaciente((prevState) => ({...prevState, value: '', valid: undefined}));
+        setEdad((prevState) => ({...prevState, value: 0.0, valid: undefined}));
+        setPeso((prevState) => ({...prevState, value: 0.0, valid: undefined}));
+        setTalla((prevState) => ({...prevState, value: 0.0, valid: undefined}));
+        setSexo((prevState) => ({...prevState, value: 'F'}));
+        setInrInicial((prevState) => ({...prevState, value: '', valid: undefined}));
         setGenetics((prevState) => ({
             ...prevState,
             value: {
@@ -69,8 +69,8 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
         var title = data.title
         var selected = data.selected
         var dic = genetics.value
-        dic = { ...dic, [title]: selected }
-        setGenetics((prevState) => ({ ...prevState, value: dic }))
+        dic = {...dic, [title]: selected}
+        setGenetics((prevState) => ({...prevState, value: dic}))
     }
 
     function calcImc() {
@@ -80,67 +80,67 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
 
     function onChangeCodPaciente(e) {
         var _cod = e.target.value;
-        setCodPaciente((prevState) => ({ ...prevState, value: _cod }))
+        setCodPaciente((prevState) => ({...prevState, value: _cod}))
         console.log(validPacienteRegex.test(_cod))
         if (validPacienteRegex.test(_cod)) {
-            setCodPaciente((prevState) => ({ ...prevState, valid: true }))
+            setCodPaciente((prevState) => ({...prevState, valid: true}))
         } else {
-            setCodPaciente((prevState) => ({ ...prevState, valid: false }))
+            setCodPaciente((prevState) => ({...prevState, valid: false}))
         }
         if (_cod === '') {
-            setCodPaciente((prevState) => ({ ...prevState, valid: undefined }))
+            setCodPaciente((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
     function onChangeEdad(e) {
         var _edad = e.target.value;
-        setEdad((prevState) => ({ ...prevState, value: _edad }))
+        setEdad((prevState) => ({...prevState, value: _edad}))
         if (validNumRegex.test(_edad)) {
-            setEdad((prevState) => ({ ...prevState, valid: true }))
+            setEdad((prevState) => ({...prevState, valid: true}))
         } else {
-            setEdad((prevState) => ({ ...prevState, valid: false }))
+            setEdad((prevState) => ({...prevState, valid: false}))
         }
         if (_edad === '') {
-            setEdad((prevState) => ({ ...prevState, valid: undefined }))
+            setEdad((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
     function onChangePeso(e) {
         var _peso = e.target.value;
-        setPeso((prevState) => ({ ...prevState, value: _peso }))
+        setPeso((prevState) => ({...prevState, value: _peso}))
         if (validNumRegex.test(_peso)) {
-            setPeso((prevState) => ({ ...prevState, valid: true }))
+            setPeso((prevState) => ({...prevState, valid: true}))
         } else {
-            setPeso((prevState) => ({ ...prevState, valid: false }))
+            setPeso((prevState) => ({...prevState, valid: false}))
         }
         if (_peso === '') {
-            setPeso((prevState) => ({ ...prevState, valid: undefined }))
+            setPeso((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
     function onChangeTalla(e) {
         var _talla = e.target.value;
-        setTalla((prevState) => ({ ...prevState, value: _talla }))
+        setTalla((prevState) => ({...prevState, value: _talla}))
         if (validNumRegex.test(_talla)) {
-            setTalla((prevState) => ({ ...prevState, valid: true }))
+            setTalla((prevState) => ({...prevState, valid: true}))
         } else {
-            setTalla((prevState) => ({ ...prevState, valid: false }))
+            setTalla((prevState) => ({...prevState, valid: false}))
         }
         if (_talla === '') {
-            setTalla((prevState) => ({ ...prevState, valid: undefined }))
+            setTalla((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
     function onChangeINRInicial(e) {
         var _inr = e.target.value;
-        setInrInicial((prevState) => ({ ...prevState, value: _inr }))
+        setInrInicial((prevState) => ({...prevState, value: _inr}))
         if (validNumRegex.test(_inr)) {
-            setInrInicial((prevState) => ({ ...prevState, valid: true }))
+            setInrInicial((prevState) => ({...prevState, valid: true}))
         } else {
-            setInrInicial((prevState) => ({ ...prevState, valid: false }))
+            setInrInicial((prevState) => ({...prevState, valid: false}))
         }
         if (_inr === '') {
-            setInrInicial((prevState) => ({ ...prevState, valid: undefined }))
+            setInrInicial((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
@@ -150,6 +150,9 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
                 <Row>
                     <Col>
                         <Card small className="mb-4">
+                            <CardHeader className="border-bottom bg-light">
+                                <h5 className="m-0 font-weight-bold text-center">Cálculo de la primera dosis</h5>
+                            </CardHeader>
                             <CardBody>
                                 <Row className="mb-2">
                                     <Col>
@@ -171,7 +174,7 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
                                                                 onChange={onChangeCodPaciente}
                                                                 size="lg"
                                                                 className="mb-3"
-                                                                placeholder="T-001" />
+                                                                placeholder="T-001"/>
                                                             <FormFeedback tooltip={true}>"Ej:
                                                                 T-002"</FormFeedback>
                                                         </FormGroup>
@@ -211,7 +214,7 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
                                                                     onChange={onChangePeso}
                                                                     size="lg"
                                                                     //className="mb-3"
-                                                                    placeholder="0" />
+                                                                    placeholder="0"/>
                                                                 <FormFeedback tooltip={true}>"Debes ingresar solo
                                                                     números."</FormFeedback>
                                                                 <InputGroupAddon type="append">
@@ -235,7 +238,7 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
                                                                     onChange={onChangeTalla}
                                                                     size="lg"
                                                                     //className="mb-3"
-                                                                    placeholder="0" />
+                                                                    placeholder="0"/>
                                                                 <FormFeedback tooltip={true}>"Debes ingresar solo
                                                                     números"</FormFeedback>
                                                                 <InputGroupAddon type="append">
@@ -256,7 +259,7 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
                                                                 onChange={onChangeINRInicial}
                                                                 size="lg"
                                                                 className="mb-3"
-                                                                placeholder="0" />
+                                                                placeholder="0"/>
                                                             <FormFeedback tooltip={true}>"Debes ingresar un
                                                                 valor decimal. EJ: 2.4"</FormFeedback>
                                                         </FormGroup>
@@ -267,17 +270,17 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
                                                         <FormGroup>
                                                             <ButtonGroup>
                                                                 <Button theme={sexo.value === 'F' ? 'primary' : 'white'}
-                                                                    onClick={() => setSexo((prevState) => ({
-                                                                        ...prevState,
-                                                                        value: 'F',
-                                                                        valid: true
-                                                                    }))}>Femenino</Button>
+                                                                        onClick={() => setSexo((prevState) => ({
+                                                                            ...prevState,
+                                                                            value: 'F',
+                                                                            valid: true
+                                                                        }))}>Femenino</Button>
                                                                 <Button theme={sexo.value === 'M' ? 'primary' : 'white'}
-                                                                    onClick={() => setSexo((prevState) => ({
-                                                                        ...prevState,
-                                                                        value: 'M',
-                                                                        valid: true
-                                                                    }))}>Masculino</Button>
+                                                                        onClick={() => setSexo((prevState) => ({
+                                                                            ...prevState,
+                                                                            value: 'M',
+                                                                            valid: true
+                                                                        }))}>Masculino</Button>
                                                             </ButtonGroup>
                                                         </FormGroup>
                                                     </Col>
@@ -423,16 +426,16 @@ const DataUserGeneral = ({ onSubmit, dosis }) => {
 }
 
 DataUserGeneral.propTypes =
-{
-    onSubmit: PropTypes.func,
-    dosis: PropTypes.any
-}
+    {
+        onSubmit: PropTypes.func,
+        dosis: PropTypes.any
+    }
 
 DataUserGeneral.defaultProps =
-{
-    onSubmit: () => {
-    },
-    dosis: -999.0,
-}
+    {
+        onSubmit: () => {
+        },
+        dosis: -999.0,
+    }
 
 export default DataUserGeneral;

@@ -37,9 +37,6 @@ const PacienteGeneral = ({data_paciente, title}) => {
     return (
         <Container>
             <Card small className="h-100 w-100">
-                <CardHeader className="border-bottom">
-                                <h6 className="m-0">{title}</h6>
-                            </CardHeader>
                 <CardHeader className="border-bottom bg-light">
                     <h5 className="mt-1 font-weight-bold text-center">{title}</h5>
                 </CardHeader>
@@ -47,43 +44,20 @@ const PacienteGeneral = ({data_paciente, title}) => {
                     <ButtonToolbar>
                         <ButtonGroup>
                             <Button
+                                className="font-weight-bold"
                                 theme={isActive.value === true ? 'primary' : 'white'}
                                 onClick={() =>
                                     handleShowPerfil()
-                                }
-                            >
-                                <Col style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}>
-                                    <Col>
-                                        <Row><strong style={{
-                                            'font-size': '13px',
-                                            'font-weight': '80'
-                                        }}>Clínico</strong></Row>
-                                    </Col>
-                                </Col>
-
+                                }>
+                                Clínico
                             </Button>
                             <Button
+                                className="font-weight-bold"
                                 theme={isActive.value === false ? 'primary' : 'white'}
                                 onClick={() =>
                                     handleHidePerfil()
-                                }
-                            >
-                                <Col style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}>
-                                    <Col>
-                                        <Row><strong style={{
-                                            'font-size': '13px',
-                                            'font-weight': '80'
-                                        }}>Genético</strong></Row>
-                                    </Col>
-                                </Col>
+                                }>
+                                Genético
                             </Button>
                         </ButtonGroup>
                     </ButtonToolbar>

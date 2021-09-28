@@ -105,16 +105,13 @@ class AnalisisDosisGen extends React.Component {
         return (
             <Card small className="h-100">
                 <CardHeader className="border-bottom">
-                    <h6 className="m-0">{title}</h6>
+                    <h5 className="m-0 font-weight-bold text-center">{title}</h5>
                 </CardHeader>
                 <CardBody className="pt-0">
                     <Row className="border-bottom py-2 bg-light">
                         <Col sm="8" className="d-flex mb-2 mb-sm-0">
                             {/*<RangeDatePicker />*/}
                             <ButtonGroup>
-                                <InputGroupAddon type="prepend">
-                                    <InputGroupText>Gen</InputGroupText>
-                                </InputGroupAddon>
                                 <Button
                                     theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
                                     onClick={() =>

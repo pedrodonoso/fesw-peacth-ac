@@ -30,7 +30,7 @@ class Analisis extends Component {
             <Container fluid className="main-content-container px-4 pb-4">
                 {/* Page Header */}
                 <ThemeProvider theme={theme}>
-                    <Container fluid className="main-content-container px-4">
+                    <Container className="main-content-container px-4">
 
                         <Row>
                             <Col lg="12" className="py-4">

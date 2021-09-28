@@ -46,6 +46,7 @@ class Paciente extends React.Component {
             data: {}, //dataprofile
         }
 
+
         this.handlerSearch = this.handlerSearch.bind(this);
 
         this.handlerOpenDialog = this.handlerOpenDialog.bind(this);

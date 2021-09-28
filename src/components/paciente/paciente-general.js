@@ -16,25 +16,26 @@ import constants from "../../data/constants";
 import DropdownOptions from "../calculo/drop-options";
 
 const PacienteGeneral = ({data_paciente, title}) => {
-  //const [data_paciente, setDataPaciente] = useState({value: '', valid: undefined});
-  const [isActive, setisActive] = useState({value: true});
+    //const [data_paciente, setDataPaciente] = useState({value: '', valid: undefined});
+    const [isActive, setisActive] = useState({value: true});
 
     function handleShowPerfil() {
-      setisActive((prevState) => ({...prevState, value: true}));
+        setisActive((prevState) => ({...prevState, value: true}));
     }
 
     function handleHidePerfil() {
-      setisActive((prevState) => ({...prevState, value: false}));
+        setisActive((prevState) => ({...prevState, value: false}));
     }
 
-    function isObjectEmpty(obj){
-      return Object.getOwnPropertyNames(obj).length == 0
+    function isObjectEmpty(obj) {
+        return Object.getOwnPropertyNames(obj).length == 0
     }
 
     //render() {
-        //const {title} = this.props;
-        
-        return (
+    //const {title} = this.props;
+
+    return (
+        <Container>
             <Card small className="h-100 w-100">
                 <CardHeader className="border-bottom">
                                 <h6 className="m-0">{title}</h6>
@@ -42,12 +43,9 @@ const PacienteGeneral = ({data_paciente, title}) => {
                 <CardHeader className="border-bottom bg-light">
                     <h5 className="mt-1 font-weight-bold text-center">{title}</h5>
                 </CardHeader>
-                <CardBody className="">
+                <CardBody>
                     <ButtonToolbar>
                         <ButtonGroup>
-                            <InputGroupAddon type="prepend">
-                                <InputGroupText>Perfil</InputGroupText>
-                            </InputGroupAddon>
                             <Button
                                 theme={isActive.value === true ? 'primary' : 'white'}
                                 onClick={() =>
@@ -93,195 +91,188 @@ const PacienteGeneral = ({data_paciente, title}) => {
                     {/* Perfil Clinico*/}
                     {isActive.value &&
                     <Row id="#perfil-clinico" className="mt-2">
-                        <Col lg="4" className="mb-4">
+                        <Col sm="12" className="mb-2">
                             {/* Data general */}
-                            <Card small lg="12">
+                            <Card lg="12">
                                 <CardHeader className="border-bottom">
                                     <h6 className="m-0">Datos Clínicos del Paciente</h6>
                                 </CardHeader>
                                 <CardBody>
-                                    <Form className="add-new-post">
-
-                                        {/* Codigo Paciente */}
-                                        <FormGroup check={false}>
-                                            <label>Código del paciente</label>
-                                            <FormInput
-                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.code}
-                                                /*value={cod_paciente.value}
-                                                valid={cod_paciente.valid}
-                                                invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
-                                                onChange={onChangeCodPaciente}*/
-                                                disabled
-                                                size="lg"
-                                                className="mb-3"
-                                                placeholder="T-001"
-                                                />
-                                            <FormFeedback>"Ej:
-                                                T-002"</FormFeedback>
-                                        </FormGroup>
-
-                                        {/* Edad */}
-                                        <FormGroup>
-                                            <label>Edad</label>
-                                            <InputGroup className="mb-3">
+                                    <Row>
+                                        <Col sm="12" lg="4">
+                                            {/* Codigo Paciente */}
+                                            <FormGroup check={false}>
+                                                <label>Código del paciente</label>
                                                 <FormInput
-                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.age}
-                                                    /*value={edad.value}
-                                                    valid={edad.valid}
-                                                    invalid={edad.valid === undefined ? undefined : !edad.valid}
-                                                    onChange={onChangeEdad}*/
+                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.code}
+                                                    /*value={cod_paciente.value}
+                                                    valid={cod_paciente.valid}
+                                                    invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
+                                                    onChange={onChangeCodPaciente}*/
+                                                    disabled
+                                                    size="lg"
+                                                    className="mb-3"
+                                                    placeholder="T-001"
+                                                />
+                                                <FormFeedback tooltip={true}>"Ej:
+                                                    T-002"</FormFeedback>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="12" lg="4">
+                                            {/* Edad */}
+                                            <FormGroup>
+                                                <label>Edad</label>
+                                                <InputGroup className="mb-3">
+                                                    <FormInput
+                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.age}
+                                                        /*value={edad.value}
+                                                        valid={edad.valid}
+                                                        invalid={edad.valid === undefined ? undefined : !edad.valid}
+                                                        onChange={onChangeEdad}*/
+                                                        size="lg"
+                                                        disabled
+                                                        placeholder="0"
+                                                    />
+                                                    <FormFeedback tooltip={true}>"Debes ingresar solo
+                                                        números."</FormFeedback>
+                                                    <InputGroupAddon type="append">
+                                                        <InputGroupText>años</InputGroupText>
+                                                    </InputGroupAddon>
+
+                                                </InputGroup>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="12" lg="4">
+                                            {/* Peso */}
+                                            <FormGroup>
+                                                <label>Peso</label>
+                                                <InputGroup className="mb-3">
+                                                    <FormInput
+                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.weight}
+                                                        /*value={peso.value}
+                                                        valid={peso.valid}
+                                                        invalid={peso.valid === undefined ? undefined : !peso.valid}
+                                                        onChange={onChangePeso}*/
+                                                        size="lg"
+                                                        disabled
+                                                        placeholder="0"/>
+                                                    <InputGroupAddon type="append">
+                                                        <InputGroupText>Kg</InputGroupText>
+                                                    </InputGroupAddon>
+                                                </InputGroup>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm="12" lg="4">
+                                            {/* Talla */}
+                                            <FormGroup>
+                                                <label>Talla</label>
+                                                <InputGroup className="mb-3">
+                                                    <FormInput
+                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.height}
+                                                        /*value={talla.value}
+                                                        valid={talla.valid}
+                                                        invalid={talla.valid === undefined ? undefined : !talla.valid}
+                                                        onChange={onChangeTalla}*/
+                                                        size="lg"
+                                                        disabled
+                                                        placeholder="0"/>
+                                                    <FormFeedback tooltip={true}>"Debes ingresar solo
+                                                        números"</FormFeedback>
+                                                    <InputGroupAddon type="append">
+                                                        <InputGroupText>m</InputGroupText>
+                                                    </InputGroupAddon>
+
+                                                </InputGroup>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="12" lg="4">
+                                            {/* Sexo */}
+                                            <FormGroup>
+                                                <label>Sexo</label>
+                                                <FormInput
+                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.sex}
+                                                    /*value={inr_inicial.value}
+                                                    valid={inr_inicial.valid}
+                                                    invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                    onChange={onChangeINRInicial}*/
                                                     size="lg"
                                                     disabled
-                                                    placeholder="0"
-                                                />
-                                                <InputGroupAddon type="append">
-                                                    <InputGroupText>años</InputGroupText>
-                                                </InputGroupAddon>
-                                                <FormFeedback>"Debes ingresar solo
-                                                    números."</FormFeedback>
-                                            </InputGroup>
-                                        </FormGroup>
-
-                                        {/* Peso */}
-                                        <FormGroup>
-                                            <label>Peso</label>
-                                            <InputGroup className="mb-3">
+                                                    className="mb-3"
+                                                    placeholder="Femenino"/>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="12" lg="4">
+                                            {/* INR Inicial */}
+                                            <FormGroup>
+                                                <label>INR Inicial</label>
                                                 <FormInput
-                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.weight}
-                                                    /*value={peso.value}
-                                                    valid={peso.valid}
-                                                    invalid={peso.valid === undefined ? undefined : !peso.valid}
-                                                    onChange={onChangePeso}*/
+                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.initialINR}
+                                                    /*value={inr_inicial.value}
+                                                    valid={inr_inicial.valid}
+                                                    invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                    onChange={onChangeINRInicial}*/
                                                     size="lg"
+                                                    className="mb-3"
                                                     disabled
                                                     placeholder="0"/>
-                                                <InputGroupAddon type="append">
-                                                    <InputGroupText>Kg</InputGroupText>
-                                                </InputGroupAddon>
-                                                <FormFeedback>"Debes ingresar solo
-                                                    números."</FormFeedback>
-                                            </InputGroup>
-                                        </FormGroup>
-                                    </Form>
+                                                <FormFeedback tooltip={true}>"Debes ingresar un
+                                                    valor decimal. EJ: 2.4"</FormFeedback>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
                                 </CardBody>
                             </Card>
                         </Col>
-                        <Col lg="4" className="mb-4">
-                            <Card small lg="9">
-                                <ListGroup flush>
-                                    <ListGroupItem className="px-3">
-                                        {/* Talla */}
-                                        <FormGroup>
-                                            <label>Talla</label>
-                                            <InputGroup className="mb-3">
-                                                <FormInput
-                                                    value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.height}
-                                                    /*value={talla.value}
-                                                    valid={talla.valid}
-                                                    invalid={talla.valid === undefined ? undefined : !talla.valid}
-                                                    onChange={onChangeTalla}*/
-                                                    size="lg"
-                                                    disabled
-                                                    placeholder="0"/>
-                                                <InputGroupAddon type="append">
-                                                    <InputGroupText>m</InputGroupText>
-                                                </InputGroupAddon>
-                                                <FormFeedback>"Debes ingresar solo
-                                                    números"</FormFeedback>
-                                            </InputGroup>
-                                        </FormGroup>
-
-
-                                        {/* Sexo */}
-
-                                        <FormGroup>
-                                            <label>Sexo</label>
-                                            <FormInput
-                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.sex}
-                                                /*value={inr_inicial.value}
-                                                valid={inr_inicial.valid}
-                                                invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
-                                                onChange={onChangeINRInicial}*/
-                                                size="lg"
-                                                disabled
-                                                className="mb-3"
-                                                placeholder="Femenino"/>
-                                        </FormGroup>
-
-                                        {/* INR Inicial */}
-                                        <FormGroup>
-                                            <label>INR Inicial</label>
-                                            <FormInput
-                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.initialINR}
-                                                /*value={inr_inicial.value}
-                                                valid={inr_inicial.valid}
-                                                invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
-                                                onChange={onChangeINRInicial}*/
-                                                size="lg"
-                                                className="mb-3"
-                                                disabled
-                                                placeholder="0"/>
-                                            <FormFeedback>"Debes ingresar un
-                                                valor decimal. EJ: 2.4"</FormFeedback>
-                                        </FormGroup>
-                                    </ListGroupItem>
-                                </ListGroup>
-                            </Card>
-                        </Col>
-                        <Col lg="4" className="mb-4">
+                        <Col sm="12">
                             {/* Genetica */}
                             <Card small lg="12">
                                 <CardHeader className="border-bottom">
-                                    <h6 className="m-0">Datos Farmacogenética del Paciente</h6>
+                                    <h6 className="m-0">Datos Farmacogenéticos del Paciente</h6>
                                 </CardHeader>
                                 <CardBody>
-                                    <Form className="add-new-post">
-                                        <ListGroup flush>
-                                            <ListGroupItem className="px-0">
-                                                <Form>
-                                                    <label>CYP2C9-2</label>
-                                                    <FormInput
-                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.CYP2C9_2}
-                                                        /*value={inr_inicial.value}
-                                                        valid={inr_inicial.valid}
-                                                        invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
-                                                        onChange={onChangeINRInicial}*/
-                                                        size="lg"
-                                                        className="mb-3"
-                                                        disabled
-                                                        placeholder="*1/*1"/>
-                                                    <FormFeedback>"Debes ingresar un
-                                                        valor decimal. EJ: 2.4"</FormFeedback>
-                                                    <label>CYP2C9-3</label>
-                                                    <FormInput
-                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.CYP2C9_3}
-                                                        /*value={inr_inicial.value}
-                                                        valid={inr_inicial.valid}
-                                                        invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
-                                                        onChange={onChangeINRInicial}*/
-                                                        size="lg"
-                                                        className="mb-3"
-                                                        disabled
-                                                        placeholder="*1/*1"/>
-                                                    <FormFeedback>"Debes ingresar un
-                                                        valor decimal. EJ: 2.4"</FormFeedback>
-                                                    <label>VKORC1</label>
-                                                    <FormInput
-                                                        value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.VKORC1}  
-                                                        /*value={inr_inicial.value}
-                                                        valid={inr_inicial.valid}
-                                                        invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
-                                                        onChange={onChangeINRInicial}*/
-                                                        size="lg"
-                                                        className="mb-3"
-                                                        disabled
-                                                        placeholder="*A/*A"/>
-                                                    <FormFeedback>"Debes ingresar un
-                                                        valor decimal. EJ: 2.4"</FormFeedback>
-                                                </Form>
-                                            </ListGroupItem>
-                                        </ListGroup>
-                                    </Form>
+                                    <Row>
+                                        <Col sm="12" lg="4">
+                                            <label>CYP2C9-2</label>
+                                            <FormInput
+                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.CYP2C9_2}
+                                                /*value={inr_inicial.value}
+                                                valid={inr_inicial.valid}
+                                                invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                onChange={onChangeINRInicial}*/
+                                                size="lg"
+                                                className="mb-3"
+                                                disabled
+                                                placeholder="*1/*1"/>
+                                        </Col>
+                                        <Col sm="12" lg="4">
+                                            <label>CYP2C9-3</label>
+                                            <FormInput
+                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.CYP2C9_3}
+                                                /*value={inr_inicial.value}
+                                                valid={inr_inicial.valid}
+                                                invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                onChange={onChangeINRInicial}*/
+                                                size="lg"
+                                                className="mb-3"
+                                                disabled
+                                                placeholder="*1/*1"/>
+                                        </Col>
+                                        <Col sm="12" lg="4">
+                                            <label>VKORC1</label>
+                                            <FormInput
+                                                value={isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.clinic.genetics.VKORC1}
+                                                /*value={inr_inicial.value}
+                                                valid={inr_inicial.valid}
+                                                invalid={inr_inicial.valid === undefined ? undefined : !inr_inicial.valid}
+                                                onChange={onChangeINRInicial}*/
+                                                size="lg"
+                                                className="mb-3"
+                                                disabled
+                                                placeholder="*A/*A"/>
+                                        </Col>
+                                    </Row>
                                 </CardBody>
                             </Card>
                         </Col>
@@ -299,10 +290,10 @@ const PacienteGeneral = ({data_paciente, title}) => {
                                 <table className="table">
                                     <thead>
                                     <tr>
-                                      <th scope="col">Gen</th>
-                                      <th scope="col">ID Poliformismo estudiado</th>
-                                      <th scope="col">Presencia del Alelo variante</th>
-                                      <th scope="col">Observaciones</th>
+                                        <th scope="col">Gen</th>
+                                        <th scope="col">ID Poliformismo estudiado</th>
+                                        <th scope="col">Presencia del Alelo variante</th>
+                                        <th scope="col">Observaciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -311,7 +302,7 @@ const PacienteGeneral = ({data_paciente, title}) => {
                                         <td>rs1799853 (*2)</td>
                                         <td>{isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.CYP2C9.rs1799853}</td>
                                         <td rowSpan="2" className="align-middle">
-                                          {isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.CYP2C9.Observaciones}
+                                            {isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.CYP2C9.Observaciones}
                                         </td>
                                     </tr>
                                     <tr>
@@ -323,7 +314,7 @@ const PacienteGeneral = ({data_paciente, title}) => {
                                         <td>rs9923231</td>
                                         <td>{isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.VKORC1.rs9923231}</td>
                                         <td>
-                                          {isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.VKORC1.Observaciones}
+                                            {isObjectEmpty(data_paciente) ? constants.no_data : data_paciente.genetic.VKORC1.Observaciones}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -340,8 +331,9 @@ const PacienteGeneral = ({data_paciente, title}) => {
           */}
                 </CardBody>
             </Card>
-        );
-   // }
+        </Container>
+    );
+    // }
 }
 
 PacienteGeneral.propTypes = {

@@ -36,6 +36,9 @@ const PacienteGeneral = ({data_paciente, title}) => {
         
         return (
             <Card small className="h-100 w-100">
+                <CardHeader className="border-bottom">
+                                <h6 className="m-0">{title}</h6>
+                            </CardHeader>
                 <CardHeader className="border-bottom bg-light">
                     <h5 className="mt-1 font-weight-bold text-center">{title}</h5>
                 </CardHeader>

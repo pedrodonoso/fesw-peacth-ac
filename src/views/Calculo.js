@@ -187,7 +187,7 @@ class Calculo extends Component {
           */}
                     <Container fluid className="main-content-container px-4">
 
-                        <Row>
+                        <Row >
                             <Col lg="12" className="py-4">
                                 <DataUserGeneral onSubmit={this.handleCalculoSubmit}
                                                  dosis={parseFloat(this.state.dosis)}/>

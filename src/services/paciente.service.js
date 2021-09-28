@@ -1,4 +1,4 @@
-import {api} from '../helpers';
+import { api } from '../helpers';
 import axios from 'axios';
 //TODO: API
 const basePath = 'api';

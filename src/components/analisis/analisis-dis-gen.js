@@ -104,7 +104,7 @@ class AnalisisDisGen extends React.Component {
 
 
     render() {
-        const {title} = this.props;
+        const { title } = this.props;
         return (
             <Card small className="h-100">
                 <CardHeader className="border-bottom">
@@ -130,7 +130,7 @@ class AnalisisDisGen extends React.Component {
                                         justifyContent: 'center',
                                     }}>
                                         <Col>
-                                            <Row><strong style={{'font-size': '13px', 'font-weight': '80'}}>CYP2C9
+                                            <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9
                                                 *2</strong></Row>
                                             <Row><strong style={{
                                                 'font-size': '10px',
@@ -152,7 +152,7 @@ class AnalisisDisGen extends React.Component {
                                         justifyContent: 'center',
                                     }}>
                                         <Col>
-                                            <Row><strong style={{'font-size': '13px', 'font-weight': '80'}}>CYP2C9
+                                            <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9
                                                 *3</strong></Row>
                                             <Row><strong style={{
                                                 'font-size': '10px',
@@ -174,7 +174,7 @@ class AnalisisDisGen extends React.Component {
                                     }}>
                                         <Col>
                                             <Row><strong
-                                                style={{'font-size': '13px', 'font-weight': '80'}}>VKORC1</strong></Row>
+                                                style={{ 'font-size': '13px', 'font-weight': '80' }}>VKORC1</strong></Row>
                                             <Row><strong style={{
                                                 'font-size': '10px',
                                                 'font-weight': '50'
@@ -183,51 +183,28 @@ class AnalisisDisGen extends React.Component {
                                     </Col>
                                 </Button>
                             </ButtonGroup>
-                            {/* <ButtonGroup >
-                <Button
-                  theme={this.state.gen === constants.gen2 ? 'primary' : 'white'}
-                  onClick={() =>
-                    this.generate(constants.gen2)
-                  }
-                > {constants.gen2} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen3 ? 'primary' : 'white'}
-                  onClick={() =>
-                    this.generate(constants.gen3)
-                  }
-                > {constants.gen3} </Button>
-                <Button
-                  theme={this.state.gen === constants.gen4 ? 'primary' : 'white'}
-                  onClick={() =>
-                    this.generate(constants.gen4)
-                  }
-                > {constants.gen4} </Button>
-              </ButtonGroup>*/}
                         </Col>
                         <Col>
-                            {/*
-              <Button
-                size="sm"
-                className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
-              >
-                View Full Report &rarr;
-              </Button>
-            */}
                         </Col>
                     </Row>
-                    <div>
-                        <Chart
-                            options={this.state.options}
-                            series={this.state.series}
-                            type={this.state.chart.type}
-                            width={this.state.chart.width}
-                            height={this.state.chart.height}
-                        />
-                    </div>
+                    <Row align="center">
+                        <Col>
+                            <div className="align-middle">
+                                <Chart
+                                    options={this.state.options}
+                                    series={this.state.series}
+                                    type={this.state.chart.type}
+                                    width={this.state.options.chart.width}
+                                    height={this.state.options.chart.height}
+                                />
+                            </div>
+
+                        </Col>
+                    </Row>
                     <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this, {})}
-                                  handler={this.handlerOpenDialog.bind(this)}
-                                  text={this.state.errortext}
-                                  title={this.state.errortitle}
+                        handler={this.handlerOpenDialog.bind(this)}
+                        text={this.state.errortext}
+                        title={this.state.errortitle}
                     />
                     {/*
           <canvas
@@ -263,10 +240,12 @@ AnalisisDisGen.defaultProps = {
     series: [],
     chart: {
         type: 'donut',
-        height: '300',
-        width: '100%',
     },
     options: {
+        chart: {
+            height: 'auto',
+            width: '50%',
+        },
         dataLabels: {
             enabled: true
         },
@@ -292,14 +271,6 @@ AnalisisDisGen.defaultProps = {
                 right: 10,
             }
         },
-        responsive: [{
-            breakpoint: 1000,
-            options: {
-                legend: {
-                    position: 'top'
-                }
-            }
-        }]
     },
 };
 export default AnalisisDisGen;

@@ -39,13 +39,10 @@ class AnalisisDosisGen extends React.Component {
         calculoService.getBoxplot(_gen)
             .then((response) => {
                 var data = response.data
-                // var ser = response.data.frequency
-                //console.log({title: "getBoxplot", response: data, gen: _gen})
                 var _data = [];
                 data.forEach(function (e) {
                     var label = e.label;
                     var value = e.value;
-                    //console.log({title:"foreach", data: label})
                     var aux = {};
                     aux.x = label;
                     aux.y = value;
@@ -57,12 +54,10 @@ class AnalisisDosisGen extends React.Component {
                     data: _data,
                 }]
 
-                //console.log({title: "data",data:_data})
                 this.setState({
                     ...this.state,
                     series: _serie
                 });
-                //console.log(this.state)
             })
             .catch((error) => {
                 this.setState({
@@ -95,7 +90,6 @@ class AnalisisDosisGen extends React.Component {
                 errortext: data.text,
             });
         }
-        //console.log({text:"toggle", open:this.state.open});
     }
 
     handlerOpenDialog(data) {
@@ -103,12 +97,11 @@ class AnalisisDosisGen extends React.Component {
             ...this.state,
             error: data
         });
-        //console.log({text:"handler", open:this.state.open});
     }
 
 
     render() {
-        const {title} = this.props;
+        const { title } = this.props;
         return (
             <Card small className="h-100">
                 <CardHeader className="border-bottom">
@@ -134,7 +127,7 @@ class AnalisisDosisGen extends React.Component {
                                         justifyContent: 'center',
                                     }}>
                                         <Col>
-                                            <Row><strong style={{'font-size': '13px', 'font-weight': '80'}}>CYP2C9
+                                            <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9
                                                 *2</strong></Row>
                                             <Row><strong style={{
                                                 'font-size': '10px',
@@ -156,7 +149,7 @@ class AnalisisDosisGen extends React.Component {
                                         justifyContent: 'center',
                                     }}>
                                         <Col>
-                                            <Row><strong style={{'font-size': '13px', 'font-weight': '80'}}>CYP2C9
+                                            <Row><strong style={{ 'font-size': '13px', 'font-weight': '80' }}>CYP2C9
                                                 *3</strong></Row>
                                             <Row><strong style={{
                                                 'font-size': '10px',
@@ -178,7 +171,7 @@ class AnalisisDosisGen extends React.Component {
                                     }}>
                                         <Col>
                                             <Row><strong
-                                                style={{'font-size': '13px', 'font-weight': '80'}}>VKORC1</strong></Row>
+                                                style={{ 'font-size': '13px', 'font-weight': '80' }}>VKORC1</strong></Row>
                                             <Row><strong style={{
                                                 'font-size': '10px',
                                                 'font-weight': '50'
@@ -189,36 +182,24 @@ class AnalisisDosisGen extends React.Component {
                             </ButtonGroup>
                         </Col>
                         <Col>
-                            {/*
-              <Button
-                size="sm"
-                className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
-              >
-                View Full Report &rarr;
-              </Button>
-            */}
                         </Col>
                     </Row>
 
-                    {/*
-          <div id="chart"></div>
-          */}
-
-                    <Row>
+                    <Row align="center">
                         <Col>
                             <Chart
                                 options={this.state.options}
                                 series={this.state.series}
                                 type='boxPlot'
-                                width='800'
-                                height='300'
+                                width='70%'
+                                height='auto'
                             />
                         </Col>
                     </Row>
                     <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this, {})}
-                                  handler={this.handlerOpenDialog.bind(this)}
-                                  text={this.state.errortext}
-                                  title={this.state.errortitle}
+                        handler={this.handlerOpenDialog.bind(this)}
+                        text={this.state.errortext}
+                        title={this.state.errortitle}
                     />
                     {/*
           <canvas
@@ -253,14 +234,15 @@ AnalisisDosisGen.defaultProps = {
     error: false,
     gen: constants.gen2,
     title: "Análisis",
-    /*
     chart: {
-      type: 'boxPlot',
-      height:'300',
-      width: '100%'
+        width: '70%',
+        height: 'auto'
     },
-    */
     options: {
+        chart: {
+            width: '70%',
+            height: 'auto'
+        },
         noData: {
             text: 'Cargando...'
         },
@@ -277,6 +259,7 @@ AnalisisDosisGen.defaultProps = {
         },
 
         yaxis: {
+            forceNiceScale: true,
             title: {
                 text: 'Dosis semanal (mg/semana)'
             },
@@ -286,23 +269,7 @@ AnalisisDosisGen.defaultProps = {
                 }
             },
         },
-        /*
-        tooltip: {
-            shared: false,
-            intersect: true
-        },
-
-        responsive: [{
-          breakpoint: 100,
-          options: {
-          legend: {
-              position: 'top'
-          }
-          }
-        }] */
-
     },
-
     series: [
         {
             name: 'box',

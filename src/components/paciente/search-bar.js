@@ -13,7 +13,7 @@ const SearchBar = ({onSearchSubmit}) => {
     const [search_input, setSearchInput] = useState({query: ''});
 
     function onChangeSearchInput(e) {
-        var _cod = e.target.value;
+        var _cod = e.target.value.toUpperCase();
         setSearchInput((prevState) => ({...prevState, query: _cod}));
     }
 

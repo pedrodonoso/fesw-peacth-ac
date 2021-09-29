@@ -81,7 +81,6 @@ function getLastLocalProps() {
             'p_VKORC1_AA': -0.701,
             'r_squared': 0.5147,
         }
-        result = JSON.parse(result);
     } else {
         result = JSON.parse(result)
     }

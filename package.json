@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "homepage": "./",
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@react-spectrum/progress": "^3.1.3",

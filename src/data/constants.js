@@ -54,6 +54,10 @@ var mensaje_error_calculo_mensaje = (<div> El código del paciente ya existe!! <
 var mensaje_error_calculo_mal_ingreso_titulo = "Revisa los datos";
 var mensaje_error_calculo_mal_ingreso_mensaje = "Algunos campos presentan errores o están vacíos";
 
+var mensaje_error_regresion_titulo = "No se pudo 😁";
+var mensaje_error_regresion_mensaje = (
+    <div>Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Intentalo más tarde </b></div>)
+
 
 var no_data = "no hay datos";
 const constants = {
@@ -83,7 +87,9 @@ const constants = {
     mensaje_error_calculo_titulo,
     mensaje_error_calculo_mensaje,
     mensaje_error_calculo_mal_ingreso_titulo,
-    mensaje_error_calculo_mal_ingreso_mensaje
+    mensaje_error_calculo_mal_ingreso_mensaje,
+    mensaje_error_regresion_titulo,
+    mensaje_error_regresion_mensaje
 };
 
 export default constants;

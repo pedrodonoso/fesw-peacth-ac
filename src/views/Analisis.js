@@ -31,7 +31,6 @@ class Analisis extends Component {
                 {/* Page Header */}
                 <ThemeProvider theme={theme}>
                     <Container className="main-content-container px-4">
-
                         <Row>
                             <Col lg="12" className="py-4">
                                 {this.props.dosisGen ?

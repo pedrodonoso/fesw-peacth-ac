@@ -1,4 +1,8 @@
-import constants from "../data/constants"
+import constants from "../data/constants";
+import { api } from '../helpers';
+import axios from 'axios';
+//TODO: API
+const basePath = 'api';
 
 function formula(props, vars) {
     console.log({nombre: "Formula", data: vars, props: props})
@@ -63,29 +67,49 @@ function updateLocalProps(data) {
 function getLastLocalProps() {
     var result = window.localStorage.getItem('vars');
     console.log(result);
-    if (result === null) {
+    if (result === {}) {
         result = {
-            'p_0': 3.081,
+            'p_0': 3.0810,
             'p_men': 0.167,
-            'p_age': 0.0081,
+            'p_age': -0.0081,
             'p_initialINR': 0.055,
             'p_imc': 0.013,
-            'p_CYP2C9_12': 0.107,
-            'p_CYP2C9_13': 0.323,
-            'p_CYP2C9_33': 0.746,
-            'p_VKORC1_GA': 0.270,
-            'p_VKORC1_AA': 0.701
+            'p_CYP2C9_12': -0.107,
+            'p_CYP2C9_13': -0.323,
+            'p_CYP2C9_33': -0.746,
+            'p_VKORC1_GA': -0.270,
+            'p_VKORC1_AA': -0.701,
+            'r_squared': 0.5147,
         }
+        result = JSON.parse(result);
     } else {
         result = JSON.parse(result)
     }
     return result;
 }
 
+
+
+//obtener regresión 
+async function getRegresion() {
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //get
+    //https://peacth-ac-api.herokuapp.com/api/LogWTDparameters/multivariable_regression/
+    //var json = JSON.stringify({ answer: 42 });
+    console.log({
+        title: 'pre get getRegresion',
+        path: `${basePath}/LogWTDparameters/multivariable_regression/`
+    })
+    return await api.get(`${basePath}/LogWTDparameters/multivariable_regression/`);
+}
+
+
 const formulaService = {
     formula,
     updateLocalProps,
-    getLastLocalProps
+    getLastLocalProps,
+    getRegresion,
 };
 
 export default formulaService;

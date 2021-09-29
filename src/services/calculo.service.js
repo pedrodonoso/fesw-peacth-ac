@@ -43,6 +43,11 @@ function updatePropsAlgorithm(data) {
     //https://peacth-ac-backend.herokuapp.com/api/LogWTDparameters/set_parametres/set_parametres/
     axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    console.log({
+        title: 'pre post updatePropsAlgorithm',
+        url: (`${basePath}/LogWTDparameters/set_parametres/set_parametres/`, data),
+        data: data
+    })
     return api.post(`${basePath}/LogWTDparameters/set_parametres/set_parametres/`, data)
 }
 

@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
     Container,
@@ -6,12 +6,12 @@ import {
     Col,
     Progress
 } from "shards-react";
-import {Line} from 'rc-progress';
+import { Line } from 'rc-progress';
 
 import PacienteGeneral from "../components/paciente/paciente-general";
 import SearchBar from "../components/paciente/search-bar";
-import {esES} from '@material-ui/core/locale';
-import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import { esES } from '@material-ui/core/locale';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CustomToggle from '../components/forms/CustomToggle';
 
 import pacienteService from "../services/paciente.service";
@@ -20,7 +20,7 @@ import ProgressBars from "../components/components-overview/ProgressBars";
 
 const theme = createMuiTheme({
     palette: {
-        primary: {main: '#1976d2'},
+        primary: { main: '#1976d2' },
     },
 }, esES);
 
@@ -57,20 +57,20 @@ class Paciente extends React.Component {
     }
 
     increase(speed) {
-        const {percent} = this.state;
+        const { percent } = this.state;
         const newPercent = percent + 1;
         if (newPercent > 100) {
             clearTimeout(this.state.tm);
             return;
         }
-        this.setState({...this.state, percent: newPercent});
+        this.setState({ ...this.state, percent: newPercent });
 
         this.state.tm = setTimeout(this.increase, speed);
     }
 
     restart(error) {
         clearTimeout(this.state.tm);
-        this.setState({...this.state, percent: 0}, () => {
+        this.setState({ ...this.state, percent: 0 }, () => {
             if (!error) {
                 console.log("??")
                 this.increase(50);
@@ -95,13 +95,13 @@ class Paciente extends React.Component {
             .then((response) => {
                 var dataProfile = response.data
                 // var ser = response.data.frequency
-                console.log({title: "getProfilePatient", response: dataProfile, gen: query});
+                console.log({ title: "getProfilePatient", response: dataProfile, gen: query });
                 this.setState({
                     ...this.state,
                     data: dataProfile,
                     bad_response: false,
                 });
-                console.log({title: "getProfilePatient2", response: this.state.data, gen: query});
+                console.log({ title: "getProfilePatient2", response: this.state.data, gen: query });
                 this.increase(0.1);
             })
             .catch((error) => {
@@ -112,7 +112,7 @@ class Paciente extends React.Component {
                     errortitle: constants.mensaje_error_perfil_paciente_titulo,
                     errortext: constants.mensaje_error_perfil_paciente_mensaje,
                 });
-                this.increase(0);
+                this.increase(0.1);
             })
     }
 
@@ -150,37 +150,39 @@ class Paciente extends React.Component {
                         <Col className="py-4">
                             <Row>
                                 <Col className="mb-2">
-                                    <SearchBar onSearchSubmit={this.handlerSearch}/>
+                                    <SearchBar onSearchSubmit={this.handlerSearch} />
                                 </Col>
                             </Row>
                             <Row>
-                                <Col lg="12" className="mb-2">
-
-                                    <div style={{width: "auto"}}>
+                                <Col lg="12" className="">
+                                    <div>
                                         {/*colores: azul,verde, rojo*/}
+                                        {/*
                                         <Line
                                             percent={this.state.percent}
                                             strokeWidth={0.5}
                                             strokeColor={getColor(this.state.bad_response ? 2 : 1)}
                                         />
+                                        */}
                                         <Progress
                                             theme={getTheme(this.state.bad_response ? 2 : 1)}
-                                            style={{height: "4px"}}
+                                            style={{ height: "4px" }}
                                             className="mb-3"
                                             value={this.state.percent}
                                             striped={false}
+                                            animated={false}
                                         />
                                     </div>
                                 </Col>
                             </Row>
                             <Row>
-                                <PacienteGeneral data_paciente={this.state.data} title="Perfil médico del paciente"/>
+                                <PacienteGeneral data_paciente={this.state.data} title="Perfil médico del paciente" />
                             </Row>
                         </Col>
                         <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this, {})}
-                                      handler={this.handlerOpenDialog.bind(this)}
-                                      text={this.state.errortext}
-                                      title={this.state.errortitle}
+                            handler={this.handlerOpenDialog.bind(this)}
+                            text={this.state.errortext}
+                            title={this.state.errortitle}
                         />
                     </Container>
                 </ThemeProvider>

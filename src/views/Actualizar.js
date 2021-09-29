@@ -166,9 +166,9 @@ class Actualizar extends Component {
                 formulaService.updateLocalProps(response.data.params);
 
                 //mensage
-                
+
                 var mensaje = response.data.message;
-                
+
                 this.toggleMessageError({
                     title: "",
                     text: mensaje.replace("r2", 'R²'),
@@ -236,7 +236,7 @@ class Actualizar extends Component {
         //guardar en estado
         this.setState({
             ...this.state,
-            data_local: model
+            data_local: model === null ? {} : model
         });
     }
     render() {

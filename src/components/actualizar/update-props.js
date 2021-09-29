@@ -32,7 +32,11 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
     const [manualUpdate, setManualUpdate] = useState({ value: false });
 
     function isObjectEmpty(obj) {
-        return Object.getOwnPropertyNames(obj).length == 0
+        if(obj === null) {
+            return true;
+        } else {
+            return Object.getOwnPropertyNames(obj).length == 0
+        }
     }
     function setForm() {
         setP0((prevState) => ({ ...prevState, value: '', valid: undefined }));

@@ -67,9 +67,9 @@ function updateLocalProps(data) {
 function getLastLocalProps() {
     var result = window.localStorage.getItem('vars');
     console.log(result);
-    if (result === {}) {
+    if (result === null || result === {}) {
         result = {
-            'p_0': 3.0810,
+            'p_0': 3.081,
             'p_men': 0.167,
             'p_age': -0.0081,
             'p_initialINR': 0.055,

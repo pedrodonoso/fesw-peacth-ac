@@ -102,7 +102,6 @@ class Paciente extends React.Component {
                     bad_response: false,
                 });
                 console.log({ title: "getProfilePatient2", response: this.state.data, gen: query });
-                this.increase(0.1);
             })
             .catch((error) => {
                 this.setState({
@@ -112,8 +111,12 @@ class Paciente extends React.Component {
                     errortitle: constants.mensaje_error_perfil_paciente_titulo,
                     errortext: constants.mensaje_error_perfil_paciente_mensaje,
                 });
-                this.increase(0.1);
-            })
+            }).finally(() => {
+                this.setState({
+                    ...this.state,
+                    percent: 100,
+                });
+            });
     }
 
     toggle(data) {

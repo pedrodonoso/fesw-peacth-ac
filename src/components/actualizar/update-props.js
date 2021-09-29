@@ -26,6 +26,8 @@ const UpdateProps = ({onSubmit}) => {
     const [p_VKORC1_GA, setPVKORC1GA] = useState({value: '', valid: undefined});
     const [p_VKORC1_AA, setPVKORC1AA] = useState({value: '', valid: undefined});
 
+    const [manualUpdate, setManualUpdate] = useState({value: false});
+
     function setForm() {
         setP0((prevState) => ({...prevState, value: '', valid: undefined}));
         setPMen((prevState) => ({...prevState, value: '', valid: undefined}));
@@ -176,6 +178,14 @@ const UpdateProps = ({onSubmit}) => {
         }
     }
 
+    function handleManual() {
+        setManualUpdate((prevState) => ({...prevState, value: true}));
+    }
+
+    function handleNotManual() {
+        setManualUpdate((prevState) => ({...prevState, value: false}));
+    }
+
     return (
         <React.Fragment>
             <Col>
@@ -184,16 +194,21 @@ const UpdateProps = ({onSubmit}) => {
                         {/* Data general */}
                         <Card small sm="12">
                             <CardHeader className="border-bottom bg-light">
-                                <h5 className="m-0 font-weight-bold text-center">Actualizar parámetros del
-                                    algoritmo</h5>
+                                <h5 className="m-0 font-weight-bold text-center">Actualizar parámetros del algoritmo</h5>
                             </CardHeader>
                             <CardBody>
                                 <Row>
-                                    <Col sm="12" lg="4">
+
+                                    {/* Parametros Actuales*/}
+                                    <Col sm="5">
+                                        <CardHeader className="border mb-3 text-center">
+                                            Parámetros Actuales
+                                        </CardHeader>
                                         {/*Coef. inicial*/}
                                         <FormGroup>
                                             <label>Coeficiente inicial</label>
                                             <FormInput
+                                                disabled
                                                 value={p_0.value}
                                                 valid={p_0.valid}
                                                 invalid={p_0.valid === undefined ? undefined : !p_0.valid}
@@ -204,12 +219,169 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback>Debes ingresar un número decimal, con punto. EJ:
                                                 1.0</FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                    <Col sm="12" lg="4">
+
                                         {/*Coef. Hombre*/}
                                         <FormGroup>
                                             <label>Coeficiente Hombre</label>
                                             <FormInput
+                                                disabled
+                                                value={p_men.value}
+                                                valid={p_men.valid}
+                                                invalid={p_men.valid === undefined ? undefined : !p_men.valid}
+                                                onChange={onChangePMen}
+                                                size="lg"
+                                                //className="mb-3 "
+                                                placeholder="0.169"/>
+                                        </FormGroup>
+
+                                        {/*Coef edad*/}
+                                        <FormGroup>
+                                            <label>Coeficiente Edad</label>
+                                            <FormInput
+                                                disabled
+                                                value={p_age.value}
+                                                valid={p_age.valid}
+                                                invalid={p_age.valid === undefined ? undefined : !p_age.valid}
+                                                onChange={onChangePAge}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.0021"/>
+                                        </FormGroup>
+
+                                        {/*INR inicial*/}
+                                        <FormGroup>
+                                            <label>Coeficiente INR Inicial</label>
+                                            <FormInput
+                                                disabled
+                                                value={p_initialINR.value}
+                                                valid={p_initialINR.valid}
+                                                invalid={p_initialINR.valid === undefined ? undefined : !p_initialINR.valid}
+                                                onChange={onChangePInitialINR}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.044"/>
+                                        </FormGroup>
+
+                                        {/*IMC*/}
+                                        <FormGroup>
+                                            <label>Coeficiente IMC</label>
+                                            <FormInput
+                                                disabled
+                                                value={p_imc.value}
+                                                valid={p_imc.valid}
+                                                invalid={p_imc.valid === undefined ? undefined : !p_imc.valid}
+                                                onChange={onChangePImc}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.013"/>
+                                        </FormGroup>
+
+                                        {/*Coef CYP2C9 *1/*2*/}
+                                        <FormGroup>
+                                            <label>Coeficiente CYP2C9 *1/*2</label>
+                                            <FormInput
+                                                disabled
+                                                value={p_CYP2C9_12.value}
+                                                valid={p_CYP2C9_12.valid}
+                                                invalid={p_CYP2C9_12.valid === undefined ? undefined : !p_CYP2C9_12.valid}
+                                                onChange={onChangePCYP2C912}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.106"/>
+                                        </FormGroup>
+
+                                        {/*Coef CYP2C9 *1/*3*/}
+                                        <FormGroup>
+                                            <label>Coeficiente CYP2C9 *1/*3</label>
+                                            <FormInput
+                                                disabled
+                                                value={p_CYP2C9_13.value}
+                                                valid={p_CYP2C9_13.valid}
+                                                invalid={p_CYP2C9_13.valid === undefined ? undefined : !p_CYP2C9_13.valid}
+                                                onChange={onChangePCYP2C913}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.334"/>
+                                        </FormGroup>
+
+                                        {/*Coef CYP2C9 *3/*3*/}
+                                        <FormGroup>
+                                            <label>Coeficiente CYP2C9 *3/*3</label>
+                                            <FormInput
+                                                disabled
+                                                value={p_CYP2C9_33.value}
+                                                valid={p_CYP2C9_33.valid}
+                                                invalid={p_CYP2C9_33.valid === undefined ? undefined : !p_CYP2C9_33.valid}
+                                                onChange={onChangePCYP2C933}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.784"/>
+                                        </FormGroup>
+
+                                        {/* Coeficiente VKORC1 *G/*A */}
+                                        <FormGroup>
+                                            <label>Coeficiente VKORC1 *G/*A </label>
+                                            <FormInput
+                                                disabled
+                                                value={p_VKORC1_GA.value}
+                                                valid={p_VKORC1_GA.valid}
+                                                invalid={p_VKORC1_GA.valid === undefined ? undefined : !p_VKORC1_GA.valid}
+                                                onChange={onChangeVKORC1GA}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.26"/>
+                                        </FormGroup>
+
+                                        {/* Coeficiente VKORC1 *A/*A */}
+                                        <FormGroup>
+                                            <label>Coeficiente VKORC1 *A/*A</label>
+                                            <FormInput
+                                                disabled
+                                                value={p_VKORC1_AA.value}
+                                                valid={p_VKORC1_AA.valid}
+                                                invalid={p_VKORC1_AA.valid === undefined ? undefined : !p_VKORC1_AA.valid}
+                                                onChange={onChangeVKORC1AA}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0.705"/>
+                                        </FormGroup>
+
+                                    </Col>
+
+                                    {/*Columna Central*/}
+                                    <Col sm="2" className="text-center mx-auto d-flex flex-column justify-content-around">
+                                        <h2 style={{"font-size": "60px"}}><i className="material-icons text-primary">double_arrow</i></h2>
+                                        <h2 style={{"font-size": "60px"}}><i className="material-icons text-primary">double_arrow</i></h2>
+                                        <h2 style={{"font-size": "60px"}}><i className="material-icons text-primary">double_arrow</i></h2>
+                                    </Col>
+
+                                    {/* Nuevos Parámetros*/}
+                                    <Col sm="5">
+                                        <CardHeader className="border mb-3 text-center">
+                                            Nuevos Parámetros con: <span
+                                            className="font-weight-bold">{manualUpdate.value ? "Ingreso Manual" : "Regresión Lineal"}</span>
+                                        </CardHeader>
+                                        {/*Coef. inicial*/}
+                                        <FormGroup>
+                                            <label>Coeficiente inicial</label>
+                                            <FormInput
+                                                disabled={!manualUpdate.value}
+                                                value={p_0.value}
+                                                valid={p_0.valid}
+                                                invalid={p_0.valid === undefined ? undefined : !p_0.valid}
+                                                onChange={onChangeP0}
+                                                size="lg"
+                                                className="mb-3"
+                                                placeholder="3.042"/>
+                                            <FormFeedback>Debes ingresar un número decimal, con punto. EJ:
+                                                1.0</FormFeedback>
+                                        </FormGroup>
+
+                                        {/*Coef. Hombre*/}
+                                        <FormGroup>
+                                            <label>Coeficiente Hombre</label>
+                                            <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_men.value}
                                                 valid={p_men.valid}
                                                 invalid={p_men.valid === undefined ? undefined : !p_men.valid}
@@ -220,12 +392,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                    <Col sm="12" lg="4">
+
                                         {/*Coef edad*/}
                                         <FormGroup>
                                             <label>Coeficiente Edad</label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_age.value}
                                                 valid={p_age.valid}
                                                 invalid={p_age.valid === undefined ? undefined : !p_age.valid}
@@ -236,15 +408,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
 
-                                </Row>
-                                <Row>
-                                    <Col sm="12" lg="4">
                                         {/*INR inicial*/}
                                         <FormGroup>
-                                            <label>Coeficiente InitialINR</label>
+                                            <label>Coeficiente INR Inicial</label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_initialINR.value}
                                                 valid={p_initialINR.valid}
                                                 invalid={p_initialINR.valid === undefined ? undefined : !p_initialINR.valid}
@@ -255,12 +424,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                    <Col sm="12" lg="4">
+
                                         {/*IMC*/}
                                         <FormGroup>
                                             <label>Coeficiente IMC</label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_imc.value}
                                                 valid={p_imc.valid}
                                                 invalid={p_imc.valid === undefined ? undefined : !p_imc.valid}
@@ -271,12 +440,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                    <Col sm="12" lg="4">
+
                                         {/*Coef CYP2C9 *1/*2*/}
                                         <FormGroup>
                                             <label>Coeficiente CYP2C9 *1/*2</label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_CYP2C9_12.value}
                                                 valid={p_CYP2C9_12.valid}
                                                 invalid={p_CYP2C9_12.valid === undefined ? undefined : !p_CYP2C9_12.valid}
@@ -287,14 +456,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col sm="12" lg="4">
+
                                         {/*Coef CYP2C9 *1/*3*/}
                                         <FormGroup>
                                             <label>Coeficiente CYP2C9 *1/*3</label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_CYP2C9_13.value}
                                                 valid={p_CYP2C9_13.valid}
                                                 invalid={p_CYP2C9_13.valid === undefined ? undefined : !p_CYP2C9_13.valid}
@@ -305,12 +472,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                    <Col sm="12" lg="4">
+
                                         {/*Coef CYP2C9 *3/*3*/}
                                         <FormGroup>
                                             <label>Coeficiente CYP2C9 *3/*3</label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_CYP2C9_33.value}
                                                 valid={p_CYP2C9_33.valid}
                                                 invalid={p_CYP2C9_33.valid === undefined ? undefined : !p_CYP2C9_33.valid}
@@ -321,12 +488,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                    <Col sm="12" lg="4">
+
                                         {/* Coeficiente VKORC1 *G/*A */}
                                         <FormGroup>
                                             <label>Coeficiente VKORC1 *G/*A </label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_VKORC1_GA.value}
                                                 valid={p_VKORC1_GA.valid}
                                                 invalid={p_VKORC1_GA.valid === undefined ? undefined : !p_VKORC1_GA.valid}
@@ -337,14 +504,12 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col sm="12" lg="4">
+
                                         {/* Coeficiente VKORC1 *A/*A */}
                                         <FormGroup>
                                             <label>Coeficiente VKORC1 *A/*A</label>
                                             <FormInput
+                                                disabled={!manualUpdate.value}
                                                 value={p_VKORC1_AA.value}
                                                 valid={p_VKORC1_AA.valid}
                                                 invalid={p_VKORC1_AA.valid === undefined ? undefined : !p_VKORC1_AA.valid}
@@ -355,6 +520,7 @@ const UpdateProps = ({onSubmit}) => {
                                             <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                 1.0 </FormFeedback>
                                         </FormGroup>
+
                                     </Col>
                                 </Row>
 
@@ -449,8 +615,52 @@ const UpdateProps = ({onSubmit}) => {
                         bottom: 0,
                         zIndex: 1
                     }}>
-                        <Card small lg="12" className="mb-2 border-primary" style={{border: '#5A6169'}}>
+                        <Card small lg="12" className="mb-2" style={{border: '#5A6169'}}>
                             <CardBody>
+
+                                {/* Regresión Lineal*/}
+                                {manualUpdate.value === false &&
+                                <Row>
+                                    <Col xs="6" md="6">
+                                        <Button
+                                            className="font-weight-bold"
+                                            onClick={(event) => {
+                                                onSubmit({
+                                                    valid: allValid(),
+                                                    vars: {
+                                                        "p_0": p_0.valid ? parseFloat(p_0.value) : 0.0,
+                                                        "p_men": p_men.valid ? parseFloat(p_men.value) : 0.0,
+                                                        "p_age": p_age.valid ? parseFloat(p_age.value) : 0.0,
+                                                        "p_initialINR": p_initialINR.valid ? parseFloat(p_initialINR.value) : 0.0,
+                                                        "p_imc": p_imc.valid ? parseFloat(p_imc.value) : 0.0,
+                                                        "p_CYP2C9_12": p_CYP2C9_12.valid ? parseFloat(p_CYP2C9_12.value) : 0.0,
+                                                        "p_CYP2C9_13": p_CYP2C9_13.valid ? parseFloat(p_CYP2C9_13.value) : 0.0,
+                                                        "p_CYP2C9_33": p_CYP2C9_33.valid ? parseFloat(p_CYP2C9_33.value) : 0.0,
+                                                        "p_VKORC1_GA": p_VKORC1_GA.valid ? parseFloat(p_VKORC1_GA.value) : 0.0,
+                                                        "p_VKORC1_AA": p_VKORC1_AA.valid ? parseFloat(p_VKORC1_AA.value) : 0.0,
+                                                    }
+                                                });
+
+                                            }}
+                                        >
+                                            Regresión Lineal
+                                        </Button>
+                                    </Col>
+                                    <Col xs="6" md="6" className="text-right">
+                                        <Button
+                                            theme="secondary"
+                                            className="mb-2"
+                                            onClick={(event) => {
+                                                setForm();
+                                                handleManual()
+                                            }}>
+                                            Ingreso Manual
+                                        </Button>
+                                    </Col>
+                                </Row>}
+
+                                {/* Actualización Manual*/}
+                                {manualUpdate.value &&
                                 <Row>
                                     <Col xs="6" md="6">
                                         <InputGroup className="mb-2">
@@ -485,12 +695,13 @@ const UpdateProps = ({onSubmit}) => {
                                             theme="secondary"
                                             className="mb-2"
                                             onClick={(event) => {
-                                                setForm()
+                                                setForm();
+                                                handleNotManual()
                                             }}>
-                                            Limpiar campos
+                                            Regresión Lineal
                                         </Button>
                                     </Col>
-                                </Row>
+                                </Row>}
                             </CardBody>
                         </Card>
                     </Col>

@@ -104,13 +104,24 @@ class Paciente extends React.Component {
                 console.log({ title: "getProfilePatient2", response: this.state.data, gen: query });
             })
             .catch((error) => {
-                this.setState({
-                    ...this.state,
-                    bad_response: true,
-                    error: true,
-                    errortitle: constants.mensaje_error_perfil_paciente_titulo,
-                    errortext: constants.mensaje_error_perfil_paciente_mensaje,
-                });
+                if(error.message === 'Network Error') {
+                    this.setState({
+                        ...this.state,
+                        bad_response: true,
+                        error: true,
+                        errortitle: constants.mensaje_error_network_perfil_paciente_titulo,
+                        errortext: constants.mensaje_error_network_perfil_paciente_mensaje,
+                    });
+                } else {
+                    this.setState({
+                        ...this.state,
+                        bad_response: true,
+                        error: true,
+                        errortitle: constants.mensaje_error_perfil_paciente_titulo,
+                        errortext: constants.mensaje_error_perfil_paciente_mensaje,
+                    });
+                }
+                
             }).finally(() => {
                 this.setState({
                     ...this.state,

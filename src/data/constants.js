@@ -42,6 +42,10 @@ var search_paciente = "Ingresa el código del paciente a buscar: T-200"
 var mensaje_error_perfil_paciente_titulo = "Lo sentimos";
 var mensaje_error_perfil_paciente_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
 
+var mensaje_error_network_perfil_paciente_titulo = "Lo sentimos";
+var mensaje_error_network_perfil_paciente_mensaje = (<div> No pudimos obtener los datos,<br/> <b> verifique que hay conexión a internet o contactese con el sistema de soporte. </b></div>)
+//"No pudimos obtener los datos, verifique que hay conexión a internet o que el sistema está funcionado correctamente. ";
+
 var mensaje_error_analisis_titulo = "Lo sentimos";
 var mensaje_error_analisis_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
 
@@ -82,6 +86,8 @@ const constants = {
     no_data,
     mensaje_error_perfil_paciente_titulo,
     mensaje_error_perfil_paciente_mensaje,
+    mensaje_error_network_perfil_paciente_titulo,
+    mensaje_error_network_perfil_paciente_mensaje,
     mensaje_error_analisis_titulo,
     mensaje_error_analisis_mensaje,
     mensaje_error_calculo_titulo,

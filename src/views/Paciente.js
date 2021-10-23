@@ -190,7 +190,7 @@ class Paciente extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <PacienteGeneral data_paciente={this.state.data} title="Perfil médico del paciente" />
+                                <PacienteGeneral data_paciente={this.state.data} title="Información del paciente" />
                             </Row>
                         </Col>
                         <CustomToggle openOut={this.state.error} toggle={this.toggle.bind(this, {})}

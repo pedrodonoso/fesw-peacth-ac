@@ -15,6 +15,7 @@ var gen13 = '*1/*3'
 var gen33 = '*3/*3'
 var perfil_clinico = 'Clínico'
 var perfil_genetico = 'Genético'
+var perfil_historico = 'Histórico'
 var series = [14, 23, 21, 17, 15, 10, 12, 17, 21]
 var labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 var props = {
@@ -82,6 +83,7 @@ const constants = {
     theme,
     perfil_clinico,
     perfil_genetico,
+    perfil_historico,
     search_paciente,
     no_data,
     mensaje_error_perfil_paciente_titulo,

@@ -4,6 +4,7 @@ import Dispatcher from "./dispatcher";
 import Constants from "./constants";
 import getSidebarNavItems from "../data/sidebar-nav-items";
 import getNavbarItems from "../data/navbar-nav-items";
+import getActualizarNavbarItems from "../data/navbar-actualizar-nav-items";
 import getPacienteNavbarItems from "../data/navbar-paciente-nav-items";
 
 
@@ -11,6 +12,7 @@ let _store = {
   menuVisible: false,
   navItems: getSidebarNavItems(),
   navbarItems: getNavbarItems(),
+  actualizarNavbarItems: getActualizarNavbarItems(),
   pacienteNavbarItems: getPacienteNavbarItems(),
 };
 
@@ -48,6 +50,10 @@ class Store extends EventEmitter {
 
   getNavbarItems() {
     return _store.navbarItems;
+  }
+  
+  getActualizarNavbarItems() {
+    return _store.actualizarNavbarItems;
   }
 
   getPacienteNavbarItems() {

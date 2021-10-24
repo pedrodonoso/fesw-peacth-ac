@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 
 // Layout Types
-import {CustomAnalisis, CustomGeneral, CustomPaciente} from "./layouts";
+import {CustomAnalisis, CustomGeneral, CustomActualizar} from "./layouts";
 
 // Route Views
 import {Calculo, Analisis, RegistrarVisita, Actualizar, Paciente} from "./views";
@@ -55,11 +55,19 @@ export default [
         layout_props: {noNavbar: true, noFooter: true, hideLogoText: true}
     },
     {
-        path: "/actualizar",
-        layout: CustomGeneral,
+        path: "/actualizar/regresion",
+        layout: CustomActualizar,
         component: Actualizar,
-        layout_props: {noNavbar: true, noFooter: true, hideLogoText: true}
+        layout_props: {noNavbar: false, noFooter: false, hideLogoText: true},
+        component_props: {regresion: true},
     },
+    {
+      path: "/actualizar/red",
+      layout: CustomActualizar,
+      component: Actualizar,
+      layout_props: {noNavbar: false, noFooter: false, hideLogoText: true},
+      component_props: {regresion: false}
+  },
     {
         path: "/paciente/general",
         layout: CustomGeneral,

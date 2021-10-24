@@ -61,10 +61,10 @@ export default function() {
       to: '/analisis/dosis_gen'
     },
     {
-      title: 'Actualizar algoritmo',
+      title: 'Actualizar modelo',
       subtitle:"",
       htmlBefore: '<i class="material-icons">update</i>',
-      to: '/actualizar'
+      to: '/actualizar/regresion'
     },
   ];
 }

@@ -5,23 +5,19 @@ import {Container, Navbar, Row} from "shards-react";
 
 import NavbarNavItems from "./NavbarNav/NavbarNavItems";
 import NavbarToggle from "./NavbarToggle";
-import NavbarSearch from "./NavbarSearch";
 
-const MainNavbar = ({ layout, stickyTop }) => {
+const ActualizarNavbar = ({ layout, stickyTop }) => {
   const classes = classNames(
     "main-navbar",
     "bg-white",
     stickyTop && "sticky-top"
   );
-  function handleSearchSubmit(data) {
-    console.log(`handleSearchSubmit : ${data.input}`);
-  }
 
   return (
     <div className={classes}>
       <Container className="p-0">
         <Navbar type="light" className="align-items-stretch right">
-          <NavbarSearch onSubmit={handleSearchSubmit}/>
+          <NavbarNavItems/>
           <NavbarToggle/>
         </Navbar>
       </Container>
@@ -29,7 +25,7 @@ const MainNavbar = ({ layout, stickyTop }) => {
   );
 };
 
-MainNavbar.propTypes = {
+ActualizarNavbar.propTypes = {
     /**
      * The layout type where the MainNavbar is used.
      */
@@ -40,8 +36,8 @@ MainNavbar.propTypes = {
     stickyTop: PropTypes.bool
 };
 
-MainNavbar.defaultProps = {
+ActualizarNavbar.defaultProps = {
     stickyTop: true
 };
 
-export default MainNavbar;
+export default ActualizarNavbar;

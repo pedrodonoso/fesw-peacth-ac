@@ -9,7 +9,7 @@ class NabarNavItems extends React.Component {
         super(props)
 
         this.state = {
-            navItems: Store.getPacienteNavbarItems()
+            navItems: Store.getActualizarNavbarItems()
         };
 
         this.onChange = this.onChange.bind(this);
@@ -26,7 +26,7 @@ class NabarNavItems extends React.Component {
     onChange() {
         this.setState({
             ...this.state,
-            navItems: Store.getNavbarItems()
+            navItems: Store.getActualizarNavbarItems()
         });
     }
 

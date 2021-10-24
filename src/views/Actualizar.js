@@ -3,6 +3,7 @@ import {
     Container,
     Row,
     Col,
+    Card,
     Alert,
     Collapse,
 } from "shards-react";
@@ -248,8 +249,8 @@ class Actualizar extends Component {
 
                         <Row>
                             <Col lg="12" className="py-4">
-
-                                <UpdateProps
+                            {this.props.regresion ?
+                                    <UpdateProps
                                     data_local={this.state.data_local}
                                     data_model={this.state.data}
                                     onSubmitManual={this.handleUpdateSubmit}
@@ -259,6 +260,11 @@ class Actualizar extends Component {
                                         tm: this.state.tm,
                                         bad_response: this.state.bad_response,
                                     }} />
+                                    :
+                                    <Card></Card>
+                                    //<AnalisisDisGen title="Análisis de la frecuencia de distribución de genotipos "/>
+                                }
+                                
                                 <CustomToggle openOut={this.state.open} toggle={this.toggleMessageError.bind(this, {})}
                                     handler={this.handlerOpenDialog.bind(this)}
                                     text={this.state.text}

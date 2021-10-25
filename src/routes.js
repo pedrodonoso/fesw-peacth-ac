@@ -5,7 +5,13 @@ import {Redirect} from "react-router-dom";
 import {CustomAnalisis, CustomGeneral, CustomActualizar} from "./layouts";
 
 // Route Views
-import {Calculo, Analisis, RegistrarVisita, Actualizar, Paciente} from "./views";
+import {
+    Calculo,
+    Analisis,
+    RegistrarVisita,
+    Actualizar,
+    Paciente
+} from "./views";
 /*
 import BlogOverview from "./views/template/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
@@ -45,7 +51,12 @@ export default [
         path: "/analisis/dis_gen",
         layout: CustomAnalisis,
         component: Analisis,
-        layout_props: {noNavbar: false, noFooter: false, footer_props: {menuItems: []}, hideLogoText: true},
+        layout_props: {
+            noNavbar: false,
+            noFooter: false,
+            footer_props: {menuItems: []},
+            hideLogoText: true
+        },
         component_props_: {dosisGen: false}
     },
     {
@@ -62,12 +73,12 @@ export default [
         component_props: {regresion: true},
     },
     {
-      path: "/actualizar/red",
-      layout: CustomActualizar,
-      component: Actualizar,
-      layout_props: {noNavbar: false, noFooter: false, hideLogoText: true},
-      component_props: {regresion: false}
-  },
+        path: "/actualizar/red",
+        layout: CustomActualizar,
+        component: Actualizar,
+        layout_props: {noNavbar: false, noFooter: false, hideLogoText: true},
+        component_props: {regresion: false}
+    },
     {
         path: "/paciente/general",
         layout: CustomGeneral,
@@ -79,7 +90,12 @@ export default [
         path: "/paciente/genetico",
         layout: CustomGeneral,
         component: Paciente,
-        layout_props: {noNavbar: false, noFooter: false, footer_props: {menuItems: []}, hideLogoText: true},
+        layout_props: {
+            noNavbar: false,
+            noFooter: false,
+            footer_props: {menuItems: []},
+            hideLogoText: true
+        },
         component_props_: {dosisGen: false}
     },
     /*

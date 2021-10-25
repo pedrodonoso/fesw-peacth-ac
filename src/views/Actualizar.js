@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, {Component, useEffect, useState} from "react";
 import {
     Container,
     Row,
     Col,
     Card,
     Alert,
-    Collapse,
+    Collapse, CardHeader, CardBody, Button,
 } from "shards-react";
 
 import calculoService from '../services/calculo.service';
@@ -15,12 +15,21 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import UpdateProps from "../components/actualizar/update-props";
 import formulaService from "../services/formula.service";
 import constants from "../data/constants";
+import {
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText
+} from "@material-ui/core";
+import UpdateNeuralNetwork from "../components/actualizar/update-neural";
 
 const theme = createMuiTheme({
     palette: {
         primary: { main: '#1976d2' },
     },
 }, esES);
+
+
 
 class Actualizar extends Component {
     constructor(props) {
@@ -240,7 +249,11 @@ class Actualizar extends Component {
             data_local: model === null ? {} : model
         });
     }
+
+
+
     render() {
+
         return (
             <Container fluid className="main-content-container px-4 pb-4">
                 {/* Page Header */}
@@ -260,11 +273,10 @@ class Actualizar extends Component {
                                         tm: this.state.tm,
                                         bad_response: this.state.bad_response,
                                     }} />
-                                    :
-                                    <Card></Card>
-                                    //<AnalisisDisGen title="Análisis de la frecuencia de distribución de genotipos "/>
+                                :<UpdateNeuralNetwork />
+                                //<AnalisisDisGen title="Análisis de la frecuencia de distribución de genotipos "/>
                                 }
-                                
+
                                 <CustomToggle openOut={this.state.open} toggle={this.toggleMessageError.bind(this, {})}
                                     handler={this.handlerOpenDialog.bind(this)}
                                     text={this.state.text}

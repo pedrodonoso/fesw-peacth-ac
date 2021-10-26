@@ -25,22 +25,53 @@ import {
 import {ProgressCircle} from "@react-spectrum/progress";
 
 
-const UpdateNeuralNetwork = ({ data_local, data_model, onSubmitManual, onSubmitGetRegresion, progressBar }) => {
+const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
 
     const themeMap = ['info', 'success', 'danger']; //azul,verde, rojo
 
     function getTheme(index) {
         return themeMap[(index + themeMap.length) % themeMap.length];
     }
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [charging, setCharging] = useState(true);
+    const [dialogBody, setDialogBody] = useState("Cargando...");
     const [estadoRed, setEstadoRed] = useState(false);
 
-    const openDialog = () => setOpen(!open);
+    // const openDialog = () => setOpen(!open);
+    function openDialog() {
+        setOpen(!open);
+  /*      onUpdateNeuralNetwork({
+            valid: true,
+        });*/
+        fetch("http://dummy.restapiexample.com/api/v1/employee/1")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setEstadoRed(true);
+                    setCharging(false);
+                    setDialogBody("Se ha actualizado el modelo neuronal correctamente.")
+                    console.log(result);
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    console.log(error);
+                    setCharging(false);
+                    setEstadoRed(true);
+                    setDialogBody("Tenemos problemas, porfavor intente más tarde.")
+                }
+            );
+    }
     const estadoDesactualizado = () => setEstadoRed(false);
     const estadoActualizado = () => setEstadoRed(true);
     function closeDialog() {
-        openDialog();
+        setOpen(!open);
         estadoDesactualizado();
+        setTimeout(function () {
+            setDialogBody("Cargando...");
+            setCharging(true);
+        }, 200);
     }
 
     return (
@@ -49,33 +80,42 @@ const UpdateNeuralNetwork = ({ data_local, data_model, onSubmitManual, onSubmitG
                     onClose={closeDialog}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
-                {estadoRed ?
-                    <React.Fragment>
-                        <DialogContent>
-                            <DialogContentText  id="alert-dialog-description" className="text-justify">
-                                Se ha actualizado el modelo neuronal correctamente
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={closeDialog}>
-                                Cerrar
-                            </Button>
-                        </DialogActions>
-                    </React.Fragment> : null}
-                {!estadoRed === open ?
+                {charging ?
                     <React.Fragment>
                         <DialogContent>
                             <DialogContentText  id="alert-dialog-description" className="text-center">
-                                Cargando...
+                                {dialogBody}
                             </DialogContentText>
-                            <DialogContentText className="text-center">
-                                <CircularProgress />
-                            </DialogContentText>
-                            <Button onClick={estadoActualizado}>
-                                Actualizar
-                            </Button>
+                                <DialogContentText className="text-center">
+                                    <CircularProgress />
+                                </DialogContentText>
                         </DialogContent>
-                    </React.Fragment>: null}
+                    </React.Fragment> : null}
+                {estadoRed ?
+                    <React.Fragment>
+                        <DialogContent>
+                            <DialogContentText  id="alert-dialog-description" className="text-center">
+                                {dialogBody}
+                            </DialogContentText>
+                        </DialogContent>
+                            <DialogActions>
+                                <Button onClick={closeDialog}>
+                                    Cerrar
+                                </Button>
+                            </DialogActions>
+                    </React.Fragment> : null }
+                {/*{!estadoRed === open ?
+                    <React.Fragment>
+                        <DialogContent>
+                            <DialogContentText  id="alert-dialog-description" className="text-center">
+                                {dialogBody}
+                            </DialogContentText>
+                            {charging ?
+                                <DialogContentText className="text-center">
+                                    <CircularProgress />
+                                </DialogContentText> : null }
+                        </DialogContent>
+                    </React.Fragment>: null}*/}
             </Dialog>
             <Col>
                 <Container>
@@ -85,7 +125,9 @@ const UpdateNeuralNetwork = ({ data_local, data_model, onSubmitManual, onSubmitG
                                 <h5 className="m-0 font-weight-bold text-center">Actualizar Red Neuronal</h5>
                             </CardHeader>
                             <CardBody className="text-center">
-                                <Button size="lg" onClick={openDialog}>Actualizar</Button>
+                                <Button size="lg" onClick={() => {
+                                    openDialog();
+                                }}>Actualizar</Button>
                             </CardBody>
                         </Card>
                     </Col>

@@ -1,5 +1,5 @@
 import constants from "../data/constants";
-import { api } from '../helpers';
+import { api, neuralApi } from '../helpers';
 import axios from 'axios';
 //TODO: API
 const basePath = 'api';
@@ -89,7 +89,7 @@ function getLastLocalProps() {
 
 
 
-//obtener regresión 
+//obtener regresión
 async function getRegresion() {
     axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
@@ -103,12 +103,28 @@ async function getRegresion() {
     return await api.get(`${basePath}/LogWTDparameters/multivariable_regression/`);
 }
 
+//actualizar modelo neuronal
+async function updateNeuralModel() {
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //get
+    //http://54.164.58.120:8000/api/LogWTDparameters/neural_network/
+    //var json = JSON.stringify({answer: "Red neuronal actualizada"});
+    console.log({
+        title: 'updateNeuralNetwork',
+        path: `${basePath}/LogWTDparameters/multivariable_regression/`
+    })
+    return await api.get(`${basePath}/v1/employee/1`)
+    // return await api.get(`${basePath}/LogWTDparameters/neural_network/`);
+}
+
 
 const formulaService = {
     formula,
     updateLocalProps,
     getLastLocalProps,
     getRegresion,
+    updateNeuralModel,
 };
 
 export default formulaService;

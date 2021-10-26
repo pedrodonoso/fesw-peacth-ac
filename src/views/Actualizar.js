@@ -49,6 +49,7 @@ class Actualizar extends Component {
         this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
         this.handleRegresion = this.handleRegresion.bind(this);
         this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
+        // this.handleUpdateNeuralNetwork = this.handleUpdateNeuralNetwork.bind(this);
         this.toggleMessageError = this.toggleMessageError.bind(this);
         this.toggleCollapse = this.toggleCollapse.bind(this);
         this.increase = this.increase.bind(this);

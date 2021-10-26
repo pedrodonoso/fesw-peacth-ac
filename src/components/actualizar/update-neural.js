@@ -20,7 +20,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText
+    DialogContentText, DialogTitle
 } from "@material-ui/core";
 import {ProgressCircle} from "@react-spectrum/progress";
 
@@ -34,6 +34,7 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
     }
     const [open, setOpen] = useState(false);
     const [charging, setCharging] = useState(true);
+    const [dialogTitle, setDialogTitle] = useState("Título que depende del ID de la respuesta");
     const [dialogBody, setDialogBody] = useState("Cargando...");
     const [estadoRed, setEstadoRed] = useState(false);
 
@@ -43,13 +44,14 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
   /*      onUpdateNeuralNetwork({
             valid: true,
         });*/
-        fetch("http://dummy.restapiexample.com/api/v1/employee/1")
+        fetch("http://3.143.234.136:8000/api/LogWTDparameters/neural_network/")
             .then(res => res.json())
             .then(
                 (result) => {
                     setEstadoRed(true);
                     setCharging(false);
-                    setDialogBody("Se ha actualizado el modelo neuronal correctamente.")
+
+                    setDialogBody(result.message)
                     console.log(result);
                 },
                 // Note: it's important to handle errors here
@@ -82,6 +84,9 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
                     aria-describedby="alert-dialog-description">
                 {charging ?
                     <React.Fragment>
+                        <DialogTitle id="alert-dialog-title">
+                            {dialogTitle}
+                        </DialogTitle>
                         <DialogContent>
                             <DialogContentText  id="alert-dialog-description" className="text-center">
                                 {dialogBody}
@@ -93,6 +98,9 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
                     </React.Fragment> : null}
                 {estadoRed ?
                     <React.Fragment>
+                        <DialogTitle id="alert-dialog-title">
+                            {dialogTitle}
+                        </DialogTitle>
                         <DialogContent>
                             <DialogContentText  id="alert-dialog-description" className="text-center">
                                 {dialogBody}

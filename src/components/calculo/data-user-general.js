@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import {
     Row,
@@ -6,6 +6,7 @@ import {
     Card,
     CardBody,
     Form,
+    Badge,
     FormGroup,
     FormInput,
     Button,
@@ -23,13 +24,14 @@ import {
 import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
 
-const DataUserGeneral = ({onSubmit, dosis}) => {
-    const [cod_paciente, setCodPaciente] = useState({value: '', valid: undefined});
-    const [edad, setEdad] = useState({value: '', valid: undefined});
-    const [peso, setPeso] = useState({value: '', valid: undefined});
-    const [talla, setTalla] = useState({value: '', valid: undefined});
-    const [sexo, setSexo] = useState({value: 'F'});
-    const [inr_inicial, setInrInicial] = useState({value: '', valid: undefined});
+const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
+
+    const [cod_paciente, setCodPaciente] = useState({ value: '', valid: undefined });
+    const [edad, setEdad] = useState({ value: '', valid: undefined });
+    const [peso, setPeso] = useState({ value: '', valid: undefined });
+    const [talla, setTalla] = useState({ value: '', valid: undefined });
+    const [sexo, setSexo] = useState({ value: 'F' });
+    const [inr_inicial, setInrInicial] = useState({ value: '', valid: undefined });
     const [genetics, setGenetics] = useState({
         value: {
             [constants.gen2]: constants.gen11,
@@ -39,12 +41,12 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
     });
 
     function setForm() {
-        setCodPaciente((prevState) => ({...prevState, value: '', valid: undefined}));
-        setEdad((prevState) => ({...prevState, value: 0.0, valid: undefined}));
-        setPeso((prevState) => ({...prevState, value: 0.0, valid: undefined}));
-        setTalla((prevState) => ({...prevState, value: 0.0, valid: undefined}));
-        setSexo((prevState) => ({...prevState, value: 'F'}));
-        setInrInicial((prevState) => ({...prevState, value: '', valid: undefined}));
+        setCodPaciente((prevState) => ({ ...prevState, value: '', valid: undefined }));
+        setEdad((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
+        setPeso((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
+        setTalla((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
+        setSexo((prevState) => ({ ...prevState, value: 'F' }));
+        setInrInicial((prevState) => ({ ...prevState, value: '', valid: undefined }));
         setGenetics((prevState) => ({
             ...prevState,
             value: {
@@ -69,8 +71,8 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
         var title = data.title
         var selected = data.selected
         var dic = genetics.value
-        dic = {...dic, [title]: selected}
-        setGenetics((prevState) => ({...prevState, value: dic}))
+        dic = { ...dic, [title]: selected }
+        setGenetics((prevState) => ({ ...prevState, value: dic }))
     }
 
     function calcImc() {
@@ -80,67 +82,67 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
 
     function onChangeCodPaciente(e) {
         var _cod = e.target.value;
-        setCodPaciente((prevState) => ({...prevState, value: _cod}))
+        setCodPaciente((prevState) => ({ ...prevState, value: _cod }))
         console.log(validPacienteRegex.test(_cod))
         if (validPacienteRegex.test(_cod)) {
-            setCodPaciente((prevState) => ({...prevState, valid: true}))
+            setCodPaciente((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setCodPaciente((prevState) => ({...prevState, valid: false}))
+            setCodPaciente((prevState) => ({ ...prevState, valid: false }))
         }
         if (_cod === '') {
-            setCodPaciente((prevState) => ({...prevState, valid: undefined}))
+            setCodPaciente((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
     function onChangeEdad(e) {
         var _edad = e.target.value;
-        setEdad((prevState) => ({...prevState, value: _edad}))
+        setEdad((prevState) => ({ ...prevState, value: _edad }))
         if (validNumRegex.test(_edad)) {
-            setEdad((prevState) => ({...prevState, valid: true}))
+            setEdad((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setEdad((prevState) => ({...prevState, valid: false}))
+            setEdad((prevState) => ({ ...prevState, valid: false }))
         }
         if (_edad === '') {
-            setEdad((prevState) => ({...prevState, valid: undefined}))
+            setEdad((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
     function onChangePeso(e) {
         var _peso = e.target.value;
-        setPeso((prevState) => ({...prevState, value: _peso}))
+        setPeso((prevState) => ({ ...prevState, value: _peso }))
         if (validNumRegex.test(_peso)) {
-            setPeso((prevState) => ({...prevState, valid: true}))
+            setPeso((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setPeso((prevState) => ({...prevState, valid: false}))
+            setPeso((prevState) => ({ ...prevState, valid: false }))
         }
         if (_peso === '') {
-            setPeso((prevState) => ({...prevState, valid: undefined}))
+            setPeso((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
     function onChangeTalla(e) {
         var _talla = e.target.value;
-        setTalla((prevState) => ({...prevState, value: _talla}))
+        setTalla((prevState) => ({ ...prevState, value: _talla }))
         if (validNumRegex.test(_talla)) {
-            setTalla((prevState) => ({...prevState, valid: true}))
+            setTalla((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setTalla((prevState) => ({...prevState, valid: false}))
+            setTalla((prevState) => ({ ...prevState, valid: false }))
         }
         if (_talla === '') {
-            setTalla((prevState) => ({...prevState, valid: undefined}))
+            setTalla((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
     function onChangeINRInicial(e) {
         var _inr = e.target.value;
-        setInrInicial((prevState) => ({...prevState, value: _inr}))
+        setInrInicial((prevState) => ({ ...prevState, value: _inr }))
         if (validNumRegex.test(_inr)) {
-            setInrInicial((prevState) => ({...prevState, valid: true}))
+            setInrInicial((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setInrInicial((prevState) => ({...prevState, valid: false}))
+            setInrInicial((prevState) => ({ ...prevState, valid: false }))
         }
         if (_inr === '') {
-            setInrInicial((prevState) => ({...prevState, valid: undefined}))
+            setInrInicial((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
@@ -174,7 +176,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                                                                 onChange={onChangeCodPaciente}
                                                                 size="lg"
                                                                 className="mb-3"
-                                                                placeholder="T-001"/>
+                                                                placeholder="T-001" />
                                                             <FormFeedback tooltip={true}>"Ej:
                                                                 T-002"</FormFeedback>
                                                         </FormGroup>
@@ -214,7 +216,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                                                                     onChange={onChangePeso}
                                                                     size="lg"
                                                                     //className="mb-3"
-                                                                    placeholder="0"/>
+                                                                    placeholder="0" />
                                                                 <FormFeedback tooltip={true}>"Debes ingresar solo
                                                                     números."</FormFeedback>
                                                                 <InputGroupAddon type="append">
@@ -238,7 +240,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                                                                     onChange={onChangeTalla}
                                                                     size="lg"
                                                                     //className="mb-3"
-                                                                    placeholder="0"/>
+                                                                    placeholder="0" />
                                                                 <FormFeedback tooltip={true}>"Debes ingresar solo
                                                                     números"</FormFeedback>
                                                                 <InputGroupAddon type="append">
@@ -259,7 +261,7 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                                                                 onChange={onChangeINRInicial}
                                                                 size="lg"
                                                                 className="mb-3"
-                                                                placeholder="0"/>
+                                                                placeholder="0" />
                                                             <FormFeedback tooltip={true}>"Debes ingresar un
                                                                 valor decimal. EJ: 2.4"</FormFeedback>
                                                         </FormGroup>
@@ -270,17 +272,17 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                                                         <FormGroup>
                                                             <ButtonGroup>
                                                                 <Button theme={sexo.value === 'F' ? 'primary' : 'white'}
-                                                                        onClick={() => setSexo((prevState) => ({
-                                                                            ...prevState,
-                                                                            value: 'F',
-                                                                            valid: true
-                                                                        }))}>Femenino</Button>
+                                                                    onClick={() => setSexo((prevState) => ({
+                                                                        ...prevState,
+                                                                        value: 'F',
+                                                                        valid: true
+                                                                    }))}>Femenino</Button>
                                                                 <Button theme={sexo.value === 'M' ? 'primary' : 'white'}
-                                                                        onClick={() => setSexo((prevState) => ({
-                                                                            ...prevState,
-                                                                            value: 'M',
-                                                                            valid: true
-                                                                        }))}>Masculino</Button>
+                                                                    onClick={() => setSexo((prevState) => ({
+                                                                        ...prevState,
+                                                                        value: 'M',
+                                                                        valid: true
+                                                                    }))}>Masculino</Button>
                                                             </ButtonGroup>
                                                         </FormGroup>
                                                     </Col>
@@ -343,81 +345,149 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
                         bottom: 0,
                         zIndex: 1
                     }}>
-                        <Card small lg="12" className="mb-2">
-                            {/*<CardHeader className="border-bottom">
-              <h6 className="m-0"> Dosis </h6>
-            </CardHeader>*/}
-                            <CardBody>
-                                <Row>
-                                    <Col xs="6" md="6">
-                                        <InputGroup className="mb-2">
-                                            <InputGroupAddon type="prepend">
-                                                <Button
-                                                    theme="primary"
-                                                    className="font-weight-bold"
-                                                    onClick={(event) => {
-                                                        var _imc = calcImc();
-                                                        onSubmit({
-                                                            valid: allValid(),
-                                                            vars: {
-                                                                'code': cod_paciente.valid ? cod_paciente.value : "",
-                                                                'sex': sexo.value,
-                                                                // 'bloodtype': blood.value,
-                                                                'initialDate': "2009-11-30", //preguntar
-                                                                'initialDosis': 0,
-                                                                'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
-                                                                'weeklyDosisInRange': 10,
-                                                                'totalDays': 534,
-                                                                'weight': peso.valid ? parseFloat(peso.value) : 0.0,
-                                                                'height': talla.valid ? parseFloat(talla.value) : 0.0,
-                                                                'imc': _imc === Infinity ? 999 : _imc,
-                                                                'age': edad.valid ? parseFloat(edad.value) : 0,
-                                                                'genetics': genetics.value,
-                                                                //'diagnosis': diagnosis.value,
-                                                            }
-                                                        });
-                                                    }}
-                                                >
-                                                    Calcular dosis
-                                                </Button>
-                                            </InputGroupAddon>
-                                            <InputGroupAddon type="append">
-                                                <InputGroupText>
-                                                    <t6 className={"text-black"}> {isNaN(dosis) ? '-' : dosis.toFixed(4)} </t6>
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <InputGroupAddon type="append">
-                                                <InputGroupText>
-                                                    <t6> mg/semana</t6>
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                        </InputGroup>
-                                    </Col>
-                                    <Col xs="6" md="6" className="text-right">
+                        {/*
+                        <Card small className="mb-3">
+                            <CardHeader className="border-bottom">
+                                <h6 className="m-0">Calculo</h6>
+                            </CardHeader>
+
+                            <CardBody className="p-0">
+                                <ListGroup flush>
+                                    <ListGroupItem className="p-3">
+                                        <span className="d-flex mb-2">
+                                            <strong className="mr-1">Modelo Red Neuronal:</strong>
+                                            <t6 className={"text-black"}> {isNaN(dosis_network) ? '-' : dosis_network.toFixed(4)} </t6>
+                                            <t6 className="ml-auto">
+                                                mg/semana
+                                            </t6>
+                                        </span>
+                                        <span className="d-flex mb-2">
+                                            <strong className="mr-1">Modelo Regresión:</strong>
+                                            <t6 className={"text-black"}> {isNaN(dosis) ? '-' : dosis.toFixed(4)} </t6>
+                                            <t6 className="ml-auto">
+                                                mg/semana
+                                            </t6>
+                                        </span>
+
+                                    </ListGroupItem>
+                                    <ListGroupItem className="d-flex px-3 border-0">
+                                        <Button
+                                            theme="primary"
+                                            className="font-weight-bold mb-2"
+                                            onClick={(event) => {
+                                                var _imc = calcImc();
+                                                onSubmit({
+                                                    valid: allValid(),
+                                                    vars: {
+                                                        'code': cod_paciente.valid ? cod_paciente.value : "",
+                                                        'sex': sexo.value,
+                                                        // 'bloodtype': blood.value,
+                                                        'initialDate': "2009-11-30", //preguntar
+                                                        'initialDosis': 0,
+                                                        'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                                                        'weeklyDosisInRange': 10,
+                                                        'totalDays': 534,
+                                                        'weight': peso.valid ? parseFloat(peso.value) : 0.0,
+                                                        'height': talla.valid ? parseFloat(talla.value) : 0.0,
+                                                        'imc': _imc === Infinity ? 999 : _imc,
+                                                        'age': edad.valid ? parseFloat(edad.value) : 0,
+                                                        'genetics': genetics.value,
+                                                        //'diagnosis': diagnosis.value,
+                                                    }
+                                                });
+                                            }}
+                                        >
+                                            Calcular dosis
+                                        </Button>
                                         <Button
                                             theme="secondary"
-                                            className="mb-2"
+                                            className="mb-2 ml-auto"
                                             onClick={(event) => {
                                                 setForm()
                                             }}>
                                             Limpiar campos
                                         </Button>
-                                    </Col>
-                                </Row>
-
-
-                                {/* <ListGroupItem lg="9" className="mb-2">
-                <Button
-                  theme="secondary"
-                  className="mb-2 mr-2"
-                  onClick={(event) => {
-                    setForm()
-                  }}>
-                  Nuevo Paciente
-                </Button>
-              </ListGroupItem>*/}
+                                    </ListGroupItem>
+                                </ListGroup>
                             </CardBody>
                         </Card>
+                        */}
+                        <Row>
+                            <Col className="col-lg mb-2">
+                                <Card small className={"stats-small--60 m-auto"}>
+                                    <CardBody className={"stats-small--60 m-auto"}>
+                                        <ButtonGroup >
+                                            <Button
+                                                theme="primary"
+                                                className="font-weight-bold mb-2"
+                                                onClick={(event) => {
+                                                    var _imc = calcImc();
+                                                    onSubmit({
+                                                        valid: allValid(),
+                                                        vars: {
+                                                            'code': cod_paciente.valid ? cod_paciente.value : "",
+                                                            'sex': sexo.value,
+                                                            // 'bloodtype': blood.value,
+                                                            'initialDate': "2009-11-30", //preguntar
+                                                            'initialDosis': 0,
+                                                            'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                                                            'weeklyDosisInRange': 10,
+                                                            'totalDays': 534,
+                                                            'weight': peso.valid ? parseFloat(peso.value) : 0.0,
+                                                            'height': talla.valid ? parseFloat(talla.value) : 0.0,
+                                                            'imc': _imc === Infinity ? 999 : _imc,
+                                                            'age': edad.valid ? parseFloat(edad.value) : 0,
+                                                            'genetics': genetics.value,
+                                                            //'diagnosis': diagnosis.value,
+                                                        }
+                                                    });
+                                                }}
+                                            >
+                                                Calcular dosis
+                                            </Button>
+                                            <Button
+                                                theme="secondary"
+                                                className="mb-2"
+                                                onClick={(event) => {
+                                                    setForm()
+                                                }}>
+                                                Limpiar campos
+                                            </Button>
+                                        </ButtonGroup>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                            <Col className="col-lg mb-2">
+                                <Card small className={"stats-small--60"}>
+                                    <CardBody className={" d-flex"}>
+                                        <div className={"d-flex flex-column m-auto"}>
+                                            <div className={"text-center"}>
+                                                <span className={"stats-small__label text-uppercase mb-1"}>{"Modelo Regresión Lineal"}</span>
+                                                <h6 className={"stats-small__value count my-3"}>{isNaN(dosis) ? '-' : dosis.toFixed(4)}</h6>
+                                            </div>
+                                            <div className={"stats-small__data text-center align-items-center m-auto"}>
+                                                <span> mg/semana</span>
+                                            </div>
+                                        </div>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                            <Col className="col-lg mb-5">
+                                <Card small className={"stats-small--60"}>
+                                    <CardBody className={" d-flex"}>
+                                        <div className={"d-flex flex-column m-auto"}>
+                                            <div className={"text-center"}>
+                                                <span className={"stats-small__label text-uppercase mb-1"}>{"Modelo Red Neuronal"}</span>
+                                                <h6 className={"stats-small__value count my-3"}>{isNaN(dosis_network) ? '-' : dosis_network.toFixed(4)}</h6>
+                                            </div>
+                                            <div className={"stats-small__data text-center align-items-center m-auto"}>
+                                                <span> mg/semana</span>
+                                            </div>
+                                        </div>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>
@@ -426,16 +496,16 @@ const DataUserGeneral = ({onSubmit, dosis}) => {
 }
 
 DataUserGeneral.propTypes =
-    {
-        onSubmit: PropTypes.func,
-        dosis: PropTypes.any
-    }
+{
+    onSubmit: PropTypes.func,
+    dosis: PropTypes.any
+}
 
 DataUserGeneral.defaultProps =
-    {
-        onSubmit: () => {
-        },
-        dosis: -999.0,
-    }
+{
+    onSubmit: () => {
+    },
+    dosis: -999.0,
+}
 
 export default DataUserGeneral;

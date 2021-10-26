@@ -31,7 +31,8 @@ class Calculo extends Component {
         super(props);
         this.state = {
             open: false,
-            dosis: 0.0
+            dosis: 0.0,
+            dosis_network: 0.0,
         }
         this.handleCalculoSubmit = this.handleCalculoSubmit.bind(this);
         this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
@@ -85,14 +86,17 @@ class Calculo extends Component {
         calculoService.getDosePatient(this.vars)
             .then((response) => {
                 var _dosis = response.data.initialDose
+                var _dosis_network = response.data.networkdose
                 _dosis = _dosis.toFixed(4)
+                _dosis_network = _dosis_network.toFixed(4)
                 //console.log({title: 'initialDose', initialDose: _dosis})
                 //guardamos las variables
                 ifResponseVar = true
 
                 this.setState({
                     ...this.state,
-                    dosis: _dosis
+                    dosis: _dosis,
+                    dosis_network: _dosis_network
                 });
 
                 //mostramos al usuario un toggle
@@ -136,7 +140,8 @@ class Calculo extends Component {
             var _Dosis = formulaService.formula(this.coef, this.vars)
             this.setState({
                 ...this.state,
-                dosis: _Dosis
+                dosis: _Dosis,
+                dosis_network: 0.0,
             });
         }
     }
@@ -189,7 +194,9 @@ class Calculo extends Component {
                         <Row >
                             <Col lg="12" className="py-4">
                                 <DataUserGeneral onSubmit={this.handleCalculoSubmit}
-                                                 dosis={parseFloat(this.state.dosis)}/>
+                                                 dosis={parseFloat(this.state.dosis)}
+                                                 dosis_network={parseFloat(this.state.dosis_network)}
+                                                />
                                 <CustomToggle openOut={this.state.open} toggle={this.toggle.bind(this, {})}
                                               handler={this.handlerOpenDialog.bind(this)}
                                               text={this.state.text}

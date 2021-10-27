@@ -33,7 +33,7 @@ class Calculo extends Component {
             open: false,
             dosis: 0.0,
             dosis_network: 0.0,
-            doseCalculated: true,
+            doseCalculated: false,
         }
         this.handleCalculoSubmit = this.handleCalculoSubmit.bind(this);
         this.handlerOpenDialog = this.handlerOpenDialog.bind(this);

@@ -477,7 +477,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                 <Col className="col-sm-12 col-lg-4 mb-2">
                                                     <Card
                                                         small
-                                                        className={"stats-small--60"}
+                                                        className={"stats-small--60 button-card"}
                                                         role="button"
                                                         onClick={(event) => {
                                                             var _imc = calcImc();
@@ -519,7 +519,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                 <Col className="col-sm-12 col-lg-4 mb-2">
                                                     <Card
                                                         small
-                                                        className={"stats-small--60"}
+                                                        className={"stats-small--60 button-card"}
                                                         role="button"
                                                         onClick={(event) => {
                                                             var _imc = calcImc();

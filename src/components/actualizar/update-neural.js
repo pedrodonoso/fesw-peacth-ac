@@ -34,16 +34,13 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
     }
     const [open, setOpen] = useState(false);
     const [charging, setCharging] = useState(true);
-    const [dialogTitle, setDialogTitle] = useState("Título que depende del ID de la respuesta");
+    const [dialogTitle, setDialogTitle] = useState("Por favor espere");
     const [dialogBody, setDialogBody] = useState("Cargando...");
     const [estadoRed, setEstadoRed] = useState(false);
 
     // const openDialog = () => setOpen(!open);
     function openDialog() {
         setOpen(!open);
-  /*      onUpdateNeuralNetwork({
-            valid: true,
-        });*/
         fetch("http://3.143.234.136:8000/api/LogWTDparameters/neural_network/")
             .then(res => res.json())
             .then(
@@ -52,6 +49,7 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
                     setCharging(false);
 
                     setDialogBody(result.message)
+                    result.is_updated ? setDialogTitle("Exito") : setDialogTitle("No se puede actualizar")
                     console.log(result);
                 },
                 // Note: it's important to handle errors here
@@ -67,7 +65,6 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
             );
     }
     const estadoDesactualizado = () => setEstadoRed(false);
-    const estadoActualizado = () => setEstadoRed(true);
     function closeDialog() {
         setOpen(!open);
         estadoDesactualizado();
@@ -83,6 +80,7 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
                     onClose={closeDialog}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
+                {/* Cargando */}
                 {charging ?
                     <React.Fragment>
                         <DialogTitle id="alert-dialog-title">
@@ -97,6 +95,7 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
                                 </DialogContentText>
                         </DialogContent>
                     </React.Fragment> : null}
+                {/* Con respuesta */}
                 {estadoRed ?
                     <React.Fragment>
                         <DialogTitle id="alert-dialog-title">
@@ -113,18 +112,6 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
                                 </Button>
                             </DialogActions>
                     </React.Fragment> : null }
-                {/*{!estadoRed === open ?
-                    <React.Fragment>
-                        <DialogContent>
-                            <DialogContentText  id="alert-dialog-description" className="text-center">
-                                {dialogBody}
-                            </DialogContentText>
-                            {charging ?
-                                <DialogContentText className="text-center">
-                                    <CircularProgress />
-                                </DialogContentText> : null }
-                        </DialogContent>
-                    </React.Fragment>: null}*/}
             </Dialog>
             <Col>
                 <Container>

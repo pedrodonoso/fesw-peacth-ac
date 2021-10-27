@@ -9,7 +9,6 @@ import {
     CardBody,
     Button,
     ButtonGroup,
-    InputGroupAddon, InputGroupText,
 
 } from "shards-react";
 
@@ -58,7 +57,7 @@ class AnalisisDisGen extends React.Component {
                     }
                 });
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({
                     ...this.state,
                     error: true,

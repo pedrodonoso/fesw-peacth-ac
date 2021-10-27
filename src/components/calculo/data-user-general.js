@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import {
-    Row,
-    Col,
+    Button,
+    ButtonGroup,
     Card,
     CardBody,
-    Form,
-    Badge,
+    CardHeader,
+    Col,
+    Container,
+    FormFeedback,
     FormGroup,
     FormInput,
-    Button,
-    FormFeedback,
     InputGroup,
     InputGroupAddon,
     InputGroupText,
-    ButtonGroup,
-    CardHeader,
-    ListGroup,
-    ListGroupItem, Container,
+    Row,
 } from "shards-react";
 
 
@@ -31,7 +28,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     const [peso, setPeso] = useState({ value: '', valid: undefined });
     const [talla, setTalla] = useState({ value: '', valid: undefined });
     const [sexo, setSexo] = useState({ value: 'F' });
-    const [initialDose, setInitialDose] = useState(0);
+    const [initialDose, setInitialDose] = useState({value: '', valid: undefined});
     const [inr_inicial, setInrInicial] = useState({ value: '', valid: undefined });
     const [genetics, setGenetics] = useState({
         value: {
@@ -40,8 +37,6 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
             [constants.gen4]: constants.genaa
         }, valid: false
     });
-    const [doseCalculated, setDoseCalculated] = useState(false);
-    console.log({title:"dosecalculated2", value: doseCalculated});
     function setForm() {
         setCodPaciente((prevState) => ({ ...prevState, value: '', valid: undefined }));
         setEdad((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
@@ -61,12 +56,14 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     }
 
     const validNumRegex =
-        RegExp(/^([0-9])+[\.]?([0-9])*$/i);
+        RegExp(/^([0-9])+[.]?([0-9])*$/i);
     const validPacienteRegex =
         RegExp(/^(T-)([0-9]){3}$/i);
 
     function allValid() {
-        return (cod_paciente.valid && !(cod_paciente.valid === undefined)) && (edad.valid && !(edad.valid === undefined)) && (peso.valid && !(peso.valid === undefined)) && (talla.valid && !(talla.valid === undefined)) && (inr_inicial.valid && !(inr_inicial.valid === undefined));
+        // return (cod_paciente.valid && !(cod_paciente.valid === undefined)) && (edad.valid && !(edad.valid === undefined)) && (peso.valid && !(peso.valid === undefined)) && (talla.valid && !(talla.valid === undefined)) && (inr_inicial.valid && !(inr_inicial.valid === undefined));
+        return (cod_paciente.valid && true) && (edad.valid && true) && (peso.valid && true) && (talla.valid && true) && (inr_inicial.valid && true);
+
     }
 
     function handleSubmit(data) {
@@ -78,8 +75,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     }
 
     function calcImc() {
-        var _imc = peso.value / Math.pow(talla.value, 2);
-        return _imc;
+        return peso.value / Math.pow(talla.value, 2);
     }
 
     function onChangeCodPaciente(e) {
@@ -111,15 +107,15 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
 
     function onChangeInitialDose(e) {
         var _initialDose = e.target.value;
-        setInitialDose(_initialDose);
-        /*if (validNumRegex.test(_initialDose)) {
-            setInitialDose((prevState) => ({ ...prevState, _initialDose }))
+        setInitialDose((prevState) => ({ ...prevState, value: _initialDose }));
+        if (validNumRegex.test(_initialDose)) {
+            setInitialDose((prevState) => ({ ...prevState, valid: true }))
         } else {
             setInitialDose((prevState) => ({ ...prevState, valid: false }))
         }
         if (_initialDose === '') {
             setInitialDose((prevState) => ({ ...prevState, valid: undefined }))
-        }*/
+        }
     }
 
     function onChangePeso(e) {
@@ -431,9 +427,8 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                             <Button
                                                                 theme="primary"
                                                                 className="font-weight-bold mb-2"
-                                                                onClick={(event) => {
+                                                                onClick={() => {
                                                                     var _imc = calcImc();
-                                                                    setDoseCalculated(false);
                                                                     onSubmit({
                                                                         valid: allValid(),
                                                                         vars: {
@@ -453,7 +448,6 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                                             //'diagnosis': diagnosis.value,
                                                                         }
                                                                     });
-                                                                    setDoseCalculated(doseCalculatedStatus);
                                                                 }}
                                                             >
                                                                 Calcular dosis
@@ -461,9 +455,8 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                             <Button
                                                                 theme="secondary"
                                                                 className="mb-2"
-                                                                onClick={(event) => {
+                                                                onClick={() => {
                                                                     setForm();
-                                                                    setDoseCalculated(false);
                                                                 }}>
                                                                 Limpiar campos
                                                             </Button>
@@ -472,16 +465,15 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                 </Card>
                                             </Col>
                                         </Row>
-                                        {doseCalculated ?
+                                        {doseCalculatedStatus ?
                                             <Row>
                                                 <Col className="col-sm-12 col-lg-4 mb-2">
                                                     <Card
                                                         small
                                                         className={"stats-small--60 button-card"}
                                                         role="button"
-                                                        onClick={(event) => {
+                                                        onClick={() => {
                                                             var _imc = calcImc();
-                                                            setDoseCalculated(doseCalculatedStatus);
                                                             onSetDose({
                                                                 valid: allValid(),
                                                                 vars: {
@@ -521,9 +513,8 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                         small
                                                         className={"stats-small--60 button-card"}
                                                         role="button"
-                                                        onClick={(event) => {
+                                                        onClick={() => {
                                                             var _imc = calcImc();
-                                                            setDoseCalculated(doseCalculatedStatus);
                                                             onSetDose({
                                                                     valid: allValid(),
                                                                     vars: {
@@ -563,15 +554,14 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                                 <div className={"text-center"}>
                                                                     {/*<span className={"stats-small__label text-uppercase mb-1"}>{"Ingresar dosis manual"}</span>*/}
                                                                     <FormGroup >
-                                                                        <label className={"stats-small__label text-uppercase mb-1"}>Dosis manual</label>
+                                                                        <label className={"stats-small__label text-uppercase mb-1"}>Ingresar Dosis manual</label>
                                                                         <InputGroup className="mb-3">
                                                                             <FormInput
-                                                                                value={initialDose}
+                                                                                value={initialDose.value}
                                                                                 valid={initialDose.valid}
                                                                                 invalid={initialDose.valid === undefined ? undefined : !initialDose.valid}
                                                                                 onChange={onChangeInitialDose}
                                                                                 size="sm"
-
                                                                                 //className="mb-3 "
                                                                                 placeholder="0"
                                                                             />
@@ -589,7 +579,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                                 <Button
                                                                     theme="primary"
                                                                     className="font-weight-bold mb-2"
-                                                                    onClick={(event) => {
+                                                                    onClick={() => {
                                                                         var _imc = calcImc();
                                                                         onSetDose({
                                                                             valid: allValid(),

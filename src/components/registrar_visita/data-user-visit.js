@@ -5,7 +5,6 @@ import {
     Col,
     Card,
     CardBody,
-    Form,
     FormGroup,
     FormInput,
     Button,
@@ -18,7 +17,7 @@ import {
 
 const DataUserVisit = ({onSubmit}) => {
 
-    const today = new Date();
+    // const today = new Date();
     const [cod_paciente, setCodPaciente] = useState({value: '', valid: undefined});
     const [arrivalDose, setArrivalDose] = useState({value: '', valid: undefined});
     const [updatedDose, setUpdatedDose] = useState({value: '', valid: undefined});
@@ -33,7 +32,7 @@ const DataUserVisit = ({onSubmit}) => {
     }
 
     const validNumRegex =
-        RegExp(/^([0-9])+[\.]?([0-9])*$/i);
+        RegExp(/^([0-9])+[.]?([0-9])*$/i);
     const validPacienteRegex =
         RegExp(/^(T-)([0-9]){3}$/i);
 
@@ -199,7 +198,7 @@ const DataUserVisit = ({onSubmit}) => {
                                     <Button
                                         theme="primary"
                                         className="font-weight-bold"
-                                        onClick={(event) => {
+                                        onClick={() => {
                                             onSubmit({
                                                 valid: allValid(),
                                                 vars: {
@@ -223,7 +222,7 @@ const DataUserVisit = ({onSubmit}) => {
                                 <Button
                                     theme="secondary"
                                     className="mb-2"
-                                    onClick={(event) => {
+                                    onClick={() => {
                                         setForm()
                                     }}>
                                     Nuevo Paciente

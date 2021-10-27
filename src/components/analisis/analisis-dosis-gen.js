@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import Chart from 'react-apexcharts'
 import {
     Row, Col, Card, CardHeader, CardBody, Button, ButtonGroup
-    , InputGroupAddon,
-    InputGroupText,
-    Container
 } from "shards-react";
 
 import constants from "../../data/constants";
@@ -59,7 +56,7 @@ class AnalisisDosisGen extends React.Component {
                     series: _serie
                 });
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({
                     ...this.state,
                     error: true,

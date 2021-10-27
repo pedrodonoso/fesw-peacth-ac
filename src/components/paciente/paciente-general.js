@@ -1,48 +1,34 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Chart from 'react-apexcharts';
 import {
     Row, Col, Card, CardHeader, CardBody, Button, ButtonGroup
     , InputGroupAddon,
     InputGroupText,
-    Container, FormInput, InputGroup, ButtonToolbar, Form, FormGroup, FormFeedback, ListGroup, ListGroupItem
+    Container, FormInput, InputGroup, ButtonToolbar, FormGroup, FormFeedback,
 } from "shards-react";
 
-import PacienteDataUserGeneral from "../paciente/paciente-data-user-general";
-import CustomToggle from '../forms/CustomToggle';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
-import pacienteService from "../../services/paciente.service";
 import constants from "../../data/constants";
-import DropdownOptions from "../calculo/drop-options";
 
 const PacienteGeneral = ({ data_paciente, title }) => {
     //const [data_paciente, setDataPaciente] = useState({value: '', valid: undefined});
     const [isActive, setisActive] = useState({ value: constants.perfil_clinico });
-    const [chartState, setchartState] = useState({
-
-        
-    });
-
-    /** */
-
-    /** */
     function handleChangeOption(section) {
         console.log(section);
-        if (section == constants.perfil_clinico) {
+        if (section === constants.perfil_clinico) {
             setisActive((prevState) => ({ ...prevState, value: constants.perfil_clinico }));
 
         }
-        if (section == constants.perfil_genetico) {
+        if (section === constants.perfil_genetico) {
             setisActive((prevState) => ({ ...prevState, value: constants.perfil_genetico }));
 
         }
-        if (section == constants.perfil_historico) {
+        if (section === constants.perfil_historico) {
             setisActive((prevState) => ({ ...prevState, value: constants.perfil_historico }));
         }
     }
     function isObjectEmpty(obj) {
-        return Object.getOwnPropertyNames(obj).length == 0
+        return Object.getOwnPropertyNames(obj).length === 0
     }
 
     //render() {
@@ -378,7 +364,7 @@ const PacienteGeneral = ({ data_paciente, title }) => {
                                                         xaxis: {
                                                             // type: 'datetime',
                                                             // forceNiceScale: true,
-                                                
+
                                                             categories: isObjectEmpty(data_paciente) ? [] : data_paciente.historicINR.dates, //fechas
                                                             // categories: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001'],
                                                             // title: {

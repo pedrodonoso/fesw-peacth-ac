@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import {
     InputGroup,
     InputGroupAddon,
-    InputGroupText,
     FormInput,
-    Button, Card,
+    Button,
 } from "shards-react";
 
 import constants from "../../data/constants";
@@ -18,7 +17,7 @@ const SearchBar = ({onSearchSubmit}) => {
     }
 
     function onSubmitSearch(e) {
-        if (e.key == "Enter") {
+        if (e.key === "Enter") {
             onSearchSubmit({
                 query: search_input.query,
             });

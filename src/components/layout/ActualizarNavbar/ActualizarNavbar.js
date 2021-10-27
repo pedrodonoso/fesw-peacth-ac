@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import {Container, Navbar, Row} from "shards-react";
+import {Container, Navbar} from "shards-react";
 
 import NavbarNavItems from "./NavbarNav/NavbarNavItems";
 import NavbarToggle from "./NavbarToggle";
 
-const ActualizarNavbar = ({ layout, stickyTop }) => {
+const ActualizarNavbar = ({ stickyTop }) => {
   const classes = classNames(
     "main-navbar",
     "bg-white",

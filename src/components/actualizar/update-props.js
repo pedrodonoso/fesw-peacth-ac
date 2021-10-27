@@ -35,10 +35,10 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
         if(obj === null) {
             return true;
         } else {
-            return Object.getOwnPropertyNames(obj).length == 0
+            return Object.getOwnPropertyNames(obj).length === 0
         }
     }
-    function setForm() {
+    /*function setForm() {
         setP0((prevState) => ({ ...prevState, value: '', valid: undefined }));
         setPMen((prevState) => ({ ...prevState, value: '', valid: undefined }));
         setPAge((prevState) => ({ ...prevState, value: '', valid: undefined }));
@@ -49,7 +49,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
         setPCYP2C933((prevState) => ({ ...prevState, value: '', valid: undefined }));
         setPVKORC1GA((prevState) => ({ ...prevState, value: '', valid: undefined }));
         setPVKORC1AA((prevState) => ({ ...prevState, value: '', valid: undefined }));
-    }
+    }*/
 
     const themeMap = ['info', 'success', 'danger']; //azul,verde, rojo
 
@@ -58,7 +58,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
     }
 
     const validNumRegex =
-        RegExp(/^([\-0-9])+[\.]?([0-9])*$/i);
+        RegExp(/^([0-9])+[.]?([0-9])*$/i);
 
     function allValid() {
         return (p_0.valid) &&
@@ -689,7 +689,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
                                         {manualUpdate.value === false &&
                                             <Button
                                                 className="font-weight-bold"
-                                                onClick={(event) => {
+                                                onClick={() => {
                                                     onSubmitGetRegresion({
                                                         valid: true,
                                                     });
@@ -702,7 +702,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
                                             <Button
                                                 theme="primary"
                                                 className="font-weight-bold"
-                                                onClick={(event) => {
+                                                onClick={() => {
                                                     onSubmitManual({
                                                         valid: allValid(),
                                                         vars: {
@@ -735,7 +735,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
                                                 toggle
                                                 small
                                                 onChange={switchEdit}
-                                                checked={manualUpdate.value ? true : false}
+                                                checked={manualUpdate.value}
                                             >
                                                 {manualUpdate.value ? "Manual" : "Regresión Lineal"}
                                             </FormCheckbox>
@@ -754,7 +754,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
                                                 }}>
                                                 Ingreso Manual
                                             </Button>
-                                            
+
                                         </Col>
                                             */}
                                 </Row>

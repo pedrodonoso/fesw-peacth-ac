@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import {
-    Row,
-    Col,
+    Button,
+    ButtonGroup,
     Card,
     CardBody,
+    CardHeader,
+    Col,
     Form,
+    FormFeedback,
     FormGroup,
     FormInput,
-    Button,
-    FormFeedback,
     InputGroup,
     InputGroupAddon,
     InputGroupText,
-    ButtonGroup,
-    CardHeader,
     ListGroup,
     ListGroupItem,
+    Row,
 } from "shards-react";
 
 
@@ -24,7 +24,7 @@ import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
 
 const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
-    const today = new Date();
+    // const today = new Date();
     const [cod_paciente, setCodPaciente] = useState({value: '', valid: undefined});
     const [edad, setEdad] = useState({value: '', valid: undefined});
     const [peso, setPeso] = useState({value: '', valid: undefined});
@@ -58,7 +58,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     }
 
     const validNumRegex =
-        RegExp(/^([0-9])+[\.]?([0-9])*$/i);
+        RegExp(/^([0-9])+[.]?([0-9])*$/i);
     const validPacienteRegex =
         RegExp(/^(T-)([0-9]){3}$/i);
 
@@ -75,8 +75,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     }
 
     function calcImc() {
-        var _imc = peso.value / Math.pow(talla.value, 2);
-        return _imc;
+        return peso.value / Math.pow(talla.value, 2);
     }
 
     function onChangeCodPaciente(e) {
@@ -168,7 +167,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
                                                 <Button
                                                     theme="primary"
                                                     className="font-weight-bold"
-                                                    onClick={(event) => {
+                                                    onClick={() => {
                                                         var _imc = calcImc();
                                                         onSubmit({
                                                             valid: allValid(),
@@ -210,7 +209,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
                                         <Button
                                             theme="secondary"
                                             className="mb-2"
-                                            onClick={(event) => {
+                                            onClick={() => {
                                                 setForm()
                                             }}>
                                             Limpiar campos

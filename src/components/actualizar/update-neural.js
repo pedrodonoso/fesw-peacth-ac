@@ -1,20 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import PropTypes from "prop-types";
 import {
-    Row,
     Col,
     Card,
     CardBody,
-    Badge,
-    FormGroup,
-    FormInput,
     Button,
-    FormFeedback,
-    Progress,
-    CardHeader, Container, FormCheckbox,
+    CardHeader, Container
 } from "shards-react";
 
-import constants from "../../data/constants";
 import {
     CircularProgress,
     Dialog,
@@ -22,16 +15,8 @@ import {
     DialogContent,
     DialogContentText, DialogTitle
 } from "@material-ui/core";
-import {ProgressCircle} from "@react-spectrum/progress";
 
-
-const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
-
-    const themeMap = ['info', 'success', 'danger']; //azul,verde, rojo
-
-    function getTheme(index) {
-        return themeMap[(index + themeMap.length) % themeMap.length];
-    }
+const UpdateNeuralNetwork = () => {
     const [open, setOpen] = useState(false);
     const [charging, setCharging] = useState(true);
     const [dialogTitle, setDialogTitle] = useState("Por favor espere");

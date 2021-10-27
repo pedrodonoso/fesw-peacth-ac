@@ -1,11 +1,8 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {Component } from "react";
 import {
     Container,
     Row,
     Col,
-    Card,
-    Alert,
-    Collapse, CardHeader, CardBody, Button,
 } from "shards-react";
 
 import calculoService from '../services/calculo.service';
@@ -15,12 +12,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import UpdateProps from "../components/actualizar/update-props";
 import formulaService from "../services/formula.service";
 import constants from "../data/constants";
-import {
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText
-} from "@material-ui/core";
 import UpdateNeuralNetwork from "../components/actualizar/update-neural";
 
 const theme = createMuiTheme({
@@ -302,6 +293,6 @@ class Actualizar extends Component {
 
         );
     }
-};
+}
 
 export default Actualizar;

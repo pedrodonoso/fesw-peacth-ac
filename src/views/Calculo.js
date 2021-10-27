@@ -33,6 +33,7 @@ class Calculo extends Component {
             open: false,
             dosis: 0.0,
             dosis_network: 0.0,
+            doseCalculated: true,
         }
         this.handleCalculoSubmit = this.handleCalculoSubmit.bind(this);
         this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
@@ -52,7 +53,7 @@ class Calculo extends Component {
             return false;
         }
 
-        var ifResponseCoef = false
+        // var ifResponseCoef = false
         var ifResponseVar = false
 
 
@@ -70,7 +71,7 @@ class Calculo extends Component {
             .then((response) => {
                 var _coef = response.data
                 //console.log({title: 'Coefs', coef: _coef})
-                ifResponseCoef = true
+                // ifResponseCoef = true
 
                 this.coef = _coef
                 //guardamos en local
@@ -87,7 +88,7 @@ class Calculo extends Component {
             .then((response) => {
                 var _dosis = response.data.regressionDose
                 var _dosis_network = response.data.networkDose
-
+                let _doseCalculatedStatus = true;
                 _dosis = _dosis.toFixed(4)
                 _dosis_network = _dosis_network.toFixed(4)
                 //console.log({title: 'initialDose', initialDose: _dosis})
@@ -98,16 +99,8 @@ class Calculo extends Component {
                     ...this.state,
                     dosis: _dosis,
                     dosis_network: _dosis_network,
-                    doseCalculated: true,
+                    doseCalculated: _doseCalculatedStatus,
                 });
-
-                //mostramos al usuario un toggle
-
-                // this.toggle({
-                // text: "Equipo creado correctamente!! 😘",
-                // title: "Si se pudo!!😍 "
-                // });
-
             })
             .catch((error) => {
                 console.log({title: 'error', error: error})
@@ -125,19 +118,6 @@ class Calculo extends Component {
                 });
 
             });
-
-        /*
-        teamsService.create(data.tag,data.idlist)
-        .then((response) => this.toggle({
-          text: "Equipo creado correctamente!! 😘",
-          title: "Si se pudo!!😍 "
-        }))
-        .catch((error) => this.toggle({
-          text: "Debes ingresar Personal de Servicio que no esté asignado a un Equipo!! ✋",
-          title: "No se pudo 😁"
-        }) );
-        */
-        //console.log({nombre:"calculo dosis",data:this.vars,props:this.coef})
         if (!ifResponseVar) { //no se puede acceder a bd para calcular dosis
             var _Dosis = formulaService.formula(this.coef, this.vars)
             this.setState({
@@ -171,13 +151,6 @@ class Calculo extends Component {
                     dosis_network: _dosis_network,
                     doseCalculated: true,
                 });
-
-                //mostramos al usuario un toggle
-
-                // this.toggle({
-                // text: "Equipo creado correctamente!! 😘",
-                // title: "Si se pudo!!😍 "
-                // });
 
             })
             .catch((error) => {
@@ -240,7 +213,6 @@ class Calculo extends Component {
                     <Container fluid className="main-content-container px-4">
                         <Row >
                             <Col lg="12" className="py-4">
-                                {() => {console.log(this.state.doseCalculated)}}
                                 <DataUserGeneral onSubmit={this.handleCalculoSubmit}
                                                  onSetDose={this.handleSubmitDose}
                                                  dosis={parseFloat(this.state.dosis)}
@@ -284,6 +256,6 @@ class Calculo extends Component {
 
         );
     }
-};
+}
 
 export default Calculo;

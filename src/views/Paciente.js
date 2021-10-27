@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
     Container,
@@ -6,7 +6,6 @@ import {
     Col,
     Progress
 } from "shards-react";
-import { Line } from 'rc-progress';
 
 import PacienteGeneral from "../components/paciente/paciente-general";
 import SearchBar from "../components/paciente/search-bar";
@@ -16,7 +15,6 @@ import CustomToggle from '../components/forms/CustomToggle';
 
 import pacienteService from "../services/paciente.service";
 import constants from "../data/constants";
-import ProgressBars from "../components/components-overview/ProgressBars";
 
 const theme = createMuiTheme({
     palette: {
@@ -24,12 +22,7 @@ const theme = createMuiTheme({
     },
 }, esES);
 
-const colorMap = ['#3FC7FA', '#85D262', '#FE8C6A']; //azul,verde, rojo
 const themeMap = ['info', 'success', 'danger']; //azul,verde, rojo
-
-function getColor(index) {
-    return colorMap[(index + colorMap.length) % colorMap.length];
-}
 
 function getTheme(index) {
     return themeMap[(index + themeMap.length) % themeMap.length];
@@ -121,7 +114,7 @@ class Paciente extends React.Component {
                         errortext: constants.mensaje_error_perfil_paciente_mensaje,
                     });
                 }
-                
+
             }).finally(() => {
                 this.setState({
                     ...this.state,
@@ -204,7 +197,7 @@ class Paciente extends React.Component {
 
         );
     }
-};
+}
 
 Paciente.propTypes = {
     /**

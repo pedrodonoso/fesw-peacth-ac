@@ -24,13 +24,14 @@ import {
 import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
 
-const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
-
+const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalculatedStatus }) => {
+    console.log({title:"dosecalculated", value: doseCalculatedStatus});
     const [cod_paciente, setCodPaciente] = useState({ value: '', valid: undefined });
     const [edad, setEdad] = useState({ value: '', valid: undefined });
     const [peso, setPeso] = useState({ value: '', valid: undefined });
     const [talla, setTalla] = useState({ value: '', valid: undefined });
     const [sexo, setSexo] = useState({ value: 'F' });
+    const [initialDose, setInitialDose] = useState(0);
     const [inr_inicial, setInrInicial] = useState({ value: '', valid: undefined });
     const [genetics, setGenetics] = useState({
         value: {
@@ -39,7 +40,8 @@ const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
             [constants.gen4]: constants.genaa
         }, valid: false
     });
-
+    const [doseCalculated, setDoseCalculated] = useState(false);
+    console.log({title:"dosecalculated2", value: doseCalculated});
     function setForm() {
         setCodPaciente((prevState) => ({ ...prevState, value: '', valid: undefined }));
         setEdad((prevState) => ({ ...prevState, value: 0.0, valid: undefined }));
@@ -81,7 +83,7 @@ const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
     }
 
     function onChangeCodPaciente(e) {
-        var _cod = e.target.value;
+        var _cod = e.target.value.toUpperCase();
         setCodPaciente((prevState) => ({ ...prevState, value: _cod }))
         console.log(validPacienteRegex.test(_cod))
         if (validPacienteRegex.test(_cod)) {
@@ -105,6 +107,19 @@ const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
         if (_edad === '') {
             setEdad((prevState) => ({ ...prevState, valid: undefined }))
         }
+    }
+
+    function onChangeInitialDose(e) {
+        var _initialDose = e.target.value;
+        setInitialDose(_initialDose);
+        /*if (validNumRegex.test(_initialDose)) {
+            setInitialDose((prevState) => ({ ...prevState, _initialDose }))
+        } else {
+            setInitialDose((prevState) => ({ ...prevState, valid: false }))
+        }
+        if (_initialDose === '') {
+            setInitialDose((prevState) => ({ ...prevState, valid: undefined }))
+        }*/
     }
 
     function onChangePeso(e) {
@@ -335,17 +350,13 @@ const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
                                         </Card>
                                     </Col>
                                 </Row>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="12" style={{
-                        position: "sticky",
-                        bottom: 0,
-                        zIndex: 1
-                    }}>
-                        {/*
+                                <Row className="mt-2">
+                                    <Col lg="12" style={{
+                                        position: "sticky",
+                                        bottom: 0,
+                                        zIndex: 1
+                                    }}>
+                                        {/*
                         <Card small className="mb-3">
                             <CardHeader className="border-bottom">
                                 <h6 className="m-0">Calculo</h6>
@@ -412,6 +423,215 @@ const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
                             </CardBody>
                         </Card>
                         */}
+                                        <Row>
+                                            <Col className="col-12 mb-2">
+                                                <Card small className={"stats-small--60 m-auto"}>
+                                                    <CardBody className={"stats-small--60 m-auto"}>
+                                                        <ButtonGroup >
+                                                            <Button
+                                                                theme="primary"
+                                                                className="font-weight-bold mb-2"
+                                                                onClick={(event) => {
+                                                                    var _imc = calcImc();
+                                                                    setDoseCalculated(false);
+                                                                    onSubmit({
+                                                                        valid: allValid(),
+                                                                        vars: {
+                                                                            'code': cod_paciente.valid ? cod_paciente.value : "",
+                                                                            'sex': sexo.value,
+                                                                            // 'bloodtype': blood.value,
+                                                                            'initialDate': "2009-11-30", //preguntar
+                                                                            'initialDose': 0,
+                                                                            'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                                                                            'weeklyDoseInRange': 0,
+                                                                            'totalDays': 534,
+                                                                            'weight': peso.valid ? parseFloat(peso.value) : 0.0,
+                                                                            'height': talla.valid ? parseFloat(talla.value) : 0.0,
+                                                                            'imc': _imc === Infinity ? 999 : _imc,
+                                                                            'age': edad.valid ? parseFloat(edad.value) : 0,
+                                                                            'genetics': genetics.value,
+                                                                            //'diagnosis': diagnosis.value,
+                                                                        }
+                                                                    });
+                                                                    setDoseCalculated(doseCalculatedStatus);
+                                                                }}
+                                                            >
+                                                                Calcular dosis
+                                                            </Button>
+                                                            <Button
+                                                                theme="secondary"
+                                                                className="mb-2"
+                                                                onClick={(event) => {
+                                                                    setForm();
+                                                                    setDoseCalculated(false);
+                                                                }}>
+                                                                Limpiar campos
+                                                            </Button>
+                                                        </ButtonGroup>
+                                                    </CardBody>
+                                                </Card>
+                                            </Col>
+                                        </Row>
+                                        {doseCalculated ?
+                                            <Row>
+                                                <Col className="col-sm-12 col-lg-4 mb-2">
+                                                    <Card
+                                                        small
+                                                        className={"stats-small--60"}
+                                                        role="button"
+                                                        onClick={(event) => {
+                                                            var _imc = calcImc();
+                                                            setDoseCalculated(doseCalculatedStatus);
+                                                            onSetDose({
+                                                                valid: allValid(),
+                                                                vars: {
+                                                                    'code': cod_paciente.valid ? cod_paciente.value : "",
+                                                                    'sex': sexo.value,
+                                                                    // 'bloodtype': blood.value,
+                                                                    'initialDate': "2009-11-30", //preguntar
+                                                                    'initialDose': dosis.toFixed(4),
+                                                                    'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                                                                    'weeklyDoseInRange': 0,
+                                                                    'totalDays': 534,
+                                                                    'weight': peso.valid ? parseFloat(peso.value) : 0.0,
+                                                                    'height': talla.valid ? parseFloat(talla.value) : 0.0,
+                                                                    'imc': _imc === Infinity ? 999 : _imc,
+                                                                    'age': edad.valid ? parseFloat(edad.value) : 0,
+                                                                    'genetics': genetics.value,
+                                                                    //'diagnosis': diagnosis.value,
+                                                                }}
+                                                            );
+                                                        }}
+                                                    >
+                                                        <CardBody className={" d-flex"}>
+                                                            <div className={"d-flex flex-column m-auto"}>
+                                                                <div className={"text-center"}>
+                                                                    <span className={"stats-small__label text-uppercase mb-1"}>{"Aceptar Modelo Regresión Lineal"}</span>
+                                                                    <h6 className={"stats-small__value count my-3"}>{isNaN(dosis) ? '-' : dosis.toFixed(4)}</h6>
+                                                                </div>
+                                                                <div className={"stats-small__data text-center align-items-center m-auto"}>
+                                                                    <span> mg/semana</span>
+                                                                </div>
+                                                            </div>
+                                                        </CardBody>
+                                                    </Card>
+                                                </Col>
+                                                <Col className="col-sm-12 col-lg-4 mb-2">
+                                                    <Card
+                                                        small
+                                                        className={"stats-small--60"}
+                                                        role="button"
+                                                        onClick={(event) => {
+                                                            var _imc = calcImc();
+                                                            setDoseCalculated(doseCalculatedStatus);
+                                                            onSetDose({
+                                                                    valid: allValid(),
+                                                                    vars: {
+                                                                        'code': cod_paciente.valid ? cod_paciente.value : "",
+                                                                        'sex': sexo.value,
+                                                                        // 'bloodtype': blood.value,
+                                                                        'initialDate': "2009-11-30", //preguntar
+                                                                        'initialDose': dosis_network.toFixed(4),
+                                                                        'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                                                                        'weeklyDoseInRange': 0,
+                                                                        'totalDays': 534,
+                                                                        'weight': peso.valid ? parseFloat(peso.value) : 0.0,
+                                                                        'height': talla.valid ? parseFloat(talla.value) : 0.0,
+                                                                        'imc': _imc === Infinity ? 999 : _imc,
+                                                                        'age': edad.valid ? parseFloat(edad.value) : 0,
+                                                                        'genetics': genetics.value,}
+                                                            });
+                                                        }}
+                                                    >
+                                                        <CardBody className={" d-flex"}>
+                                                            <div className={"d-flex flex-column m-auto"}>
+                                                                <div className={"text-center"}>
+                                                                    <span className={"stats-small__label text-uppercase mb-1"}>{"Aceptar Modelo Red Neuronal"}</span>
+                                                                    <h6 className={"stats-small__value count my-3"}>{isNaN(dosis_network) ? '-' : dosis_network.toFixed(4)}</h6>
+                                                                </div>
+                                                                <div className={"stats-small__data text-center align-items-center m-auto"}>
+                                                                    <span> mg/semana</span>
+                                                                </div>
+                                                            </div>
+                                                        </CardBody>
+                                                    </Card>
+                                                </Col>
+                                                <Col className="col-sm-12 col-lg-4 mb-2">
+                                                    <Card small className="" >
+                                                        <CardBody className={" d-flex"}>
+                                                            <div className={"d-flex flex-column m-auto"}>
+                                                                <div className={"text-center"}>
+                                                                    {/*<span className={"stats-small__label text-uppercase mb-1"}>{"Ingresar dosis manual"}</span>*/}
+                                                                    <FormGroup >
+                                                                        <label className={"stats-small__label text-uppercase mb-1"}>Dosis manual</label>
+                                                                        <InputGroup className="mb-3">
+                                                                            <FormInput
+                                                                                value={initialDose}
+                                                                                valid={initialDose.valid}
+                                                                                invalid={initialDose.valid === undefined ? undefined : !initialDose.valid}
+                                                                                onChange={onChangeInitialDose}
+                                                                                size="sm"
+
+                                                                                //className="mb-3 "
+                                                                                placeholder="0"
+                                                                            />
+                                                                            <FormFeedback tooltip={true}>"Debes ingresar solo
+                                                                                números."</FormFeedback>
+
+                                                                            <InputGroupAddon type="append">
+                                                                                <InputGroupText>mg/semana</InputGroupText>
+                                                                            </InputGroupAddon>
+
+                                                                        </InputGroup>
+                                                                    </FormGroup>
+                                                                    {/*<h6 className={"stats-small__value count my-3"}>{isNaN(dosis_network) ? '-' : dosis_network.toFixed(4)}</h6>*/}
+                                                                </div>
+                                                                <Button
+                                                                    theme="primary"
+                                                                    className="font-weight-bold mb-2"
+                                                                    onClick={(event) => {
+                                                                        var _imc = calcImc();
+                                                                        onSetDose({
+                                                                            valid: allValid(),
+                                                                            vars: {
+                                                                                'code': cod_paciente.valid ? cod_paciente.value : "",
+                                                                                'sex': sexo.value,
+                                                                                // 'bloodtype': blood.value,
+                                                                                'initialDate': "2009-11-30", //preguntar
+                                                                                'initialDose': initialDose,
+                                                                                'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
+                                                                                'weeklyDoseInRange': 0,
+                                                                                'totalDays': 534,
+                                                                                'weight': peso.valid ? parseFloat(peso.value) : 0.0,
+                                                                                'height': talla.valid ? parseFloat(talla.value) : 0.0,
+                                                                                'imc': _imc === Infinity ? 999 : _imc,
+                                                                                'age': edad.valid ? parseFloat(edad.value) : 0,
+                                                                                'genetics': genetics.value,
+                                                                                //'diagnosis': diagnosis.value,
+                                                                            }
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Fijar Dosis Manual
+                                                                </Button>
+                                                            </div>
+                                                        </CardBody>
+                                                    </Card>
+                                                </Col>
+                                            </Row> : null}
+                                    </Col>
+                                </Row>
+                            </CardBody>
+                        </Card>
+                    </Col>
+
+                </Row>
+                {/*<Row>
+                    <Col lg="12" style={{
+                        position: "sticky",
+                        bottom: 0,
+                        zIndex: 1
+                    }}>
                         <Row>
                             <Col className="col-lg mb-2">
                                 <Card small className={"stats-small--60 m-auto"}>
@@ -489,7 +709,7 @@ const DataUserGeneral = ({ onSubmit, dosis, dosis_network }) => {
                             </Col>
                         </Row>
                     </Col>
-                </Row>
+                </Row>*/}
             </Container>
         </React.Fragment>
     );

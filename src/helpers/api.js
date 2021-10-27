@@ -4,7 +4,7 @@ const endpoints = {
     // development: 'http://chile-2.herokuapp.com',
     // development: 'http://127.0.0.1:8000',
     // development: 'https://chopinhauer.herokuapp.com',
-    test: 'https://peacth-ac-api.herokuapp.com/',
+    test: 'http://3.143.234.136:8000/',
     // neural: 'http://54.164.58.120:8000/',
     neural: 'http://dummy.restapiexample.com/',
 };

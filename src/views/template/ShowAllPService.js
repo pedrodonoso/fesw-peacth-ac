@@ -73,8 +73,8 @@ class AllPService extends Component {
         })
     }).catch((error) => {
         this.toggle({
-        text: "No se puede mostrar el Personal de Servicio!! ✋",
-        title: "No se pudo 😁" });
+        text: "No se puede mostrar el Personal de Servicio!!",
+        title: "No se pudo" });
     });
     }
 

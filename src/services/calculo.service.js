@@ -1,6 +1,6 @@
 import {api} from '../helpers';
 import axios from 'axios';
-//TODO: API 
+//TODO: API
 const basePath = 'api';
 
 //obtener dosis del paciente
@@ -11,7 +11,18 @@ async function getDosePatient(data) {
     //https://peacth-ac-backend.herokuapp.com/api/patients/get_weekly_dosis/get_weekly_dosis/
     //var json = JSON.stringify({ answer: 42 });
     console.log({title: 'pre post getDosePatient', data: data})
-    return await api.post(`${basePath}/patients/get_weekly_dosis/get_weekly_dosis/`, data);
+    return await api.post(`${basePath}/patients/get_weekly_dosis/`, data);
+}
+
+//obtener dosis del paciente
+async function submitDosePatient(data) {
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //post
+    //https://peacth-ac-backend.herokuapp.com/api/patients/get_weekly_dosis/get_weekly_dosis/
+    //var json = JSON.stringify({ answer: 42 });
+    console.log({title: 'pre post submitDosePatient', data: data})
+    return await api.post(`${basePath}/patients/set_dose/`, data);
 }
 
 //obtener ultimos coeficientes del algoritmo
@@ -22,6 +33,8 @@ function getLastPropsAlgorithm() {
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     return api.get(`${basePath}/LogWTDparameters/get_last/get_last/`);
 }
+
+
 
 //registrar visitas
 function postRegisterVisit(data) {
@@ -75,7 +88,8 @@ const calculoService = {
     postRegisterVisit,
     getDistribution,
     getBoxplot,
-    updatePropsAlgorithm
+    updatePropsAlgorithm,
+    submitDosePatient
 };
 
 export default calculoService;

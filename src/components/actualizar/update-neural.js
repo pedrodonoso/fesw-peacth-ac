@@ -61,6 +61,7 @@ const UpdateNeuralNetwork = ({ onUpdateNeuralNetwork }) => {
                     console.log(error);
                     setCharging(false);
                     setEstadoRed(true);
+                    setDialogTitle("Error de conexión:")
                     setDialogBody("Tenemos problemas, porfavor intente más tarde.")
                 }
             );

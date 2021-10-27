@@ -55,6 +55,7 @@ class Calculo extends Component {
         var ifResponseCoef = false
         var ifResponseVar = false
 
+
         //console.log({nombre:"handleCalculoSubmit",data:data})
         //guarda variables ingresadas
         this.vars = data.vars
@@ -81,12 +82,12 @@ class Calculo extends Component {
 
 
         console.log({title: 'vars', data: this.vars})
-
         //subimos las variables ingresadas
         calculoService.getDosePatient(this.vars)
             .then((response) => {
-                var _dosis = response.data.initialDose
-                var _dosis_network = response.data.networkdose
+                var _dosis = response.data.regressionDose
+                var _dosis_network = response.data.networkDose
+
                 _dosis = _dosis.toFixed(4)
                 _dosis_network = _dosis_network.toFixed(4)
                 //console.log({title: 'initialDose', initialDose: _dosis})
@@ -96,7 +97,8 @@ class Calculo extends Component {
                 this.setState({
                     ...this.state,
                     dosis: _dosis,
-                    dosis_network: _dosis_network
+                    dosis_network: _dosis_network,
+                    doseCalculated: true,
                 });
 
                 //mostramos al usuario un toggle
@@ -146,6 +148,51 @@ class Calculo extends Component {
         }
     }
 
+    //guarda dosis en la api
+    handleSubmitDose(data) {
+        console.log(data);
+
+        let vars = data.vars;
+        console.log(vars);
+        calculoService.submitDosePatient(vars)
+            .then((response) => {
+                console.log({title: "Respuesta api", value: response.data.initialDose})
+                var _dosis = response.data.regressionDose
+                var _dosis_network = response.data.networkDose
+
+                _dosis = _dosis.toFixed(4)
+                _dosis_network = _dosis_network.toFixed(4)
+                //console.log({title: 'initialDose', initialDose: _dosis})
+                //guardamos las variables
+
+                this.setState({
+                    ...this.state,
+                    dosis: _dosis,
+                    dosis_network: _dosis_network,
+                    doseCalculated: true,
+                });
+
+                //mostramos al usuario un toggle
+
+                // this.toggle({
+                // text: "Equipo creado correctamente!! 😘",
+                // title: "Si se pudo!!😍 "
+                // });
+
+            })
+            .catch((error) => {
+                console.log({title: 'error', error: error})
+
+                //mostramos al usuario un toggle
+
+               /* this.toggle({
+                    title: constants.mensaje_error_calculo_titulo,
+                    text: constants.mensaje_error_calculo_mensaje,
+                });*/
+
+            });
+    }
+
     toggle(data) {
         if (data === {}) {
             this.setState({
@@ -193,9 +240,12 @@ class Calculo extends Component {
                     <Container fluid className="main-content-container px-4">
                         <Row >
                             <Col lg="12" className="py-4">
+                                {() => {console.log(this.state.doseCalculated)}}
                                 <DataUserGeneral onSubmit={this.handleCalculoSubmit}
+                                                 onSetDose={this.handleSubmitDose}
                                                  dosis={parseFloat(this.state.dosis)}
                                                  dosis_network={parseFloat(this.state.dosis_network)}
+                                                 doseCalculatedStatus={this.state.doseCalculated}
                                                 />
                                 <CustomToggle openOut={this.state.open} toggle={this.toggle.bind(this, {})}
                                               handler={this.handlerOpenDialog.bind(this)}

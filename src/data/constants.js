@@ -47,10 +47,10 @@ var mensaje_error_network_perfil_paciente_titulo = "Lo sentimos";
 var mensaje_error_network_perfil_paciente_mensaje = (<div> No pudimos obtener los datos,<br/> <b> verifique que hay conexión a internet o contactese con el sistema de soporte. </b></div>)
 //"No pudimos obtener los datos, verifique que hay conexión a internet o que el sistema está funcionado correctamente. ";
 
-var mensaje_error_analisis_titulo = "Lo sentimos";
+var mensaje_error_analisis_titulo = "Ocurrió un problema";
 var mensaje_error_analisis_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
 
-var mensaje_error_calculo_titulo = "No se pudo 😁";
+var mensaje_error_calculo_titulo = "Ocurrió un problema";
 var mensaje_error_calculo_mensaje = (<div> El código del paciente ya existe!! <br/> <b> Vuelve a intentarlo con un nuevo código </b></div>)
 
 //(<div> Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Se calculará la dosis con los
@@ -59,7 +59,7 @@ var mensaje_error_calculo_mensaje = (<div> El código del paciente ya existe!! <
 var mensaje_error_calculo_mal_ingreso_titulo = "Revisa los datos";
 var mensaje_error_calculo_mal_ingreso_mensaje = "Algunos campos presentan errores o están vacíos";
 
-var mensaje_error_regresion_titulo = "No se pudo 😁";
+var mensaje_error_regresion_titulo = "No se pudo";
 var mensaje_error_regresion_mensaje = (
     <div>Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Intentalo más tarde </b></div>)
 

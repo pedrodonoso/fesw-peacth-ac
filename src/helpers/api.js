@@ -23,7 +23,3 @@ export const api = axios.create({
     */
 });
 
-export const neuralApi = axios.create({
-    baseURL: endpoints['neural'],
-    timeout: 20000,
-})

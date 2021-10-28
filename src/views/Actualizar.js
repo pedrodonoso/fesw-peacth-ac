@@ -46,8 +46,8 @@ class Actualizar extends Component {
         this.increase = this.increase.bind(this);
         this.restart = this.restart.bind(this);
     }
-    //progress bar
 
+    //progress bar
     increase(speed) {
         const { percent } = this.state;
         const newPercent = percent + 1;

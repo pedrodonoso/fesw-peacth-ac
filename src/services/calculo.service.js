@@ -35,7 +35,6 @@ function getLastPropsAlgorithm() {
 }
 
 
-
 //registrar visitas
 function postRegisterVisit(data) {
     //post
@@ -64,6 +63,36 @@ function updatePropsAlgorithm(data) {
     return api.post(`${basePath}/LogWTDparameters/set_parametres/set_parametres/`, data)
 }
 
+
+function getLastNeuralNetwork() {
+    //post
+    //https://peacth-ac-backend.herokuapp.com/api/LogWTDparameters/get_last_neural_network/
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    console.log({
+        title: 'pre get getLastNeuralNetwork',
+        url: (`${basePath}/LogWTDparameters/get_last_neural_network/`),
+    })
+    return api.get(`${basePath}/LogWTDparameters/get_last_neural_network/`)
+}
+
+
+function getNeuralNetwork() {
+    //post
+    //https://peacth-ac-backend.herokuapp.com/api/LogWTDparameters/neural_network/
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    console.log({
+        title: 'pre get getNeuralNetwork',
+        url: (`${basePath}/LogWTDparameters/neural_network/`),
+    })
+    return api.get(`${basePath}/LogWTDparameters/neural_network/`)
+}
+
+
+
+
+
 //obtener distribucion
 async function getDistribution(data) {
     //get
@@ -89,7 +118,9 @@ const calculoService = {
     getDistribution,
     getBoxplot,
     updatePropsAlgorithm,
-    submitDosePatient
+    submitDosePatient,
+    getLastNeuralNetwork,
+    getNeuralNetwork
 };
 
 export default calculoService;

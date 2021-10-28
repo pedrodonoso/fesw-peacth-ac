@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import {
     Col,
@@ -15,6 +15,7 @@ import {
     DialogContent,
     DialogContentText, DialogTitle
 } from "@material-ui/core";
+import calculoService from '../../services/calculo.service';
 
 const UpdateNeuralNetwork = () => {
     const [open, setOpen] = useState(false);
@@ -22,6 +23,29 @@ const UpdateNeuralNetwork = () => {
     const [dialogTitle, setDialogTitle] = useState("Por favor espere");
     const [dialogBody, setDialogBody] = useState("Cargando...");
     const [estadoRed, setEstadoRed] = useState(false);
+    const [loss, setLoss] = useState('-');
+    const [created_at, setCreatedAt] = useState('');
+
+    useEffect(() => {
+        loadLastNeural();
+    });
+
+    //load last neural network
+    function loadLastNeural() {
+        calculoService.getLastNeuralNetwork()
+            .then((response) => {
+                console.log({ title: 'getLastNeuralNetwork', data: response.data });
+                setLoss(response.data.loss);
+                setCreatedAt(response.data.created_at);
+
+            })
+            .catch((error) => {
+                console.log({ title: 'error getLastNeuralNetwork', data: error })
+                setOpen(true);
+                setDialogTitle("Error de conexión:")
+                setDialogBody("Tenemos problemas, porfavor intente más tarde.")
+            });
+    }
 
     // const openDialog = () => setOpen(!open);
     function openDialog() {
@@ -55,6 +79,7 @@ const UpdateNeuralNetwork = () => {
         estadoDesactualizado();
         setTimeout(function () {
             setDialogBody("Cargando...");
+            setDialogTitle("Por favor espere");
             setCharging(true);
         }, 200);
     }
@@ -62,9 +87,9 @@ const UpdateNeuralNetwork = () => {
     return (
         <React.Fragment>
             <Dialog open={open}
-                    onClose={closeDialog}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description">
+                onClose={closeDialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description">
                 {/* Cargando */}
                 {charging ?
                     <React.Fragment>
@@ -72,12 +97,12 @@ const UpdateNeuralNetwork = () => {
                             {dialogTitle}
                         </DialogTitle>
                         <DialogContent>
-                            <DialogContentText  id="alert-dialog-description" className="text-center">
+                            <DialogContentText id="alert-dialog-description" className="text-center">
                                 {dialogBody}
                             </DialogContentText>
-                                <DialogContentText className="text-center">
-                                    <CircularProgress />
-                                </DialogContentText>
+                            <DialogContentText className="text-center">
+                                <CircularProgress />
+                            </DialogContentText>
                         </DialogContent>
                     </React.Fragment> : null}
                 {/* Con respuesta */}
@@ -87,16 +112,16 @@ const UpdateNeuralNetwork = () => {
                             {dialogTitle}
                         </DialogTitle>
                         <DialogContent>
-                            <DialogContentText  id="alert-dialog-description" className="text-center">
+                            <DialogContentText id="alert-dialog-description" className="text-center">
                                 {dialogBody}
                             </DialogContentText>
                         </DialogContent>
-                            <DialogActions>
-                                <Button onClick={closeDialog}>
-                                    Cerrar
-                                </Button>
-                            </DialogActions>
-                    </React.Fragment> : null }
+                        <DialogActions>
+                            <Button onClick={closeDialog}>
+                                Cerrar
+                            </Button>
+                        </DialogActions>
+                    </React.Fragment> : null}
             </Dialog>
             <Col>
                 <Container>
@@ -105,9 +130,31 @@ const UpdateNeuralNetwork = () => {
                             <CardHeader className="border-bottom bg-light">
                                 <h5 className="m-0 font-weight-bold text-center">Actualizar Red Neuronal</h5>
                             </CardHeader>
-                            <CardBody className="text-center">
+                            <CardBody className="text-left">
+                                
+                                <Card
+                                    small
+                                    className={`stats-small--60 mb-4`}
+
+                                >
+                                    <CardBody className={" d-flex"}>
+                                        <div className={"d-flex flex-column m-auto"}>
+                                            <div className={"text-center"}>
+                                                <span className={"stats-small__label text-uppercase mb-1"}>Error del último modelo de Red Neuronal</span>
+                                                <h6 className={"stats-small__value count my-3"}>{loss}</h6>
+                                            </div>
+                                            <div className={"text-center"}>
+                                                <span className={"stats-small__label text-uppercase mb-1"}>Fecha de última actualización del modelo</span>
+                                                <h6 className={"stats-small__value count my-3"}>{created_at.split(" ")[0]}</h6>
+                                            </div>
+                                        </div>
+                                    </CardBody>
+                                </Card>
+                                
+
                                 <Button size="lg" onClick={() => {
                                     openDialog();
+                                    loadLastNeural();
                                 }}>Actualizar</Button>
                             </CardBody>
                         </Card>

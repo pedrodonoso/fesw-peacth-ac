@@ -152,7 +152,7 @@ const UpdateNeuralNetwork = () => {
                                 </Card>
                                 
 
-                                <Button size="lg" onClick={() => {
+                                <Button size="s" onClick={() => {
                                     openDialog();
                                     loadLastNeural();
                                 }}>Actualizar</Button>

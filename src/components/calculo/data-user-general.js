@@ -635,10 +635,9 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                                 // onChange={onChangeInitialDose}
                                                                 // size="sm"
                                                                 //className="mb-3 "
+                                                                disabled
                                                                 placeholder="0.0"
                                                             />
-                                                            <FormFeedback tooltip={true}>"Debes ingresar solo
-                                                                números."</FormFeedback>
 
                                                             <InputGroupAddon type="append">
                                                                 <InputGroupText>mg/semana</InputGroupText>

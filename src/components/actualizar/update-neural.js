@@ -50,7 +50,7 @@ const UpdateNeuralNetwork = () => {
     // const openDialog = () => setOpen(!open);
     function openDialog() {
         setOpen(!open);
-        fetch("http://3.143.234.136:8000/api/LogWTDparameters/neural_network/")
+        fetch("https://peacth-ac-backend.rj.r.appspot.com/api/LogWTDparameters/neural_network/")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -131,7 +131,7 @@ const UpdateNeuralNetwork = () => {
                                 <h5 className="m-0 font-weight-bold text-center">Actualizar Red Neuronal</h5>
                             </CardHeader>
                             <CardBody className="text-left">
-                                
+
                                 <Card
                                     small
                                     className={`stats-small--60 mb-4`}
@@ -150,7 +150,7 @@ const UpdateNeuralNetwork = () => {
                                         </div>
                                     </CardBody>
                                 </Card>
-                                
+
 
                                 <Button size="s" onClick={() => {
                                     openDialog();

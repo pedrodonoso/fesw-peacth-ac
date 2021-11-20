@@ -10,7 +10,6 @@ class PDFExport extends React.Component {
 
     generateDataUser(doc) {
         
-    
         var nombre = "Juan Carlos Rojas Naranjo"
         var codigo = "T-100";
         var edad = "72"
@@ -46,13 +45,13 @@ class PDFExport extends React.Component {
 
         doc.text("Edad : ", 20, line4).setFont(undefined, 'bold');
         doc.text(edad, 60, line4).setFont(undefined, 'normal');
-        doc.text("años", 75, line4).setFont(undefined, 'bold');
+        doc.text("años", 75, line4).setFont(undefined, 'normal');
         doc.text("Peso : ", 110, line4).setFont(undefined, 'bold');
         doc.text(peso, 140, line4).setFont(undefined, 'normal');
-        doc.text("Kg", 150, line4).setFont(undefined, 'bold');
+        doc.text("Kg", 150, line4).setFont(undefined, 'normal');
         doc.text("Talla : ", 20, line5).setFont(undefined, 'bold');
         doc.text(talla, 60, line5).setFont(undefined, 'normal');
-        doc.text("m", 75, line5).setFont(undefined, 'bold');
+        doc.text("m", 75, line5).setFont(undefined, 'normal');
         doc.text("Sexo : ", 110, line5).setFont(undefined, 'bold');
         doc.text(sexo, 140, line5).setFont(undefined, 'normal');
         doc.text("INR Inicial : ", 20, line6).setFont(undefined, 'bold');
@@ -76,8 +75,8 @@ class PDFExport extends React.Component {
         doc.text(dosis_inicial, 60, line11).setFont(undefined, 'normal');
         
     }
-    generatePDF = (e) => {
-        //var doc = new jsPDF('p', 'pt');
+
+    generateTable(doc) {
 
         var historicINR = {
             "dates": [
@@ -99,7 +98,7 @@ class PDFExport extends React.Component {
                 40.0
             ]
         }
-        
+
         var getData = function(original_data,headers) {
             var result = [];
             var length_data = original_data[headers[0]].length;
@@ -136,7 +135,6 @@ class PDFExport extends React.Component {
                 id: keys[i],
                 name: keys[i],
                 prompt: keys_alt[i], //titulo que se muestra
-                width: 100,
                 align: "center",
                 padding: 0
               });
@@ -150,12 +148,18 @@ class PDFExport extends React.Component {
         var _headers_alt = ["Fecha ","Valor INR ", "Dosis recetada "]; 
 
         var _headers_table = createHeaders(_headers,_headers_alt);
+        doc.table(50, 20, getData(historicINR,_headers), _headers_table, { autoSize: true });
+    }
+    generatePDF = (e) => {
+        //var doc = new jsPDF('p', 'pt');        
         var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "p" });
 
         this.generateDataUser(doc);
 
         doc.addPage("a4", "p"); //letter
-        doc.table(50, 20, getData(historicINR,_headers), _headers_table, { autoSize: true, margin:{ bottom: 25 } });
+
+        this.generateTable(doc);
+
         doc.save('demo.pdf')
         // Set the document to automatically print via JS
         // doc.autoPrint();

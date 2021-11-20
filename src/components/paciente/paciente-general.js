@@ -9,7 +9,8 @@ import {
 } from "shards-react";
 
 import constants from "../../data/constants";
-
+//import Download from '../exports/excel-export';
+import DropdownExports from '../exports/DropdownExports';
 const PacienteGeneral = ({ data_paciente, title }) => {
     //const [data_paciente, setDataPaciente] = useState({value: '', valid: undefined});
     const [isActive, setisActive] = useState({ value: constants.perfil_clinico });
@@ -35,12 +36,14 @@ const PacienteGeneral = ({ data_paciente, title }) => {
     //const {title} = this.props;
 
     return (
-        <Container>
+       
+        <Container >
             <Card small className="h-100 w-100">
                 <CardHeader className="border-bottom bg-light">
                     <h5 className="mt-1 font-weight-bold text-center">{title}</h5>
                 </CardHeader>
                 <CardBody>
+                    <DropdownExports/>
                     <ButtonToolbar>
                         <ButtonGroup>
                             <Button

@@ -58,7 +58,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
     }
 
     const validNumRegex =
-        RegExp(/^([0-9])+[.]?([0-9])*$/i);
+        RegExp(/^[-]*([0-9])+[.]?([0-9])*$/i);
 
     function allValid() {
         return (p_0.valid) &&

@@ -11,7 +11,7 @@ import {
     Button,
     FormFeedback,
     Progress,
-    CardHeader, Container, FormCheckbox,
+    CardHeader, Container, FormRadio,
 } from "shards-react";
 
 import constants from "../../data/constants";
@@ -203,9 +203,9 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
         }
     }
 
-    function switchEdit() {
+    /*function switchEdit(mode) {
         setManualUpdate((prevState) => ({ ...prevState, value: !manualUpdate.value }));
-    }
+    }*/
 
     /*
     function handleManual() {
@@ -727,10 +727,28 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
                                     </Col>
 
                                     <Col sm="12" md="4" className="mb-3">
-                                        <strong className="text-muted d-block mb-2">
-                                            Estado de edición
+                                        <strong className="d-block mb-2">
+                                            Modo de Edición
                                         </strong>
                                         <fieldset>
+                                            <FormRadio
+                                                inline
+                                                name="manual"
+                                                checked={manualUpdate.value === true}
+                                                onChange={()=>{setManualUpdate({value: true})}}
+                                            >
+                                                Manual
+                                            </FormRadio>
+                                            <FormRadio
+                                                inline
+                                                name="linearR"
+                                                checked={manualUpdate.value === false}
+                                                onChange={()=>{setManualUpdate({value: false})}}
+                                            >
+                                                Regresión Lineal
+                                            </FormRadio>
+                                        </fieldset>
+                                        {/*<fieldset>
                                             <FormCheckbox
                                                 toggle
                                                 small
@@ -739,7 +757,7 @@ const UpdateProps = ({ data_local, data_model, onSubmitManual, onSubmitGetRegres
                                             >
                                                 {manualUpdate.value ? "Manual" : "Regresión Lineal"}
                                             </FormCheckbox>
-                                        </fieldset>
+                                        </fieldset>*/}
                                     </Col>
 
 

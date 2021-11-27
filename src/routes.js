@@ -10,7 +10,8 @@ import {
     Analisis,
     RegistrarVisita,
     Actualizar,
-    Paciente
+    Paciente,
+    Comparar
 } from "./views";
 /*
 import BlogOverview from "./views/template/BlogOverview";
@@ -97,6 +98,12 @@ export default [
             hideLogoText: true
         },
         component_props_: {dosisGen: false}
+    },
+    {
+        path: "/comparar",
+        layout: CustomGeneral,
+        component: Comparar,
+        layout_props: {noNavbar: false, noFooter: true, hideLogoText: true}
     },
     /*
     {

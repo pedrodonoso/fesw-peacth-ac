@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import {
     Row,
     Col,
@@ -11,16 +10,19 @@ import {
     Button,
     FormFeedback,
     Progress,
-    CardHeader, Container, FormCheckbox,
-    FormRadio,
-    Collapse,
-    Fade,
+    CardHeader, Container,
     Popover,
     PopoverHeader,
     PopoverBody
 } from "shards-react";
 
 import constants from "../../data/constants";
+import {
+    FormControl,
+    FormControlLabel,
+    Radio,
+    RadioGroup
+} from "@material-ui/core";
 
 const validNumRegex =
     RegExp(/^[-]*([0-9])+[.]?([0-9])*$/i);
@@ -49,7 +51,7 @@ class UpdateProps extends React.Component {
             collapseInfoEdition: false,
         };
 
-        this.changeMethod = this.changeMethod.bind(this);
+        this.handleChangeMethod = this.handleChangeMethod.bind(this);
         this.isObjectEmpty = this.isObjectEmpty.bind(this);
         this.getTheme = this.getTheme.bind(this);
         this.allValid = this.allValid.bind(this);
@@ -224,15 +226,15 @@ class UpdateProps extends React.Component {
         });
     }
 
-    changeMethod(method) {
+    handleChangeMethod(method) {
         this.setState({
-            checked: (method === 'manual') ? true : false
+            checked: (method.target.value === 'manual') ? true : false
         });
     }
 
     toggleCollapseInfoEdition() {
-        this.setState({ 
-            ...this.state, 
+        this.setState({
+            ...this.state,
             collapseInfoEdition: !this.state.collapseInfoEdition });
     }
 
@@ -757,8 +759,8 @@ class UpdateProps extends React.Component {
                                                 style={{cursor:'pointer'}}
                                                     onClick={
                                                         () => {
-                                                            this.setState({ 
-                                                                ...this.state, 
+                                                            this.setState({
+                                                                ...this.state,
                                                                 collapseInfoEdition: !this.state.collapseInfoEdition });
                                                         }
                                                     }>help</i>
@@ -772,40 +774,26 @@ class UpdateProps extends React.Component {
                                                 >
                                                     <PopoverHeader>Ayuda</PopoverHeader>
                                                     <PopoverBody>
-                                                       Para cambiar el modo de edición debes seleccionar 
-                                                       la palabra que corresponda al estado de edición que 
-                                                       corresponda. 
+                                                       Para cambiar el modo de edición debes seleccionar
+                                                       la palabra que corresponda al estado de edición que
+                                                       corresponda.
                                                     </PopoverBody>
                                                 </Popover>
-                                                {/*
-                                            <Fade in={this.state.collapseInfoEdition}>
-          Etiam semper convallis tortor, in euismod orci vehicula sit amet.
-        </Fade>
-        */}{/*
-                                                <Collapse open={this.state.collapseInfoEdition}>
-                                                    <div className="p-3 mt-3 border rounded">
-                                                        <h5>😍 Now you see me!</h5>
-                                                        <span>
-                                                            In sagittis nibh non arcu viverra, nec imperdiet quam suscipit.
-                                                            Sed porta eleifend scelerisque. Vestibulum dapibus quis arcu a
-                                                            facilisis.
-                                                        </span>
-                                                    </div>
-                                                </Collapse>
-        */}
                                             </Row>
-                                            {/*<SmallToggleExamples title={'Manual'} handler={} />*/}
-                                            {/*}
-                                            <FormCheckbox
-                                                toggle
-                                                small
-                                                onChange={switchEdit}
-                                                checked={this.state.checked}
-                                            >
-                                                {this.state.checked ? "Manual" : "Regresión Lineal"}
-                                            </FormCheckbox> */}
                                             <div>
-                                                <FormRadio
+                                                <FormControl component="fieldset">
+                                                    <RadioGroup row aria-label="UpdateMethod" name="update" defaultValue="auto" onChange={this.handleChangeMethod}>
+                                                        <FormControlLabel
+                                                            value="auto"
+                                                            control={<Radio color="primary" />}
+                                                            label="Regresión Lineal" />
+                                                        <FormControlLabel
+                                                            value="manual"
+                                                            control={<Radio color="primary" />}
+                                                            label="Manual" />
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                {/*<FormRadio
                                                     name="manual"
                                                     checked={this.state.checked === true}
                                                     onChange={() => {
@@ -822,9 +810,8 @@ class UpdateProps extends React.Component {
                                                         this.changeMethod("auto");
                                                     }}
                                                 >
-                                                    {/*Regresión Lineal*/}
                                                     Automático
-                                                </FormRadio>
+                                                </FormRadio>*/}
                                             </div>
                                         </Col>
 
@@ -855,51 +842,6 @@ class UpdateProps extends React.Component {
                                         animated={false}
                                     />
 
-                                    {/* Actualización Manual*/}
-                                    {/*
-                            {this.state.checked &&
-                                <Row>
-                                    <Col xs="6" md="6">
-                                        <InputGroup className="mb-2">
-                                            <Button
-                                                theme="primary"
-                                                className="font-weight-bold"
-                                                onClick={(event) => {
-                                                    onSubmitManual({
-                                                        valid: allValid(),
-                                                        vars: {
-                                                            "p_0": p_0.valid ? parseFloat(p_0.value) : 0.0,
-                                                            "p_men": p_men.valid ? parseFloat(p_men.value) : 0.0,
-                                                            "p_age": p_age.valid ? parseFloat(p_age.value) : 0.0,
-                                                            "p_initialINR": p_initialINR.valid ? parseFloat(p_initialINR.value) : 0.0,
-                                                            "p_imc": p_imc.valid ? parseFloat(p_imc.value) : 0.0,
-                                                            "p_CYP2C9_12": p_CYP2C9_12.valid ? parseFloat(p_CYP2C9_12.value) : 0.0,
-                                                            "p_CYP2C9_13": p_CYP2C9_13.valid ? parseFloat(p_CYP2C9_13.value) : 0.0,
-                                                            "p_CYP2C9_33": p_CYP2C9_33.valid ? parseFloat(p_CYP2C9_33.value) : 0.0,
-                                                            "p_VKORC1_GA": p_VKORC1_GA.valid ? parseFloat(p_VKORC1_GA.value) : 0.0,
-                                                            "p_VKORC1_AA": p_VKORC1_AA.valid ? parseFloat(p_VKORC1_AA.value) : 0.0,
-                                                        }
-                                                    });
-
-                                                }}
-                                            >
-                                                Guardar parámetros
-                                            </Button>
-                                        </InputGroup>
-                                    </Col>
-                                    <Col xs="6" md="6" className="text-right">
-                                        <Button
-                                            theme="secondary"
-                                            className="mb-2"
-                                            onClick={(event) => {
-                                                setForm();
-                                                handleNotManual()
-                                            }}>
-                                            Regresión Lineal
-                                        </Button>
-                                    </Col>
-                                </Row>}
-                                        */}
                                 </CardBody>
                             </Card>
                         </Col>

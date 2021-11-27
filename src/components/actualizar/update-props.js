@@ -23,7 +23,7 @@ import {
 import constants from "../../data/constants";
 
 const validNumRegex =
-    RegExp(/^([\-0-9])+[.]?([0-9])*$/i);
+    RegExp(/^[-]*([0-9])+[.]?([0-9])*$/i);
 
 const themeMap = ['info', 'success', 'danger']; //azul,verde, rojo
 
@@ -749,8 +749,8 @@ class UpdateProps extends React.Component {
 
                                         <Col sm="12" md="4" className="mb-3">
                                             <Row>
-                                                <strong className="text-muted d-block mb-2 mr-2">
-                                                    Estado de edición
+                                                <strong className="d-block mb-2 mr-2">
+                                                    Modo de edición
                                                 </strong>
                                                 <i className="material-icons"
                                                 id="popover-1"
@@ -815,6 +815,7 @@ class UpdateProps extends React.Component {
                                                     Manual
                                                 </FormRadio>
                                                 <FormRadio
+                                                inline
                                                     name="auto"
                                                     checked={this.state.checked === false}
                                                     onChange={() => {

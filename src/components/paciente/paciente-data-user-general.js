@@ -57,11 +57,6 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
         }));
     }
 
-    const validNumRegex =
-        RegExp(/^([0-9])+[.]?([0-9])*$/i);
-    const validPacienteRegex =
-        RegExp(/^(T-)([0-9]){3}$/i);
-
     function allValid() {
         return (cod_paciente.valid || !(cod_paciente.valid === undefined)) && (edad.valid || !(edad.valid === undefined)) && (peso.valid || !(peso.valid === undefined)) && (talla.valid || !(talla.valid === undefined)) && (inr_inicial.valid || !(inr_inicial.valid === undefined));
     }
@@ -81,8 +76,8 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     function onChangeCodPaciente(e) {
         var _cod = e.target.value;
         setCodPaciente((prevState) => ({...prevState, value: _cod}))
-        console.log(validPacienteRegex.test(_cod))
-        if (validPacienteRegex.test(_cod)) {
+        console.log(constants.validPacienteRegex.test(_cod))
+        if (constants.validPacienteRegex.test(_cod)) {
             setCodPaciente((prevState) => ({...prevState, valid: true}))
         } else {
             setCodPaciente((prevState) => ({...prevState, valid: false}))
@@ -95,7 +90,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     function onChangeEdad(e) {
         var _edad = e.target.value;
         setEdad((prevState) => ({...prevState, value: _edad}))
-        if (validNumRegex.test(_edad)) {
+        if (constants.validNumRegex.test(_edad)) {
             setEdad((prevState) => ({...prevState, valid: true}))
         } else {
             setEdad((prevState) => ({...prevState, valid: false}))
@@ -108,7 +103,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     function onChangePeso(e) {
         var _peso = e.target.value;
         setPeso((prevState) => ({...prevState, value: _peso}))
-        if (validNumRegex.test(_peso)) {
+        if (constants.validNumRegex.test(_peso)) {
             setPeso((prevState) => ({...prevState, valid: true}))
         } else {
             setPeso((prevState) => ({...prevState, valid: false}))
@@ -121,7 +116,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     function onChangeTalla(e) {
         var _talla = e.target.value;
         setTalla((prevState) => ({...prevState, value: _talla}))
-        if (validNumRegex.test(_talla)) {
+        if (constants.validNumRegex.test(_talla)) {
             setTalla((prevState) => ({...prevState, valid: true}))
         } else {
             setTalla((prevState) => ({...prevState, valid: false}))
@@ -134,7 +129,7 @@ const PacienteDataUserGeneral = ({onSubmit, dosis}) => {
     function onChangeINRInicial(e) {
         var _inr = e.target.value;
         setInrInicial((prevState) => ({...prevState, value: _inr}))
-        if (validNumRegex.test(_inr)) {
+        if (constants.validNumRegex.test(_inr)) {
             setInrInicial((prevState) => ({...prevState, valid: true}))
         } else {
             setInrInicial((prevState) => ({...prevState, valid: false}))

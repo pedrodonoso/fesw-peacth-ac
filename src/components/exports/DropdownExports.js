@@ -3,7 +3,8 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    Button
 } from "shards-react";
 
 import ExcelExport from './excel-export';
@@ -12,11 +13,16 @@ import PDFExport from './pdf-export';
 class DropdownExports extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            open: false, 
+            export_type: ["Excel", "PDF"],
+        };
+        
         this.toggle = this.toggle.bind(this);
-        this.state = {open: false, export_type: ["Excel", "PDF"]};
     }
 
     toggle() {
+        console.log(this.props.userdata)
         this.setState(prevState => {
             return {open: !prevState.open};
         });
@@ -34,11 +40,12 @@ class DropdownExports extends Component {
 
     render() {
         return (
-            <Dropdown open={this.state.open} toggle={this.toggle}>
-                <DropdownToggle>Exportar</DropdownToggle>
+            <Dropdown open={this.state.open} toggle={this.toggle} group>
+                <Button className="font-weight-bold">Exportar </Button>
+                <DropdownToggle split/>
                 <DropdownMenu>
-                    <DropdownItem><ExcelExport/></DropdownItem>
-                    <DropdownItem><PDFExport/></DropdownItem>
+                    <DropdownItem><ExcelExport userdata={this.props.userdata}/></DropdownItem>
+                    <DropdownItem><PDFExport userdata={this.props.userdata}/></DropdownItem>
                     {/*
                     this.state.export_type.map((item) => {
                         return (

@@ -774,9 +774,10 @@ class UpdateProps extends React.Component {
                                                 >
                                                     <PopoverHeader>Ayuda</PopoverHeader>
                                                     <PopoverBody>
-                                                       Para cambiar el modo de edición debes seleccionar
-                                                       la palabra que corresponda al estado de edición que
-                                                       corresponda.
+                                                        El modo de edición "Regresión Lineal" genera un modelo de 
+                                                        regresión lineal solo en caso de encontrar un ajuste mejor que el anterior.
+                                                        
+                                                        El modo de edición "Manual" te permite modificar los coeficientes del modelo de regresión lineal manualmente.
                                                     </PopoverBody>
                                                 </Popover>
                                             </Row>

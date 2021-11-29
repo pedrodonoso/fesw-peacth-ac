@@ -777,7 +777,7 @@ class UpdateProps extends React.Component {
                                                         El modo de edición "Regresión Lineal" genera un modelo de 
                                                         regresión lineal solo en caso de encontrar un ajuste mejor que el anterior.
                                                         
-                                                        El modo de edición "Manual" modifica los coeficientes del modelo manualmente.
+                                                        El modo de edición "Manual" te permite modificar los coeficientes del modelo de regresión lineal manualmente.
                                                     </PopoverBody>
                                                 </Popover>
                                             </Row>

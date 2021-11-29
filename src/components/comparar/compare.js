@@ -10,8 +10,7 @@ import {
 } from "shards-react";
 import formulaService from "../../services/formula.service";
 import constants from "../../data/constants";
-import {CircularProgress, TablePagination} from "@material-ui/core";
-import {JSONToTable} from "json-to-table-pagination";
+import {CircularProgress} from "@material-ui/core";
 import MaterialTable from "material-table";
 
 const Compare = () => {

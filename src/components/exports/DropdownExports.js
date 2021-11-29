@@ -13,11 +13,16 @@ import PDFExport from './pdf-export';
 class DropdownExports extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            open: false, 
+            export_type: ["Excel", "PDF"],
+        };
+        
         this.toggle = this.toggle.bind(this);
-        this.state = {open: false, export_type: ["Excel", "PDF"]};
     }
 
     toggle() {
+        console.log(this.props.userdata)
         this.setState(prevState => {
             return {open: !prevState.open};
         });
@@ -39,8 +44,8 @@ class DropdownExports extends Component {
                 <Button className="font-weight-bold">Exportar </Button>
                 <DropdownToggle split/>
                 <DropdownMenu>
-                    <DropdownItem><ExcelExport/></DropdownItem>
-                    <DropdownItem><PDFExport/></DropdownItem>
+                    <DropdownItem><ExcelExport userdata={this.props.userdata}/></DropdownItem>
+                    <DropdownItem><PDFExport userdata={this.props.userdata}/></DropdownItem>
                     {/*
                     this.state.export_type.map((item) => {
                         return (

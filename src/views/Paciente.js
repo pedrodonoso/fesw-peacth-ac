@@ -116,6 +116,7 @@ class Paciente extends React.Component {
                 }
 
             }).finally(() => {
+                console.log(this.state.data)
                 this.setState({
                     ...this.state,
                     percent: 100,

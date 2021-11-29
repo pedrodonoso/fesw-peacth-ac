@@ -22,7 +22,7 @@ import DropdownOptions from "./drop-options";
 import constants from "../../data/constants";
 
 const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalculatedStatus }) => {
-    console.log({ title: "dosecalculated", value: doseCalculatedStatus });
+    //console.log({ title: "dosecalculated", value: doseCalculatedStatus });
 
     const [card_1_selected, setCard1Selected] = useState({ value: false, });
     const [card_2_selected, setCard2Selected] = useState({ value: false, });
@@ -69,11 +69,6 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
         }));
     }
 
-    const validNumRegex =
-        RegExp(/^([0-9])+[.]?([0-9])*$/i);
-    const validPacienteRegex =
-        RegExp(/^([a-zA-Z0-9\-]){1,5}$/i);
-
     function allValid() {
         // return (cod_paciente.valid && !(cod_paciente.valid === undefined)) && (edad.valid && !(edad.valid === undefined)) && (peso.valid && !(peso.valid === undefined)) && (talla.valid && !(talla.valid === undefined)) && (inr_inicial.valid && !(inr_inicial.valid === undefined));
         return (cod_paciente.valid && true) && (edad.valid && true) && (peso.valid && true) && (talla.valid && true) && (inr_inicial.valid && true);
@@ -95,8 +90,8 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     function onChangeCodPaciente(e) {
         var _cod = e.target.value.toUpperCase();
         setCodPaciente((prevState) => ({ ...prevState, value: _cod }))
-        console.log(validPacienteRegex.test(_cod))
-        if (validPacienteRegex.test(_cod)) {
+        //console.log(constants.validPacienteRegex.test(_cod))
+        if (constants.validPacienteRegex.test(_cod)) {
             setCodPaciente((prevState) => ({ ...prevState, valid: true }))
         } else {
             setCodPaciente((prevState) => ({ ...prevState, valid: false }))
@@ -109,7 +104,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     function onChangeEdad(e) {
         var _edad = e.target.value;
         setEdad((prevState) => ({ ...prevState, value: _edad }))
-        if (validNumRegex.test(_edad)) {
+        if (constants.validNumRegex.test(_edad)) {
             setEdad((prevState) => ({ ...prevState, valid: true }))
         } else {
             setEdad((prevState) => ({ ...prevState, valid: false }))
@@ -122,7 +117,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     function onChangeInitialDose(e) {
         var _initialDose = e.target.value;
         setInitialDose((prevState) => ({ ...prevState, value: _initialDose }));
-        if (validNumRegex.test(_initialDose)) {
+        if (constants.validNumRegex.test(_initialDose)) {
             setInitialDose((prevState) => ({ ...prevState, valid: true }))
         } else {
             setInitialDose((prevState) => ({ ...prevState, valid: false }))
@@ -137,7 +132,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
         setManualDose((prevState) => ({ ...prevState, value: _manualDose }));
         setInitialDose((prevState) => ({ ...prevState, value: _manualDose, }));
 
-        if (validNumRegex.test(_manualDose)) {
+        if (constants.validNumRegex.test(_manualDose)) {
             setManualDose((prevState) => ({ ...prevState, valid: true }))
         } else {
             setManualDose((prevState) => ({ ...prevState, valid: false }))
@@ -156,7 +151,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     function onChangePeso(e) {
         var _peso = e.target.value;
         setPeso((prevState) => ({ ...prevState, value: _peso }))
-        if (validNumRegex.test(_peso)) {
+        if (constants.validNumRegex.test(_peso)) {
             setPeso((prevState) => ({ ...prevState, valid: true }))
         } else {
             setPeso((prevState) => ({ ...prevState, valid: false }))
@@ -169,7 +164,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     function onChangeTalla(e) {
         var _talla = e.target.value;
         setTalla((prevState) => ({ ...prevState, value: _talla }))
-        if (validNumRegex.test(_talla)) {
+        if (constants.validNumRegex.test(_talla)) {
             setTalla((prevState) => ({ ...prevState, valid: true }))
         } else {
             setTalla((prevState) => ({ ...prevState, valid: false }))
@@ -182,7 +177,7 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
     function onChangeINRInicial(e) {
         var _inr = e.target.value;
         setInrInicial((prevState) => ({ ...prevState, value: _inr }))
-        if (validNumRegex.test(_inr)) {
+        if (constants.validNumRegex.test(_inr)) {
             setInrInicial((prevState) => ({ ...prevState, valid: true }))
         } else {
             setInrInicial((prevState) => ({ ...prevState, valid: false }))

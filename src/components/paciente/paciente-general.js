@@ -87,7 +87,7 @@ const PacienteGeneral = ({ data_paciente, title }) => {
                     </ButtonToolbar>
                     </Col>
                     <Col className="" style={{textAlign: 'right'}}>
-                    <DropdownExports/>
+                    <DropdownExports userdata={data_paciente}/>
                     </Col>
                     </Row>
 

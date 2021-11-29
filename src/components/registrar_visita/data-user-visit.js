@@ -15,6 +15,8 @@ import {
     InputGroupText, Container
 } from "shards-react";
 
+import constants from "../../data/constants";
+
 const DataUserVisit = ({onSubmit}) => {
 
     // const today = new Date();
@@ -31,11 +33,6 @@ const DataUserVisit = ({onSubmit}) => {
         setArrivalINR((prevState) => ({...prevState, value: '', valid: undefined}));
     }
 
-    const validNumRegex =
-        RegExp(/^([0-9])+[.]?([0-9])*$/i);
-    const validPacienteRegex =
-        RegExp(/^(T-)([0-9]){3}$/i);
-
     function allValid() {
         return (cod_paciente.valid || !(cod_paciente.valid === undefined)) && (arrivalDose.valid || !(arrivalDose.valid === undefined)) && (updatedDose.valid || !(updatedDose.valid === undefined)) && (arrivalINR.valid || !(arrivalINR.valid === undefined));
     }
@@ -43,7 +40,7 @@ const DataUserVisit = ({onSubmit}) => {
     function onChangeCodPaciente(e) {
         var _cod = e.target.value;
         setCodPaciente((prevState) => ({...prevState, value: _cod}))
-        if (validPacienteRegex.test(_cod)) {
+        if (constants.validPacienteRegex.test(_cod)) {
             setCodPaciente((prevState) => ({...prevState, valid: true}))
         } else {
             setCodPaciente((prevState) => ({...prevState, valid: false}))
@@ -56,7 +53,7 @@ const DataUserVisit = ({onSubmit}) => {
     function onChangeArrivalDose(e) {
         var _arrival = e.target.value;
         setArrivalDose((prevState) => ({...prevState, value: _arrival}))
-        if (validNumRegex.test(_arrival)) {
+        if (constants.validNumRegex.test(_arrival)) {
             setArrivalDose((prevState) => ({...prevState, valid: true}))
         } else {
             setArrivalDose((prevState) => ({...prevState, valid: false}))
@@ -69,7 +66,7 @@ const DataUserVisit = ({onSubmit}) => {
     function onChangeUpdatedDose(e) {
         var _updated = e.target.value;
         setUpdatedDose((prevState) => ({...prevState, value: _updated}))
-        if (validNumRegex.test(_updated)) {
+        if (constants.validNumRegex.test(_updated)) {
             setUpdatedDose((prevState) => ({...prevState, valid: true}))
         } else {
             setUpdatedDose((prevState) => ({...prevState, valid: false}))
@@ -82,7 +79,7 @@ const DataUserVisit = ({onSubmit}) => {
     function onChangeArrivalINR(e) {
         var _arrival = e.target.value;
         setArrivalINR((prevState) => ({...prevState, value: _arrival}))
-        if (validNumRegex.test(_arrival)) {
+        if (constants.validNumRegex.test(_arrival)) {
             setArrivalINR((prevState) => ({...prevState, valid: true}))
         } else {
             setArrivalINR((prevState) => ({...prevState, valid: false}))

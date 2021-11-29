@@ -1,6 +1,6 @@
 import React from "react";
-import {esES} from '@material-ui/core/locale';
-import {createMuiTheme} from '@material-ui/core/styles';
+import { esES } from '@material-ui/core/locale';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 var gen2 = 'CYP2C9_2'
 var gen3 = 'CYP2C9_3'
@@ -34,7 +34,7 @@ var props = {
 
 const theme = createMuiTheme({
     palette: {
-        primary: {main: '#1976d2'},
+        primary: { main: '#1976d2' },
     },
 }, esES);
 
@@ -44,14 +44,14 @@ var mensaje_error_perfil_paciente_titulo = "Lo sentimos";
 var mensaje_error_perfil_paciente_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
 
 var mensaje_error_network_perfil_paciente_titulo = "Lo sentimos";
-var mensaje_error_network_perfil_paciente_mensaje = (<div> No pudimos obtener los datos,<br/> <b> verifique que hay conexión a internet o contactese con el sistema de soporte. </b></div>)
+var mensaje_error_network_perfil_paciente_mensaje = (<div> No pudimos obtener los datos,<br /> <b> verifique que hay conexión a internet o contactese con el sistema de soporte. </b></div>)
 //"No pudimos obtener los datos, verifique que hay conexión a internet o que el sistema está funcionado correctamente. ";
 
 var mensaje_error_analisis_titulo = "Ocurrió un problema";
 var mensaje_error_analisis_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
 
 var mensaje_error_calculo_titulo = "Ocurrió un problema";
-var mensaje_error_calculo_mensaje = (<div> El código del paciente ya existe!! <br/> <b> Vuelve a intentarlo con un nuevo código </b></div>)
+var mensaje_error_calculo_mensaje = (<div> El código del paciente ya existe!! <br /> <b> Vuelve a intentarlo con un nuevo código </b></div>)
 
 //(<div> Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Se calculará la dosis con los
 //    último parametros guardados localmente. </b></div>);
@@ -61,10 +61,15 @@ var mensaje_error_calculo_mal_ingreso_mensaje = "Algunos campos presentan errore
 
 var mensaje_error_regresion_titulo = "No se pudo";
 var mensaje_error_regresion_mensaje = (
-    <div>Ha ocurrido un problema, vuelve a intentarlo! <br/> <b> Intentalo más tarde </b></div>)
+    <div>Ha ocurrido un problema, vuelve a intentarlo! <br /> <b> Intentalo más tarde </b></div>)
 
 
 var no_data = "no hay datos";
+const validPacienteRegex =
+    RegExp(/^([a-zA-Z0-9\-]){1,5}$/i);
+const validNumRegex =
+    RegExp(/^([0-9])+[.]?([0-9])*$/i);
+
 const constants = {
     gen2,
     gen3,
@@ -97,7 +102,9 @@ const constants = {
     mensaje_error_calculo_mal_ingreso_titulo,
     mensaje_error_calculo_mal_ingreso_mensaje,
     mensaje_error_regresion_titulo,
-    mensaje_error_regresion_mensaje
+    mensaje_error_regresion_mensaje,
+    validPacienteRegex,
+    validNumRegex,
 };
 
 export default constants;

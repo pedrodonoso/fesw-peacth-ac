@@ -3,7 +3,8 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    Button
 } from "shards-react";
 
 import ExcelExport from './excel-export';
@@ -34,8 +35,9 @@ class DropdownExports extends Component {
 
     render() {
         return (
-            <Dropdown open={this.state.open} toggle={this.toggle}>
-                <DropdownToggle>Exportar</DropdownToggle>
+            <Dropdown open={this.state.open} toggle={this.toggle} group>
+                <Button className="font-weight-bold">Exportar </Button>
+                <DropdownToggle split/>
                 <DropdownMenu>
                     <DropdownItem><ExcelExport/></DropdownItem>
                     <DropdownItem><PDFExport/></DropdownItem>

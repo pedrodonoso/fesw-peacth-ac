@@ -43,7 +43,8 @@ const PacienteGeneral = ({ data_paciente, title }) => {
                     <h5 className="mt-1 font-weight-bold text-center">{title}</h5>
                 </CardHeader>
                 <CardBody>
-                    <DropdownExports/>
+                    <Row className="mt-2">
+                        <Col>
                     <ButtonToolbar>
                         <ButtonGroup>
                             <Button
@@ -84,6 +85,11 @@ const PacienteGeneral = ({ data_paciente, title }) => {
                             </Button>
                         </ButtonGroup>
                     </ButtonToolbar>
+                    </Col>
+                    <Col className="" style={{textAlign: 'right'}}>
+                    <DropdownExports/>
+                    </Col>
+                    </Row>
 
                     {/* Perfil Clinico*/}
                     {isActive.value === constants.perfil_clinico &&

@@ -103,11 +103,26 @@ async function getRegresion() {
     return await api.get(`${basePath}/LogWTDparameters/multivariable_regression/`);
 }
 
+// Obtener datos para tabla comparativa
+async function getModelsTable() {
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //get
+    //https://peacth-ac-api.herokuapp.com/api/LogWTDparameters/multivariable_regression/
+    //var json = JSON.stringify({ answer: 42 });
+    console.log({
+        title: 'pre get getModelsTable',
+        path: `${basePath}/models_analysis/`
+    })
+    return await api.get(`${basePath}/models_analysis/`);
+}
+
 const formulaService = {
     formula,
     updateLocalProps,
     getLastLocalProps,
     getRegresion,
+    getModelsTable
 };
 
 export default formulaService;

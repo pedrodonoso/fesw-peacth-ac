@@ -102,6 +102,7 @@ class Paciente extends React.Component {
                         ...this.state,
                         bad_response: true,
                         error: true,
+                        data: {},
                         errortitle: constants.mensaje_error_network_perfil_paciente_titulo,
                         errortext: constants.mensaje_error_network_perfil_paciente_mensaje,
                     });
@@ -110,6 +111,7 @@ class Paciente extends React.Component {
                         ...this.state,
                         bad_response: true,
                         error: true,
+                        data: {},
                         errortitle: constants.mensaje_error_perfil_paciente_titulo,
                         errortext: constants.mensaje_error_perfil_paciente_mensaje,
                     });

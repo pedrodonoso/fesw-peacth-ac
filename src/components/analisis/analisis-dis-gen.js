@@ -15,6 +15,7 @@ import {
 import constants from "../../data/constants";
 import CustomToggle from '../forms/CustomToggle';
 import calculoService from "../../services/calculo.service";
+import DropdownExports from '../exports/DropdownExports';
 
 class AnalisisDisGen extends React.Component {
     constructor(props) {
@@ -180,6 +181,10 @@ class AnalisisDisGen extends React.Component {
                                 </Button>
                             </ButtonGroup>
                         </Col>
+                        
+                        <Col className="" style={{textAlign: 'right'}}>
+                    <DropdownExports type={"excel"}/>
+                    </Col>
                     </Row>
                     <Row align="center">
                         <Col>

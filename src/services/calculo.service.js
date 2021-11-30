@@ -43,11 +43,11 @@ function postRegisterVisit(data) {
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     console.log({
         title: 'pre post postRegisterVisit',
-        url: `${basePath}/clinical_control/register_visit/register_visit/`,
+        url: `${basePath}/clinical_control/register_visit/`,
         data: data
     })
 
-    return api.post(`${basePath}/clinical_control/register_visit/register_visit/`, data)
+    return api.post(`${basePath}/clinical_control/register_visit/`, data)
 }
 
 function updatePropsAlgorithm(data) {

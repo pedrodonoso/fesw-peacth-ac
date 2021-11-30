@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import jsPDF from 'jspdf';
+import { Button, ButtonGroup } from "shards-react";
+import {
+    CircularProgress
+  } from "@material-ui/core";
 
 class PDFExport extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state ={
-            user_data: this.props.userdata,
-        }
     };
 
+    isObjectEmpty(obj) {
+        return Object.getOwnPropertyNames(obj).length === 0
+    }
+
     generateDataUser(doc, user) {
-        
+
         //var nombre = "Juan Carlos Rojas Naranjo"
         var codigo = user.code
         var edad = user.age.toString()
@@ -23,7 +28,7 @@ class PDFExport extends React.Component {
         var c_3 = user.genetics.CYP2C9_3
         var vk = user.genetics.VKORC1
         var dosis_inicial = user.initialDose.toString()
-      
+
         var line1 = 20
         var line2 = 30
         var line3 = 40
@@ -60,7 +65,7 @@ class PDFExport extends React.Component {
 
         var row_line_2 = line7
         doc.line(40, row_line_2, 170, row_line_2); // horizontal line
-        
+
         doc.text("CYP2C9-2 : ", 20, line8).setFont(undefined, 'bold');
         doc.text(c_2, 60, line8).setFont(undefined, 'normal');
         doc.text("CYP2C9-3 : ", 100, line8).setFont(undefined, 'bold');
@@ -70,11 +75,11 @@ class PDFExport extends React.Component {
 
         var row_line_2 = line10
         doc.line(40, row_line_2, 170, row_line_2); // horizontal line
-        
-        
+
+
         doc.text("Dosis Inicial : ", 20, line11).setFont(undefined, 'bold');
         doc.text(dosis_inicial, 60, line11).setFont(undefined, 'normal');
-        
+
     }
 
     generateTable(doc, historic) {
@@ -102,7 +107,7 @@ class PDFExport extends React.Component {
         */
         var historicINR = historic;
 
-        var getData = function(original_data,headers) {
+        var getData = function (original_data, headers) {
             var result = [];
             var length_data = original_data[headers[0]].length;
             // console.log(headers);
@@ -111,56 +116,62 @@ class PDFExport extends React.Component {
             var dates_title = headers[0];
             var inrValues_title = headers[1];
             var doseValues_title = headers[2];
-        
-        
+
+
             var dates = original_data[dates_title];
             var inrValues = original_data[inrValues_title];
             var doseValues = original_data[doseValues_title];
 
             for (var i = 0; i < length_data; i += 1) {
-                var data_result_item = { 
-                    id : (i + 1).toString(),
-                    [dates_title] : dates[i],
-                    [inrValues_title] : inrValues[i].toString(),
-                    [doseValues_title] : doseValues[i].toString(),
+                var data_result_item = {
+                    id: (i + 1).toString(),
+                    [dates_title]: dates[i],
+                    [inrValues_title]: inrValues[i].toString(),
+                    [doseValues_title]: doseValues[i].toString(),
                 }
-                
+
                 // data_result_item.id = (i + 1).toString();
                 result.push(Object.assign({}, data_result_item));
             }
             return result;
-          };
-          
-          function createHeaders(keys, keys_alt) {
+        };
+
+        function createHeaders(keys, keys_alt) {
             var result = [];
             for (var i = 0; i < keys.length; i += 1) {
-              result.push({
-                id: keys[i],
-                name: keys[i],
-                prompt: keys_alt[i], //titulo que se muestra
-                align: "center",
-                padding: 0
-              });
+                result.push({
+                    id: keys[i],
+                    name: keys[i],
+                    prompt: keys_alt[i], //titulo que se muestra
+                    align: "center",
+                    padding: 0
+                });
             }
             return result;
-          }
-          
-        var _headers = Object.keys(historicINR);
-        
-        //dejar los espacios al final para que se ajuste el ancho de la celda
-        var _headers_alt = ["Fecha ","Valor INR ", "Dosis recetada "]; 
+        }
 
-        var _headers_table = createHeaders(_headers,_headers_alt);
-        doc.table(50, 20, getData(historicINR,_headers), _headers_table, { autoSize: true });
+        var _headers = Object.keys(historicINR);
+
+        //dejar los espacios al final para que se ajuste el ancho de la celda
+        var _headers_alt = ["Fecha ", "Valor INR ", "Dosis recetada "];
+
+        var _headers_table = createHeaders(_headers, _headers_alt);
+        doc.table(50, 20, getData(historicINR, _headers), _headers_table, { autoSize: true });
     }
+
     generatePDF = (e) => {
         ////var doc = new jsPDF('p', 'pt');        
         var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "p" });
 
         console.log("generate PDF")
 
-        var user = this.state.user_data.clinic
-        var historic = this.state.user_data.historicINR 
+        if (this.isObjectEmpty(this.props.userdata)) {
+            console.log("no data")
+            return
+        }
+
+        var user = this.props.userdata.clinic
+        var historic = this.props.userdata.historicINR
 
         this.generateDataUser(doc, user);
 
@@ -168,19 +179,25 @@ class PDFExport extends React.Component {
 
         this.generateTable(doc, historic);
 
-        doc.save('demo.pdf')
-        
+        var codigo = user.code
+        doc.save(`${codigo}.pdf`)
+
         //// Set the document to automatically print via JS
         //// doc.autoPrint();
         //// doc.autoPrint({variant: 'javascript'});
-        
-    }   
-    
-   render() {
-      return (
-         <div onClick={this.generatePDF}> PDF </div>
-      );
-   }
+
+    }
+
+    render() {
+        return (
+            <ButtonGroup>
+                <Button 
+                disabled={(this.isObjectEmpty(this.props.userdata)) ? true : false }
+                onClick={this.generatePDF}> Exportar PDF </Button>
+            </ButtonGroup>
+
+        );
+    }
 }
 
 export default PDFExport;

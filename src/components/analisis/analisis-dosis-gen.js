@@ -9,6 +9,7 @@ import constants from "../../data/constants";
 
 import CustomToggle from '../forms/CustomToggle';
 import calculoService from "../../services/calculo.service";
+import DropdownExports from '../exports/DropdownExports';
 
 class AnalisisDosisGen extends React.Component {
     constructor(props) {
@@ -175,8 +176,9 @@ class AnalisisDosisGen extends React.Component {
                                 </Button>
                             </ButtonGroup>
                         </Col>
-                        <Col>
-                        </Col>
+                        <Col className="" style={{textAlign: 'right'}}>
+                    <DropdownExports  type={"excel"}/>
+                    </Col>
                     </Row>
 
                     <Row align="center">

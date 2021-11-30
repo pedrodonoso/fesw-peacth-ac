@@ -3,6 +3,32 @@ import axios from 'axios';
 //TODO: API
 const basePath = 'api';
 
+//enviar correo de notificacion
+async function postSendMail(data) {
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //post
+    //https://peacth-ac-backend.herokuapp.com/api/patients/get_weekly_dosis/get_weekly_dosis/
+    //var json = JSON.stringify({ answer: 42 });
+    console.log({title: 'pre post postSendMail', data: data})
+    return await api.post(`${basePath}/send_email`, data);
+}
+
+
+//obtener todos los pacientes
+async function getAllPatients() {
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //post
+    //https://peacth-ac-backend.herokuapp.com/api/patients/get_weekly_dosis/get_weekly_dosis/
+    //var json = JSON.stringify({ answer: 42 });
+    console.log({
+        title: 'pre get getAllPatients',
+        path: `${basePath}/patients/`
+    })
+    return await api.get(`${basePath}/patients/`);
+}
+
 //obtener perfil del paciente
 async function getProfilePatient(data) {
     axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
@@ -37,6 +63,8 @@ async function getGeneticProfilePatient(data) {
 const pacienteService = {
     getProfilePatient,
     getGeneticProfilePatient,
+    getAllPatients,
+    postSendMail
 };
 
 export default pacienteService;

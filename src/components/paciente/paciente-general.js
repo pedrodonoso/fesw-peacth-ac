@@ -36,7 +36,7 @@ const PacienteGeneral = ({ data_paciente, title }) => {
     //const {title} = this.props;
 
     return (
-       
+
         <Container >
             <Card small className="h-100 w-100">
                 <CardHeader className="border-bottom bg-light">
@@ -45,50 +45,50 @@ const PacienteGeneral = ({ data_paciente, title }) => {
                 <CardBody>
                     <Row className="mt-2">
                         <Col>
-                    <ButtonToolbar>
-                        <ButtonGroup>
-                            <Button
-                                className="font-weight-bold"
-                                theme={isActive.value === constants.perfil_clinico ? 'primary' : 'white'}
-                                onClick={() =>
-                                    handleChangeOption(constants.perfil_clinico)
-                                }>
-                                {constants.perfil_clinico}
+                            <ButtonToolbar>
+                                <ButtonGroup>
+                                    <Button
+                                        className="font-weight-bold"
+                                        theme={isActive.value === constants.perfil_clinico ? 'primary' : 'white'}
+                                        onClick={() =>
+                                            handleChangeOption(constants.perfil_clinico)
+                                        }>
+                                        {constants.perfil_clinico}
 
-                            </Button>
-                            <Button
-                                className="font-weight-bold"
-                                theme={isActive.value === constants.perfil_genetico ? 'primary' : 'white'}
-                                onClick={() =>
-                                    handleChangeOption(constants.perfil_genetico)
-                                }>
-                                {constants.perfil_genetico}
-                            </Button>
-                            <Button
-                                className="font-weight-bold"
-                                theme={isActive.value === constants.perfil_historico ? 'primary' : 'white'}
-                                onClick={() =>
-                                    handleChangeOption(constants.perfil_historico)
-                                    //this.generate(constants.gen4)
-                                }>
-                                {constants.perfil_historico}
-                                <Col style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}>
-                                    <Row><strong style={{
-                                        'font-size': '10px',
-                                        'font-weight': '50'
-                                    }}>dosificación vs INR</strong></Row>
-                                </Col>
-                            </Button>
-                        </ButtonGroup>
-                    </ButtonToolbar>
-                    </Col>
-                    <Col className="" style={{textAlign: 'right'}}>
-                    <DropdownExports userdata={data_paciente}/>
-                    </Col>
+                                    </Button>
+                                    <Button
+                                        className="font-weight-bold"
+                                        theme={isActive.value === constants.perfil_genetico ? 'primary' : 'white'}
+                                        onClick={() =>
+                                            handleChangeOption(constants.perfil_genetico)
+                                        }>
+                                        {constants.perfil_genetico}
+                                    </Button>
+                                    <Button
+                                        className="font-weight-bold"
+                                        theme={isActive.value === constants.perfil_historico ? 'primary' : 'white'}
+                                        onClick={() =>
+                                            handleChangeOption(constants.perfil_historico)
+                                            //this.generate(constants.gen4)
+                                        }>
+                                        {constants.perfil_historico}
+                                        <Col style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                        }}>
+                                            <Row><strong style={{
+                                                'font-size': '10px',
+                                                'font-weight': '50'
+                                            }}>dosificación vs INR</strong></Row>
+                                        </Col>
+                                    </Button>
+                                </ButtonGroup>
+                            </ButtonToolbar>
+                        </Col>
+                        <Col className="" style={{ textAlign: 'right' }}>
+                            <DropdownExports userdata={data_paciente} type={"pdf"} />
+                        </Col>
                     </Row>
 
                     {/* Perfil Clinico*/}

@@ -70,6 +70,7 @@ const validPacienteRegex =
 const validNumRegex =
     RegExp(/^([0-9])+[.]?([0-9])*$/i);
 
+const newtest = 'http://13.58.23.184:8000/'
 const constants = {
     gen2,
     gen3,
@@ -105,6 +106,7 @@ const constants = {
     mensaje_error_regresion_mensaje,
     validPacienteRegex,
     validNumRegex,
+    newtest
 };
 
 export default constants;

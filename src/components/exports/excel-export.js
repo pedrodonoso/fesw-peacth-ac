@@ -4,6 +4,8 @@ import {
     Button
 } from "shards-react";
 
+import pacienteService from "../../services/paciente.service";
+
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
@@ -48,22 +50,52 @@ const dataSet2 = [
     }
 ];
 
+function parseUser(data) {
+    var dataGenerated = {
+        age: data.age,
+        code: data.code,
+        CYP2C9_2: data.genetics.CYP2C9_2,
+        CYP2C9_3: data.genetics.CYP2C9_3,
+        VKORC1: data.genetics.VKORC1,
+        height: data.height,
+        imc: data.imc,
+        initialDate: data.initialDate,
+        initialDose: data.initialDose,
+        initialINR: data.initialINR,
+        sex: data.sex,
+        totalDays: data.totalDays,
+        weeklyDoseInRange: data.weeklyDoseInRange,
+        weight: data.weight,
+    }
+    return dataGenerated;
+}
+
 class ExcelExport extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            export_type: ["Excel", "PDF"],
+            data: {}
+        };
+    }
     render() {
         return (
-            /* <ExcelFile element={<Button>Excel</Button>}>*/
-           <ExcelFile element={<div>Excel</div>}>
-                <ExcelSheet data={dataSet1} name="Employees">
-                    <ExcelColumn label="Name" value="name"/>
-                    <ExcelColumn label="Wallet Money" value="amount"/>
-                    <ExcelColumn label="Gender" value="sex"/>
-                    <ExcelColumn label="Marital Status"
-                                 value={(col) => col.is_married ? "Married" : "Single"}/>
-                </ExcelSheet>
-                <ExcelSheet data={dataSet2} name="Leaves">
-                    <ExcelColumn label="Name" value="name"/>
-                    <ExcelColumn label="Total Leaves" value="total"/>
-                    <ExcelColumn label="Remaining Leaves" value="remaining"/>
+            <ExcelFile element={<div>Excel</div>}>
+                <ExcelSheet data={this.props.data} name="Pacientes">
+                    <ExcelColumn label="Código Paciente" value="code" />
+                    <ExcelColumn label="Fecha Inicial" value="initialDate" />
+                    <ExcelColumn label="Edad" value="age" />
+                    <ExcelColumn label="Altura" value="height" />
+                    <ExcelColumn label="Peso" value="weight" />
+                    <ExcelColumn label="Género" value="sex" />
+                    <ExcelColumn label="IMC" value="imc" />
+                    <ExcelColumn label="Dosis Inicial" value="initialDose" />
+                    <ExcelColumn label="INR Inicial" value="initialINR" />
+                    <ExcelColumn label="CYP2C9_2" value="CYP2C9_2" />
+                    <ExcelColumn label="CYP2C9_3" value="CYP2C9_3" />
+                    <ExcelColumn label="VKORC1" value="VKORC1" />
+                    <ExcelColumn label="Total Días" value="totalDays" />
                 </ExcelSheet>
             </ExcelFile>
         );

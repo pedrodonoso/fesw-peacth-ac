@@ -10,6 +10,27 @@ import AnalisisDisGen from "../components/analisis/analisis-dis-gen";
 import {esES} from '@material-ui/core/locale';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
+import pacienteService from "../services/paciente.service";
+
+function parseUser(data) {
+    var dataGenerated = {
+        age: data.age,
+        code: data.code,
+        CYP2C9_2: data.genetics.CYP2C9_2,
+        CYP2C9_3: data.genetics.CYP2C9_3,
+        VKORC1: data.genetics.VKORC1,
+        height: data.height,
+        imc: data.imc,
+        initialDate: data.initialDate,
+        initialDose: data.initialDose,
+        initialINR: data.initialINR,
+        sex: data.sex,
+        totalDays: data.totalDays,
+        weeklyDoseInRange: data.weeklyDoseInRange,
+        weight: data.weight,
+    }
+    return dataGenerated;
+}
 
 const theme = createMuiTheme({
     palette: {
@@ -24,6 +45,7 @@ class Analisis extends Component {
             open: false,
         }
     }
+   
 
     render() {
         return (
@@ -36,7 +58,7 @@ class Analisis extends Component {
                                 {this.props.dosisGen ?
                                     <AnalisisDosisGen title="Análisis de la dosis calculada entre genotipos"/>
                                     :
-                                    <AnalisisDisGen title="Análisis de la frecuencia de distribución de genotipos "/>
+                                    <AnalisisDisGen title="Análisis de la frecuencia de distribución de genotipos"/>
                                 }
                             </Col>
                         </Row>

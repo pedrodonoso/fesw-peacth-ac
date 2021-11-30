@@ -3,16 +3,15 @@ import {
     Container,
     Row,
     Col,
+    Button
 } from "shards-react";
 
 import DataUserGeneral from "../components/calculo/data-user-general";
 import CustomToggle from '../components/forms/CustomToggle';
+import ChargingToggle from "../components/forms/ChargingToggle";
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
 import constants from "../data/constants";
-
-
 import formulaService from "../services/formula.service";
 import calculoService from "../services/calculo.service";
 
@@ -23,7 +22,7 @@ const theme = createMuiTheme({
     },
 }, esES);
 
-class Calculo extends Component {
+class Calculo extends React.Component {
     vars = {};
     coef = {};
 
@@ -33,12 +32,17 @@ class Calculo extends Component {
             open: false,
             dosis: 0.0,
             dosis_network: 0.0,
-            doseCalculated: false,
+            doseCalculated: true,
+            dialogOpen: false,
+
         }
         this.handleCalculoSubmit = this.handleCalculoSubmit.bind(this);
         this.handleSubmitDose = this.handleSubmitDose.bind(this);
         this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
+        this.handlerOpenDialogCharging = this.handlerOpenDialogCharging.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.toggleDialog = this.toggleDialog.bind(this);
+
     }
 
 
@@ -59,6 +63,23 @@ class Calculo extends Component {
         //console.log({text:"toggle", open:this.state.open});
     }
 
+    toggleDialog(data) {
+        if (data === {}) {
+            this.setState({
+                ...this.state,
+                dialogOpen: !this.state.dialogOpen
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                dialogOpen: !this.state.dialogOpen,
+                dialogTitle: data.title,
+                dialogBody: data.text,
+            });
+        }
+        //console.log({text:"toggle", open:this.state.open});
+    }
+
     handlerOpenDialog(data) {
         this.setState({
             ...this.state,
@@ -67,9 +88,19 @@ class Calculo extends Component {
         //console.log({text:"handler", open:this.state.open});
     }
 
+    handlerOpenDialogCharging(data) {
+        this.setState({
+            ...this.state,
+            dialogOpen: data
+        });
+        //console.log({text:"handler", open:this.state.open});
+    }
     //envía data a API
     handleCalculoSubmit(data) {
+
+
         console.log(data)
+
         if (!data.valid) {
             //console.log({title:"Data",data:data})
             this.toggle({
@@ -102,13 +133,18 @@ class Calculo extends Component {
                 this.coef = _coef
                 //guardamos en local
                 formulaService.updateLocalProps(_coef);
+                this.toggleDialog({
+                    title: "Calculando dosis ..",
+                    text: "",
+                });
             })
             .catch((error) => {
                 console.log({ title: 'error', error: error })
-            });
-
+            })
 
         console.log({ title: 'vars', data: this.vars })
+
+
         //subimos las variables ingresadas
         calculoService.getDosePatient(this.vars)
             .then((response) => {
@@ -121,12 +157,20 @@ class Calculo extends Component {
                 //guardamos las variables
                 ifResponseVar = true
 
+
                 this.setState({
                     ...this.state,
                     dosis: _dosis,
                     dosis_network: _dosis_network,
                     doseCalculated: _doseCalculatedStatus,
+                    dialogOpen: false,
                 });
+                console.log("calculo de dosis hecho!")
+                this.toggle({
+                    title: "Se ha calculado correctamente!",
+                    text: "",
+                });
+
             })
             .catch((error) => {
                 console.log({ title: 'error', error: error })
@@ -134,6 +178,8 @@ class Calculo extends Component {
                 //calculamos sin internet con las últimas variables
                 this.setState({
                     ...this.state,
+                    dialogOpen: false,
+                    open: false,
                     coef: {} //vacío para que formula service ejecute las últimas variables
                 });
                 //mostramos al usuario un toggle
@@ -156,28 +202,27 @@ class Calculo extends Component {
 
     //guarda dosis en la api
     handleSubmitDose(data) {
-        console.log(data);
-
         let vars = data.vars;
-        console.log(vars);
-
-
+        console.log("DOSIS:", vars)
         if (vars.initialDose == '') {
             this.toggle({
                 title: "No se envío ninguna dosis.",
                 text: "Procure seleccionar una dosis a utilizar y/o ingresar una dosis manualmente.",
             });
         } else {
+            this.toggleDialog({
+                title: "Enviando dosis ..",
+                text: "",
+            });
             calculoService.submitDosePatient(vars)
                 .then((response) => {
-                    console.log({ title: "Respuesta api", value: response.data.initialDose })
                     console.log({ title: "Respuesta api", value: response })
 
-                    //var _dosis_subida = response.data.initialDose
-
-                    //_dosis_subida = _dosis_subida.toFixed(4)
-                    //console.log({title: 'initialDose', initialDose: _dosis})
-                    //guardamos las variables
+                    this.setState({
+                        ...this.state,
+                        dialogOpen: false,
+                        open: false,
+                    });
 
                     this.toggle({
                         title: "Se ha enviado correctamente!!",
@@ -199,8 +244,6 @@ class Calculo extends Component {
                 });
         }
     }
-
-
 
     render() {
         return (
@@ -225,6 +268,7 @@ class Calculo extends Component {
                             <Col lg="12" className="py-4">
                                 <DataUserGeneral onSubmit={this.handleCalculoSubmit}
                                     onSetDose={this.handleSubmitDose}
+                                    onDialog={this.handleDialog}  //dialog
                                     dosis={parseFloat(this.state.dosis)}
                                     dosis_network={parseFloat(this.state.dosis_network)}
                                     doseCalculatedStatus={this.state.doseCalculated}
@@ -234,30 +278,11 @@ class Calculo extends Component {
                                     text={this.state.text}
                                     title={this.state.title}
                                 />
-                                {/*
-          <Card>
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Datos del Paciente</h6>
-            </CardHeader>
-              <Row>
-                  <Col lg="4" className="mb-4">
-                    <Card small>
-                        <CardHeader className="border-bottom">
-                        <h6 className="m-0">Datos Clínicos del Paciente</h6>
-                        </CardHeader>
-                        <DataUserGeneral />
-                    </Card>
-                  </Col>
-                  <Col lg="4" className="mb-4">
-                    <Card small>
-                        <CardHeader className="border-bottom">
-                        <h6 className="m-0">Datos Farmacogenética del Paciente</h6>
-                        </CardHeader>
-                    </Card>
-                  </Col>
-              </Row>
-          </Card>
-        */}
+                                <ChargingToggle openOut={this.state.dialogOpen} toggle={this.toggleDialog.bind(this, {})}
+                                    handler={this.handlerOpenDialogCharging.bind(this)}
+                                    text={this.state.dialogBody}
+                                    title={this.state.dialogTitle}
+                                />
                             </Col>
                         </Row>
                     </Container>

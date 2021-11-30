@@ -16,6 +16,7 @@ import {
     DialogContentText, DialogTitle
 } from "@material-ui/core";
 import calculoService from '../../services/calculo.service';
+import constants from '../../data/constants'
 
 const UpdateNeuralNetwork = () => {
     const [open, setOpen] = useState(false);
@@ -50,7 +51,7 @@ const UpdateNeuralNetwork = () => {
     // const openDialog = () => setOpen(!open);
     function openDialog() {
         setOpen(!open);
-        fetch("https://peacth-ac-backend.rj.r.appspot.com/api/LogWTDparameters/neural_network/")
+        fetch(`${constants.newtest}api/LogWTDparameters/neural_network/`)
             .then(res => res.json())
             .then(
                 (result) => {

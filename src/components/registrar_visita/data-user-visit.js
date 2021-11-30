@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import {
     Row,
@@ -17,20 +17,20 @@ import {
 
 import constants from "../../data/constants";
 
-const DataUserVisit = ({onSubmit}) => {
+const DataUserVisit = ({ onSubmit }) => {
 
     // const today = new Date();
-    const [cod_paciente, setCodPaciente] = useState({value: '', valid: undefined});
-    const [arrivalDose, setArrivalDose] = useState({value: '', valid: undefined});
-    const [updatedDose, setUpdatedDose] = useState({value: '', valid: undefined});
-    const [arrivalINR, setArrivalINR] = useState({value: '', valid: undefined});
+    const [cod_paciente, setCodPaciente] = useState({ value: '', valid: undefined });
+    const [arrivalDose, setArrivalDose] = useState({ value: '', valid: undefined });
+    const [updatedDose, setUpdatedDose] = useState({ value: '', valid: undefined });
+    const [arrivalINR, setArrivalINR] = useState({ value: '', valid: undefined });
 
 
     function setForm() {
-        setCodPaciente((prevState) => ({...prevState, value: '', valid: undefined}));
-        setArrivalDose((prevState) => ({...prevState, value: '', valid: undefined}));
-        setUpdatedDose((prevState) => ({...prevState, value: '', valid: undefined}));
-        setArrivalINR((prevState) => ({...prevState, value: '', valid: undefined}));
+        setCodPaciente((prevState) => ({ ...prevState, value: '', valid: undefined }));
+        setArrivalDose((prevState) => ({ ...prevState, value: '', valid: undefined }));
+        setUpdatedDose((prevState) => ({ ...prevState, value: '', valid: undefined }));
+        setArrivalINR((prevState) => ({ ...prevState, value: '', valid: undefined }));
     }
 
     function allValid() {
@@ -38,54 +38,54 @@ const DataUserVisit = ({onSubmit}) => {
     }
 
     function onChangeCodPaciente(e) {
-        var _cod = e.target.value;
-        setCodPaciente((prevState) => ({...prevState, value: _cod}))
+        var _cod = e.target.value.toUpperCase();
+        setCodPaciente((prevState) => ({ ...prevState, value: _cod }))
         if (constants.validPacienteRegex.test(_cod)) {
-            setCodPaciente((prevState) => ({...prevState, valid: true}))
+            setCodPaciente((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setCodPaciente((prevState) => ({...prevState, valid: false}))
+            setCodPaciente((prevState) => ({ ...prevState, valid: false }))
         }
         if (_cod === '') {
-            setCodPaciente((prevState) => ({...prevState, valid: undefined}))
+            setCodPaciente((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
     function onChangeArrivalDose(e) {
         var _arrival = e.target.value;
-        setArrivalDose((prevState) => ({...prevState, value: _arrival}))
+        setArrivalDose((prevState) => ({ ...prevState, value: _arrival }))
         if (constants.validNumRegex.test(_arrival)) {
-            setArrivalDose((prevState) => ({...prevState, valid: true}))
+            setArrivalDose((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setArrivalDose((prevState) => ({...prevState, valid: false}))
+            setArrivalDose((prevState) => ({ ...prevState, valid: false }))
         }
         if (_arrival === '') {
-            setArrivalDose((prevState) => ({...prevState, valid: undefined}))
+            setArrivalDose((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
     function onChangeUpdatedDose(e) {
         var _updated = e.target.value;
-        setUpdatedDose((prevState) => ({...prevState, value: _updated}))
+        setUpdatedDose((prevState) => ({ ...prevState, value: _updated }))
         if (constants.validNumRegex.test(_updated)) {
-            setUpdatedDose((prevState) => ({...prevState, valid: true}))
+            setUpdatedDose((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setUpdatedDose((prevState) => ({...prevState, valid: false}))
+            setUpdatedDose((prevState) => ({ ...prevState, valid: false }))
         }
         if (_updated === '') {
-            setUpdatedDose((prevState) => ({...prevState, valid: undefined}))
+            setUpdatedDose((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
     function onChangeArrivalINR(e) {
         var _arrival = e.target.value;
-        setArrivalINR((prevState) => ({...prevState, value: _arrival}))
+        setArrivalINR((prevState) => ({ ...prevState, value: _arrival }))
         if (constants.validNumRegex.test(_arrival)) {
-            setArrivalINR((prevState) => ({...prevState, valid: true}))
+            setArrivalINR((prevState) => ({ ...prevState, valid: true }))
         } else {
-            setArrivalINR((prevState) => ({...prevState, valid: false}))
+            setArrivalINR((prevState) => ({ ...prevState, valid: false }))
         }
         if (_arrival === '') {
-            setArrivalINR((prevState) => ({...prevState, valid: undefined}))
+            setArrivalINR((prevState) => ({ ...prevState, valid: undefined }))
         }
     }
 
@@ -110,7 +110,7 @@ const DataUserVisit = ({onSubmit}) => {
                                         onChange={onChangeCodPaciente}
                                         size="lg"
                                         className="mb-3"
-                                        placeholder="T-001"/>
+                                        placeholder="T-001" />
                                     <FormFeedback tooltip={true}>"Ej: T-002"</FormFeedback>
                                 </FormGroup>
                             </Col>
@@ -151,7 +151,7 @@ const DataUserVisit = ({onSubmit}) => {
                                         onChange={onChangeArrivalINR}
                                         size="lg"
                                         //className="mb-3"
-                                        placeholder="0"/>
+                                        placeholder="0" />
                                     <FormFeedback tooltip={true}> Debes ingresar un número decimal, con punto. EJ:
                                         1.0 </FormFeedback>
                                 </FormGroup>
@@ -168,7 +168,7 @@ const DataUserVisit = ({onSubmit}) => {
                                             onChange={onChangeUpdatedDose}
                                             size="lg"
                                             //className="mb-3"
-                                            placeholder="0"/>
+                                            placeholder="0" />
                                         <FormFeedback tooltip={true}> Debes ingresar un número decimal, con punto. EJ:
                                             1.0 </FormFeedback>
                                         <InputGroupAddon type="append">
@@ -187,7 +187,7 @@ const DataUserVisit = ({onSubmit}) => {
                 bottom: 0,
                 zIndex: 1
             }}>
-                <Card small lg="7" className="mb-2 border-primary" style={{border: '#5A6169'}}>
+                <Card small lg="7" className="mb-2 border-primary" style={{ border: '#5A6169' }}>
                     <CardBody>
                         <Row>
                             <Col xs="6" md="6">
@@ -196,11 +196,16 @@ const DataUserVisit = ({onSubmit}) => {
                                         theme="primary"
                                         className="font-weight-bold"
                                         onClick={() => {
+                                            const date = new Date();
+                                            let year = date.getFullYear().toString();
+                                            let month = date.getMonth().toString();
+                                            let day = date.getDate().toString();
+                                            var date2string = year + "-" + month + "-" + day
                                             onSubmit({
                                                 valid: allValid(),
                                                 vars: {
                                                     'patientCode': cod_paciente.valid ? cod_paciente.value : "",
-                                                    'controlDate': "2009-11-30",
+                                                    'controlDate': date2string,
                                                     'arrivalDose': arrivalDose.valid ? parseFloat(arrivalDose.value) : 0.0,
                                                     'updatedDose': updatedDose.valid ? parseFloat(updatedDose.value) : 0.0,
                                                     'arrivalINR': arrivalINR.valid ? parseFloat(arrivalINR.value) : 0.0,
@@ -208,7 +213,6 @@ const DataUserVisit = ({onSubmit}) => {
                                                     //'diagnosis': diagnosis.value,
                                                 }
                                             });
-
                                         }}
                                     >
                                         Guardar visita

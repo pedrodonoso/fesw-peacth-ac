@@ -465,7 +465,12 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                             setCard1Selected((prevState) => ({ ...prevState, value: !card_1_selected.value, }));
                                                             setCard2Selected((prevState) => ({ ...prevState, value: false, }));
                                                             setCard3Selected((prevState) => ({ ...prevState, value: false, }));
-                                                            setInitialDose((prevState) => ({ ...prevState, value: dosis.toFixed(4), }));
+                                                            
+                                                            if(card_1_selected.value == true) { // no está seleccionado
+                                                                setInitialDose((prevState) => ({ ...prevState, value: '', }));
+                                                            } else {
+                                                                setInitialDose((prevState) => ({ ...prevState, value: dosis.toFixed(4), }));
+                                                            }
                                                         }}
                                                     >
                                                         
@@ -491,7 +496,12 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                             setCard1Selected((prevState) => ({ ...prevState, value: false, }));
                                                             setCard3Selected((prevState) => ({ ...prevState, value: false, }));
                                                             setCard2Selected((prevState) => ({ ...prevState, value: !card_2_selected.value, }));
-                                                            setInitialDose((prevState) => ({ ...prevState, value: dosis_network.toFixed(4), }));
+
+                                                            if(card_2_selected.value == true) { // no está seleccionado
+                                                                setInitialDose((prevState) => ({ ...prevState, value: '', }));
+                                                            } else {
+                                                                setInitialDose((prevState) => ({ ...prevState, value: dosis_network.toFixed(4), }));
+                                                            }
                                                         }}
                                                     >
                                                         <CardBody className={" d-flex"}>
@@ -516,8 +526,12 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                             setCard1Selected((prevState) => ({ ...prevState, value: false, }));
                                                             setCard2Selected((prevState) => ({ ...prevState, value: false, }));
                                                             setCard3Selected((prevState) => ({ ...prevState, value: !card_3_selected.value, }));
-                                                            setInitialDose((prevState) => ({ ...prevState, value: manualDose.value, }));
-                                                            //setManualDose((prevState) => ({ ...prevState, value: manualDose.value, }));
+
+                                                            if(card_3_selected.value == true) { // no está seleccionado
+                                                                setInitialDose((prevState) => ({ ...prevState, value: '', }));
+                                                            } else {
+                                                                setInitialDose((prevState) => ({ ...prevState, value: manualDose.value, }));
+                                                            }
                                                         }}
                                                     >
                                                         <CardBody className={" d-flex"}>
@@ -571,7 +585,6 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                                         vars: {
                                                                             'code': cod_paciente.valid ? cod_paciente.value : "",
                                                                             'sex': sexo.value,
-                                                                            // 'bloodtype': blood.value,
                                                                             'initialDate': "2009-11-30", //preguntar
                                                                             'initialDose': 0,
                                                                             'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
@@ -582,7 +595,6 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                                             'imc': _imc === Infinity ? 999 : _imc,
                                                                             'age': edad.valid ? parseFloat(edad.value) : 0,
                                                                             'genetics': genetics.value,
-                                                                            //'diagnosis': diagnosis.value,
                                                                         }
                                                                     });
                                                                 }}
@@ -595,14 +607,24 @@ const DataUserGeneral = ({ onSubmit, onSetDose, dosis, dosis_network, doseCalcul
                                                                 className="font-weight-bold "
                                                                 onClick={() => {
                                                                     var _imc = calcImc();
+                                                                    /*
+                                                                    var date = Date();
+                                                                    var date2string = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+                                                                    */
+                                                                   
+                                                                    const date = new Date();
+                                                                    let year = date.getFullYear().toString();
+                                                                    let month = date.getMonth().toString();
+                                                                    let day = date.getDate().toString();
+                                                                    var date2string = year + "-" + month + "-" + day
                                                                     onSetDose({
                                                                         valid: allValid(),
                                                                         vars: {
                                                                             'code': cod_paciente.valid ? cod_paciente.value : "",
                                                                             'sex': sexo.value,
                                                                             // 'bloodtype': blood.value,
-                                                                            'initialDate': "2009-11-30", //preguntar
-                                                                            'initialDose': initialDose.value,
+                                                                            'initialDate': date2string, //preguntar
+                                                                            'initialDose': parseFloat(initialDose.value),
                                                                             'initialINR': inr_inicial.valid ? parseFloat(inr_inicial.value) : 0.0,
                                                                             'weeklyDoseInRange': 0,
                                                                             'totalDays': 534,

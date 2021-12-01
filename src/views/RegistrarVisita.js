@@ -12,6 +12,7 @@ import DataUserVisit from "../components/registrar_visita/data-user-visit";
 import CustomToggle from '../components/forms/CustomToggle';
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import constants from "../data/constants";
 
 const theme = createMuiTheme({
     palette: {
@@ -111,7 +112,8 @@ class RegistrarVisita extends Component {
         var submit = {
             email : email,
             patient : patient,
-            totalDosis : totalDosis
+            totalDosis : totalDosis,
+            name: constants.user.name + " " + constants.user.last_name
         }
 
         if(correo === '') {
@@ -172,7 +174,6 @@ class RegistrarVisita extends Component {
                     </Container>
                 </ThemeProvider>
             </Container>
-
         );
     }
 };

@@ -32,7 +32,7 @@ class Calculo extends React.Component {
             open: false,
             dosis: 0.0,
             dosis_network: 0.0,
-            doseCalculated: true,
+            doseCalculated: false,
             dialogOpen: false,
 
         }

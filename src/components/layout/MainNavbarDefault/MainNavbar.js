@@ -1,0 +1,59 @@
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { Container, Navbar, Row } from "shards-react";
+
+import NavbarSearch from "./NavbarSearch";
+import NavbarNav from "./NavbarNav/NavbarNav";
+import NavbarToggle from "./NavbarToggle";
+
+const MainNavbar = ({ layout, stickyTop , logo}) => {
+  const classes = classNames(
+    "main-navbar",
+    "bg-white",
+    stickyTop && "sticky-top"
+  );
+
+  return (
+    <div className={classes}>
+      <Container className="p-0">
+        <Navbar type="light" className="align-items-stretch flex-md-nowrap p-0">
+          {/*<NavbarSearch /> */}
+          <Row className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+            {logo ?
+              <img
+                id="main-logo"
+                className="d-inline-block align-top mr-2"
+                style={{ maxWidth: "120px" }}
+                // src={require("../../../images/shards-dashboards-logo.svg")}
+                src={require("../../../images/peacth_ac-02.svg")}
+                alt="peacth-ac"
+              // alt="Team Context"
+              />
+              : null
+            }</Row>
+          <NavbarNav />
+          {/* <NavbarToggle /> */}
+          
+        </Navbar>
+      </Container>
+    </div>
+  );
+};
+
+MainNavbar.propTypes = {
+  /**
+   * The layout type where the MainNavbar is used.
+   */
+  layout: PropTypes.string,
+  /**
+   * Whether the main navbar is sticky to the top, or not.
+   */
+  stickyTop: PropTypes.bool
+};
+
+MainNavbar.defaultProps = {
+  stickyTop: true
+};
+
+export default MainNavbar;

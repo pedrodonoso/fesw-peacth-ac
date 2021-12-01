@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Container, Row, Col, Navbar} from "shards-react";
+
+import MainNavbar from "../components/layout/MainNavbarDefault/MainNavbar";
 import NavbarToggle from "../components/layout/MainNavbar/NavbarToggle";
 import MainSidebar from "../components/layout/MainSidebar/MainSidebar";
 import MainFooter from "../components/layout/MainFooter";
@@ -16,13 +18,7 @@ const CustomGeneral = ({children, noNavbar, noFooter, footer_props, navbar_props
                 sm="12"
                 tag="main"
             >
-                <div>
-                    <Container className="p-0">
-                        <Navbar type="light" className="align-items-stretch right">
-                            <NavbarToggle/>
-                        </Navbar>
-                    </Container>
-                </div>
+            <MainNavbar logo={false}/>
                 {children}
                 {!noFooter && <MainFooter {...footer_props} />}
             </Col>

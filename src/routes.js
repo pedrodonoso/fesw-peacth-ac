@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 
 // Layout Types
-import {CustomAnalisis, CustomGeneral, CustomActualizar} from "./layouts";
+import {CustomAnalisis, CustomGeneral, CustomActualizar, CustomVoid, DefaultLayout} from "./layouts";
 
 // Route Views
 import {
@@ -11,7 +11,9 @@ import {
     RegistrarVisita,
     Actualizar,
     Paciente,
-    Comparar
+    Comparar,
+    Login,
+    Register,
 } from "./views";
 /*
 import BlogOverview from "./views/template/BlogOverview";
@@ -31,8 +33,21 @@ export default [
         path: "/",
         exact: true,
         layout: CustomGeneral,
-        component: () => <Redirect to="/calculo"/>,
+        component: () => <Redirect to="/login"/>,
         layout_props: {noNavbar: true, noFooter: true, hideLogoText: true}
+    },
+    
+    {
+        path: "/login",
+        layout: DefaultLayout,
+        component: Login,
+        layout_props: {noNavbar: false, noFooter: true, hideLogoText: true}
+    },
+    {
+        path: "/register",
+        layout: DefaultLayout,
+        component: Register,
+        layout_props: {noNavbar: false, noFooter: true, hideLogoText: true}
     },
     {
         path: "/calculo",

@@ -6,6 +6,8 @@ import {Container, Navbar} from "shards-react";
 import NavbarNavItems from "./NavbarNav/NavbarNavItems";
 import NavbarToggle from "./NavbarToggle";
 
+import NavbarNav from "../MainNavbarDefault/NavbarNav/NavbarNav"
+
 const ActualizarNavbar = ({ stickyTop }) => {
   const classes = classNames(
     "main-navbar",
@@ -19,6 +21,7 @@ const ActualizarNavbar = ({ stickyTop }) => {
         <Navbar type="light" className="align-items-stretch right">
           <NavbarNavItems/>
           <NavbarToggle/>
+          <NavbarNav />
         </Navbar>
       </Container>
     </div>

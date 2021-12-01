@@ -74,8 +74,6 @@ class Paciente extends React.Component {
     }
 
     handlerSearch(data) {
-        console.log(data.query);
-
         this.generate(data.query)
     }
 
@@ -157,7 +155,7 @@ class Paciente extends React.Component {
                 <ThemeProvider theme={theme}>
                     <Container className="main-content-container px-4">
 
-                        <Col className="py-4">
+                        <Col className="py-3">
                             <Row>
                                 <Col className="mb-2">
                                     <SearchBar onSearchSubmit={this.handlerSearch} />

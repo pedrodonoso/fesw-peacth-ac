@@ -15,6 +15,7 @@ const endpoints = {
 export const api = axios.create({
     baseURL: endpoints['newtest'],
     timeout: 20000,
+    withCredentials: true
     /*
     headers: {
         post: {        // can be common or any other method

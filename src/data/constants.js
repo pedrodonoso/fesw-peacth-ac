@@ -1,6 +1,7 @@
 import React from "react";
 import { esES } from '@material-ui/core/locale';
 import { createMuiTheme } from '@material-ui/core/styles';
+import Cookies from 'universal-cookie';
 
 var gen2 = 'CYP2C9_2'
 var gen3 = 'CYP2C9_3'
@@ -70,7 +71,12 @@ const validPacienteRegex =
 const validNumRegex =
     RegExp(/^([0-9])+[.]?([0-9])*$/i);
 
-const newtest = 'http://13.58.23.184:8000/'
+const newtest = 'http://13.58.23.184:8000/';
+
+const cookies = new Cookies();
+
+var user = {}
+
 const constants = {
     gen2,
     gen3,
@@ -106,7 +112,9 @@ const constants = {
     mensaje_error_regresion_mensaje,
     validPacienteRegex,
     validNumRegex,
-    newtest
+    newtest,
+    user,
+    cookies
 };
 
 export default constants;

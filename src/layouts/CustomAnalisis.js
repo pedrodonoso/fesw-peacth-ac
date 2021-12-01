@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col } from "shards-react";
+
+import MainNavbarDefault from "../components/layout/MainNavbarDefault/MainNavbar";
 import MainNavbar from "../components/layout/MainNavbar/MainNavbar";
 import MainSidebar from "../components/layout/MainSidebar/MainSidebar";
 import MainFooter from "../components/layout/MainFooter";
@@ -16,6 +18,7 @@ const CustomAnalisis = ({ children, noNavbar, noFooter, footer_props, navbar_pro
         sm="12"
         tag="main"
       >
+    
         {!noNavbar && <MainNavbar {...navbar_props} />}
         {children}
         {!noFooter && <MainFooter {...footer_props} />}

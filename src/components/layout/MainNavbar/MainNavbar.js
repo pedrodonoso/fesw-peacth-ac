@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import {Container, Navbar} from "shards-react";
+import { Container, Navbar } from "shards-react";
 
 import NavbarNavItems from "./NavbarNav/NavbarNavItems";
 import NavbarToggle from "./NavbarToggle";
 
-const MainNavbar = ({layout, stickyTop}) => {
+import NavbarNav from "../MainNavbarDefault/NavbarNav/NavbarNav"
+
+const MainNavbar = ({ layout, stickyTop }) => {
     const classes = classNames(
         "main-navbar",
         "bg-white",
@@ -15,10 +17,11 @@ const MainNavbar = ({layout, stickyTop}) => {
 
     return (
         <div className={classes}>
-            <Container className="p-0">
+            <Container className="">
                 <Navbar type="light" className="align-items-stretch right">
-                    <NavbarNavItems/>
-                    <NavbarToggle/>
+                    <NavbarNavItems />
+                    <NavbarToggle />
+                    <NavbarNav />
                 </Navbar>
             </Container>
         </div>

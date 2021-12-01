@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import {
     Row,
@@ -16,21 +16,52 @@ import {
 } from "shards-react";
 
 import constants from "../../data/constants";
+import formulaService from "../../services/formula.service";
+import pacienteService from "../../services/paciente.service";
+import CustomToggle from "../forms/CustomToggle";
 
-const DataUserVisit = ({ onSubmit }) => {
+const DataUserVisit = ({onSubmit, onSearchLastVisit}) => {
 
     // const today = new Date();
-    const [cod_paciente, setCodPaciente] = useState({ value: '', valid: undefined });
-    const [arrivalDose, setArrivalDose] = useState({ value: '', valid: undefined });
-    const [updatedDose, setUpdatedDose] = useState({ value: '', valid: undefined });
-    const [arrivalINR, setArrivalINR] = useState({ value: '', valid: undefined });
+    const [cod_paciente, setCodPaciente] = useState({
+        value: '',
+        valid: undefined
+    });
+    const [arrivalDose, setArrivalDose] = useState({
+        value: '',
+        valid: undefined
+    });
+    const [updatedDose, setUpdatedDose] = useState({
+        value: '',
+        valid: undefined
+    });
+    const [arrivalINR, setArrivalINR] = useState({value: '', valid: undefined});
+    const [apiResponse, setApiResponse] = useState({value: false});
+    const [errorState, setError] = useState([]);
 
 
     function setForm() {
-        setCodPaciente((prevState) => ({ ...prevState, value: '', valid: undefined }));
-        setArrivalDose((prevState) => ({ ...prevState, value: '', valid: undefined }));
-        setUpdatedDose((prevState) => ({ ...prevState, value: '', valid: undefined }));
-        setArrivalINR((prevState) => ({ ...prevState, value: '', valid: undefined }));
+        setCodPaciente((prevState) => ({
+            ...prevState,
+            value: '',
+            valid: undefined
+        }));
+        setArrivalDose((prevState) => ({
+            ...prevState,
+            value: '',
+            valid: undefined
+        }));
+        setUpdatedDose((prevState) => ({
+            ...prevState,
+            value: '',
+            valid: undefined
+        }));
+        setArrivalINR((prevState) => ({
+            ...prevState,
+            value: '',
+            valid: undefined
+        }));
+        setApiResponse({value: false})
     }
 
     function allValid() {
@@ -39,54 +70,101 @@ const DataUserVisit = ({ onSubmit }) => {
 
     function onChangeCodPaciente(e) {
         var _cod = e.target.value.toUpperCase();
-        setCodPaciente((prevState) => ({ ...prevState, value: _cod }))
+        setCodPaciente((prevState) => ({...prevState, value: _cod}))
         if (constants.validPacienteRegex.test(_cod)) {
-            setCodPaciente((prevState) => ({ ...prevState, valid: true }))
+            setCodPaciente((prevState) => ({...prevState, valid: true}))
         } else {
-            setCodPaciente((prevState) => ({ ...prevState, valid: false }))
+            setCodPaciente((prevState) => ({...prevState, valid: false}))
         }
         if (_cod === '') {
-            setCodPaciente((prevState) => ({ ...prevState, valid: undefined }))
+            setCodPaciente((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
     function onChangeArrivalDose(e) {
         var _arrival = e.target.value;
-        setArrivalDose((prevState) => ({ ...prevState, value: _arrival }))
+        setArrivalDose((prevState) => ({...prevState, value: _arrival}))
         if (constants.validNumRegex.test(_arrival)) {
-            setArrivalDose((prevState) => ({ ...prevState, valid: true }))
+            setArrivalDose((prevState) => ({...prevState, valid: true}))
         } else {
-            setArrivalDose((prevState) => ({ ...prevState, valid: false }))
+            setArrivalDose((prevState) => ({...prevState, valid: false}))
         }
         if (_arrival === '') {
-            setArrivalDose((prevState) => ({ ...prevState, valid: undefined }))
+            setArrivalDose((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
     function onChangeUpdatedDose(e) {
         var _updated = e.target.value;
-        setUpdatedDose((prevState) => ({ ...prevState, value: _updated }))
+        setUpdatedDose((prevState) => ({...prevState, value: _updated}))
         if (constants.validNumRegex.test(_updated)) {
-            setUpdatedDose((prevState) => ({ ...prevState, valid: true }))
+            setUpdatedDose((prevState) => ({...prevState, valid: true}))
         } else {
-            setUpdatedDose((prevState) => ({ ...prevState, valid: false }))
+            setUpdatedDose((prevState) => ({...prevState, valid: false}))
         }
         if (_updated === '') {
-            setUpdatedDose((prevState) => ({ ...prevState, valid: undefined }))
+            setUpdatedDose((prevState) => ({...prevState, valid: undefined}))
         }
     }
 
     function onChangeArrivalINR(e) {
         var _arrival = e.target.value;
-        setArrivalINR((prevState) => ({ ...prevState, value: _arrival }))
+        setArrivalINR((prevState) => ({...prevState, value: _arrival}))
         if (constants.validNumRegex.test(_arrival)) {
-            setArrivalINR((prevState) => ({ ...prevState, valid: true }))
+            setArrivalINR((prevState) => ({...prevState, valid: true}))
         } else {
-            setArrivalINR((prevState) => ({ ...prevState, valid: false }))
+            setArrivalINR((prevState) => ({...prevState, valid: false}))
         }
         if (_arrival === '') {
-            setArrivalINR((prevState) => ({ ...prevState, valid: undefined }))
+            setArrivalINR((prevState) => ({...prevState, valid: undefined}))
         }
+    }
+
+    function setPatientData(data) {
+        setCodPaciente((prevState) => ({
+            ...prevState,
+            value: data.patientCode,
+            valid: true
+        }));
+        setArrivalDose((prevState) => ({
+            ...prevState,
+            value: data.updatedDose,
+            valid: true
+        }))
+    }
+
+    function handleSearchLastVisit(patient) {
+        pacienteService.getLastVisitPatient(patient)
+            .then((response) => {
+                try{
+                    const dataProfile = response.data
+                    console.log({ title: "Fetch", response: dataProfile });
+                    setPatientData(dataProfile)
+                    setApiResponse({value: true})
+                    console.log({ title: "Fetch2", response: this.lastVisit });
+                } catch (e) {
+                    console.log({
+                        title: response,
+                        error: e
+                    })
+                }
+            })
+            .catch((error) => {
+                if(error.message === 'Network Error') {
+                    setError((prevState => ({...prevState,
+                        bad_response: true,
+                        error: true,
+                        errortitle: constants.mensaje_error_network_perfil_paciente_titulo,
+                        errortext: constants.mensaje_error_network_perfil_paciente_mensaje,})))
+                } else {
+                    setError((prevState => ({...prevState,
+                        bad_response: true,
+                        error: true,
+                        errortitle: constants.mensaje_error_network_perfil_paciente_titulo,
+                        errortext: constants.mensaje_error_network_perfil_paciente_mensaje,})))
+                }
+
+        });
     }
 
     return (
@@ -95,90 +173,144 @@ const DataUserVisit = ({ onSubmit }) => {
                 {/* Data general */}
                 <Card small lg="7">
                     <CardHeader className="border-bottom bg-light">
-                        <h5 className="m-0 font-weight-bold text-center">Registrar visita</h5>
+                        <h5 className="m-0 font-weight-bold text-center">Registrar
+                            visita</h5>
                     </CardHeader>
                     <CardBody>
-                        <Row>
-                            <Col>
-                                {/* Codigo Paciente */}
-                                <FormGroup check={false}>
-                                    <label>Código del paciente</label>
-                                    <FormInput
-                                        value={cod_paciente.value}
-                                        valid={cod_paciente.valid}
-                                        invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
-                                        onChange={onChangeCodPaciente}
-                                        size="lg"
-                                        className="mb-3"
-                                        placeholder="T-001" />
-                                    <FormFeedback tooltip={true}>"Ej: T-002"</FormFeedback>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                {/* Dosis de llegada */}
-                                <FormGroup>
-                                    <label>Dosis llegada </label>
-                                    <InputGroup className="mb-3">
+
+                        {!apiResponse.value ?
+                            <Row>
+                                <Col>
+                                    {/* Codigo Paciente */}
+
+                                    <InputGroup size="lg">
+                                        <InputGroupAddon type="prepend">
+                                            <InputGroupText>Código del paciente</InputGroupText>
+                                        </InputGroupAddon>
                                         <FormInput
-                                            value={arrivalDose.value}
-                                            valid={arrivalDose.valid}
-                                            invalid={arrivalDose.valid === undefined ? undefined : !arrivalDose.valid}
-                                            onChange={onChangeArrivalDose}
+                                            value={cod_paciente.value}
+                                            valid={cod_paciente.valid}
+                                            invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
+                                            onChange={onChangeCodPaciente}
                                             size="lg"
-                                            //className="mb-3 "
-                                            placeholder="0"
-                                        />
-                                        <FormFeedback tooltip={true}> Debes ingresar un número decimal, con punto. EJ:
-                                            1.0 </FormFeedback>
+                                            style={{"height":"auto"}}
+                                            placeholder="T-001"/>
+                                        <FormFeedback tooltip={true}>"Ej:
+                                            T-002"</FormFeedback>
                                         <InputGroupAddon type="append">
-                                            <InputGroupText>mg/semana</InputGroupText>
+                                            <Button theme="secondary" onClick={() => {handleSearchLastVisit(cod_paciente.value)}} >Buscar</Button>
                                         </InputGroupAddon>
                                     </InputGroup>
 
-                                </FormGroup>
-                            </Col>
-                        </Row>
 
-                        <Row>
-                            <Col>
-                                {/* INR de llegada */}
-                                <FormGroup>
-                                    <label>INR de llegada</label>
-                                    <FormInput
-                                        value={arrivalINR.value}
-                                        valid={arrivalINR.valid}
-                                        invalid={arrivalINR.valid === undefined ? undefined : !arrivalINR.valid}
-                                        onChange={onChangeArrivalINR}
-                                        size="lg"
-                                        //className="mb-3"
-                                        placeholder="0" />
-                                    <FormFeedback tooltip={true}> Debes ingresar un número decimal, con punto. EJ:
-                                        1.0 </FormFeedback>
-                                </FormGroup>
-                            </Col>
-                            {/* Nueva dosis */}
-                            <Col>
-                                <FormGroup>
-                                    <label>Nueva dosis</label>
-                                    <InputGroup className="mb-3">
+                                    {/*<FormGroup check={false}>
+                                        <label>Código del paciente</label>
                                         <FormInput
-                                            value={updatedDose.value}
-                                            valid={updatedDose.valid}
-                                            invalid={updatedDose.valid === undefined ? undefined : !updatedDose.valid}
-                                            onChange={onChangeUpdatedDose}
+                                            value={cod_paciente.value}
+                                            valid={cod_paciente.valid}
+                                            invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
+                                            onChange={onChangeCodPaciente}
                                             size="lg"
-                                            //className="mb-3"
-                                            placeholder="0" />
-                                        <FormFeedback tooltip={true}> Debes ingresar un número decimal, con punto. EJ:
-                                            1.0 </FormFeedback>
-                                        <InputGroupAddon type="append">
-                                            <InputGroupText>mg/semana</InputGroupText>
-                                        </InputGroupAddon>
+                                            className="mb-3"
+                                            placeholder="T-001"/>
+                                        <FormFeedback tooltip={true}>"Ej:
+                                            T-002"</FormFeedback>
+                                    </FormGroup>*/}
+                                </Col>
+                            </Row> : <>
+                                <Row>
+                                    <Col>
+                                        {/* Codigo Paciente */}
+                                        <FormGroup check={false}>
+                                            <label>Código del paciente</label>
+                                            <FormInput
+                                                value={cod_paciente.value}
+                                                valid={cod_paciente.valid}
+                                                invalid={cod_paciente.valid === undefined ? undefined : !cod_paciente.valid}
+                                                onChange={onChangeCodPaciente}
+                                                size="lg"
+                                                className="mb-3"
+                                                placeholder="T-001"/>
+                                            <FormFeedback tooltip={true}>"Ej:
+                                                T-002"</FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col>
+                                        {/* Dosis de llegada */}
+                                        <FormGroup>
+                                            <label>Dosis llegada </label>
+                                            <InputGroup className="mb-3">
+                                                <FormInput
+                                                    value={arrivalDose.value}
+                                                    valid={arrivalDose.valid}
+                                                    invalid={arrivalDose.valid === undefined ? undefined : !arrivalDose.valid}
+                                                    onChange={onChangeArrivalDose}
+                                                    size="lg"
+                                                    //className="mb-3 "
+                                                    placeholder="0"
+                                                />
+                                                <FormFeedback
+                                                    tooltip={true}> Debes
+                                                    ingresar un número decimal,
+                                                    con punto. EJ:
+                                                    1.0 </FormFeedback>
+                                                <InputGroupAddon type="append">
+                                                    <InputGroupText>mg/semana</InputGroupText>
+                                                </InputGroupAddon>
+                                            </InputGroup>
 
-                                    </InputGroup>
-                                </FormGroup>
-                            </Col>
-                        </Row>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col>
+                                        {/* INR de llegada */}
+                                        <FormGroup>
+                                            <label>INR de llegada</label>
+                                            <FormInput
+                                                value={arrivalINR.value}
+                                                valid={arrivalINR.valid}
+                                                invalid={arrivalINR.valid === undefined ? undefined : !arrivalINR.valid}
+                                                onChange={onChangeArrivalINR}
+                                                size="lg"
+                                                //className="mb-3"
+                                                placeholder="0"/>
+                                            <FormFeedback tooltip={true}> Debes
+                                                ingresar un número decimal, con
+                                                punto. EJ:
+                                                1.0 </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    {/* Nueva dosis */}
+                                    <Col>
+                                        <FormGroup>
+                                            <label>Nueva dosis</label>
+                                            <InputGroup className="mb-3">
+                                                <FormInput
+                                                    value={updatedDose.value}
+                                                    valid={updatedDose.valid}
+                                                    invalid={updatedDose.valid === undefined ? undefined : !updatedDose.valid}
+                                                    onChange={onChangeUpdatedDose}
+                                                    size="lg"
+                                                    //className="mb-3"
+                                                    placeholder="0"/>
+                                                <FormFeedback
+                                                    tooltip={true}> Debes
+                                                    ingresar un número decimal,
+                                                    con punto. EJ:
+                                                    1.0 </FormFeedback>
+                                                <InputGroupAddon type="append">
+                                                    <InputGroupText>mg/semana</InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                            </>}
+
+
                     </CardBody>
                 </Card>
             </Container>
@@ -187,7 +319,8 @@ const DataUserVisit = ({ onSubmit }) => {
                 bottom: 0,
                 zIndex: 1
             }}>
-                <Card small lg="7" className="mb-2 border-primary" style={{ border: '#5A6169' }}>
+                <Card small lg="7" className="mb-2 border-primary"
+                      style={{border: '#5A6169'}}>
                     <CardBody>
                         <Row>
                             <Col xs="6" md="6">

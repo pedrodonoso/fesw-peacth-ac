@@ -29,9 +29,11 @@ class RegistrarVisita extends Component {
             open: false,
             optionInput: false,
             inputMessageVisible: false,
+            lastVisit: {},
             inputMessage: ''
         }
         this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+        this.handleSearchLastVisit = this.handleSearchLastVisit.bind(this);
         this.handlerOpenDialog = this.handlerOpenDialog.bind(this);
         this.toggle = this.toggle.bind(this);
         this.inputToggle = this.inputToggle.bind(this);
@@ -57,7 +59,7 @@ class RegistrarVisita extends Component {
             .then((response) => {
                 ////console.log({title: 'postRegisterVisit', initialDose: response.data})
                 //mostramos al usuario un toggle
-                
+
                 this.setState({
                     ...this.state,
                     optionInput: true,
@@ -147,6 +149,51 @@ class RegistrarVisita extends Component {
         //console.log({text:"handler", open:this.state.open});
     }
 
+    // recibir ultima visita
+    handleSearchLastVisit(patient) {
+
+        pacienteService.getLastVisitPatient(patient)
+            .then((response) => {
+                var dataProfile = response.data
+                // var ser = response.data.frequency
+                console.log({ title: "getLastVisitPatient", response: dataProfile, gen: patient });
+                this.setState({
+                    ...this.state,
+                    lastVisit: dataProfile,
+                    bad_response: false,
+                });
+                console.log({ title: "getLastVisitPatient2", response: this.state.data, gen: patient });
+            })
+            .catch((error) => {
+                if(error.message === 'Network Error') {
+                    this.setState({
+                        ...this.state,
+                        bad_response: true,
+                        error: true,
+                        lastVisit: {},
+                        errortitle: constants.mensaje_error_network_perfil_paciente_titulo,
+                        errortext: constants.mensaje_error_network_perfil_paciente_mensaje,
+                    });
+                } else {
+                    this.setState({
+                        ...this.state,
+                        bad_response: true,
+                        error: true,
+                        lastVisit: {},
+                        errortitle: constants.mensaje_error_perfil_paciente_titulo,
+                        errortext: constants.mensaje_error_perfil_paciente_mensaje,
+                    });
+                }
+
+            }).finally(() => {
+            console.log(this.state.data)
+            this.setState({
+                ...this.state,
+                percent: 100,
+            });
+        });
+    }
+
     render() {
         return (
             <Container fluid className="main-content-container px-4 pb-4">
@@ -156,7 +203,7 @@ class RegistrarVisita extends Component {
 
                         <Row>
                             <Col lg="12" className="py-4">
-                                <DataUserVisit onSubmit={this.handleRegisterSubmit} />
+                                <DataUserVisit onSubmit={this.handleRegisterSubmit} onSearchLastVisit={this.handleSearchLastVisit} />
                                 <CustomToggle
                                     openOut={this.state.open}
                                     //openOut={true}

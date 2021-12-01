@@ -25,6 +25,8 @@ const Compare = () => {
     ];
 
     const [dataModels, setData] = useState([]);
+    const [errorState, setError] = useState([]);
+
 
     function fetch_data() {
         formulaService.getModelsTable()
@@ -43,21 +45,17 @@ const Compare = () => {
             })
             .catch((error) => {
                 if(error.message === 'Network Error') {
-                    this.setState({
-                        ...this.state,
+                    setError((prevState => ({...prevState,
                         bad_response: true,
                         error: true,
                         errortitle: constants.mensaje_error_network_perfil_paciente_titulo,
-                        errortext: constants.mensaje_error_network_perfil_paciente_mensaje,
-                    });
+                        errortext: constants.mensaje_error_network_perfil_paciente_mensaje,})))
                 } else {
-                    this.setState({
-                        ...this.state,
+                    setError((prevState => ({...prevState,
                         bad_response: true,
                         error: true,
-                        errortitle: constants.mensaje_error_perfil_paciente_titulo,
-                        errortext: constants.mensaje_error_perfil_paciente_mensaje,
-                    });
+                        errortitle: constants.mensaje_error_network_perfil_paciente_titulo,
+                        errortext: constants.mensaje_error_network_perfil_paciente_mensaje,})))
                 }
 
             })

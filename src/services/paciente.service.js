@@ -44,6 +44,21 @@ async function getProfilePatient(data) {
     return await api.get(`${basePath}/patients/${data}/patient_profile/`);
 }
 
+//obtener ultima visita
+async function getLastVisitPatient(data) {
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //post
+    //https://peacth-ac-backend.herokuapp.com/api/patients/get_weekly_dosis/get_weekly_dosis/
+    //var json = JSON.stringify({ answer: 42 });
+    console.log({
+        title: 'pre get getLastVisitPatient',
+        data: data,
+        path: `${basePath}/clinical_control/${data}/get_last/`
+    })
+    return await api.get(`${basePath}/clinical_control/${data}/get_last/`);
+}
+
 async function getGeneticProfilePatient(data) {
     axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
@@ -62,6 +77,7 @@ async function getGeneticProfilePatient(data) {
 
 const pacienteService = {
     getProfilePatient,
+    getLastVisitPatient,
     getGeneticProfilePatient,
     getAllPatients,
     postSendMail

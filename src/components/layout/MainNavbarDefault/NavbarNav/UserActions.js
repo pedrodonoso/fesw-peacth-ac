@@ -41,7 +41,7 @@ export default class UserActions extends React.Component {
   }
 
   componentDidMount() {
-    var jwt = constants.cookies.get('jwt')
+    var jwt = cookies.get('jwt')
     console.log(jwt)
     console.log("obteniendo info de usuario")
     if (jwt == undefined) { //no registrado

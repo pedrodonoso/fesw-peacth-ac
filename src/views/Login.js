@@ -23,6 +23,8 @@ const theme = createMuiTheme({
   },
 }, esES);
 
+const cookies = new Cookies();
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -86,7 +88,7 @@ function Login() {
         console.log(result)
         var jwt = result.data.jwt
 
-        constants.cookies.set('jwt', jwt);
+        cookies.set('jwt', jwt);
         setRedirect(true);
 
       })

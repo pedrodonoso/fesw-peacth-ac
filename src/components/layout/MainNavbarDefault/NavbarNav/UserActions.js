@@ -13,6 +13,10 @@ import {
 import systemService from '../../../../services/system.service';
 import constants from '../../../../data/constants'
 
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 export default class UserActions extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +32,7 @@ export default class UserActions extends React.Component {
     
   }
   loggOut() {
-    constants.cookies.remove('jwt')
+    cookies.remove('jwt')
     constants.user = {}
     this.setState({
       ...this.state,

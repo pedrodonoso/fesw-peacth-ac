@@ -71,7 +71,8 @@ const validPacienteRegex =
 const validNumRegex =
     RegExp(/^([0-9])+[.]?([0-9])*$/i);
 
-const newtest = 'http://13.58.23.184:8000/';
+// const newtest = 'http://13.58.23.184:8000/';
+const newtest = 'http://3.139.84.102:8000/';
 
 const cookies = new Cookies();
 

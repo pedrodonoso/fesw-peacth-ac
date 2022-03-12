@@ -48,6 +48,7 @@ class UpdateProps extends React.Component {
             p_CYP2C9_33: { value: '', valid: undefined },
             p_VKORC1_GA: { value: '', valid: undefined },
             p_VKORC1_AA: { value: '', valid: undefined },
+            r_squared: { value: '', valid: undefined },
             collapseInfoEdition: false,
         };
 
@@ -65,6 +66,7 @@ class UpdateProps extends React.Component {
         this.onChangePCYP2C933 = this.onChangePCYP2C933.bind(this);
         this.onChangeVKORC1GA = this.onChangeVKORC1GA.bind(this);
         this.onChangeVKORC1AA = this.onChangeVKORC1AA.bind(this);
+        this.onChangeRSquare = this.onChangeRSquare.bind(this);
         this.toggleCollapseInfoEdition = this.toggleCollapseInfoEdition.bind(this);
 
     }
@@ -226,6 +228,19 @@ class UpdateProps extends React.Component {
         });
     }
 
+    onChangeRSquare(e) {
+        var _rsq = e.target.value;
+
+        this.setState({
+            ...this.state,
+            r_squared: {
+                ...this.state.r_squared,
+                value: _rsq,
+                valid: (_rsq === '') ? undefined : ((validNumRegex.test(_rsq)) ? true : false),
+            }
+        });
+    }
+
     handleChangeMethod(method) {
         this.setState({
             checked: (method.target.value === 'manual') ? true : false
@@ -235,7 +250,8 @@ class UpdateProps extends React.Component {
     toggleCollapseInfoEdition() {
         this.setState({
             ...this.state,
-            collapseInfoEdition: !this.state.collapseInfoEdition });
+            collapseInfoEdition: !this.state.collapseInfoEdition
+        });
     }
 
     render() {
@@ -599,13 +615,28 @@ class UpdateProps extends React.Component {
                                                 <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
                                                     1.0 </FormFeedback>
                                             </FormGroup>
-                                            <Row>
+                                            <FormGroup>
+                                                <label>R²</label>
+                                                <FormInput
+                                                    disabled={!this.state.checked}
+                                                    // value={p_VKORC1_AA.value}
+                                                    value={!this.state.checked ? (this.isObjectEmpty(this.props.data_model) ? constants.no_data : this.props.data_model.r_squared.toFixed(4)) : this.state.r_squared.value}
+                                                    valid={this.state.r_squared.valid}
+                                                    invalid={this.state.r_squared.valid === undefined ? undefined : !this.state.r_squared.valid}
+                                                    onChange={this.onChangeRSquare}
+                                                    size="lg"
+                                                    //className="mb-3"
+                                                    placeholder="Ej: 0.5147" />
+                                                <FormFeedback> Debes ingresar un número decimal, con punto. EJ:
+                                                    1.0 </FormFeedback>
+                                            </FormGroup>
+                                            {/* <Row>
                                                 <Badge outline theme="light">
-                                                    R²:
+                                                    :
                                                 </Badge><Badge outline theme="info">
                                                     {!this.state.checked ? (this.isObjectEmpty(this.props.data_model) ? constants.no_data : this.props.data_model.r_squared.toFixed(4)) : '-'}
                                                 </Badge>
-                                            </Row>
+                                            </Row> */}
 
                                         </Col>
 
@@ -755,13 +786,14 @@ class UpdateProps extends React.Component {
                                                     Modo de edición
                                                 </strong>
                                                 <i className="material-icons"
-                                                id="popover-1"
-                                                style={{cursor:'pointer'}}
+                                                    id="popover-1"
+                                                    style={{ cursor: 'pointer' }}
                                                     onClick={
                                                         () => {
                                                             this.setState({
                                                                 ...this.state,
-                                                                collapseInfoEdition: !this.state.collapseInfoEdition });
+                                                                collapseInfoEdition: !this.state.collapseInfoEdition
+                                                            });
                                                         }
                                                     }>help</i>
                                             </Row>
@@ -774,9 +806,9 @@ class UpdateProps extends React.Component {
                                                 >
                                                     <PopoverHeader>Ayuda</PopoverHeader>
                                                     <PopoverBody>
-                                                        El modo de edición "Regresión Lineal" genera un modelo de 
+                                                        El modo de edición "Regresión Lineal" genera un modelo de
                                                         regresión lineal solo en caso de encontrar un ajuste mejor que el anterior.
-                                                        
+
                                                         El modo de edición "Manual" te permite modificar los coeficientes del modelo de regresión lineal manualmente.
                                                     </PopoverBody>
                                                 </Popover>

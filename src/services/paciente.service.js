@@ -11,7 +11,7 @@ async function postSendMail(data) {
     //https://peacth-ac-backend.herokuapp.com/api/patients/get_weekly_dosis/get_weekly_dosis/
     //var json = JSON.stringify({ answer: 42 });
     console.log({title: 'pre post postSendMail', data: data})
-    return await api.post(`${basePath}/send_email`, data);
+    return await api.post(`http://localhost:8000/api/send_email`, data);
 }
 
 

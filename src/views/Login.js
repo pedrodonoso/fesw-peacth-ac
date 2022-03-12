@@ -88,7 +88,7 @@ function Login() {
         console.log(result)
         var jwt = result.data.jwt
 
-        cookies.set('jwt', jwt);
+        cookies.set('jwt', jwt, { path: '/' });
         setRedirect(true);
 
       })

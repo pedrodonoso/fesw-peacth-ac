@@ -128,6 +128,7 @@ const Ingresar = ({ onSubmit }) => {
                                     </Button>
                                 </InputGroup>
                             </Col>
+                            {/*
                             <Col xs="6" md="6" className="text-right">
                                 <Link to="/register" >
                                     <Button
@@ -139,7 +140,7 @@ const Ingresar = ({ onSubmit }) => {
                                         Registrarse
                                     </Button>
                                 </Link>
-                            </Col>
+                            </Col>*/}
                         </Row>
                         <Row>
 

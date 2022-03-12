@@ -95,6 +95,7 @@ class UpdateProps extends React.Component {
     }
 
     onChangeP0(e) {
+        console.log(e)
         var _po = e.target.value;
 
         this.setState({
@@ -729,20 +730,19 @@ class UpdateProps extends React.Component {
                                                         this.props.onSubmitManual({
                                                             valid: this.allValid(),
                                                             vars: {
-                                                                "p_0": this.sp_0.valid ? parseFloat(this.sp_0.value) : 0.0,
-                                                                "p_men": this.sp_men.valid ? parseFloat(this.sp_men.value) : 0.0,
-                                                                "p_age": this.sp_age.valid ? parseFloat(this.sp_age.value) : 0.0,
-                                                                "p_initialINR": this.sp_initialINR.valid ? parseFloat(this.sp_initialINR.value) : 0.0,
-                                                                "p_imc": this.sp_imc.valid ? parseFloat(this.sp_imc.value) : 0.0,
-                                                                "p_CYP2C9_12": this.sp_CYP2C9_12.valid ? parseFloat(this.sp_CYP2C9_12.value) : 0.0,
-                                                                "p_CYP2C9_13": this.sp_CYP2C9_13.valid ? parseFloat(this.sp_CYP2C9_13.value) : 0.0,
-                                                                "p_CYP2C9_33": this.sp_CYP2C9_33.valid ? parseFloat(this.sp_CYP2C9_33.value) : 0.0,
-                                                                "p_VKORC1_GA": this.sp_VKORC1_GA.valid ? parseFloat(this.sp_VKORC1_GA.value) : 0.0,
-                                                                "p_VKORC1_AA": this.sp_VKORC1_AA.valid ? parseFloat(this.sp_VKORC1_AA.value) : 0.0,
+                                                                "p_0": this.state.p_0.valid ? parseFloat(this.state.p_0.value) : 0.0,
+                                                                "p_men": this.state.p_men.valid ? parseFloat(this.state.p_men.value) : 0.0,
+                                                                "p_age": this.state.p_age.valid ? parseFloat(this.state.p_age.value) : 0.0,
+                                                                "p_initialINR": this.state.p_initialINR.valid ? parseFloat(this.state.p_initialINR.value) : 0.0,
+                                                                "p_imc": this.state.p_imc.valid ? parseFloat(this.state.p_imc.value) : 0.0,
+                                                                "p_CYP2C9_12": this.state.p_CYP2C9_12.valid ? parseFloat(this.state.p_CYP2C9_12.value) : 0.0,
+                                                                "p_CYP2C9_13": this.state.p_CYP2C9_13.valid ? parseFloat(this.state.p_CYP2C9_13.value) : 0.0,
+                                                                "p_CYP2C9_33": this.state.p_CYP2C9_33.valid ? parseFloat(this.state.p_CYP2C9_33.value) : 0.0,
+                                                                "p_VKORC1_GA": this.state.p_VKORC1_GA.valid ? parseFloat(this.state.p_VKORC1_GA.value) : 0.0,
+                                                                "p_VKORC1_AA": this.state.p_VKORC1_AA.valid ? parseFloat(this.state.p_VKORC1_AA.value) : 0.0,
                                                                 "r_squared": 0.0,
                                                             }
                                                         });
-
                                                     }}
                                                 >
                                                     Guardar parámetros

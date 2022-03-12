@@ -49,7 +49,7 @@ var mensaje_error_network_perfil_paciente_mensaje = (<div> No pudimos obtener lo
 //"No pudimos obtener los datos, verifique que hay conexión a internet o que el sistema está funcionado correctamente. ";
 
 var mensaje_error_analisis_titulo = "Ocurrió un problema";
-var mensaje_error_analisis_mensaje = "No pudimos obtener los datos, verifique que el código de paciente esté bien escrito o exista";
+var mensaje_error_analisis_mensaje = "No pudimos obtener los datos, inténtelo más tarde.";
 
 var mensaje_error_calculo_titulo = "Ocurrió un problema";
 var mensaje_error_calculo_mensaje = (<div> El código del paciente ya existe!! <br /> <b> Vuelve a intentarlo con un nuevo código </b></div>)
